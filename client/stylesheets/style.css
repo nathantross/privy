@@ -1,57 +1,23 @@
-.grid-block, .main, .post, .comments li, .comment-form { 
-background: #fff;
-border-radius: 3px;
-padding: 10px;
-margin-bottom: 10px;
-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
-}
-body {
-background: #eee;
-color: #666666; }
-.navbar { margin-bottom: 10px } .navbar .navbar-inner {
-border-radius: 0px 0px 3px 3px; }
-#spinner { height: 300px } .post {
-*zoom: 1;
--webkit-transition: all 300ms 0ms; -webkit-transition-delay: ease-in; -moz-transition: all 300ms 0ms ease-in; -o-transition: all 300ms 0ms ease-in; transition: all 300ms 0ms ease-in; position: relative;
-opacity: 1;
-}
-.post:before, .post:after {
-content: "";
-display: table; }
-.post:after { clear: both } .post.invisible { opacity: 0 } .post .upvote {
-display: block; margin: 7px 12px 0 0; float: left;
-}
-.post .post-content { float: left } .post .post-content h3 {
-margin: 0; line-height: 1.4; font-size: 18px;
-}
-.post .post-content h3 a {
-display: inline-block;
-margin-right: 5px; }
-.post .post-content h3 span { font-weight: normal; font-size: 14px;
-display: inline-block; color: #aaaaaa;
-}
 
-.post .post-content p { margin: 0 } .post .discuss {
-display: block; float: right; margin-top: 7px;
-}
-.comments {
-list-style-type: none;
-margin: 0; }
-.comments li h4 { font-size: 16px; margin: 0;
-}
-.comments li h4 .date {
-font-size: 12px;
-font-weight: normal; }
-.comments li h4 a { font-size: 12px } .comments li p:last-child { margin-bottom: 0 } .dropdown-menu span {
-display: block; padding: 3px 20px; clear: both; line-height: 20px; color: #bbb; white-space: nowrap;
-}
-.load-more {
-display: block;
-border-radius: 3px;
-background: rgba(0, 0, 0, 0.05); text-align: center;
-height: 60px;
-line-height: 60px; margin-bottom: 10px;
-}
-.load-more:hover {
-text-decoration: none;
-background: rgba(0, 0, 0, 0.1); }
+// Small screens
+@media only screen { } /* Define mobile styles */
+
+@media only screen and (max-width: 40em) { } /* max-width 640px, mobile-only styles, use when QAing mobile issues */
+
+// Medium screens
+@media only screen and (min-width: 40.063em) { } /* min-width 641px, medium screens */
+
+@media only screen and (min-width: 40.063em) and (max-width: 64em) { } /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
+
+// Large screens
+@media only screen and (min-width: 64.063em) { } /* min-width 1025px, large screens */
+
+@media only screen and (min-width: 64.063em) and (max-width: 90em) { } /* min-width 1025px and max-width 1440px, use when QAing large screen-only issues */
+
+// XLarge screens
+@media only screen and (min-width: 90.063em) { } /* min-width 1441px, xlarge screens */
+
+@media only screen and (min-width: 90.063em) and (max-width: 120em) { } /* min-width 1441px and max-width 1920px, use when QAing xlarge screen-only issues */
+
+// XXLarge screens
+@media only screen and (min-width: 120.063em) { } /* min-width 1921px, xlarge screens */
