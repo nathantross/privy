@@ -94,7 +94,7 @@ ul {
 
 /***********/
 
-/****** Message ******/
+/****** Navigation ******/
 .fa-comment {
   padding-left: 12px;
   color: #fff;
@@ -104,4 +104,12 @@ ul {
   padding-left: 12px;
   color: #fff;
 }
+
+.title a {
+  color: #fff;
+}
+
+
+
+
 
