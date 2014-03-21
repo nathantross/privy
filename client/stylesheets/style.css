@@ -37,15 +37,18 @@ h2 {
 
 .response {
   border-style: solid 1px;
-  background-color: blue;
-  border-color: #333;
-  padding: 5px;
+  border-color: #666;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
   width: 100%;
-  background-color: green;
+  background-color: #ccc;
   font-size: 10px;
   color: #444;
   -webkit-border-radius: 10px;
   border-radius: 10px;
+  text-align: left;
 }
 
 .avatar {
@@ -57,7 +60,7 @@ h2 {
 
 .comment {
   border-style: solid 1px;
-  background-color: blue;
+  background-color: #008cba;
   border-color: #333;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -66,15 +69,21 @@ h2 {
   font-size: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px;
+  color: #fff;
 }
 
 .fixed-comment {
     position:fixed;
    left:0px;
    bottom:0px;
-   height:37px;
+   height:0px;
    width:100%;
 
+}
+
+#right-align {
+  text-align: right;
+  float: right;
 }
 
 /***********/
@@ -83,5 +92,16 @@ ul {
   list-style: none;
 }
 
+/***********/
 
+/****** Message ******/
+.fa-comment {
+  padding-left: 12px;
+  color: #fff;
+}
+
+.fa-plus {
+  padding-left: 12px;
+  color: #fff;
+}
 
