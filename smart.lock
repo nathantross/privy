@@ -3,7 +3,8 @@
   "dependencies": {
     "basePackages": {
       "foundation-5": {},
-      "font-awesome": {}
+      "font-awesome": {},
+      "mocha-web": {}
     },
     "packages": {
       "foundation-5": {
@@ -15,6 +16,11 @@
         "git": "https://github.com/nate-strauser/meteor-font-awesome.git",
         "tag": "v4.0.3",
         "commit": "61e9361384347547ae144f8228faa4deffda23db"
+      },
+      "mocha-web": {
+        "git": "https://github.com/mad-eye/meteor-mocha-web.git",
+        "tag": "v0.2.2",
+        "commit": "cc58d823457944334ed70e2569147856bbc2ef66"
       },
       "jquery": {
         "git": "https://github.com/nrafter/meteor-jquery.git",

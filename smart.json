@@ -1,6 +1,7 @@
 {
   "packages": {
     "foundation-5": {},
-    "font-awesome": {}
+    "font-awesome": {},
+    "mocha-web": {}
   }
 }
