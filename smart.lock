@@ -2,13 +2,19 @@
   "meteor": {},
   "dependencies": {
     "basePackages": {
-      "foundation-5": {}
+      "foundation-5": {},
+      "font-awesome": {}
     },
     "packages": {
       "foundation-5": {
         "git": "https://github.com/menuet/meteor-foundation-5.git",
         "tag": "v5.0.3.5",
         "commit": "8bc2219c0c7f3d68ca0a8d15a066db55b52f0aa4"
+      },
+      "font-awesome": {
+        "git": "https://github.com/nate-strauser/meteor-font-awesome.git",
+        "tag": "v4.0.3",
+        "commit": "61e9361384347547ae144f8228faa4deffda23db"
       },
       "jquery": {
         "git": "https://github.com/nrafter/meteor-jquery.git",
