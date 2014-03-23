@@ -1,6 +1,5 @@
-<template name="header">
-
-<div class="off-canvas-wrap">
+<template name="layout">
+  <div class="off-canvas-wrap">
   <div class="inner-wrap">
     <nav class="tab-bar">
       <section class="left-small">
@@ -40,6 +39,11 @@
 
   </div>
 </div>
+<div class="container">
 
-  
+
+{{yield}}  
+
+</div>
+  </div>
 </template>
