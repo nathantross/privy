@@ -8,9 +8,9 @@ autopublish
 insecure
 preserve-inputs
 coffeescript
-foundation-5
 accounts-base
 accounts-password
 font-awesome
 iron-router
 mocha-web
+foundation-5
