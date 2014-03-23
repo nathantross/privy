@@ -3,6 +3,7 @@
     "foundation-5": {},
     "font-awesome": {},
     "iron-router": {},
-    "mocha-web": {}
+    "mocha-web": {},
+    "accounts-ui-bootstrap-dropdown": {}
   }
 }
