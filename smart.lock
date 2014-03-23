@@ -5,7 +5,8 @@
       "foundation-5": {},
       "font-awesome": {},
       "iron-router": {},
-      "mocha-web": {}
+      "mocha-web": {},
+      "accounts-ui-bootstrap-dropdown": {}
     },
     "packages": {
       "foundation-5": {
@@ -27,6 +28,11 @@
         "git": "https://github.com/mad-eye/meteor-mocha-web.git",
         "tag": "v0.2.2",
         "commit": "cc58d823457944334ed70e2569147856bbc2ef66"
+      },
+      "accounts-ui-bootstrap-dropdown": {
+        "git": "https://github.com/erobit/meteor-accounts-ui-bootstrap-dropdown.git",
+        "tag": "v0.6.5.1",
+        "commit": "c8b29d2e7f8611d6dec9d6d23c1c2b94e000b0fb"
       },
       "jquery": {
         "git": "https://github.com/nrafter/meteor-jquery.git",
