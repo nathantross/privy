@@ -1,4 +1,4 @@
-Template.notesNew.events
+Template.newNote.events
   "submit form": (e) ->
     e.preventDefault()
   
@@ -8,4 +8,4 @@ Template.notesNew.events
       isInstream: true
 
     note._id = Notes.insert(note)
-    Router.go "notesShow"
+    Router.go "index"
