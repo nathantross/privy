@@ -1,45 +1,45 @@
 <template name="layout">
+
+<nav class="top-bar" data-topbar="">
+    <ul class="title-area">
+      <!-- Title Area -->
+      <li class="name">
+
+      </li>
+      <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar menu-icon"><a href="">Menu</a></li>
+    </ul>
+
+    
+  <section class="top-bar-section">
+      <ul class="left">
+        <li class="has-dropdown not-click"><a href="#"><h1 class="fa fa-comment fa-lg"></h1></a>
+
+          <ul class="dropdown"><li class="title back js-generated  fa fa-comment fa-lg"><h5><a href="javascript:void(0)">Back</a></h5></li>
+            <li><label>Level One</label></li>
+            <li><a href="{{pathFor 'usersEdit'}}">Settings</a></li>
+            <li><a href="#">Log Out</a></li>
+            <li class="divider"></li>
+
+            <!-- User Messages -->
+            <li><a href="#">Example Message</a></li>
+            <li><a href="#">Example Message</a></li>
+            <li><a href="#">Example Message</a></li>
+          </ul>
+      </ul>
+
+
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <li class="divider"></li>
+        <li><a href="#"><h1 class="fa fa-plus fa-lg"></h1></a></li>
+      </ul>
+    </section></nav>
+
+
+
   <div>
-    <div class="off-canvas-wrap">
-      <div class="inner-wrap">
-        <nav class="tab-bar">
-          <section class="left-small">
-            <a class="left-off-canvas-toggle fa fa-comment fa-lg" ><span></span></a>
-          </section>
 
-          <section class="middle tab-bar-section">
-            <h1 class="title"><a href="{{pathFor 'index'}}">Privy</a></h1>
-          </section>
-
-          <section class="right-small">
-            <a class="right-off-canvas-toggle fa fa-plus fa-lg" ><span></span></a>
-          </section>
-        </nav>
-
-        <aside class="left-off-canvas-menu">
-          <ul class="off-canvas-list">
-            <li><label>Foundation</label></li>
-            <li><a href="#">The Psychohistorians</a></li>
-            ...
-          </ul>
-        </aside>
-
-        <aside class="right-off-canvas-menu">
-          <ul class="off-canvas-list">
-            <li><label>Users</label></li>
-            <li><a href="#">Hari Seldon</a></li>
-            ...
-          </ul>
-        </aside>
-
-        <section class="main-section">
-          <!-- content goes here -->
-        </section>
-
-        <a class="exit-off-canvas"></a>
-
-      </div>
-    </div>
     <div class="container">
       {{yield}}  
     </div>
