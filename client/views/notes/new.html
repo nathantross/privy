@@ -1,15 +1,19 @@
-<template name="newNote">
-  <div class="row">
-    <div class="small-10 small-centered columns">
-      <h1>What's on your mind?</h1>
+<template name="notesNew">
+  <form class="notes-form">
+    <div class="row">
+      <div class="small-10 small-centered columns">
+        <h1 class="notes-prompt">What's on your mind, sunshine?</h1>
+      </div>
     </div>
-  </div>
-  <div class="row collapse">
-    <div class="small-9 columns">
-      <input class="fa fa-camera" type="text" placeholder="Start writing..." autofocus>
+
+    <div class="row collapse">
+      <div class="small-9 columns">
+        <input name="notes-body" class="fa fa-camera" type="text" placeholder="Start writing..." autofocus>
+      </div>
+
+      <div class="small-3 columns">
+        <button type="submit" class="button postfix">Submit</button>
+      </div>
     </div>
-    <div class="small-3 columns">
-      <button type="submit" class="button postfix">Submit</button>
-    </div>
-  </div>
+  </form>
 </template>
