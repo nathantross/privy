@@ -22,6 +22,8 @@ Router.map ->
 
   @route "usersEdit",
     path: "/users/:_id/edit"
+    data: ->
+      Meteor.users.findOne @params._id
 
   
   # Note Routes
@@ -41,14 +43,20 @@ Router.map ->
 
   @route "notesEdit",
     path: "/notes/:_id/edit"
+    data: ->
+      Notes.findOne @params._id
 
   @route "notesDestroy",
     path: "/notes/:_id/destroy"
+    data: ->
+      Notes.findOne @params._id
 
   
   # Thread Route
   @route "threadsId",
     path: "/threads/:_id"
+    data: ->
+      Threads.findOne @params._id
 
   
   # Various Routes
