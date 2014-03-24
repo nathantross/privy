@@ -1,32 +1,30 @@
 <template name="index">
-  {{header}}
-  <div class="posts">
-    <div class="container text-center">
-      <div class="row">
-        <h1>Welcome to Privy</h1>
-      </div>
+  <div class="container text-center">
+    <div class="row">
+      <h1>Welcome to Privy</h1>
+    </div>
 
-      <div class="row">
-        <div class="small-10 small-centered columns">
+    <div class="row">
+      <div class="small-10 small-centered columns">
         <h3>Privy is a private network for anonymous chat.</h3>
       </div>
-      </div>
+    </div>
 
-      <div class="row">
-        <div class="small-10 small-centered columns">
-          <button href="{{pathFor 'register'}}" class="button radius round expand">Get Started</button>
-        </div>
+    <div class="row">
+      <div class="small-10 small-centered columns">
+        <a href="{{pathFor 'register'}}" class="button radius round expand">Get Started</a>
       </div>
-      
-    {{> mochaTestReport}}
-    {{> serverTestReport}}
+    </div>
+    
+  {{> mochaTestReport}}
+  {{> serverTestReport}}
 <a href="{{pathFor 'register'}}" class="discuss btn">register</a>
 <a href="{{pathFor 'feed'}}" class="discuss btn">Feed</a>
 <a href="{{pathFor 'message'}}" class="discuss btn">Message</a>
 
-    </div><!-- Container close -->
+  </div><!-- Container close -->
 
-  </div>
+  
 </template>
 
 
