@@ -1,0 +1,39 @@
+<template name="navbar">
+
+<nav class="top-bar" data-topbar="">
+    <ul class="title-area">
+      <!-- Title Area -->
+      <li class="name">
+
+      </li>
+      <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar menu-icon"><a href="">Menu</a></li>
+    </ul>
+
+    
+  <section class="top-bar-section">
+      <ul class="left">
+        <li class="has-dropdown not-click"><a href="#"><h1 class="fa fa-comment fa-lg"></h1></a>
+
+          <ul class="dropdown"><li class="title back js-generated  fa fa-comment fa-lg"><h5><a href="javascript:void(0)">Back</a></h5></li>
+            <li><label>Level One</label></li>
+            <li><a href="{{pathFor 'usersEdit'}}">Settings</a></li>
+            <li><a href="#">Log Out</a></li>
+            <li class="divider"></li>
+
+            <!-- User Messages -->
+            <li><a href="#">Example Message</a></li>
+            <li><a href="#">Example Message</a></li>
+            <li><a href="#">Example Message</a></li>
+          </ul>
+      </ul>
+
+
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <li class="divider"></li>
+        <li><a href="#"><h1 class="fa fa-plus fa-lg"></h1></a></li>
+      </ul>
+    </section></nav>
+
+  </template>
