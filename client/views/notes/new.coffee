@@ -9,4 +9,4 @@ Template.newNote.events
       alert(error.reason) if error # need better error handling than "alerts"
     )
       
-    Router.go "index"
+    Router.go "feed"
