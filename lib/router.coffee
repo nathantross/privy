@@ -1,9 +1,9 @@
 # Provide the router with the name of a loading template
 Router.configure 
   layoutTemplate: "layout"
+  loadingTemplate: "loading"
   # waitOn lets us load 'feed' in the background
   # until it loads fully. Giving loading template beforehand
-  # loadingTemplate: 'loading',
   # waitOn: function() { return Meteor.subscribe('feed'); }
 
 
@@ -27,44 +27,50 @@ Router.map ->
 
   
   # Note Routes
-  @route "notes",
+  @route "feed",
     path: "/notes"
 
-  @route "notesNew",
+  @route "newNote",
     path: "/notes/new"
 
-  @route "notesShow",
+  @route "showNote",
     path: "/notes/:_id"
     data: ->
       Notes.findOne @params._id
 
-  @route "notesSubimt",
-    path: "notes/submit"
-
-  @route "notesEdit",
+  @route "editNote",
     path: "/notes/:_id/edit"
     data: ->
       Notes.findOne @params._id
 
-  @route "notesDestroy",
+  @route "destroyNote",
     path: "/notes/:_id/destroy"
     data: ->
       Notes.findOne @params._id
 
   
   # Thread Route
-  @route "threadsId",
+  @route "showThread",
     path: "/threads/:_id"
     data: ->
       Threads.findOne @params._id
 
   
   # Various Routes
-  @route "privacyPolicy",
-    path: "/privacy-policy"
+  @route "privacy",
+    path: "/privacy"
 
-  @route "termsConditions",
-    path: "/terms-conditions"
+  @route "terms",
+    path: "/terms"
 
-  @route "faqs",
-    path: "/faqs"
+  @route "faq",
+    path: "/faq"
+
+requireLogin = -> 
+  unless Meteor.user() 
+    @render( if Meteor.loggingIn() then @loadingTemplate else "accessDenied" )
+    @stop()
+  return
+
+Router.before requireLogin,
+  except: ["index", "register", "terms", "privacy", "login"]

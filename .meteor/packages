@@ -5,7 +5,6 @@
 
 standard-app-packages
 autopublish
-insecure
 preserve-inputs
 coffeescript
 foundation-5
@@ -17,3 +16,4 @@ mocha-web
 accounts-ui-bootstrap-dropdown
 accounts-twitter
 accounts-facebook
+spin
