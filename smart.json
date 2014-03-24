@@ -4,6 +4,7 @@
     "font-awesome": {},
     "iron-router": {},
     "mocha-web": {},
-    "accounts-ui-bootstrap-dropdown": {}
+    "accounts-ui-bootstrap-dropdown": {},
+    "spin": {}
   }
 }
