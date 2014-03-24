@@ -4,8 +4,9 @@ Template.newNote.events
   
     note = 
       body: $(e.target).find("[name=notes-body]").val()
-      userId: Meteor.userId()
-      isInstream: true
 
-    note._id = Notes.insert(note)
+    Meteor.call('post', note, (error, id) -> 
+      alert(error.reason) if error # need better error handling than "alerts"
+    )
+      
     Router.go "index"
