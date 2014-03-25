@@ -22,8 +22,16 @@ FeedController = RouteController.extend(
   waitOn: ->
     Meteor.subscribe "notes", @findOptions()
 
+  notes: ->
+    Notes.find isInstream: true, @findOptions()
+
   data: ->
-    notes: Notes.find( isInstream: true, @findOptions())
+    hasMore = @notes().fetch().length is @limit()
+    nextPath = @route.path(notesLimit: @limit() + @increment)
+    return (
+      notes: @notes()
+      nextPath: (if hasMore then nextPath else null)
+    )
 )
 
 Router.map ->
@@ -64,22 +72,6 @@ Router.map ->
   @route "feed",
     path: "/notes/:notesLimit?" 
     controller: FeedController
-
-    # waitOn: ->
-    #   notesLimit = parseInt(@params.notesLimit) || 5 
-    #   Meteor.subscribe "notes",
-    #     sort:
-    #       updatedAt: -1
-    #     limit: notesLimit
-        
-    # data: ->
-    #   limit = parseInt(@params.notesLimit) || 5 
-    #   notes: Notes.find
-    #       isInstream: true
-    #     ,
-    #       sort: 
-    #         updatedAt: -1
-    #       limit: limit
   
   # Thread Route
   @route "showThread",
