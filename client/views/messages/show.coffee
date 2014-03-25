@@ -1,4 +1,4 @@
-Template.message.helpers
+Template.showMessage.helpers
   sender: ->
     Meteor.users.findOne(@senderId)
 
