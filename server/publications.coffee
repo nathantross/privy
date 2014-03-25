@@ -10,3 +10,7 @@ Meteor.publish "messages", ->
 Meteor.publish "notes", ->
   Notes.find()
 
+
+# Example limiting db shared
+# Meteor.publish "notes", ->
+#   Posts.find flagged: false
