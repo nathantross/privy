@@ -10,7 +10,7 @@ Router.configure
 
 FeedController = RouteController.extend(
   template: "feed"
-  increment: 5
+  increment: 1
   limit: ->
     parseInt(@params.notesLimit) || @increment
 
