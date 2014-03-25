@@ -1,14 +1,14 @@
 Meteor.publish "threads", ->
-  Threads.find()
+  Threads.find #add 'or' query with creator/responder
 
-Meteor.publish "noteActions", ->
-  NoteActions.find()
+Meteor.publish "noteActions", (noteId) ->
+  NoteActions.find noteId: noteId
 
-Meteor.publish "messages", ->
-  Messages.find()
+Meteor.publish "messages", (threadId) ->
+  Messages.find threadId: threadId
 
 Meteor.publish "notes", (options) ->
-  Notes.find {}, options
+  Notes.find isInstream: true, options
 
 # Example limiting db shared
 # Meteor.publish "notes", ->

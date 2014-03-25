@@ -1,8 +1,2 @@
-Template.feed.helpers 
-  notes: ->
-    Notes.find(
-        isInstream: true
-      ,
-        sort:
-          updatedAt: -1
-    )
+# Template.feed.helpers 
+# noteActions will be registered here

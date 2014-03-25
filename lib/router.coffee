@@ -25,9 +25,6 @@ Router.map ->
     path: "/profile/edit"
   
   # Note Routes
-  @route "feed",
-    path: "/notes"
-
   @route "newNote",
     path: "/notes/new"
 
@@ -46,6 +43,24 @@ Router.map ->
     data: ->
       Notes.findOne @params._id
 
+  @route "feed",
+    path: "/notes/:notesLimit?" 
+
+    waitOn: ->
+      notesLimit = parseInt(@params.notesLimit) || 5 
+      Meteor.subscribe "notes",
+        sort:
+          updatedAt: -1
+        limit: notesLimit
+        
+    data: ->
+      limit = parseInt(@params.notesLimit) || 5 
+      notes: Notes.find
+          isInstream: true
+        ,
+          sort: 
+            updatedAt: -1
+          limit: limit
   
   # Thread Route
   @route "showThread",
@@ -66,31 +81,6 @@ Router.map ->
 
   @route "faq",
     path: "/faq"
-
-
-  # Ability to match mutliple routes
-  # Position below other routes or will replace
-  @route "feed",
-    path: "/notes/:notesLimit?"
-    waitOn: ->
-      notesLimit = parseInt(@params.notesLimit) || 5 
-      Meteor.subscribe "notes",
-        sort:
-          updatedAt: -1
-        limit: notesLimit
-
-    data: ->
-      limit = parseInt(@params.notesLimit) || 5 
-      notes: Notes.find({},
-        sort: 
-          updatedAt: -1
-        limit: limit
-      )
-
-
-
-
-
 
 requireLogin = -> 
   unless Meteor.user() 
