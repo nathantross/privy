@@ -4,7 +4,6 @@
 # but you can also edit it by hand.
 
 standard-app-packages
-autopublish
 preserve-inputs
 coffeescript
 foundation-5
@@ -17,3 +16,4 @@ accounts-ui-bootstrap-dropdown
 accounts-twitter
 accounts-facebook
 spin
+pages
