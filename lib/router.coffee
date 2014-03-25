@@ -20,11 +20,8 @@ Router.map ->
   @route "login",
     path: "/login"
 
-  @route "usersEdit",
-    path: "/users/:_id/edit"
-    data: ->
-      Meteor.users.findOne @params._id
-
+  @route "editUser",
+    path: "/profile/edit"
   
   # Note Routes
   @route "feed",
@@ -55,6 +52,10 @@ Router.map ->
     data: ->
       Threads.findOne @params._id
 
+  # The route to this template is only for testing purposes 
+  # The template should be moved to the navbar
+  @route "allThreads",
+    path: "/threads/"
   
   # Various Routes
   @route "privacy",
