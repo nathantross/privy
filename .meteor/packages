@@ -6,7 +6,6 @@
 standard-app-packages
 preserve-inputs
 coffeescript
-foundation-5
 accounts-base
 accounts-password
 font-awesome
