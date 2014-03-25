@@ -98,6 +98,15 @@ ul {
 /***********/
 
 /****** Navigation ******/
+
+#inline {
+display: inline ;
+padding: 0px 3px 0px 3px ; 
+  }
+
+/***********/
+
+/****** Navigation ******/
 .fa-comment {
   padding-left: 12px;
   color: #fff;
