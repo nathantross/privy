@@ -2,7 +2,6 @@
   "meteor": {},
   "dependencies": {
     "basePackages": {
-      "foundation-5": {},
       "font-awesome": {},
       "iron-router": {},
       "mocha-web": {},
@@ -10,11 +9,6 @@
       "spin": {}
     },
     "packages": {
-      "foundation-5": {
-        "git": "https://github.com/menuet/meteor-foundation-5.git",
-        "tag": "v5.0.3.5",
-        "commit": "8bc2219c0c7f3d68ca0a8d15a066db55b52f0aa4"
-      },
       "font-awesome": {
         "git": "https://github.com/nate-strauser/meteor-font-awesome.git",
         "tag": "v4.0.3",
@@ -39,11 +33,6 @@
         "git": "https://github.com/SachaG/meteor-spin.git",
         "tag": "v0.2.2",
         "commit": "3f655f0016228e4195acc784c45d3e3a247dc39f"
-      },
-      "jquery": {
-        "git": "https://github.com/nrafter/meteor-jquery.git",
-        "tag": "v2.0.3",
-        "commit": "8e8b556f39e1549d03abeebcc2d93083670ae200"
       }
     }
   }

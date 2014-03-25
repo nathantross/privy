@@ -1,6 +1,5 @@
 {
   "packages": {
-    "foundation-5": {},
     "font-awesome": {},
     "iron-router": {},
     "mocha-web": {},
