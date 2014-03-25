@@ -1,48 +1,19 @@
 <template name="message">
-  <div>
-    <div class="row">
+  <div class="row">
+    {{#if currentUserIsSender}}
       <div class="small-4 columns">
-        <img class="avatar" src="https://avatars0.githubusercontent.com/u/680567?s=460" />
+        <img class="avatar" src="{{sender.profile.avatar}}" />
       </div>
       <div class="left-small small-8 columns">
-        <p class="response">hi!</p>
+        <p class="response">{{body}}</p>
       </div>
-    </div>
-
-    <div class="row">
+    {{else}}
       <div class="small-8 columns">
-        <p class="comment">Great thanks!<br>dafs</p>
+        <p class="comment">{{body}}</p>
       </div>
       <div class="small-4 columns">
-        <img class="avatar" src="https://avatars3.githubusercontent.com/u/6180517?s=460" />
+        <img class="avatar" src="{{sender.profile.avatar}}" />
       </div>
-    </div>
-
-    <div class="row">
-      <div class="small-4 columns">
-        <img class="avatar" src="https://avatars0.githubusercontent.com/u/680567?s=460" />
-      </div>
-      <div class="left-small small-8 columns">
-        <p class="response">This is a great imaginary conversation about absolutely nothing! Yes!</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="right-small small-8 columns">
-        <p class="comment">Yes it is . . . HEre's some random text. HEre's some random text. HEre's some random text. HEre's some random text. HEre's some random text. HEre's some random text. HEre's some random text. HEre's some random text. HEre's some random text. HEre's some random text. HEre's some random text. HEre's some random text. HEre's some random text. HEre's some random text. HEre's some random text. </p>
-      </div>
-      <div class="small-4 columns">
-        <img class="avatar" src="https://avatars3.githubusercontent.com/u/6180517?s=460" />
-      </div>
-    </div>
-
-  </div><!-- Container close -->
-  <div class="row collapse">
-    <div class="small-9 columns">
-      <input class="fa fa-camera" type="text" placeholder="Write your comment here">
-    </div>
-    <div class="small-3 columns">
-      <a href="#" class="button postfix">Submit</a>
-    </div>
+    {{/if}}
   </div>
 </template>

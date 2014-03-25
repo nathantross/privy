@@ -1,0 +1,10 @@
+<template name="showThread">
+  <div>
+    {{#each messages}}
+      {{> message}}
+    {{/each}}
+  </div>
+  <div class="row collapse">
+    {{> newMessage}}
+  </div>
+</template>

@@ -4,6 +4,7 @@ Template.newNote.events
   
     note = 
       body: $(e.target).find("[name=notes-body]").val()
+      threadId: @_id
 
     Meteor.call('post', note, (error, id) -> 
       alert(error.reason) if error # need better error handling than "alerts"

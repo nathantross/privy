@@ -1,12 +1,13 @@
 <template name="newNote">
-  <form class="notes-form">
-    <div class="row">
-      <div class="small-10 small-centered columns">
-        <h1 class="notes-prompt">What's on your mind, sunshine?</h1>
-      </div>
+  
+  <div class="row">
+    <div class="small-10 small-centered columns">
+      <h1 class="notes-prompt">What's on your mind, sunshine?</h1>
     </div>
+  </div>
 
-    <div class="row collapse">
+  <div class="row collapse">
+    <form class="notes-form">
       <div class="small-9 columns">
         <input name="notes-body" class="fa fa-camera" type="text" placeholder="Start writing..." autofocus>
       </div>
@@ -14,6 +15,6 @@
       <div class="small-3 columns">
         <button type="submit" class="button postfix">Submit</button>
       </div>
-    </div>
-  </form>
+    </form>
+  </div>  
 </template>

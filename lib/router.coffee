@@ -20,11 +20,8 @@ Router.map ->
   @route "login",
     path: "/login"
 
-  @route "usersEdit",
-    path: "/users/:_id/edit"
-    data: ->
-      Meteor.users.findOne @params._id
-
+  @route "editUser",
+    path: "/profile/edit"
   
   # Note Routes
   @route "feed",
@@ -55,6 +52,9 @@ Router.map ->
     data: ->
       Threads.findOne @params._id
 
+  # This route is only for testing purposes
+  @route "allThreads",
+    path: "/threads/"
   
   # Various Routes
   @route "privacy",
