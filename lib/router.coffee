@@ -8,6 +8,24 @@ Router.configure
   # waitOn: -> 
   #   [Meteor.subscribe 'notifications']
 
+FeedController = RouteController.extend(
+  template: "feed"
+  increment: 5
+  limit: ->
+    parseInt(@params.notesLimit) || @increment
+
+  findOptions: ->
+    sort:
+      submitted: -1
+    limit: @limit()
+
+  waitOn: ->
+    Meteor.subscribe "notes", @findOptions()
+
+  data: ->
+    notes: Notes.find( isInstream: true, @findOptions())
+)
+
 Router.map ->
   # Sets route for Index to '/' for the application
   @route "index",
@@ -45,22 +63,23 @@ Router.map ->
 
   @route "feed",
     path: "/notes/:notesLimit?" 
+    controller: FeedController
 
-    waitOn: ->
-      notesLimit = parseInt(@params.notesLimit) || 5 
-      Meteor.subscribe "notes",
-        sort:
-          updatedAt: -1
-        limit: notesLimit
+    # waitOn: ->
+    #   notesLimit = parseInt(@params.notesLimit) || 5 
+    #   Meteor.subscribe "notes",
+    #     sort:
+    #       updatedAt: -1
+    #     limit: notesLimit
         
-    data: ->
-      limit = parseInt(@params.notesLimit) || 5 
-      notes: Notes.find
-          isInstream: true
-        ,
-          sort: 
-            updatedAt: -1
-          limit: limit
+    # data: ->
+    #   limit = parseInt(@params.notesLimit) || 5 
+    #   notes: Notes.find
+    #       isInstream: true
+    #     ,
+    #       sort: 
+    #         updatedAt: -1
+    #       limit: limit
   
   # Thread Route
   @route "showThread",
