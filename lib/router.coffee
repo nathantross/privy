@@ -5,7 +5,8 @@ Router.configure
   # waitOn lets us load 'feed' in the background
   # until it loads fully. Giving loading template beforehand
   # waitOn: function() { return ('index'); }
-
+  # waitOn: -> 
+  #   [Meteor.subscribe 'notifications']
 
 Router.map ->
   # Sets route for Index to '/' for the application
@@ -29,8 +30,6 @@ Router.map ->
   # Note Routes
   @route "feed",
     path: "/notes"
-
-
 
   @route "newNote",
     path: "/notes/new"
@@ -72,14 +71,26 @@ Router.map ->
   # Ability to match mutliple routes
   # Position below other routes or will replace
   @route "feed",
-    path: "/notes/:notes?"
-    # waitOn: ->
-    #   notesLimit = parseInt(this.params.notesLimit) || 5; 
-    #   Meteor.subscribe 'notes', 
-    #     sort: 
-    #       submitted: -1
-    #   , 
-    #     limit: notesLimit
+    path: "/notes/:notesLimit?"
+    waitOn: ->
+      notesLimit = parseInt(@params.notesLimit) || 5 
+      Meteor.subscribe "notes",
+        sort:
+          updatedAt: -1
+        limit: notesLimit
+
+    data: ->
+      limit = parseInt(@params.notesLimit) || 5 
+      notes: Notes.find({},
+        sort: 
+          updatedAt: -1
+        limit: limit
+      )
+
+
+
+
+
 
 requireLogin = -> 
   unless Meteor.user() 
