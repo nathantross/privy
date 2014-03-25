@@ -8,7 +8,7 @@ Template.threadItem.helpers(
   hello: "hi"
 
   lastMessage: ->
-    m = Messages.find(
+    Messages.find(
       threadId: "egXCNvBv35skjqphw"
     ,
       sort:

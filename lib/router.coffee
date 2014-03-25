@@ -79,7 +79,8 @@ Router.map ->
     data: ->
       Threads.findOne @params._id
 
-  # This route is only for testing purposes
+  # The route to this template is only for testing purposes 
+  # The template should be moved to the navbar
   @route "allThreads",
     path: "/threads/"
   
