@@ -7,6 +7,7 @@ Meteor.subscribe('noteActions')
 
 Meteor.subscribe('messages')
 
+Meteor.subscribe('users')
 
 #if Meteor.isClient
   # Meteor.startup ->

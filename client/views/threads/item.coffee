@@ -4,12 +4,10 @@ Template.threadItem.helpers(
       Meteor.users.findOne(_id: @responderId)
     else
       Meteor.users.findOne(_id: @creatorId)
-  
-  hello: "hi"
 
   lastMessage: ->
     Messages.find(
-      threadId: "egXCNvBv35skjqphw"
+      threadId: @_id
     ,
       sort:
         createdAt: -1

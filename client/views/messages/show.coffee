@@ -1,6 +1,6 @@
 Template.showMessage.helpers
   sender: ->
-    Meteor.users.findOne(@senderId)
+    Meteor.users.findOne(_id: @senderId)
 
   currentUserIsSender: ->
-    Meteor.users.findOne(@senderId)._id == Meteor.userId()
+    @senderId == Meteor.userId()

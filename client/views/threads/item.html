@@ -1,6 +1,3 @@
 <template name="threadItem">
-  <div>
-    <image src="{{contact.profile.avatar}}" />
-    <h1><a href="{{pathFor 'showThread'}}">{{lastMessage.body}}</a></h1>
-  </div>
+    <li><a href="{{pathFor 'showThread'}}"><image src="{{contact.profile.avatar}}" class="avatar" />{{lastMessage.body}}</a></li>
 </template>
