@@ -3,7 +3,7 @@ Meteor.subscribe('notes')
 
 Meteor.subscribe('threads')
 
-Meteor.subscribe('noteActions')
+Meteor.subscribe('NoteActions')
 
 Meteor.subscribe('messages')
 

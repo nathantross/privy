@@ -1,7 +1,7 @@
 Meteor.publish "threads", ->
   Threads.find()
 
-Meteor.publish "noteActions", (noteId) ->
+Meteor.publish "NoteActions", (noteId) ->
   NoteActions.find()
 
 Meteor.publish "messages", ->
