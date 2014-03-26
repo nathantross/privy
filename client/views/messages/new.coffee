@@ -10,3 +10,5 @@ Template.newMessage.events
     Meteor.call('deliver', message, (error, messageId) ->
       alert(error.reason) if error # need better error handling
     )
+
+    $body.val("") 
