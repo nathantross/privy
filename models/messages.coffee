@@ -2,7 +2,7 @@ exports = this
 exports.Messages = new Meteor.Collection('messages')
 
 Meteor.methods
-  deliver: (messageAttributes) ->
+  createMessage: (messageAttributes) ->
     user = Meteor.user()
 
     if !user

@@ -2,7 +2,7 @@ exports = this
 exports.Notes = new Meteor.Collection('notes')
 
 Meteor.methods
-  post: (noteAttributes) ->
+  createNote: (noteAttributes) ->
     user = Meteor.user()
     duplicateNote = Notes.findOne(
       body: noteAttributes.body

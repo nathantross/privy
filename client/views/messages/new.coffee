@@ -7,7 +7,7 @@ Template.newMessage.events
       body: $body.val()
       threadId: template.data._id
 
-    Meteor.call('deliver', message, (error, messageId) ->
+    Meteor.call('createMessage', message, (error, messageId) ->
       alert(error.reason) if error # need better error handling
     )
 

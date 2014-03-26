@@ -1,7 +1,10 @@
 Template.threadItem.helpers(
   contact: ->
     if Meteor.userId() == @creatorId
-      Meteor.users.findOne(_id: @responderId)
+      if @responderId
+        Meteor.users.findOne(_id: @responderId)
+      else
+        Meteor.user()
     else
       Meteor.users.findOne(_id: @creatorId)
 
