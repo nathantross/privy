@@ -4,8 +4,8 @@
     "basePackages": {
       "font-awesome": {},
       "iron-router": {},
-      "accounts-ui-bootstrap-dropdown": {},
-      "iron-router-progress": {}
+      "iron-router-progress": {},
+      "accounts-entry": {}
     },
     "packages": {
       "font-awesome": {
@@ -18,15 +18,25 @@
         "tag": "v0.6.4",
         "commit": "927bbaed1b87894fb6fb70807f74ff3a5bd89f29"
       },
-      "accounts-ui-bootstrap-dropdown": {
-        "git": "https://github.com/erobit/meteor-accounts-ui-bootstrap-dropdown.git",
-        "tag": "v0.6.5.1",
-        "commit": "c8b29d2e7f8611d6dec9d6d23c1c2b94e000b0fb"
-      },
       "iron-router-progress": {
         "git": "https://github.com/Multiply/iron-router-progress.git",
         "tag": "v0.2.0",
         "commit": "ce730d1d26feadb7c75ea25f22c5bfdb0c549a8b"
+      },
+      "accounts-entry": {
+        "git": "https://github.com/BeDifferential/accounts-entry.git",
+        "tag": "v0.6.2",
+        "commit": "56c9b6c064cc0d92a97aa9b53a8f4da050f54c29"
+      },
+      "just-i18n": {
+        "git": "https://github.com/subhog/meteor-just-i18n.git",
+        "tag": "v0.1.1",
+        "commit": "ce88ac66c0dc107dc2da93ce152616115838101f"
+      },
+      "accounts-t9n": {
+        "git": "https://github.com/softwarerero/meteor-accounts-t9n.git",
+        "tag": "v0.0.2",
+        "commit": "408e3a037114cb72163073110e2121e3d548c1a2"
       }
     }
   }
