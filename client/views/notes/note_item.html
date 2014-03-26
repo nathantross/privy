@@ -1,9 +1,13 @@
 <template name="noteItem">
-	<h3><a href="{{url}}">{{body}}</h3>
-  <div class="row small-centered">
-    <ul class="inline-list">
-      <li><button href="{{url}}" class="button radius round">Pass</button></li>
-      <li><button href="{{url}}" class="button radius round">Chat</button></li>
-    </ul>
-  </div>
+
+	<h3>{{body}}</h3>
+		<br>
+		<br>
+	  <div class="row small-centered">
+	  	<div class="small-12 columns">
+	    	<a href="#" id="skip" class="button radius round"><i class="fa fa-times fa-lg" /> Pass</a>
+			<a href="#" class="button radius round"><i class="fa fa-check fa-lg" />  Chat</a>
+		</div>
+	</div>
+
 </template>
