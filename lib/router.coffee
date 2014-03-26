@@ -21,11 +21,17 @@ Router.map ->
   @route "login",
     path: "/login"
 
+  @route "resetPassword",
+    path: "/resetpassword"    
+
   @route "editUser",
     path: "/profile/edit"
 
   @route "logout",
     path: "/"
+
+  @route "dashboard",
+    path: "/dashboard" 
   
 
   # Note Routes
