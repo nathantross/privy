@@ -32,3 +32,8 @@ Meteor.methods
     )
 
     Notes.insert(note)
+
+
+
+
+
