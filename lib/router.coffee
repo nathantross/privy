@@ -30,8 +30,8 @@ Router.map ->
   @route "logout",
     path: "/"
 
-  @route "dashboard",
-    path: "/dashboard" 
+  @route "forgotPassword",
+    path: "/forgotpassword" 
   
 
   # Note Routes

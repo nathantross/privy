@@ -14,3 +14,5 @@ accounts-twitter
 accounts-facebook
 iron-router-progress
 accounts-entry
+accounts-google
+accounts-oauth
