@@ -8,32 +8,6 @@ Router.configure
   # waitOn: -> 
   #   [Meteor.subscribe 'notifications']
 
-FeedController = RouteController.extend(
-  template: "feed"
-  increment: 5
-  limit: ->
-    parseInt(@params.notesLimit) || @increment
-
-  findOptions: ->
-    sort:
-      submitted: -1
-    limit: @limit()
-
-  waitOn: ->
-    Meteor.subscribe "notes", @findOptions()
-
-  notes: ->
-    Notes.find isInstream: true, @findOptions()
-
-  data: ->
-    hasMore = @notes().fetch().length is @limit()
-    nextPath = @route.path(notesLimit: @limit() + @increment)
-    return (
-      notes: @notes()
-      nextPath: (if hasMore then nextPath else null)
-    )
-)
-
 Router.map ->
   # Sets route for Index to '/' for the application
   @route "index",
@@ -50,6 +24,7 @@ Router.map ->
   @route "editUser",
     path: "/profile/edit"
   
+
   # Note Routes
   @route "newNote",
     path: "/notes/new"
@@ -73,17 +48,14 @@ Router.map ->
     path: "/notes/:notesLimit?" 
     controller: FeedController
   
+
   # Thread Route
   @route "showThread",
     path: "/threads/:_id"
     data: ->
       Threads.findOne @params._id
 
-  # The route to this template is only for testing purposes 
-  # The template should be moved to the navbar
-  @route "allThreads",
-    path: "/threads/"
-  
+
   # Various Routes
   @route "privacy",
     path: "/privacy"
