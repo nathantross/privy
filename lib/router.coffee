@@ -23,6 +23,9 @@ Router.map ->
 
   @route "editUser",
     path: "/profile/edit"
+
+  @route "logout",
+    path: "/"
   
 
   # Note Routes

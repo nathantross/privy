@@ -17,12 +17,14 @@
 
         <ul class="dropdown">
           <li class="title back js-generated  fa fa-comment fa-lg"><h5><a href="javascript:void(0)">Back</a></h5></li>
-            <li><label>Level One</label></li>
+            <li><label></label></li>
             <li><a href="{{pathFor 'editUser'}}">Settings</a></li>
-            <li><a href="#">Log Out</a></li>
+            <li><a href="{{signOut}}">Log Out</a></li>
             <li class="divider"></li>
           </li><!-- Closes Dropdown List Item -->
+          {{#if currentUser}}
             {{> allThreads}}
+          {{/if}}
         </ul>
       </ul>
 
