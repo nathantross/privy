@@ -1,12 +1,11 @@
 <template name="feed">
   <div class="notes">
     <div class="container text-center">
-      <h1>test</h1>
       {{#each notes}}
         {{> noteItem}}
       {{/each}}
       {{#if nextPath}}
-        <a class="load-more" href="{{nextPath}}">Load more</a>
+       <!--  <a class="load-more" href="{{nextPath}}">Load more</a> -->
       {{/if}}
     </div><!-- Container close -->
   </div>

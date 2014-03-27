@@ -1,40 +1,39 @@
 <template name="navbar">
 
-<nav class="top-bar" data-topbar="">
-    <ul class="title-area">
-      <!-- Title Area -->
-      <li class="name">
+  <nav class="navbar navbar-inverse" role="navigation">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
 
-      </li>
-      <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-      <li class="toggle-topbar menu-icon"><a href="">Menu</a></li>
-    </ul>
 
-    
-  <section class="top-bar-section">
-      <ul class="left">
-        <li class="has-dropdown not-click"><a href="#"><h1 class="fa fa-comment fa-lg"></h1></a>
+      <!-- Collect the nav links, forms, and other content for toggling -->
 
-        <ul class="dropdown">
-          <li class="title back js-generated  fa fa-comment fa-lg"><h5><a href="javascript:void(0)">Back</a></h5></li>
-            <li><label></label></li>
-            <li><a href="{{pathFor 'editUser'}}">Settings</a></li>
-            <li><a href="/sign-out">{{{beforeSignOut}}}{{i18n "signOut"}}</a></li>
-            <li class="divider"></li>
-          </li><!-- Closes Dropdown List Item -->
-          {{#if currentUser}}
-            {{> allThreads}}
-          {{/if}}
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle fa fa-comment fa-lg" data-toggle="dropdown"> <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="{{pathFor 'editUser'}}">Settings</a></li>
+              <li><a href="/sign-out">{{{beforeSignOut}}}{{i18n "signOut"}}</a></li>
+              <li class="divider"></li>
+              <li><a href="#" class="fa fa-comments"> Messages</a></li>
+              <li class="divider"></li>
+              <li>
+                {{#if currentUser}}
+                  {{> allThreads}}
+                {{/if}}
+              </li>
+            </ul>
+          </li>
         </ul>
-      </ul>
 
+        <div class="navbar-header text-center">
+          <a class="navbar-brand" href="{{pathFor getStarted}}">Privy</a>
+        </div>
 
-      <!-- Right Nav Section -->
-      <ul class="right">
-        <li class="divider"></li>
-        <li><a href="{{pathFor 'newNote'}}"><h1 class="fa fa-plus fa-lg"></h1></a></li>
-      </ul>
-      </div>
-    </section></nav>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" class="fa fa-plus fa-lg"></a></li>
+        </ul>
 
-  </template>
+    </div><!-- /.container-fluid -->
+  </nav>
+
+</template>
