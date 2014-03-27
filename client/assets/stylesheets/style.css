@@ -349,13 +349,14 @@ ul {
   height: 60px;
   width: 100%;
   left: 0;
-  position: absolute;
-  right: 0;
-  padding-left: 10px;
+  z-index: 1000;
+  bottom: 0;
+  padding-left: 0px;
   border-radius: 0px !important;
   text-align: center;
   outline: none;
   box-shadow:none;
+  margin-left: 0px;
 }
 
 .reply-form form input {
@@ -377,6 +378,7 @@ ul {
   box-shadow:none;
   float: right;
   color: #999;
+  z-index: 2000;
 }
 
 .message-feed {
