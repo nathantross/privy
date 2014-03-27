@@ -28,6 +28,7 @@ Meteor.methods
     now = new Date().getTime()
 
     Threads.update(threadId, 
-      responderId: user._id
-      updatedAt: now
+      $set:
+        responderId: user._id
+        updatedAt: now
     )
