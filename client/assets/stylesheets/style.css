@@ -3,6 +3,14 @@ body {
   font-family: 'Cabin', sans-serif;
   font-weight: 400;
   color: #555;
+  height: 100%;
+  background: -moz-linear-gradient(left,  rgba(198,198,198,0.65) 0%, rgba(249,249,249,0.83) 50%, rgba(198,198,198,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(198,198,198,0.65)), color-stop(50%,rgba(249,249,249,0.83)), color-stop(100%,rgba(198,198,198,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left,  rgba(198,198,198,0.65) 0%,rgba(249,249,249,0.83) 50%,rgba(198,198,198,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left,  rgba(198,198,198,0.65) 0%,rgba(249,249,249,0.83) 50%,rgba(198,198,198,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(left,  rgba(198,198,198,0.65) 0%,rgba(249,249,249,0.83) 50%,rgba(198,198,198,1) 100%); /* IE10+ */
+  background: linear-gradient(to right,  rgba(198,198,198,0.65) 0%,rgba(249,249,249,0.83) 50%,rgba(198,198,198,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6c6c6c6', endColorstr='#c6c6c6',GradientType=1 ); /* IE6-9 */
 }
 
 /*font-family: 'Dosis', sans-serif;
@@ -56,9 +64,42 @@ h2 {
   border-color: #007ABA;
 }
 
+.btn-info {
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
+  margin-right: 10px;
+  background-color: #999;
+  border: 0;
+}
+
+.btn-info:hover {
+  background-color: #777;
+}
+
 .btn-big {
   padding: 15px;
   font-size: 25px;
+}
+
+/* Grow */
+
+.grow {
+  display: inline-block;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: -webkit-transform;
+  transition-property: transform;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+
+.grow:hover {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 /***********/
@@ -279,7 +320,7 @@ ul {
 
 /***********/
 
-/****** Navigation ******/
+/****** New Note ******/
 
 .create-form {
   padding-top: 150px;
@@ -299,5 +340,78 @@ ul {
     padding-right: 10px;
 }
 
+/***********/
 
+/****** Feed ******/
+
+.reply-form {
+  font-size: 20px;
+  height: 60px;
+  width: 100%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  padding-left: 10px;
+  border-radius: 0px !important;
+  text-align: center;
+  outline: none;
+  box-shadow:none;
+}
+
+.reply-form form input {
+  outline: none;
+  box-shadow:none;
+}
+
+.reply-form-button {
+  font-size: 20px;
+  height: 60px;
+  width: 10%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  padding-left: 0px;
+  border-radius: 0px !important;
+  text-align: center;
+  outline: none;
+  box-shadow:none;
+  float: right;
+  color: #999;
+}
+
+.message-feed {
+  font-size: 56px;
+  padding-bottom: 30px;
+  padding-top: 10%;
+  color: #F55D0C;
+  border: 0 !important;
+}
+
+.message-feed input {
+  border: 0 !important;
+}
+
+.message-feed button {
+  border: 0 !important;
+}
+
+.input-group {
+  border: 0 !important;
+}
+
+.form-control {
+  border: 0px solid #fff;
+  border-top: 1px solid #999;
+}
+
+.btn-default {
+  border: 0px solid #fff;
+  border-top: 1px solid #999;
+  margin-left: -2px;
+}
+
+.btn-default:hover {
+  border-color: #fff;
+  border-top: 1px solid #999;
+}
 

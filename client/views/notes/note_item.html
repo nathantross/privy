@@ -1,13 +1,17 @@
 <template name="noteItem">
-	<h3>{{body}}</h3>
-
-	<br>
-	<br>
+	<h1 class="message-feed">{{body}}</h1>
   {{> noteReply}}
   <div class="row small-centered">
-  	<div class="small-12 columns">
-    	<a href="#" id="skip" class="button radius round"><i class="fa fa-times fa-lg" /> Pass</a>
-  		<a href="#" class="button radius round"><i class="fa fa-check fa-lg" />  Reply</a>
-  	</div>
+    <div class="small-12 columns">
+      <a href="#" id="skip" class="grow btn btn-info"><i class="fa fa-times fa-lg" /> Next</a>
+      <a href="#" id="skip" class="grow btn btn-primary btn-lg"><i class="fa fa-check fa-lg" /> Reply</a>
+    </div>
   </div>
+	<br>
+	<br>
+  
+
 </template>
+
+
+      

@@ -1,10 +1,11 @@
 <template name="noteReply">
-  <form class="reply-form">
-    <div class="small-9 columns">
-      <input name="reply-body" class="fa fa-camera" type="text" placeholder="What do you think?" autofocus>
-    </div>
-    <div class="small-3 columns">
-      <button type="submit" class="button postfix">Submit</button>
-    </div>
-  </form>
+    <form class="reply-form navbar-fixed-bottom">
+
+
+      <input  name="reply-body"  type="text" class="form-control reply-form" maxlength="65" placeholder="What do you think?">
+      <span class="input-group-btn">
+        <button class="btn btn-default reply-form-button" type="button"><i class="fa fa-pencil"></i></button>
+      </span>
+
+
 </template>
