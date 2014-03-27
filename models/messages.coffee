@@ -21,3 +21,17 @@ Meteor.methods
     )
 
     Messages.insert(message)
+
+  updateRead: (messageAttributes) ->
+    user = Meteor.user()
+
+    if !user
+      throw new Meteor.Error(401, "You have to login to update a message.")
+      
+    # whitelisted keys
+    now = new Date().getTime()
+    message = _.extend(_.pick(messageAttributes, 'isRead'),
+      updatedAt: now
+    )
+
+    Messages.update(messageAttributes.messageId, message)

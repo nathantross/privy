@@ -33,6 +33,19 @@ Meteor.methods
 
     Notes.insert(note)
 
+  switchInstream: (noteId) ->
+    note = !Notes.findOne(_id: noteId).isInstream
+    console.log(note)
+
+    if !Meteor.userId()
+      throw new Meteor.Error(401, "You have to login to create a note.")
+
+    now = new Date().getTime()
+    Notes.update(noteId, 
+      isInstream: note
+      updatedAt: now
+    )
+
 
 
 
