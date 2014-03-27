@@ -239,6 +239,8 @@ ul {
   font-size: 20px;
   margin-top: 30px;
   padding-top: 50px;
+  margin-bottom: -50px;
+  padding-bottom: -50px;
 }
 
 .plus {
