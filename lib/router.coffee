@@ -16,7 +16,6 @@ Router.map ->
   @route "index",
     path: "/"
   
-
   # User Routes
   @route "register",
     path: "/register"
