@@ -1,43 +1,10 @@
 <template name="register">
   <div class="posts">
       <div class="row text-center">
-        <h1>Register</h1>
+        <h1>Create an account</h1>
       </div>
 <br>  
-{{loginButtons align="center"}}
-      <!-- <form>
-        <div class="row">
-          <div class="large-12 columns">
-
-              <input type="text" placeholder="Email Address" />
-            </label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="large-12 columns">
-              <input type="text" placeholder="Create Password" />
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="large-12 columns">
-              <input type="text" placeholder="Confirm Password" />
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="large-12 columns text-center">
-            <button href="{{url}}" class="button radius round expand">Create Account</button>
-          </div>
-        </div>
-      </form>-->
-
-        <div class="row">
-          <div class="large-12 columns text-center">
-            <a href="{{pathFor 'login'}}">Login instead</a>
-          </div>
-        </div>
+{{> entrySignUp }}
 
 
   </div>
