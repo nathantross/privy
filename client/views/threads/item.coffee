@@ -23,7 +23,7 @@ Template.threadItem.helpers
     # Return the substring of the message
     if message 
       message = message.body
-      previewLength = 20
+      previewLength = 20 # change this to update number of characters
       if previewLength < message.length
         message = message.slice(0, previewLength) + "..."
     else
