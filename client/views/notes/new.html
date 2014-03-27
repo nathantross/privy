@@ -1,18 +1,12 @@
 <template name="newNote">
-  
-  <div class="row">
-    <div class="small-10 small-centered columns">
-      <h1 class="notes-prompt">What's on your mind, sunshine?</h1>
-    </div>
-  </div>
+  <div class="row text-center">
 
-
-    <form class="input-group">
-      <input name="notes-body" class="fa fa-camera form-control" type="text" placeholder="Start writing..." autofocus>
-      <span class="input-group-btn">
-        <button class="btn btn-primary" type="submit">Go!</button>
-      </span>
+    <form>
+      <i class="pencil-form fa fa-pencil"></i><input  name="notes-body" class="create-form" type="text" maxlength="65" style="overflow:hidden" placeholder="What's on your mind?">
+      </input>
     </form><!-- /input-group-->
 
-
+  </div>
 </template>
+
+
