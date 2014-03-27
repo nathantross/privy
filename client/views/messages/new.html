@@ -1,25 +1,12 @@
 <template name="newMessage">
-<!--   <form class="message-form">
-    <div class="small-9 columns">
-      <input name="message-body" class="fa fa-camera" type="text" placeholder="Get chattin'" autofocus>
-    </div>
-    <div class="small-3 columns">
-      <button type="submit" class="button postfix">Submit</button>
-    </div>
-  </form>
- -->
+<br>
+<br>
+<br>
 
-
-    <form class="message-form">
-      <input name="message-body" class="fa fa-camera" type="text" placeholder="Get chattin'" autofocus>
-      <span class="input-group-btn">
-        <button class="button postfix" type="submit">Go!</button>
-      </span>
-    </form><!-- /input-group-->
-
-
-
-
-
-
+  <form class="reply-form navbar-fixed-bottom">
+    <input  name="message-body"  type="text" class="form-control reply-form" maxlength="65" placeholder="Reply here ya'll">
+    <span class="input-group-btn">
+      <button class="btn btn-default reply-form-button" type="button"><i class="fa fa-pencil"></i></button>
+    </span>
+    </form>
 </template>
