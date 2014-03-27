@@ -2,14 +2,9 @@
 Router.configure 
   layoutTemplate: "layout"
   loadingTemplate: "loading"
-  notFoundTemplate: 'notFound' #
-  # waitOn lets us load 'feed' in the background
-  # until it loads fully. Giving loading template beforehand
-  # waitOn: function() { return ('index'); }
-  # waitOn: -> 
-  #   [Meteor.subscribe 'notifications']
-
-
+  notFoundTemplate: 'notFound'
+  waitOn: -> 
+    [Meteor.subscribe 'notifications']
 
 Router.map ->
   # Sets route for Index to '/' for the application

@@ -20,7 +20,11 @@ Meteor.methods
       isRead: false
     )
 
-    Messages.insert(message)
+    message._id = Messages.insert(message)
+
+    createMessageNotification(message)
+    message._id
+
 
   updateRead: (messageAttributes) ->
     user = Meteor.user()

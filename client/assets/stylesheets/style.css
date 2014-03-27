@@ -180,6 +180,10 @@ ul {
   color: #fff;
 }
 
+.nav-notify{
+  color: yellow !important;
+}
+
 .fa-plus {
   padding-left: 12px;
   color: #fff;

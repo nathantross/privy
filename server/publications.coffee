@@ -13,6 +13,9 @@ Meteor.publish "notes", (options) ->
 Meteor.publish "users", ->
   Meteor.users.find()
 
+Meteor.publish "notifications", ->
+  Notifications.find userId: @userId
+
 # Example limiting db shared
 # Meteor.publish "notes", ->
 #   Posts.find flagged: false
