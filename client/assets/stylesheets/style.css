@@ -9,6 +9,18 @@ body {
   padding-top: 20px;
 }
 
+a {
+  text-decoration: none;
+  font-size: 13px;
+  color: #fff;
+}
+
+a:hover {
+  color: #ccc;
+  text-decoration: none;
+}
+
+
 h1 {
   font-size: 2.5em;
   font-weight: 700;
@@ -135,10 +147,20 @@ ul {
 
 /****** Navigation ******/
 
+.navbar {
+  border: 0;
+  min-width: 500px !important;
+}
+
+.navbar-fixed-top {
+  border: 0;
+}
+
 .navbar-inverse {
   border-radius: 0;
   color: #fff;
   background-color: #222;
+  border: 0;
 }
 
 .navbar-inverse .navbar-brand {
@@ -167,7 +189,100 @@ ul {
   color: #fff;
 }
 
+#full-height {
+  height: 2000%;
+}
 
+.dropdown-menu {
+  background-color: green;
+  border: 0;
+  text-shadow: none;
+  border-radius: 0;
+  min-width: 250px;
+  background-color: #222;
+  webkit-box-shadow: 0;
+  box-shadow: 0;
+  margin-left: -2px;
+}
+
+.dropdown-menu > li > a {
+  color: #EDEDED;
+}
+
+.dropdown-menu > li > a:hover a:active {
+  color: #EDEDED;
+}
+
+.dropdown-menu .divider {
+  background-color: #333;
+}
+
+.avatar-nav {
+  width: 20px;
+  height: 20px;
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+.fa-plus {
+  margin-right: 20px;
+}
+
+.navbar-brand {
+  float: right;
+}
+
+.main-logo {
+  text-align: center !important;
+  font-size: 20px !important;
+}
+
+.main-logo li {
+  text-align: center !important;
+  font-size: 20px !important;
+  margin-bottom: -30px !important; 
+  padding-top: 500px !important;
+}
+
+
+.plus {
+  color: #fff;
+  padding-right: 0px;
+  margin-top: -8px;
+}
+
+.navbar-right a {
+  background-color: #333;
+}
+
+.navbar-right li:hover {
+  background-color: #444;
+}
+
+
+/***********/
+
+/****** Navigation ******/
+
+.create-form {
+  padding-top: 150px;
+  font-size: 72px;
+  border: 0;
+  background-color: #F5F5F5;
+  outline: none;
+  height: 100%;
+  resize: none;
+  overflow-x: hidden;
+  width: 70%;
+}
+
+.pencil-form {
+    font-size: 40px;
+    color: #999;
+    padding-right: 10px;
+}
 
 
 
