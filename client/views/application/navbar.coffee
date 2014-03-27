@@ -7,7 +7,10 @@ Template.navbar.helpers
 
 Template.navbar.events
   'click #threads-link': ->
-    Notifications.update @_id, 
-      $set: 
-        isSeen: true
-  
+    Notifications.update 
+        userId: Meteor.userId()
+        isSeen: false
+      , 
+        $set: 
+          isSeen: true
+    

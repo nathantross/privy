@@ -27,8 +27,7 @@ Meteor.methods
     # whitelisted keys
     now = new Date().getTime()
 
-    Threads.update(threadId, 
+    Threads.update threadId, 
       $set:
         responderId: user._id
         updatedAt: now
-    )

@@ -80,5 +80,5 @@ requireLogin = ->
   return
 
 Router.before requireLogin,
-  except: ["index", "register", "terms", "privacy", "login"]
+  except: ["index", "register", "terms", "privacy", "login", "resetPassword", "forgotPassword"]
 

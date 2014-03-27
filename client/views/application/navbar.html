@@ -11,7 +11,7 @@
             <a href="#" id="threads-link" class="dropdown-toggle fa fa-comment fa-lg {{#if notify}}nav-notify{{/if}}" data-toggle="dropdown"> <b class="caret"></b></a>
             <ul id="full-height" class="dropdown-menu">
               <li><a class="fa fa-cog" href="{{pathFor 'editUser'}}"> Settings</a>
-              <a class="fa fa-sign-out" href="/">{{{beforeSignOut}}} Sign Out</a></li>
+              <li><a href="/sign-out">{{{beforeSignOut}}}{{i18n "signOut"}}</a></li>
               
               <li>
                 {{#if currentUser}}
