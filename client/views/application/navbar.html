@@ -1,6 +1,6 @@
 <template name="navbar">
 
-  <nav class="navbar navbar-default" role="navigation">
+  <nav class="navbar navbar-inverse" role="navigation">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
 
@@ -11,8 +11,8 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle fa fa-comment fa-lg" data-toggle="dropdown"> <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="#" class="fa fa-cog" > Settings</a></li>
-              <li><a href="#" class="fa fa-sign-out" > Log Out</a></li>
+              <li><a href="{{pathFor 'editUser'}}">Settings</a></li>
+              <li><a href="/sign-out">{{{beforeSignOut}}}{{i18n "signOut"}}</a></li>
               <li class="divider"></li>
               <li><a href="#" class="fa fa-comments"> Messages</a></li>
               <li class="divider"></li>
@@ -33,7 +33,6 @@
           <li><a href="#" class="fa fa-plus fa-lg"></a></li>
         </ul>
 
-      </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
 
