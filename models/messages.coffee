@@ -34,4 +34,4 @@ Meteor.methods
       updatedAt: now
     )
 
-    Messages.update(messageAttributes.messageId, message)
+    Messages.update(messageAttributes.messageId, $set: message)

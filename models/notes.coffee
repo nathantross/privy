@@ -44,8 +44,9 @@ Meteor.methods
 
     now = new Date().getTime()
     Notes.update(noteId, 
-      isInstream: false
-      updatedAt: now
+      $set:
+        isInstream: false
+        updatedAt: now
     )
 
     noteId
