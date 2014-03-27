@@ -10,7 +10,9 @@ accounts-base
 accounts-password
 font-awesome
 iron-router
-accounts-ui-bootstrap-dropdown
 accounts-twitter
 accounts-facebook
 iron-router-progress
+accounts-entry
+accounts-google
+accounts-oauth
