@@ -256,8 +256,27 @@ ul {
 }
 
 
+/***********/
 
+/****** Navigation ******/
 
+.create-form {
+  padding-top: 150px;
+  font-size: 72px;
+  border: 0;
+  background-color: #F5F5F5;
+  outline: none;
+  height: 100%;
+  resize: none;
+  overflow-x: hidden;
+  width: 70%;
+}
+
+.pencil-form {
+    font-size: 40px;
+    color: #999;
+    padding-right: 10px;
+}
 
 
 
