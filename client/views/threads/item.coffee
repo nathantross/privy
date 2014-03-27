@@ -1,19 +1,32 @@
-Template.threadItem.helpers(
-  contact: ->
+Template.threadItem.helpers
+  avatar: ->
+    contact
     if Meteor.userId() == @creatorId
       if @responderId
-        Meteor.users.findOne(_id: @responderId)
+        contact = Meteor.users.findOne(_id: @responderId)
       else
-        Meteor.user()
+        contact = Meteor.user()
     else
-      Meteor.users.findOne(_id: @creatorId)
+      contact = Meteor.users.findOne(_id: @creatorId)
+
+    if contact then contact.profile.avatar else ""
 
   lastMessage: ->
-    Messages.find(
+    message = Messages.find(
       threadId: @_id
     ,
       sort:
         createdAt: -1
       limit: 1
     ).fetch()[0]
-)
+
+    # Return the substring of the message
+    if message 
+      message = message.body
+      previewLength = 20 # change this to update number of characters
+      if previewLength < message.length
+        message = message.slice(0, previewLength) + "..."
+    else
+      message = ""
+
+    message
