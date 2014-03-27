@@ -9,6 +9,18 @@ body {
   padding-top: 20px;
 }
 
+a {
+  text-decoration: none;
+  font-size: 13px;
+  color: #fff;
+}
+
+a:hover {
+  color: #ccc;
+  text-decoration: none;
+}
+
+
 h1 {
   font-size: 2.5em;
   font-weight: 700;
@@ -135,10 +147,20 @@ ul {
 
 /****** Navigation ******/
 
+.navbar {
+  border: 0;
+  min-width: 500px !important;
+}
+
+.navbar-fixed-top {
+  border: 0;
+}
+
 .navbar-inverse {
   border-radius: 0;
   color: #fff;
   background-color: #222;
+  border: 0;
 }
 
 .navbar-inverse .navbar-brand {
@@ -166,6 +188,64 @@ ul {
 .title a {
   color: #fff;
 }
+
+#full-height {
+  height: 2000%;
+}
+
+.dropdown-menu {
+  background-color: green;
+  border: 0;
+  text-shadow: none;
+  border-radius: 0;
+  min-width: 250px;
+  background-color: #222;
+  webkit-box-shadow: 0;
+  box-shadow: 0;
+  margin-left: -2px;
+}
+
+.dropdown-menu > li > a {
+  color: #EDEDED;
+}
+
+.dropdown-menu > li > a:hover a:active {
+  color: #EDEDED;
+}
+
+.dropdown-menu .divider {
+  background-color: #333;
+}
+
+.avatar-nav {
+  width: 20px;
+  height: 20px;
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+.fa-plus {
+  margin-right: 20px;
+}
+
+.navbar-brand {
+  float: right;
+}
+
+.main-logo a {
+  text-align: center;
+  font-size: 20px;
+  margin-top: 30px;
+  padding-top: 50px;
+}
+
+
+
+
+
+
 
 
 
