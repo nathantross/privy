@@ -2,11 +2,14 @@
 Router.configure 
   layoutTemplate: "layout"
   loadingTemplate: "loading"
+  notFoundTemplate: 'notFound' #
   # waitOn lets us load 'feed' in the background
   # until it loads fully. Giving loading template beforehand
   # waitOn: function() { return ('index'); }
   # waitOn: -> 
   #   [Meteor.subscribe 'notifications']
+
+
 
 Router.map ->
   # Sets route for Index to '/' for the application
@@ -74,6 +77,7 @@ Router.map ->
 
   @route "faq",
     path: "/faq"
+  
 
 requireLogin = -> 
   unless Meteor.user() 
@@ -83,3 +87,4 @@ requireLogin = ->
 
 Router.before requireLogin,
   except: ["index", "register", "terms", "privacy", "login"]
+
