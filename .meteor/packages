@@ -9,9 +9,7 @@ accounts-base
 accounts-password
 font-awesome
 iron-router
-accounts-twitter
-accounts-facebook
 iron-router-progress
-accounts-google
 accounts-oauth
 accounts-entry
+accounts-ui
