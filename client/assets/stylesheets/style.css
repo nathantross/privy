@@ -126,7 +126,13 @@ h2 {
 
 #second {
   background-color: #EB8D00;
-  height: 600px;
+  margin-bottom: 0px;
+  margin-top: -50px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 800px;
 }
 
 /****** Feed ******/
