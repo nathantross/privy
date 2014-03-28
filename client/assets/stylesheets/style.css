@@ -13,13 +13,6 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6c6c6c6', endColorstr='#c6c6c6',GradientType=1 ); /* IE6-9 */
 }
 
-/*font-family: 'Dosis', sans-serif;
-font-family: 'Cabin', sans-serif;
-font-family: 'Rosario', sans-serif;
-font-family: 'Roboto Condensed', sans-serif;
-font-family: 'Open Sans Condensed', sans-serif;*/
-/*400 500 600 700*/
-
 .container {
   padding-top: 20px;
 }
@@ -116,14 +109,25 @@ h2 {
 
 /****** Index ******/
 
-/*body {
+#main {
   background: url('Rainy-Weather_2.jpg') no-repeat center center fixed;
   margin-bottom: 0px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-}*/
+  height: 100%;
+  margin-top: -80px;
+}
+
+.secondheader {
+  color: #fff;
+}
+
+#second {
+  background-color: #EB8D00;
+  height: 600px;
+}
 
 /****** Feed ******/
 
