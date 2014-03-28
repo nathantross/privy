@@ -5,3 +5,5 @@ Template.showThread.helpers
     ,
       sort:
           updatedAt: 1
+
+  
