@@ -247,6 +247,7 @@ h2 {
 
 .fa-plus {
   margin-right: 20px;
+  padding-right: 20px;
 }
 
 .navbar-brand {
@@ -270,7 +271,7 @@ h2 {
 
 .plus {
   color: #fff;
-  padding-right: 0px;
+  padding-right: 20px;
   margin-top: -8px;
   font-family: helvetica, arial, sans-serif;
   font-size: 30px;
@@ -294,7 +295,6 @@ h2 {
   color: #ccc;
   text-decoration: none;
 }
-
 
 /***********/
 
