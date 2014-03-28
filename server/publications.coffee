@@ -25,31 +25,33 @@ Meteor.publish "notes", (options) ->
       , options)
 
 Meteor.publish "threads", ->
-  noteIds =
-    Notes.find( isInstream: true )
-      .map( (n)-> n._id )
+  Threads.find()
+  # noteIds =
+  #   Notes.find( isInstream: true )
+  #     .map( (n)-> n._id )
 
-  Threads.find(
-    $or: [  
-            creatorId: @userId
-          , 
-            responderId: @userId
-          , _id: 
-              $in: noteIds
-          ]
-  )
+  # Threads.find(
+  #   $or: [  
+  #           creatorId: @userId
+  #         , 
+  #           responderId: @userId
+  #         , _id: 
+  #             $in: noteIds
+  #         ]
+  # )
 
 Meteor.publish "messages", ->
-  threadIds = 
-    Threads.find(
-        $or: [  
-            creatorId: @userId
-          , 
-            responderId: @userId
-          ]).map( (t)-> t._id )
-  Messages.find
-    threadId: 
-      $in: threadIds
+  Messages.find()
+  # threadIds = 
+  #   Threads.find(
+  #       $or: [  
+  #           creatorId: @userId
+  #         , 
+  #           responderId: @userId
+  #         ]).map( (t)-> t._id )
+  # Messages.find
+  #   threadId: 
+  #     $in: threadIds
 
 
 
