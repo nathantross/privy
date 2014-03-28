@@ -20,7 +20,6 @@ exports.FeedController = RouteController.extend(
         isSkipped: true 
         receiverId: Meteor.userId()
       ).map((na) -> na.noteId)
-    console.log(noteIds)
     noteIds = [] unless noteIds
     
     Notes.find(
@@ -31,7 +30,6 @@ exports.FeedController = RouteController.extend(
 
 
   data: ->
-    console.log(@notes)
     hasMore = @notes().fetch().length is @limit()
     nextPath = @route.path(notesLimit: @limit() + @increment)
     return (
