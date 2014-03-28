@@ -267,14 +267,14 @@ h2 {
 
 .create-form {
   padding-top: 150px;
-  font-size: 72px;
+  font-size: 30px;
   border: 0;
-  background-color: #F5F5F5;
+  background-color: rgba(200, 54, 54, 0);
   outline: none;
   height: 100%;
   resize: none;
   overflow-x: hidden;
-  width: 70%;
+  width: 60%;
 }
 
 .pencil-form {
