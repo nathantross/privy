@@ -1,4 +1,6 @@
 <template name="showThread">
+
+
   <div>
     {{#each messages}}
       {{> showMessage}}
@@ -9,4 +11,7 @@
   <div>
     {{> newMessage}}
   </div>
+
+<script>window.scroll(0, document.documentElement.scrollHeight)</script>
+
 </template>

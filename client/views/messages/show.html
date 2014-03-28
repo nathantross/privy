@@ -1,18 +1,30 @@
 <template name="showMessage">
-  <div class="row">
+  <div id="message-width" class="text-center">
     {{#if currentUserIsSender}}
-      <div class="small-8 columns">
-        <p class="comment">{{body}}</p>
+      <div class="row text-right">
+        <div class="col-xs-3">
+        </div>
+        <div id="yellow" class="col-xs-7 ">
+          <p class="comment text-right">{{body}}</p>
+        </div> 
+
+        <div id="green" class="col-xs-2 text-left">
+          <img class="text-left avatarright" src="{{sender.profile.avatar}}" />
+        </div>
+
+        
       </div>
-      <div class="small-4 columns">
-        <img class="avatar" src="{{sender.profile.avatar}}" />
-      </div>
+
     {{else}}
-      <div class="small-4 columns">
-        <img class="avatar" src="{{sender.profile.avatar}}" />
-      </div>
-      <div class="small-8 columns">
-        <p class="response">{{body}}</p>
+      <div class="row text-left">
+        <div id="green" class="col-xs-2 text-right">
+          <img class="text-right avatarleft" src="{{sender.profile.avatar}}" />
+        </div>
+        <div id="yellow" class="col-xs-7">
+          <p class="response">{{body}}</p>
+        </div>
+        <div class="col-xs-3">
+        </div>
       </div>
     {{/if}}
   </div>
