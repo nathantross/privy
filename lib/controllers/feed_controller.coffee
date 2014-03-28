@@ -12,11 +12,26 @@ exports.FeedController = RouteController.extend(
 
   waitOn: ->
     Meteor.subscribe "notes", @findOptions()
+    Meteor.subscribe "noteActions"
 
   notes: ->
-    Notes.find isInstream: true, @findOptions()
+    noteIds = 
+      NoteActions.find(
+        isSkipped: true 
+        receiverId: Meteor.userId()
+      ).map((na) -> na.noteId)
+    console.log(noteIds)
+    noteIds = [] unless noteIds
+    
+    Notes.find(
+        _id: 
+          $nin: noteIds
+        isInstream: true
+      , @findOptions())
+
 
   data: ->
+    console.log(@notes)
     hasMore = @notes().fetch().length is @limit()
     nextPath = @route.path(notesLimit: @limit() + @increment)
     return (
@@ -24,3 +39,4 @@ exports.FeedController = RouteController.extend(
       nextPath: (if hasMore then nextPath else null)
     )
 )
+

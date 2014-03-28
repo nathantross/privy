@@ -3,8 +3,8 @@
   <!-- Brand and toggle get grouped for better mobile display -->
   <!-- Collect the nav links, forms, and other content for toggling -->
     <ul class="nav navbar-nav">
-      <li class="dropdown">
-        <a href="#" id="threads-link" class="dropdown-toggle fa fa-comment fa-lg {{#if currentUser.profile.isNotified}}nav-notify{{/if}}" data-toggle="dropdown"> <b class="caret"></b></a>
+      <li class="dropdown {{#if currentUser.profile.isNotified}}nav-notify{{/if}}" id="threads-link">
+        <a href="#" class="dropdown-toggle fa fa-comment fa-lg" data-toggle="dropdown"> <b class="caret"></b></a>
         <ul id="full-height" class="dropdown-menu">
           <li>
             <a class="fa fa-cog" href="{{pathFor 'editUser'}}">Settings</a>
