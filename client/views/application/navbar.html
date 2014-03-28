@@ -1,4 +1,6 @@
 <template name="navbar">
+
+{{#if currentUser}}  
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -7,7 +9,10 @@
         <a href="#" class="dropdown-toggle fa fa-comment fa-lg" data-toggle="dropdown"> <b class="caret"></b></a>
         <ul id="full-height" class="dropdown-menu">
           <li>
-            <a class="fa fa-cog" href="{{pathFor 'editUser'}}">Settings</a>
+            <a class="" href="{{pathFor getStarted}}"> Note Feed</a>
+          </li>
+          <li>
+            <a class="fa fa-cog" href="{{pathFor 'editUser'}}"> Settings</a>
           </li>
           <li>
             <a href="/sign-out">{{{beforeSignOut}}}{{i18n "signOut"}}</a>
@@ -25,14 +30,11 @@
         <a href="{{ pathFor 'newNote' }}"><h1 class="plus">+</h1></a>
       </li>
     </ul>
-    <ul>
-      <li>
-        <center>
-          <a class="main-logo" href="{{pathFor getStarted}}">Privy</a>
-        </center>
-      </li>
-    </ul>
   </nav>
+  <br>
 <br>
-<br>
+{{else}}
+    {{/if}}
+
+
 </template>
