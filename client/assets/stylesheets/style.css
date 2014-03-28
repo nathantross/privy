@@ -235,6 +235,10 @@ ul {
   color: yellow !important;
 }
 
+.li-notify{
+  background-color: yellow !important;
+}
+
 .fa-plus {
   padding-left: 12px;
   color: #fff;

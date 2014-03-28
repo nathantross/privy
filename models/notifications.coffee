@@ -18,5 +18,9 @@ exports.createMessageNotification = (message) ->
     Notifications.insert
       userId: notifiedId
       threadId: thread._id
-      isSeen: false
-      
+      isNotified: true
+
+    unless Meteor.user().profile.isNotified
+      Meteor.users.update notifiedId,
+        $set:
+          "profile.isNotified": true

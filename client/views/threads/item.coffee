@@ -30,3 +30,18 @@ Template.threadItem.helpers
       message = ""
 
     message
+
+  notify: ->
+    notification = 
+      Notifications.findOne
+        userId: Meteor.userId()
+        threadId: @_id        
+    if notification then notification.isNotified else false
+     
+
+Template.threadItem.events
+  'click a': ->
+    unless Notifications.findOne(@_id).isNotified 
+      Notifications.update @_id,
+        $set: 
+          isNotified: true

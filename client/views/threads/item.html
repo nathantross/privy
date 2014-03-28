@@ -1,6 +1,10 @@
 <template name="threadItem">
 
 	<li class="divider"></li>
-    <li><a href="{{pathFor 'showThread'}}"><image src="{{avatar}}" class="avatar-nav" />{{ lastMessage }}</a></li>
+    <li class="{{#if notify}}li-notify{{/if}}">
+      <a href="{{pathFor 'showThread'}}">
+        <image src="{{avatar}}" class="avatar-nav" />{{ lastMessage }}
+      </a>
+    </li>
     
 </template>
