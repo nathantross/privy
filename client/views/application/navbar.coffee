@@ -6,5 +6,3 @@ Template.navbar.events
           "profile.isNotified": false
       Meteor.defer ->
         $('#threads-link').addClass('open')
-
-    console.log(event)

@@ -47,5 +47,5 @@ Template.threadItem.events
 
     if n && n.isNotified
       Notifications.update n._id,
-        $set: 
+        $set:
           isNotified: false
