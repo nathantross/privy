@@ -24,23 +24,33 @@ font-family: 'Open Sans Condensed', sans-serif;*/
   padding-top: 20px;
 }
 
+ul {
+  list-style: none;
+}
+
 a {
   text-decoration: none;
   font-size: 13px;
-  color: #fff;
+  color: #008cba;
 }
 
 a:hover {
-  color: #ccc;
+  color: #008ddd;
   text-decoration: none;
 }
 
+a {
+  text-decoration: none;
+  font-size: 13px;
+  color: #008cba;
+}
 
 h1 {
-  font-size: 4.5em;
+  font-size: 3.5em;
   font-weight: 700;
   color: #333;
-  padding: 0;
+  padding: 0px;
+  margin-bottom: -20px;
   margin: 0;
 }
 
@@ -130,67 +140,6 @@ h2 {
   font-size: 20px;
 }
 
-
-/***********/
-
-/****** Message ******/
-
-.response {
-  border-style: solid 1px;
-  border-color: #666;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 15px;
-  padding-right: 15px;
-  width: 100%;
-  background-color: #ccc;
-  font-size: 10px;
-  color: #444;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  text-align: left;
-}
-
-.avatar {
-  width: 30px;
-  height: 30px;
-  -webkit-border-radius: 100px;
-  border-radius: 100px;
-}
-
-.comment {
-  border-style: solid 1px;
-  background-color: #008cba;
-  border-color: #333;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 15px;
-  padding-right: 15px;
-  font-size: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  color: #fff;
-}
-
-.fixed-comment {
-    position:fixed;
-   left:0px;
-   bottom:0px;
-   height:0px;
-   width:100%;
-
-}
-
-#right-align {
-  text-align: right;
-  float: right;
-}
-
-/***********/
-
-ul {
-  list-style: none;
-}
 
 /***********/
 
@@ -317,6 +266,17 @@ ul {
   background-color: #444;
 }
 
+.navbar a {
+  text-decoration: none;
+  font-size: 13px;
+  color: #fff;
+}
+
+.navbar a:hover {
+  color: #ccc;
+  text-decoration: none;
+}
+
 
 /***********/
 
@@ -324,14 +284,14 @@ ul {
 
 .create-form {
   padding-top: 150px;
-  font-size: 72px;
+  font-size: 30px;
   border: 0;
-  background-color: #F5F5F5;
+  background-color: rgba(200, 54, 54, 0);
   outline: none;
   height: 100%;
   resize: none;
   overflow-x: hidden;
-  width: 70%;
+  width: 60%;
 }
 
 .pencil-form {
@@ -346,7 +306,7 @@ ul {
 
 .reply-form {
   font-size: 20px;
-  height: 60px;
+  height: 45px;
   width: 100%;
   left: 0;
   z-index: 1000;
@@ -417,3 +377,104 @@ ul {
   border-top: 1px solid #999;
 }
 
+/****** Message ******/
+
+.response {
+  border: 1px;
+  border-color: #bbb;
+  background-color: #cdcdcd;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 14px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  color: #333;
+  font-weight: 100;
+  display: inline-block;
+  -webkit-box-shadow: 0 3px 1px 0 rgba(000,000,000,0.2);
+  box-shadow: 0 3px 1px 0 rgba(000,000,000,0.2);
+}
+
+/*  border-style: solid 1px;
+  border-color: #666;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+  background-color: #ccc;
+  font-size: 10px;
+  color: #444;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  text-align: left;*/
+
+.avatarright {
+  width: 2.5em;
+  height: 2.5em;
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
+  margin-left: -15px;
+}
+
+.avatarleft {
+  width: 2.5em;
+  height: 2.5em;
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
+  margin-right: -15px;
+}
+
+
+
+/*#green {
+  background-color: green;
+}
+
+#yellow {
+  background-color: yellow;
+}*/
+
+.comment {
+  border: 1px;
+  border-color: #008ddd;
+  background-color: #008cba;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 14px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  color: #fefefe;
+  font-weight: 100;
+  display: inline-block;
+  -webkit-box-shadow: 0 1px 5px 0 rgba(000,000,000,0.2);
+  box-shadow: 0 1px 5px 0 rgba(000,000,000,0.2);
+  -webkit-box-shadow: 0 3px 1px 0 rgba(000,000,000,0.2);
+  box-shadow: 0 3px 1px 0 rgba(000,000,000,0.2);
+}
+
+.fixed-comment {
+    position:fixed;
+   left:0px;
+   bottom:0px;
+   height:0px;
+   width:100%;
+
+}
+
+#right-align {
+  text-align: right;
+  float: right;
+}
+
+/*#message-width {
+  max-width: 400px !important;
+}*/
+
+
+
+/***********/
