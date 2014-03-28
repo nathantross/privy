@@ -4,7 +4,7 @@ Template.noteReply.events
 
     # Set Note's isInstream to false
     noteId = template.data._id
-    
+
     Meteor.call('removeNoteFromStream', noteId, (error, noteId) ->
       if error 
         alert(error.reason)  # need better error handling  

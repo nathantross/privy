@@ -1,8 +1,8 @@
 exports = this
 exports.Notifications = new Meteor.Collection('notifications')
 
-# Notifications.allow
-#   update: ownsThread()
+Notifications.allow
+  update: ownsThread()
 
 exports = this
 exports.createMessageNotification = (message) ->
@@ -11,9 +11,9 @@ exports.createMessageNotification = (message) ->
   if thread.creatorId && thread.responderId
     notifiedId = 
       if message.senderId == thread.creatorId 
-        thread.creatorId
+        thread.responderId
       else 
-        thread.responderId 
+        thread.creatorId
 
     Notifications.insert
       userId: notifiedId

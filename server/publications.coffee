@@ -1,30 +1,59 @@
-Meteor.publish "threads", ->
-  Threads.find()
-
-Meteor.publish "noteActions", (noteId) ->
-  NoteActions.find 
-    receiverId: @userId
-    isSkipped: true
-
-Meteor.publish "messages", ->
-  Messages.find()
-
-Meteor.publish "notes", (options) ->
-  Notes.find isInstream: true, options
-
 Meteor.publish "users", ->
   Meteor.users.find()
 
 Meteor.publish "notifications", ->
   Notifications.find userId: @userId
 
-# Example limiting db shared
-# Meteor.publish "notes", ->
-#   Posts.find flagged: false
+Meteor.publish "noteActions", ->
+  NoteActions.find 
+    receiverId: @userId
+    isSkipped: true
 
-# Notifications
-# Meteor.publish "notifications", ->
-#   Notifications.find userId: @userId
+Meteor.publish "notes", (options) ->
+  noteIds = 
+      NoteActions.find(
+        isSkipped: true 
+        receiverId: @userId
+      ).map((na) -> na.noteId)
+
+    noteIds = [] unless noteIds
+    
+    Notes.find(
+        _id: 
+          $nin: noteIds
+        isInstream: true
+      , options)
+
+Meteor.publish "threads", ->
+  noteIds =
+    Notes.find( isInstream: true )
+      .map( (n)-> n._id )
+
+  Threads.find(
+    $or: [  
+            creatorId: @userId
+          , 
+            responderId: @userId
+          , _id: 
+              $in: noteIds
+          ]
+  )
+
+Meteor.publish "messages", ->
+  threadIds = 
+    Threads.find(
+        $or: [  
+            creatorId: @userId
+          , 
+            responderId: @userId
+          ]).map( (t)-> t._id )
+  Messages.find
+    threadId: 
+      $in: threadIds
+
+
+
+
 
 
 # A more secure pattern could be passing 
