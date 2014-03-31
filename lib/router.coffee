@@ -12,11 +12,11 @@ Router.map ->
     path: "/"
   
   # User Routes
-  @route "register",
-    path: "/register"
+  @route "entrySignUp",
+    path: "/sign-up"
 
-  @route "login",
-    path: "/login"
+  @route "entrySignIn",
+    path: "/sign-in"
 
   @route "resetPassword",
     path: "/resetpassword"    
@@ -80,5 +80,5 @@ requireLogin = ->
   return
 
 Router.before requireLogin,
-  except: ["index", "register", "terms", "privacy", "login", "resetPassword", "forgotPassword"]
+  except: ["index", "register", "terms", "privacy", "entrySignUp", "entrySignIn", "resetPassword", "forgotPassword"]
 
