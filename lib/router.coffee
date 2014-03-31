@@ -12,17 +12,23 @@ Router.map ->
     path: "/"
   
   # User Routes
-  @route "register",
-    path: "/register"
+  @route "entrySignUp",
+    path: "/sign-up"
 
-  @route "login",
-    path: "/login"
+  @route "entrySignIn",
+    path: "/sign-in"
 
   @route "resetPassword",
     path: "/resetpassword"    
 
   @route "editUser",
     path: "/profile/edit"
+
+  @route "termsUrl",
+    path: "/terms-of-use"
+
+  @route "privacyUrl",
+    path: "/privacy-policy"
 
   @route "logout",
     path: "/"
@@ -62,13 +68,6 @@ Router.map ->
       Threads.findOne @params._id
 
 
-  # Various Routes
-  @route "privacy",
-    path: "/privacy"
-
-  @route "terms",
-    path: "/terms"
-
   @route "faq",
     path: "/faq"
   
@@ -80,5 +79,5 @@ requireLogin = ->
   return
 
 Router.before requireLogin,
-  except: ["index", "register", "terms", "privacy", "login", "resetPassword", "forgotPassword"]
+  except: ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "resetPassword", "forgotPassword"]
 
