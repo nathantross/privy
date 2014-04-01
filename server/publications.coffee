@@ -1,5 +1,9 @@
 Meteor.publish "users", ->
-  Meteor.users.find()
+  Meteor.users.find {},
+    fields:
+      _id: 1
+      'profile.avatar': 1
+      'profile.isNotified': 1
 
 Meteor.publish "notifications", ->
   Notifications.find userId: @userId
