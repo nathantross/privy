@@ -78,6 +78,6 @@ requireLogin = ->
     @stop()
   return
 
-Router.before requireLogin,
+Router.onBeforeAction requireLogin,
   except: ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "resetPassword", "forgotPassword"]
 
