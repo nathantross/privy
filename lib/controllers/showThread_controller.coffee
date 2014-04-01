@@ -1,14 +1,14 @@
 exports = this
-exports.FeedController = RouteController.extend(
-  template: "feed"
-  increment: 1
-  limit: ->
-    parseInt(@params.notesLimit) || @increment
+exports.showThreadController = RouteController.extend(
+  template: "showThread"
+  # increment: 1
+  # limit: ->
+  #   parseInt(@params.notesLimit) || @increment
 
   findOptions: ->
     sort:
       updatedAt: 1
-    limit: @limit()
+    # limit: @limit()
 
   waitOn: ->
     Meteor.subscribe "notes", @findOptions()
@@ -27,6 +27,7 @@ exports.FeedController = RouteController.extend(
           $nin: noteIds
         isInstream: true
       , @findOptions())
+
 
   data: ->
     hasMore = @notes().fetch().length is @limit()

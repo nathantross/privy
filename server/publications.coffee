@@ -9,11 +9,18 @@ Meteor.publish "notifications", ->
   Notifications.find userId: @userId
 
 Meteor.publish "noteActions", ->
+  noteIds = 
+    Notes.find( 
+      isInstream: true
+    ).map((n) -> n._id)
+
   NoteActions.find 
+    noteId:
+      $in: noteIds
     receiverId: @userId
     isSkipped: true
 
-Meteor.publish "notes", (options) ->
+Meteor.publish "notes", (sortArg, limitArg) ->
   noteIds = 
       NoteActions.find(
         isSkipped: true 
@@ -21,12 +28,14 @@ Meteor.publish "notes", (options) ->
       ).map((na) -> na.noteId)
 
     noteIds = [] unless noteIds
-    
-    Notes.find(
+    limitArg = 1
+    Notes.find
         _id: 
           $nin: noteIds
         isInstream: true
-      , options)
+      , 
+        sort: sortArg
+        limit: limitArg
 
 Meteor.publish "threads", ->
   Threads.find()
