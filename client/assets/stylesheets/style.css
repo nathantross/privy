@@ -387,7 +387,7 @@ h2 {
 }
 
 #full-height {
-  height: 1000%;
+  height: 2000%;
 }
 
 .dropdown-menu {
@@ -439,39 +439,12 @@ h2 {
   background-color: #444;
 }
 
-
-
 /***********/
 
-
-.text-center {
-/*  width: 82% !important;
-  text-align: center !important;*/
-
-}
-
-.main-logo {
-  text-align: center !important;
-  font-size: 20px !important;
-  font-family: helvetica, arial, sans-serif;
-}
-
-.main-logo li a {
-  text-align: center !important;
-  font-size: 20px !important;
-  margin-bottom: -30px !important; 
-  padding-top: 500px !important;
-  font-family: helvetica, arial, sans-serif;
-}
-
-.plus {
-  color: #fff;
-  font-family: helvetica, arial, sans-serif;
-}
-
-.large {
+.large{
   font-size: 30px !important;
-  padding: 20px !important;
+  padding: 20px;
+  margin-top: -12px;
 }
 
 .navbar-inverse {
@@ -480,6 +453,8 @@ h2 {
   background-color: #222;
   border: 0;
   outline : none;
+  padding-top: 10px;
+  padding-bottom: 15px;
 }
 
 .navbar-inverse a {
@@ -494,5 +469,10 @@ h2 {
   text-decoration: none;
   outline : none;
 }
+
+.main-logo a {
+  font-size: 24px;
+}
+
 
 
