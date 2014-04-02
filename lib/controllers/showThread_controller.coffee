@@ -1,6 +1,7 @@
 exports = this
 exports.showThreadController = RouteController.extend(
   template: "showThread"
+
   
   # FOR PAGINATION WHEN WE WANT TO ADD IT
   # increment: 1
@@ -19,12 +20,19 @@ exports.showThreadController = RouteController.extend(
     Meteor.subscribe "threadUsers", @threadId()
     Meteor.subscribe "messages", @threadId()
 
-  # data: ->
-  #   return (
-  #     sender: @sender
-      
-  #     notes: @notes()
-  #     nextPath: (if hasMore then nextPath else null)
-  #   )
+  # notes: ->
+  #   noteIds = 
+  #     NoteActions.find(
+  #       isSkipped: true 
+  #       receiverId: Meteor.userId()
+  #     ).map((na) -> na.noteId)
+  #   noteIds = [] unless noteIds
+    
+  #   Notes.find(
+  #       _id: 
+  #         $nin: noteIds
+  #       isInstream: true
+  #     , @findOptions())
+
 )
 

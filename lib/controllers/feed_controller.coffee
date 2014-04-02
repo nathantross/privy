@@ -28,7 +28,6 @@ exports.FeedController = RouteController.extend(
         isInstream: true
       , @findOptions())
 
-
   data: ->
     note: @note()
     # hasMore = @notes().fetch().length is @limit()
