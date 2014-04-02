@@ -1,7 +1,7 @@
 exports = this
 exports.FeedController = RouteController.extend(
   template: "feed"
-  increment: 1
+  increment: 5
   limit: ->
     parseInt(@params.notesLimit) || @increment
 
@@ -14,7 +14,7 @@ exports.FeedController = RouteController.extend(
     Meteor.subscribe "notes", @findOptions()
     Meteor.subscribe "noteActions"
 
-  notes: ->
+  note: ->
     noteIds = 
       NoteActions.find(
         isSkipped: true 
@@ -22,7 +22,7 @@ exports.FeedController = RouteController.extend(
       ).map((na) -> na.noteId)
     noteIds = [] unless noteIds
     
-    Notes.find(
+    Notes.findOne(
         _id: 
           $nin: noteIds
         isInstream: true
@@ -30,11 +30,12 @@ exports.FeedController = RouteController.extend(
 
 
   data: ->
-    hasMore = @notes().fetch().length is @limit()
-    nextPath = @route.path(notesLimit: @limit() + @increment)
-    return (
-      notes: @notes()
-      nextPath: (if hasMore then nextPath else null)
-    )
+    note: @note()
+    # hasMore = @notes().fetch().length is @limit()
+    # nextPath = @route.path(notesLimit: @limit() + @increment)
+    # return (
+    #   isPassing: true
+    #   notes: @notes()
+    #   nextPath: (if hasMore then nextPath else "#")
+    # )
 )
-

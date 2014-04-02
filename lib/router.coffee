@@ -1,6 +1,9 @@
 # Provide the router with the name of a loading template
 Router.configure 
   layoutTemplate: "layout"
+  yieldTemplates:
+    'navbar':
+      to: 'navRegion'
   loadingTemplate: "loading"
   notFoundTemplate: 'notFound'
   waitOn: -> 
@@ -41,25 +44,25 @@ Router.map ->
   @route "newNote",
     path: "/notes/new"
 
-  @route "showNote",
-    path: "/notes/list/:_id"
-    data: ->
-      Notes.findOne @params._id
+  # @route "showNote",
+  #   path: "/notes/list/:_id"
+  #   data: ->
+  #     Notes.findOne @params._id
 
-  @route "editNote",
-    path: "/notes/:_id/edit"
-    data: ->
-      Notes.findOne @params._id
+  # @route "editNote",
+  #   path: "/notes/:_id/edit"
+  #   data: ->
+  #     Notes.findOne @params._id
 
-  @route "destroyNote",
-    path: "/notes/:_id/destroy"
-    data: ->
-      Notes.findOne @params._id
+  # @route "destroyNote",
+  #   path: "/notes/:_id/destroy"
+  #   data: ->
+  #     Notes.findOne @params._id
 
   @route "feed",
     path: "/notes/:notesLimit?" 
     controller: FeedController
-  
+    
 
   # Thread Route
   @route "showThread",
