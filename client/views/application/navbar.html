@@ -1,47 +1,49 @@
 <template name="navbar">
 
-  {{#if currentUser}}  
-    <nav class="navbar-inverse">
-      <ul class="list-inline text-center">
-        <li class="pull-left text-left dropdown {{#if currentUser.profile.isNotified}}nav-notify{{/if}}" id="threads-link">
-          <a href="#" class="navicons fa fa-comment fa-lg" data-toggle="dropdown"> <b class="caret"></b></a>
-            <ul id="full-height" class="pull-left dropdown-menu">
-              <li>
-                <a class="" href="{{pathFor getStarted}}"> Note Feed</a>
-              </li>
-              <li>
-                <a class="fa fa-cog" href="{{pathFor 'editUser'}}"> Settings</a>
-              </li>
-              <li>
-                <a href="/sign-out">{{{beforeSignOut}}}{{i18n "signOut"}}</a>
-              </li>
-              <li>
-                {{#if currentUser}}
-                  {{> allThreads}}
-                {{/if}}
-              </li>
-            </ul>
-          </li>
-          <li class="pull-center main-logo"><a href="/">Privy</a></li>
-        <!-- <li class="text-center main-logo">Privy</li> -->
-        <li class="pull-right"><a class="navicons pull-right fa fa-plus fa-lg" href="{{ pathFor 'newNote' }}"></a></li>
-      </ul>
-    </nav>
+  <div class="topspace">
 
+    {{#if currentUser}}  
+      <nav class="navbar-inverse">
+        <ul class="list-inline text-center">
+          <li class="pull-left text-left dropdown {{#if currentUser.profile.isNotified}}nav-notify{{/if}}" id="threads-link">
+            <a href="#" class="navicons fa fa-comment fa-lg" data-toggle="dropdown"> <b class="caret"></b></a>
+              <ul id="full-height" class="pull-left dropdown-menu">
+                <li>
+                  <a class="" href="{{pathFor getStarted}}"> Note Feed</a>
+                </li>
+                <li>
+                  <a class="fa fa-cog" href="{{pathFor 'editUser'}}"> Settings</a>
+                </li>
+                <li>
+                  <a href="/sign-out">{{{beforeSignOut}}}{{i18n "signOut"}}</a>
+                </li>
+                <li>
+                  {{#if currentUser}}
+                    {{> allThreads}}
+                  {{/if}}
+                </li>
+              </ul>
+            </li>
+            <li class="pull-center main-logo"><a href="/">Privy</a></li>
+          <!-- <li class="text-center main-logo">Privy</li> -->
+          <li class="pull-right"><a class="navicons pull-right fa fa-plus fa-lg" href="{{ pathFor 'newNote' }}"></a></li>
+        </ul>
+      </nav>
 
-      {{#if warning}}
-        <div class="alert alert-danger alert-dismissable">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <strong>Warning!</strong> Better check yourself, you're not looking too good.
-        </div>
-      {{/if}}
+        {{#if warning}}
+          <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Warning!</strong> Better check yourself, you're not looking too good.
+          </div>
+        {{/if}}
 
-      {{#if notification}}
-              <div class="alert alert-success alert-dismissable">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <strong>Success!</strong> Things are looking good!</div>
-      {{/if}}
-  {{/if}}
+        {{#if notification}}
+                <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Success!</strong> Things are looking good!</div>
+        {{/if}}
+    {{/if}}
 
+  </div>
 
 </template>
