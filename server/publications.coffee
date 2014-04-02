@@ -14,9 +14,7 @@ Meteor.publish "notes", (options) ->
       NoteActions.find(
         isSkipped: true 
         receiverId: @userId
-      ).map((na) -> na.noteId)
-
-    noteIds = [] unless noteIds
+      ).map((na) -> na.noteId) || []
     
     Notes.find(
         _id: 
