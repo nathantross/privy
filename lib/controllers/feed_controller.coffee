@@ -1,14 +1,14 @@
 exports = this
 exports.FeedController = RouteController.extend(
   template: "feed"
-  increment: 5
-  limit: ->
-    parseInt(@params.notesLimit) || @increment
+  # increment: 2
+  # limit: ->
+  #   parseInt(@params.notesLimit) || @increment
 
   findOptions: ->
     sort:
       updatedAt: 1
-    limit: @limit()
+    # limit: @limit()
 
   waitOn: ->
     Meteor.subscribe "notes", @findOptions()
@@ -19,14 +19,14 @@ exports.FeedController = RouteController.extend(
       NoteActions.find(
         isSkipped: true 
         receiverId: Meteor.userId()
-      ).map((na) -> na.noteId)
-    noteIds = [] unless noteIds
+      ).map((na) -> na.noteId) || []
     
     Notes.findOne(
         _id: 
           $nin: noteIds
         isInstream: true
       , @findOptions())
+
 
   data: ->
     note: @note()
@@ -35,6 +35,9 @@ exports.FeedController = RouteController.extend(
     # return (
     #   isPassing: true
     #   notes: @notes()
-    #   nextPath: (if hasMore then nextPath else "#")
+    #   nextPath: (if hasMore then nextPath else null)
     # )
+  
+  # onData:
+  #   @render('feed')
 )

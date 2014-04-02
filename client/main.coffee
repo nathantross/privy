@@ -1,9 +1,6 @@
 # Allows server to set available db objects
-Meteor.subscribe('notes')
 
 Meteor.subscribe('threads')
-
-Meteor.subscribe('NoteActions')
 
 Meteor.subscribe('messages')
 

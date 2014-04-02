@@ -60,7 +60,7 @@ Router.map ->
   #     Notes.findOne @params._id
 
   @route "feed",
-    path: "/notes/:notesLimit?" 
+    path: "/notes" 
     controller: FeedController
     
 
