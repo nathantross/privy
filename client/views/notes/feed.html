@@ -1,5 +1,4 @@
 <template name="feed">
-
   <div class="notes">
     <div class="container text-center">
       {{#if note}}
@@ -11,6 +10,7 @@
             </a>
           </div>
         </div>
+        {{> noteReply}}
       {{else}}
         {{> emptyFeed}}
       {{/if}}
