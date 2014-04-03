@@ -6,6 +6,7 @@ exports.showThreadController = RouteController.extend(
   # increment: 1
   # limit: ->
   #   parseInt(@params.notesLimit) || @increment
+
   threadId: ->
       @params._id
 
@@ -15,8 +16,6 @@ exports.showThreadController = RouteController.extend(
     # limit: @limit()
 
   waitOn: ->
-    Meteor.subscribe "thread", @threadId()
-    Meteor.subscribe "threadUsers", @threadId()
     Meteor.subscribe "messages", @threadId()
 
   # data: ->

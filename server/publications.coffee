@@ -1,5 +1,5 @@
-Meteor.publish "users", ->
-  Meteor.users.find()
+# Meteor.publish "users", ->
+#   Meteor.users.find()
 
 Meteor.publish "notifications", ->
   Notifications.find userId: @userId
@@ -23,7 +23,44 @@ Meteor.publish "notes", (options) ->
       , options)
 
 Meteor.publish "threads", ->
-  Threads.find()
+  Threads.find
+      $or:[ creatorId: @userId,
+            responderId: @userId
+          ]
+    , 
+      fields:
+        createdAt: 0
+
+Meteor.publish "contacts", ->
+  threadUsers = Threads.find(
+      $or:[ creatorId: @userId,
+            responderId: @userId
+          ]
+    , 
+      fields:
+        creatorId: 1
+        responderId: 1
+    ).map( (thread) -> 
+      if thread.creatorId == @userId
+        thread.responderId
+      else
+        thread.creatorId  
+    )
+
+  Meteor.users.find
+    _id:
+      $in: threadUsers
+    fields:
+      _id: 1
+      'profile.avatar': 1
+
+Meteor.publish "messages", (threadId) ->
+  Messages.find
+      threadId: threadId
+    ,
+      fields:
+        threadId: 0
+
   # noteIds =
   #   Notes.find( isInstream: true )
   #     .map( (n)-> n._id )
@@ -38,8 +75,8 @@ Meteor.publish "threads", ->
   #         ]
   # )
 
-Meteor.publish "messages", ->
-  Messages.find()
+# Meteor.publish "messages", ->
+#   Messages.find()
   # threadIds = 
   #   Threads.find(
   #       $or: [  

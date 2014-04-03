@@ -1,7 +1,7 @@
-Meteor.startup ->
-  if Meteor.users.find().count() == 0
-    Accounts.createUser( email: "stuart.stein@gmail.com", profile: { avatar: "http://images.all-free-download.com/images/graphicmedium/studiofibonacci_cartoon_grasshopper_clip_art_22257.jpg", isNotified: false }, password: "Welcome123"  )
-    Accounts.createUser( email: "nathantross@gmail.com", profile: { avatar: "http://rs1124.pbsrc.com/albums/l571/cocobiikan/ist2_8825822-panda-cartoon.jpg~c200", isNotified: false }, password: "Welcome123"  )
+# Meteor.startup ->
+#   if Meteor.users.find().count() == 0
+#     Accounts.createUser( email: "stuart.stein@gmail.com", profile: { avatar: "http://images.all-free-download.com/images/graphicmedium/studiofibonacci_cartoon_grasshopper_clip_art_22257.jpg", isNotified: false }, password: "Welcome123"  )
+#     Accounts.createUser( email: "nathantross@gmail.com", profile: { avatar: "http://rs1124.pbsrc.com/albums/l571/cocobiikan/ist2_8825822-panda-cartoon.jpg~c200", isNotified: false }, password: "Welcome123"  )
     
     
 

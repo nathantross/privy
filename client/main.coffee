@@ -1,9 +1,9 @@
 # Allows server to set available db objects
-Meteor.subscribe('threads')
+# Meteor.subscribe('threads')
 
-Meteor.subscribe('messages')
+# Meteor.subscribe('messages')
 
-Meteor.subscribe('users')
+# Meteor.subscribe('users')
 
 #if Meteor.isClient
   # Meteor.startup ->

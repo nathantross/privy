@@ -7,7 +7,9 @@ Router.configure
   loadingTemplate: "loading"
   notFoundTemplate: 'notFound'
   waitOn: -> 
-    [Meteor.subscribe 'notifications']
+    Meteor.subscribe 'notifications'
+    Meteor.subscribe 'threads'
+    Meteor.subscribe 'contacts'
 
 Router.map ->
   # Sets route for Index to '/' for the application
@@ -67,8 +69,9 @@ Router.map ->
   # Thread Route
   @route "showThread",
     path: "/threads/:_id"
-    data: ->
-      Threads.findOne @params._id
+    controller: showThreadController
+    # data: ->
+    #   Threads.findOne @params._id
 
 
   @route "faq",
