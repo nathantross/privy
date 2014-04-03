@@ -3,12 +3,12 @@ Template.noteReply.events
     e.preventDefault()
 
     # Set Note's isInstream to false
-    noteId = template.data._id
+    noteId = @note._id
 
     Meteor.call('removeNoteFromStream', noteId, (error, noteId) ->
       if error 
         alert(error.reason)  # need better error handling  
-      else
+      else if Meteor.isServer
         # Update the thread's responderId
         threadId = Threads.findOne(noteId: noteId)._id
         Meteor.call('updateResponder', threadId, (error, id) ->
@@ -25,6 +25,6 @@ Template.noteReply.events
           alert(error.reason) if error # need better error handling  
         )
 
-        $body.val("") 
+      $(e.target).find('[name=reply-body]').val('')
     )
     

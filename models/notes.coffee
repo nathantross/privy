@@ -34,7 +34,7 @@ Meteor.methods
     Notes.insert(note)
 
   removeNoteFromStream: (noteId) ->
-    isInstream = Notes.findOne(_id: noteId).isInstream
+    isInstream = Notes.findOne(noteId).isInstream
 
     if !Meteor.userId()
       throw new Meteor.Error(401, "You have to login to create a note.")
