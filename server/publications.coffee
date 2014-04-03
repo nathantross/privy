@@ -1,11 +1,22 @@
 Meteor.publish "users", ->
-  Meteor.users.find()
+  Meteor.users.find {},
+    fields:
+      _id: 1
+      'profile.avatar': 1
+      'profile.isNotified': 1
 
 Meteor.publish "notifications", ->
   Notifications.find userId: @userId
 
 Meteor.publish "noteActions", ->
+  noteIds = 
+    Notes.find( 
+      isInstream: true
+    ).map((n) -> n._id)
+
   NoteActions.find 
+    noteId:
+      $in: noteIds
     receiverId: @userId
     isSkipped: true
 
@@ -16,11 +27,11 @@ Meteor.publish "notes", (options) ->
         receiverId: @userId
       ).map((na) -> na.noteId) || []
     
-    Notes.find(
+    Notes.find
         _id: 
           $nin: noteIds
         isInstream: true
-      , options)
+      , options
 
 Meteor.publish "threads", ->
   Threads.find()
