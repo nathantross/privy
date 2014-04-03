@@ -110,18 +110,26 @@ h2 {
 /****** Index ******/
 
 #main {
-  background: url('Rainy-Weather_2.jpg') no-repeat center center fixed;
+/*  background: url('Rainy-Weather_2.jpg') no-repeat center center fixed;
   margin-bottom: 0px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   height: 800px;
-  margin-top: -80px;
+  margin-top: -80px;*/
+  background-color: #009999;
+  margin-bottom: 0px;
+  height: 1000px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
 }
 
 .fill {
-  background-color: rgba(0, 0, 0, .7);
+  background-color: rgba(0, 0, 0, .4);
   padding-top: 50px;
   padding-bottom: 50px;
 }
