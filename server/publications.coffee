@@ -48,55 +48,27 @@ Meteor.publish "contacts", ->
     )
 
   Meteor.users.find
-    _id:
-      $in: threadUsers
-    fields:
-      _id: 1
-      'profile.avatar': 1
+      _id:
+        $in: threadUsers
+    ,
+      fields:
+        _id: 1
+        'profile.avatar': 1
 
-Meteor.publish "messages", (threadId) ->
+Meteor.publish "thread", (threadId) ->
+  Threads.find
+      _id: threadId
+    ,
+      fields:
+        createdAt: 0
+        updatedAt: 0
+        noteId: 0
+      limit: 1
+
+Meteor.publish "messages", (threadId, sort) ->
   Messages.find
       threadId: threadId
     ,
-      fields:
-        threadId: 0
+      sort:
+        sort
 
-  # noteIds =
-  #   Notes.find( isInstream: true )
-  #     .map( (n)-> n._id )
-
-  # Threads.find(
-  #   $or: [  
-  #           creatorId: @userId
-  #         , 
-  #           responderId: @userId
-  #         , _id: 
-  #             $in: noteIds
-  #         ]
-  # )
-
-# Meteor.publish "messages", ->
-#   Messages.find()
-  # threadIds = 
-  #   Threads.find(
-  #       $or: [  
-  #           creatorId: @userId
-  #         , 
-  #           responderId: @userId
-  #         ]).map( (t)-> t._id )
-  # Messages.find
-  #   threadId: 
-  #     $in: threadIds
-
-
-
-
-
-
-# A more secure pattern could be passing 
-# the individual parameters themselves instead of 
-# the whole object, to make sure you stay in control 
-# of your data:
-# Meteor.publish('posts', function(sort, limit) {
-#   return Posts.find({}, {sort: sort, limit: limit});
-# });

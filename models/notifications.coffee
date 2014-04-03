@@ -9,16 +9,21 @@ exports.createMessageNotification = (message) ->
   thread = Threads.findOne(message.threadId)
   
   if thread.creatorId && thread.responderId
-    notifiedId = 
-      if message.senderId == thread.creatorId 
-        thread.responderId
-      else 
-        thread.creatorId
+    notifiedId = ""
+    partnerId = ""
+    if message.senderId == thread.creatorId 
+      notifiedId = thread.responderId
+      partnerId = thread.creatorId
+    else 
+      notifiedId = thread.creatorId
+      partnerId = thread.responderId
 
-    Notifications.insert
+    Notifications.upsert threadId: thread._id,
       userId: notifiedId
-      threadId: thread._id
+      
       isNotified: true
+      avatar: Meteor.users.findOne().profile.avatar
+
 
     unless Meteor.user().profile.isNotified
       Meteor.users.update notifiedId,

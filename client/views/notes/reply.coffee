@@ -27,5 +27,4 @@ Template.noteReply.events
 
         $body.val("") 
     )
-    # TODO update dom?
     

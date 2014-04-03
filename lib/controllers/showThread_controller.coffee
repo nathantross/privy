@@ -6,24 +6,26 @@ exports.showThreadController = RouteController.extend(
   # increment: 1
   # limit: ->
   #   parseInt(@params.notesLimit) || @increment
+  sort: ->
+    updatedAt: 1
 
   threadId: ->
       @params._id
 
-  findOptions: ->
-    sort:
-      updatedAt: 1
-    # limit: @limit()
-
   waitOn: ->
-    Meteor.subscribe "messages", @threadId()
+    Meteor.subscribe "messages", @threadId(), @sort()
+    Meteor.subscribe "thread", @threadId()
 
-  # data: ->
-  #   return (
-  #     sender: @sender
-      
-  #     notes: @notes()
-  #     nextPath: (if hasMore then nextPath else null)
-  #   )
+  messages: ->
+    Messages.find
+      threadId: @threadId()
+    ,
+      sort:
+        @sort()
+
+  data: ->
+    return (
+      messages: @messages()
+    )
 )
 

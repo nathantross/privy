@@ -8,7 +8,6 @@ Router.configure
   notFoundTemplate: 'notFound'
   waitOn: -> 
     Meteor.subscribe 'notifications'
-    Meteor.subscribe 'threads'
     Meteor.subscribe 'contacts'
 
 Router.map ->
@@ -70,9 +69,6 @@ Router.map ->
   @route "showThread",
     path: "/threads/:_id"
     controller: showThreadController
-    # data: ->
-    #   Threads.findOne @params._id
-
 
   @route "faq",
     path: "/faq"
