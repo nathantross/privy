@@ -34,6 +34,9 @@ Router.map ->
   @route "privacyUrl",
     path: "/privacy-policy"
 
+  @route "contact",
+    path: "/contact"
+
   @route "logout",
     path: "/"
 
