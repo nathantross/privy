@@ -110,14 +110,6 @@ h2 {
 /****** Index ******/
 
 #main {
-/*  background: url('Rainy-Weather_2.jpg') no-repeat center center fixed;
-  margin-bottom: 0px;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  height: 800px;
-  margin-top: -80px;*/
   background-color: #009999;
   margin-bottom: 0px;
   height: 1000px;
@@ -295,20 +287,6 @@ h2 {
   box-shadow: 0 3px 1px 0 rgba(000,000,000,0.2);
 }
 
-/*  border-style: solid 1px;
-  border-color: #666;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 15px;
-  padding-right: 15px;
-  width: 100%;
-  background-color: #ccc;
-  font-size: 10px;
-  color: #444;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  text-align: left;*/
-
 .avatarright {
   width: 2.5em;
   height: 2.5em;
@@ -324,16 +302,6 @@ h2 {
   border-radius: 100px;
   margin-right: -15px;
 }
-
-
-
-/*#green {
-  background-color: green;
-}
-
-#yellow {
-  background-color: yellow;
-}*/
 
 .comment {
   border: 1px;
@@ -445,17 +413,6 @@ h2 {
 
 .navbar-right li:hover {
   background-color: #444;
-}
-
-
-
-/***********/
-
-
-.text-center {
-/*  width: 82% !important;
-  text-align: center !important;*/
-
 }
 
 .main-logo {
