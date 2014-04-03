@@ -10,20 +10,26 @@ Meteor.methods
 
     if !messageAttributes.body
       throw new Meteor.Error(422, 'Woops, looks like your message is blank!')
-      
-    # whitelisted keys
-    now = new Date().getTime()
-    message = _.extend(_.pick(messageAttributes, 'threadId', 'body'),
-      senderId: user._id
-      createdAt: now
-      updatedAt: now
-      isRead: false
-    )
+    
+    # special call for replies
+    if messageAttributes.noteId && Meteor.isServer
+      messageAttributes.threadId = 
+        Threads.findOne(noteId: messageAttributes.noteId)._id
 
-    message._id = Messages.insert(message)
+    if messageAttributes.threadId
+      # whitelisted keys
+      now = new Date().getTime()
+      message = _.extend(_.pick(messageAttributes, 'threadId', 'body'),
+        senderId: user._id
+        createdAt: now
+        updatedAt: now
+        isRead: false
+      )
 
-    createMessageNotification(message)
-    message._id
+      message._id = Messages.insert(message)
+
+      # createMessageNotification(message)
+      message._id
 
 
   updateRead: (messageAttributes) ->
