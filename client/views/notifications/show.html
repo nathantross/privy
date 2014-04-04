@@ -1,0 +1,10 @@
+<template name="notification">
+
+  <li class="divider"></li>
+  <li class="{{#if isNotified}}li-notify{{/if}}">
+    <a href="{{pathFor 'showThread' _id=threadId}}">
+      <img src="{{lastAvatar}}" class="avatar-nav" />{{messageIntro}}
+    </a>
+  </li>
+    
+</template>
