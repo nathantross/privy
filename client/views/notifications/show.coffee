@@ -13,3 +13,4 @@ Template.notification.events
       Meteor.call('notified', @_id, (error, id) ->
         alert(error.reason) if error
       )
+    Router.go('showThread', _id: @threadId)

@@ -8,8 +8,7 @@ Router.configure
   notFoundTemplate: 'notFound'
   waitOn: -> 
     Meteor.subscribe 'notifications'
-    Meteor.subscribe 'contacts'
-
+    Meteor.subscribe 'threads'
 
 Router.map ->
   # Sets route for Index to '/' for the application
@@ -46,21 +45,6 @@ Router.map ->
   @route "newNote",
     path: "/notes/new"
 
-  # @route "showNote",
-  #   path: "/notes/list/:_id"
-  #   data: ->
-  #     Notes.findOne @params._id
-
-  # @route "editNote",
-  #   path: "/notes/:_id/edit"
-  #   data: ->
-  #     Notes.findOne @params._id
-
-  # @route "destroyNote",
-  #   path: "/notes/:_id/destroy"
-  #   data: ->
-  #     Notes.findOne @params._id
-
   @route "feed",
     path: "/notes" 
     controller: FeedController
@@ -81,6 +65,10 @@ requireLogin = ->
     @stop()
   return
 
+
 Router.onBeforeAction requireLogin,
   except: ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "resetPassword", "forgotPassword"]
 
+# Deps.autorun ->
+#   if Session.get('currentThread') 
+#     Meteor.subscribe('thread', Session.get('currentThread'))

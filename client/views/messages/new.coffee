@@ -5,10 +5,16 @@ Template.newMessage.events
     $body = $(e.target).find('[name=message-body]')
     message = 
       body: $body.val()
-      threadId: template.data._id
+      threadId: @threadId
+      lastMessage: $body.val()
 
-    Meteor.call('createMessage', message, (error, messageId) ->
-      alert(error.reason) if error # need better error handling
+    Meteor.call('createMessage', message, (error, id) -> 
+      if error
+        alert(error.reason) 
+      else
+        Meteor.call('createNotification', message, (error, id) ->
+          alert(error.reason) if error 
+        )
     )
 
     $body.val("") 

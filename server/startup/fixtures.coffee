@@ -15,7 +15,7 @@ Meteor.startup ->
 
     userIds.push(
       Accounts.createUser
-          email: "nathantross@gmail" 
+          email: "nathantross@gmail.com" 
           password: "Welcome123"
           profile: 
             name: "Nathan"
@@ -75,22 +75,51 @@ Meteor.startup ->
           updatedAt: now
 
       # Stu answers
-      now = new Date().getTime()
-      Messages.insert
-        threadId: threadIds[response]
-        body: "hi back from " + userIds[0]
-        senderId: userIds[0]
-        createdAt: now
-        updatedAt: now
-        isRead: true
+      stuId = userIds[0]
+      nathanId = userIds[1]
+      stuMsg = "hi back from " + stuId
+      nathanMsg = "thanks, hello from " + nathanId 
 
-      # Nathan responds 
+      # Stu creates message
       now = new Date().getTime()
       Messages.insert
         threadId: threadIds[response]
-        body: "thanks, hello from " + userIds[1] 
-        senderId: userIds[1]
+        body: stuMsg
+        senderId: stuId
+        isRead: true
         createdAt: now
         updatedAt: now
-        isRead: false
+
+      # Nathan gets a notifcation
+      now = new Date().getTime()
+      Notifications.insert
+        userId: nathanId
+        threadId: threadIds[response]
+        lastMessage: stuMsg
+        lastAvatar: Meteor.users.findOne(stuId).profile['avatar']
+        isNotified: false
+        createdAt: now
+        updatedAt: now
+
+      # Nathan creates a response
+      now = new Date().getTime()
+      Messages.insert
+        threadId: threadIds[response]
+        body: nathanMsg
+        senderId: nathanId
+        isRead: true
+        createdAt: now
+        updatedAt: now
+
+      # Stu gets a notifcation
+      now = new Date().getTime()
+      Notifications.insert
+        userId: stuId
+        threadId: threadIds[response]
+        lastMessage: nathanMsg
+        lastAvatar: Meteor.users.findOne(nathanId).profile['avatar']
+        isNotified: true
+        createdAt: now
+        updatedAt: now
+      
 

@@ -20,9 +20,15 @@ Template.newNote.events
             message = 
               body: note.body
               threadId: id
+              lastMessage: note.body 
 
             Meteor.call('createMessage', message, (error, id)->
-              alert(error.reason) if error
+              if error
+                alert(error.reason) 
+              else
+                Meteor.call('createNotification', message, (error, id)->
+                  alert(error.reason) if error
+                )
             )
         )
     )

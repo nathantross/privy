@@ -26,10 +26,7 @@ Meteor.methods
         isRead: false
       )
 
-      message._id = Messages.insert(message)
-
-      # createMessageNotification(message)
-      message._id
+      Messages.insert(message)
 
 
   updateRead: (messageAttributes) ->

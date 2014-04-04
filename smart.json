@@ -4,7 +4,6 @@
     "iron-router": {},
     "iron-router-progress": {},
     "accounts-entry": {},
-    "percolatestudio-migrations": {},
-    "mongodb-server-aggregation": {}
+    "percolatestudio-migrations": {}
   }
 }

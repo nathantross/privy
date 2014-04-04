@@ -11,14 +11,17 @@ Meteor.methods
     # whitelisted keys
     now = new Date().getTime()
     thread = _.extend(_.pick(threadAttributes, 'noteId'),
-      creatorId: user._id 
+      participants: [{
+        userId: user._id 
+        avatar: user.profile['avatar'] 
+        }]
       createdAt: now
       updatedAt: now
     )
 
     Threads.insert(thread)
 
-  updateResponder: (noteId) ->
+  addParticipant: (noteId) ->
     if Meteor.isServer
       threadId = Threads.findOne(noteId: noteId)._id
       user = Meteor.user()
@@ -31,5 +34,11 @@ Meteor.methods
 
       Threads.update threadId, 
         $set:
-          responderId: user._id
           updatedAt: now
+        $addToSet:
+          participants: 
+            {
+              userId: user._id
+              avatar: user.profile['avatar']
+            }
+          

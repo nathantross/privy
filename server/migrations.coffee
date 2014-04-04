@@ -8,14 +8,20 @@ Migrations.add(
         $exists: false
 
     threads.forEach (thread) ->
-      creator = thread.creatorId
-      responder = thread.responderId 
+      creator = Meteor.users.findOne(thread.creatorId)
+      responder = Meteor.users.findOne(thread.responderId)
 
       if responder
         Threads.update thread._id, 
             $addToSet: 
               participants:
-                $each: [creator, responder]
+                $each: [
+                    userId: creator._id
+                    avatar: creator.profile['avatar']
+                  , 
+                    userId: responder._id
+                    avatar: responder.profile['avatar']
+                ]
             $unset:
               creatorId: true
               responderId: true
@@ -25,7 +31,10 @@ Migrations.add(
         Threads.update thread._id, 
             $addToSet: 
               participants:
-                $each: [creator]
+                $each: [
+                  userId: creator._id
+                  avatar: creator.profile['avatar']
+                ]
             $unset:
               creatorId: true
               responderId: true
@@ -42,8 +51,8 @@ Migrations.add(
       unless thread.participants[1]
         Threads.update thread._id, 
             $set:
-              creatorId: participants[0]
-              responderId: participants[1]
+              creatorId: thread.participants[0].userId
+              responderId: thread.participants[1].userId
             $unset: 
               participants: true
           , 
@@ -51,7 +60,7 @@ Migrations.add(
       else
         Threads.update thread._id, 
             $set:
-              creatorId: participants[0]
+              creatorId: thread.participants[0].userId
             $unset: 
               participants: true
           , 
