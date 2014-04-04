@@ -10,7 +10,13 @@
             </a>
           </div>
         </div>
-        {{> noteReply}}
+        <a data-toggle="collapse" href="#collapseOne" class="grow btn btn-primary btn-big">Start Chatting!</a>
+        <div id="collapseOne" class="panel-collapse collapse" style="height: auto;">
+          <div class="panel-body">
+           {{> noteReply}}
+          </div>
+        </div>
+        
       {{else}}
         {{> emptyFeed}}
       {{/if}}
@@ -21,4 +27,8 @@
       <br>
     </div>
   </div>
+
+
+
+
 </template>
