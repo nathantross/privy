@@ -36,28 +36,39 @@ Meteor.publish "threads", ->
         createdAt: 0
 
 Meteor.publish "contacts", ->
-  threadUsers = Threads.find(
-      $or:[ creatorId: @userId,
-            responderId: @userId
-          ]
-    , 
-      fields:
-        creatorId: 1
-        responderId: 1
-    ).map( (thread) -> 
-      if thread.creatorId == @userId
-        thread.responderId
-      else
-        thread.creatorId  
-    )
+  # userIds = Threads.find(
+  #     participants: 
+  #       $in: @userId
+  #   ,
+  #     fields:
+  #       participants: 1
+  #   ).distinct("participants")
+  userIds = Threads.find()
+  userIds.distinct("participants")
 
   Meteor.users.find
       _id:
-        $in: threadUsers
+        $in: userIds
     ,
       fields:
         _id: 1
         'profile.avatar': 1
+
+  # userIds = Threads.find(
+  #     $or:[ creatorId: @userId,
+  #           responderId: @userId
+  #         ]
+  #   , 
+  #     fields:
+  #       creatorId: 1
+  #       responderId: 1
+  #   ).map( (thread) -> 
+  #     if thread.creatorId == @userId
+  #       thread.responderId
+  #     else
+  #       thread.creatorId  
+  #   )
+
 
 Meteor.publish "thread", (threadId) ->
   Threads.find

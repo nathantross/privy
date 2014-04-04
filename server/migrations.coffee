@@ -8,19 +8,29 @@ Migrations.add(
         $exists: false
 
     threads.forEach (thread) ->
-      creator = thread.creatorId || ""
-      responder = thread.responderId || ""
+      creator = thread.creatorId
+      responder = thread.responderId 
 
-      Threads.update thread._id, 
-          $addToSet: 
-            participants:
-              $each: [creator, responder]
-          $unset:
-            creatorId: true
-            responderId: true
-        , 
-          multi: true
-
+      if responder
+        Threads.update thread._id, 
+            $addToSet: 
+              participants:
+                $each: [creator, responder]
+            $unset:
+              creatorId: true
+              responderId: true
+          , 
+            multi: true
+      else
+        Threads.update thread._id, 
+            $addToSet: 
+              participants:
+                $each: [creator]
+            $unset:
+              creatorId: true
+              responderId: true
+          , 
+            multi: true
   down: ->
     threads = Threads.find
       participants: 
@@ -29,16 +39,28 @@ Migrations.add(
     threads.forEach (thread) ->
       # Note: down sets first two participants as creator and responder
       # any subsequent participants will be lost
-      creator = participants[0] || ""
-      responder = participants[1] || ""
-      Threads.update {}, 
-          $set:
-            creatorId: creator
-            responderId: responder 
-          $unset: 
-            participants: true
-        , 
-          multi: true 
+      unless thread.participants[1]
+        Threads.update thread._id, 
+            $set:
+              creatorId: participants[0]
+              responderId: participants[1]
+            $unset: 
+              participants: true
+          , 
+            multi: true 
+      else
+        Threads.update thread._id, 
+            $set:
+              creatorId: participants[0]
+            $unset: 
+              participants: true
+          , 
+            multi: true 
 )
 
-# Migrations.migrateTo('latest')
+delay = 1000
+Meteor.setTimeout(
+  -> 
+    Migrations.migrateTo('latest') 
+  , delay
+)

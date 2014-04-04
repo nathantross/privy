@@ -6,7 +6,8 @@
       "iron-router": {},
       "iron-router-progress": {},
       "accounts-entry": {},
-      "percolatestudio-migrations": {}
+      "percolatestudio-migrations": {},
+      "mongodb-server-aggregation": {}
     },
     "packages": {
       "font-awesome": {
@@ -33,6 +34,11 @@
         "git": "https://github.com/percolatestudio/meteor-migrations.git",
         "tag": "v0.6.0",
         "commit": "baa77d4c121f6f06b6aa142ee11f71ace8795f7f"
+      },
+      "mongodb-server-aggregation": {
+        "git": "https://github.com/zvictor/meteor-mongo-server.git",
+        "tag": "v1.0.3",
+        "commit": "416293e383f53e2506f1b7a1a7687390cbaf0e68"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
