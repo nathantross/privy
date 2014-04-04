@@ -8,7 +8,7 @@ Router.configure
   notFoundTemplate: 'notFound'
   waitOn: -> 
     Meteor.subscribe 'notifications'
-    Meteor.subscribe 'threads'
+    Meteor.subscribe 'threads' #enables switching between threads
 
 Router.map ->
   # Sets route for Index to '/' for the application
