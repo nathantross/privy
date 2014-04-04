@@ -18,16 +18,18 @@ Meteor.methods
 
     Threads.insert(thread)
 
-  updateResponder: (threadId) ->
-    user = Meteor.user()
-    
-    if !user
-      throw new Meteor.Error(401, "You have to login to respond to a thread.")
+  updateResponder: (noteId) ->
+    if Meteor.isServer
+      threadId = Threads.findOne(noteId: noteId)._id
+      user = Meteor.user()
+      
+      if !user
+        throw new Meteor.Error(401, "You have to login to respond to a thread.")
 
-    # whitelisted keys
-    now = new Date().getTime()
+      # whitelisted keys
+      now = new Date().getTime()
 
-    Threads.update threadId, 
-      $set:
-        responderId: user._id
-        updatedAt: now
+      Threads.update threadId, 
+        $set:
+          responderId: user._id
+          updatedAt: now

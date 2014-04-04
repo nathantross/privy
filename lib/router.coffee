@@ -10,6 +10,7 @@ Router.configure
     Meteor.subscribe 'notifications'
     Meteor.subscribe 'contacts'
 
+
 Router.map ->
   # Sets route for Index to '/' for the application
   @route "index",

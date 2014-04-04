@@ -363,7 +363,7 @@ h2 {
 }
 
 #full-height {
-  height: 1000%;
+  height: 2000%;
 }
 
 .dropdown-menu {
@@ -436,7 +436,8 @@ h2 {
 
 .large {
   font-size: 30px !important;
-  padding: 20px !important;
+  padding: 20px;
+  margin-top: -12px;
 }
 
 .navbar-inverse {
@@ -445,6 +446,8 @@ h2 {
   background-color: #222;
   border: 0;
   outline : none;
+  padding-top: 10px;
+  padding-bottom: 15px;
 }
 
 .navbar-inverse a {
@@ -460,4 +463,46 @@ h2 {
   outline : none;
 }
 
+.main-logo a {
+  font-size: 24px;
+}
+
+/***********/
+
+/****** Notifications ******/
+
+
+.alert {
+  text-align: center;
+  border-radius: 0px;
+  border: 0;
+}
+
+.alert-danger {
+  background-color: #FF6400;
+  color: #fff;
+  font-family: helvetica, arial, sans-serif;
+  font-weight: 100;
+  font-style: none;
+}
+
+.alert-success {
+  background-color: #3F92D2;
+  font-family: helvetica, arial, sans-serif;
+  font-weight: 100;  font-family: helvetica, arial, sans-serif;
+  font-weight: 100;
+  color: #fff;
+}
+
+.alert-dismissable {
+  color: #fff;
+}
+
+.close {
+  color: #fff !important;
+}
+
+.topspace {
+  padding-bottom: 50px
+}
 
