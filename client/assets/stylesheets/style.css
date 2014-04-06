@@ -110,18 +110,18 @@ h2 {
 /****** Index ******/
 
 #main {
-  background: url('Rainy-Weather_2.jpg') no-repeat center center fixed;
+  background-color: #009999;
   margin-bottom: 0px;
+  height: 1000px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 800px;
-  margin-top: -80px;
+
 }
 
 .fill {
-  background-color: rgba(0, 0, 0, .7);
+  background-color: rgba(0, 0, 0, .4);
   padding-top: 50px;
   padding-bottom: 50px;
 }
@@ -287,20 +287,6 @@ h2 {
   box-shadow: 0 3px 1px 0 rgba(000,000,000,0.2);
 }
 
-/*  border-style: solid 1px;
-  border-color: #666;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 15px;
-  padding-right: 15px;
-  width: 100%;
-  background-color: #ccc;
-  font-size: 10px;
-  color: #444;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  text-align: left;*/
-
 .avatarright {
   width: 2.5em;
   height: 2.5em;
@@ -316,16 +302,6 @@ h2 {
   border-radius: 100px;
   margin-right: -15px;
 }
-
-
-
-/*#green {
-  background-color: green;
-}
-
-#yellow {
-  background-color: yellow;
-}*/
 
 .comment {
   border: 1px;
@@ -387,7 +363,7 @@ h2 {
 }
 
 #full-height {
-  height: 1000%;
+  height: 2000%;
 }
 
 .dropdown-menu {
@@ -439,17 +415,6 @@ h2 {
   background-color: #444;
 }
 
-
-
-/***********/
-
-
-.text-center {
-/*  width: 82% !important;
-  text-align: center !important;*/
-
-}
-
 .main-logo {
   text-align: center !important;
   font-size: 20px !important;
@@ -471,7 +436,8 @@ h2 {
 
 .large {
   font-size: 30px !important;
-  padding: 20px !important;
+  padding: 20px;
+  margin-top: -12px;
 }
 
 .navbar-inverse {
@@ -480,6 +446,8 @@ h2 {
   background-color: #222;
   border: 0;
   outline : none;
+  padding-top: 10px;
+  padding-bottom: 15px;
 }
 
 .navbar-inverse a {
@@ -495,4 +463,46 @@ h2 {
   outline : none;
 }
 
+.main-logo a {
+  font-size: 24px;
+}
+
+/***********/
+
+/****** Notifications ******/
+
+
+.alert {
+  text-align: center;
+  border-radius: 0px;
+  border: 0;
+}
+
+.alert-danger {
+  background-color: #FF6400;
+  color: #fff;
+  font-family: helvetica, arial, sans-serif;
+  font-weight: 100;
+  font-style: none;
+}
+
+.alert-success {
+  background-color: #3F92D2;
+  font-family: helvetica, arial, sans-serif;
+  font-weight: 100;  font-family: helvetica, arial, sans-serif;
+  font-weight: 100;
+  color: #fff;
+}
+
+.alert-dismissable {
+  color: #fff;
+}
+
+.close {
+  color: #fff !important;
+}
+
+.topspace {
+  padding-bottom: 50px
+}
 
