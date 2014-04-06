@@ -4,6 +4,7 @@
     "iron-router": {},
     "iron-router-progress": {},
     "accounts-entry": {},
-    "percolatestudio-migrations": {}
+    "percolatestudio-migrations": {},
+    "mandrill": {}
   }
 }
