@@ -42,7 +42,7 @@ Meteor.startup ->
         noteIds.push(
           Notes.insert
             userId: userId
-            body: "Hi from " + userId
+            body: "Hi " + i + " from " + userId
             isInstream: true
             createdAt: now
             updatedAt: now
@@ -51,7 +51,7 @@ Meteor.startup ->
     
     # Create threads
     threadIds = []
-    for noteId in noteIds
+    for noteId, i in noteIds
       now = new Date().getTime()
       threadIds.push(
         Threads.insert
@@ -60,6 +60,13 @@ Meteor.startup ->
           createdAt: now
           updatedAt: now
       )
+      Messages.insert
+        threadId: threadIds[i]
+        body: Notes.findOne(noteId).body
+        senderId: Notes.findOne(noteId).userId
+        isRead: true
+        createdAt: now
+        updatedAt: now      
     
     # Stu responds to Nathan
     responses = [3]
@@ -90,7 +97,7 @@ Meteor.startup ->
         createdAt: now
         updatedAt: now
 
-      # Nathan gets a notifcation
+      #Nathan gets a notifcation
       now = new Date().getTime()
       Notifications.insert
         userId: nathanId
@@ -111,7 +118,7 @@ Meteor.startup ->
         createdAt: now
         updatedAt: now
 
-      # Stu gets a notifcation
+      #Stu gets a notifcation
       now = new Date().getTime()
       Notifications.insert
         userId: stuId

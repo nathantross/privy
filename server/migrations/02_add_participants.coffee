@@ -1,6 +1,6 @@
 Migrations.add(
   name: 'Threads have participants instead of creators and responders.'
-  version: 1
+  version: 2
 
   up: ->
     threads = Threads.find
@@ -65,11 +65,4 @@ Migrations.add(
               participants: true
           , 
             multi: true 
-)
-
-delay = 1000
-Meteor.setTimeout(
-  -> 
-    Migrations.migrateTo('latest') 
-  , delay
 )

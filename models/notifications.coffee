@@ -8,6 +8,8 @@ Meteor.methods
       
       now
       notification
+
+      # create a notification for each participant in the conversation
       for participant in thread.participants
         now = new Date().getTime()
         unless participant.userId == Meteor.userId()
@@ -33,7 +35,7 @@ Meteor.methods
             $set: notification
           ).insertedId
         
-        unless Notifications.findOne(notId).lastAvatar
+        unless Notifications.findOne(notId) == undefined || Notifications.findOne(notId).lastAvatar
           Notifications.update notId,
             $set:
               lastAvatar: Meteor.user().profile['avatar']
