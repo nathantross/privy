@@ -64,7 +64,7 @@ Meteor.startup ->
         threadId: threadIds[i]
         body: Notes.findOne(noteId).body
         senderId: Notes.findOne(noteId).userId
-        isRead: true
+        isRead: false
         createdAt: now
         updatedAt: now      
     

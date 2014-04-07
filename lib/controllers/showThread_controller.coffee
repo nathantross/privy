@@ -23,10 +23,19 @@ exports.showThreadController = RouteController.extend(
       sort:
         @sort()
 
+  # lastMessage: ->
+  #   Messages.findOne
+  #       threadId: @threadId()
+  #     ,
+  #       sort:
+  #           updatedAt: -1
+
   data: ->
     return (
       messages: @messages()
       threadId: @threadId()
+      #lastMessage: @lastMessage()
+      
     )
 )
 
