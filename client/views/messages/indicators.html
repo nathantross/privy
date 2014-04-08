@@ -9,6 +9,17 @@
     </div>
   </div>
   <div id="typing-status">
-    <p></p>
+    {{#if isTyping}}
+      <div class="row text-left">
+        <div id="green" class="col-xs-2 text-right">
+          <img class="text-right avatarleft" src="{{avatar}}" />
+        </div>
+        <div id="yellow" class="col-xs-7">
+          <p>Typing</p>
+        </div>
+        <div class="col-xs-3">
+        </div>
+      </div>
+    {{/if}}
   </div>
 </template>

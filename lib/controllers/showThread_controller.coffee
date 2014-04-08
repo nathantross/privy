@@ -14,6 +14,7 @@ exports.showThreadController = RouteController.extend(
 
   waitOn: ->
     Meteor.subscribe "messages", @threadId(), @sort()
+    # Meteor.subscribe 'threads'
     # Meteor.subscribe "thread", @threadId()
 
   messages: ->
@@ -22,6 +23,12 @@ exports.showThreadController = RouteController.extend(
     ,
       sort:
         @sort()
+
+  # participantIndex: ->
+  #   thread = Threads.findOne(@threadId())
+  #   for participant, i in thread.participants
+  #     if participant.userId == Meteor.userId()
+  #       return i
 
   # lastMessage: ->
   #   Messages.findOne
@@ -34,6 +41,7 @@ exports.showThreadController = RouteController.extend(
     return (
       messages: @messages()
       threadId: @threadId()
+      # participantIndex: @participantIndex()
       #lastMessage: @lastMessage()
       
     )

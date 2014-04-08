@@ -28,8 +28,7 @@ Meteor.methods
       
       if !user
         throw new Meteor.Error(401, "You have to login to respond to a thread.")
-
-      # whitelisted keys
+        
       now = new Date().getTime()
 
       Threads.update threadId, 
@@ -41,4 +40,21 @@ Meteor.methods
               userId: user._id
               avatar: user.profile['avatar']
             }
-          
+
+  startTyping: (threadId)->
+    index = userIndex(threadId)
+    modifier = $set: {}
+    modifier.$set["participants." + index + ".isTyping"] = true
+    Threads.update(threadId, modifier);
+
+  endTyping: (threadId)->
+    index = userIndex(threadId)
+    modifier = $set: {}
+    modifier.$set["participants." + index + ".isTyping"] = false
+    Threads.update(threadId, modifier);
+
+  userIndex = (threadId) ->
+    thread = Threads.findOne(threadId)
+    for participant, i in thread.participants
+      if participant.userId == Meteor.userId()
+        return i

@@ -11,19 +11,34 @@ Template.messageIndicators.helpers
     else if lastMessage.isRead
       "Read " + messageDate(lastMessage)
     else
-      "Sent" 
+      "Sent " + messageDate(lastMessage)
+
+  isTyping: ->
+    typist(@threadId).isTyping
+
+  avatar: ->
+    typist(@threadId).avatar
 
   messageDate = (message) ->
     d = new Date(0)
     d.setUTCMilliseconds(message.updatedAt)
     d = d.toDateString()
 
+    # if the date is today, return "today"
     now = new Date()
     return "today" if now.toDateString() == d
+    
+    # if the date is yesterday, return 'yesterday'
     yesterday = new Date()
     yesterday.setDate(now.getDate() - 1)
     return "yesterday" if yesterday.toDateString() == d
+    
+    # if the date is before yesterday, return the date
     dateArr = d.split(" ")
     dateArr[2] = dateArr[2].slice(1) if dateArr[2].slice(0, 1) == "0"
     return dateArr[1] + " " + dateArr[2]
-    
+  
+  typist = (threadId) ->
+    for participant, i in Threads.findOne(threadId).participants
+      unless participant.userId == Meteor.userId()
+        return participant
