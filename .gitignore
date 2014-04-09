@@ -1,3 +1,4 @@
 packages/accounts-entry
 packages/accounts-t9n
 .DS_Store
+server/secret_keys.coffee

@@ -1,5 +1,5 @@
 Template.newMessage.events
-  "submit form": (e, template) ->
+  "submit form": (e) ->
     e.preventDefault()
 
     $body = $(e.target).find('[name=message-body]')
@@ -17,4 +17,24 @@ Template.newMessage.events
         )
     )
 
+    Meteor.call('endTyping', @threadId, (error, id) -> 
+        alert(error.reason) if error 
+      )
+
     $body.val("") 
+
+  "keydown input": (e) ->
+    $body = $(e.target).find('[name=message-body]')
+    body = $body.context.value
+    if body.length == 1
+      Meteor.call('startTyping', @threadId, (error, id) -> 
+        alert(error.reason) if error 
+      )
+
+  "keyup input": (e) ->
+    $body = $(e.target).find('[name=message-body]')
+    body = $body.context.value
+    if body.length == 0
+      Meteor.call('endTyping', @threadId, (error, id) -> 
+        alert(error.reason) if error 
+      ) 

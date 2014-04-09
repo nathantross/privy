@@ -6,7 +6,8 @@
       "iron-router": {},
       "iron-router-progress": {},
       "accounts-entry": {},
-      "percolatestudio-migrations": {}
+      "percolatestudio-migrations": {},
+      "mandrill": {}
     },
     "packages": {
       "font-awesome": {
@@ -33,6 +34,11 @@
         "git": "https://github.com/percolatestudio/meteor-migrations.git",
         "tag": "v0.6.0",
         "commit": "baa77d4c121f6f06b6aa142ee11f71ace8795f7f"
+      },
+      "mandrill": {
+        "git": "https://github.com/timmyg/meteor-mandrill.git",
+        "tag": "v0.0.4",
+        "commit": "cfd6db922b3ccb66e350a2d1053ad1f66c6d5252"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",

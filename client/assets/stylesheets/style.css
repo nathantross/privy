@@ -112,6 +112,7 @@ h2 {
 #main {
   background-color: #009999;
   margin-bottom: 0px;
+  margin-top: -50px;
   height: 1000px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -447,7 +448,7 @@ h2 {
   border: 0;
   outline : none;
   padding-top: 10px;
-  padding-bottom: 15px;
+  padding-bottom: 0px;
 }
 
 .navbar-inverse a {
