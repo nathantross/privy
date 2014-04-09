@@ -10,7 +10,7 @@ Template.noteReply.events
         alert(error.reason)  # need better error handling  
       else
         # Update the thread's responderId
-        Meteor.call('updateResponder', noteId, (error, id) ->
+        Meteor.call('addParticipant', noteId, (error, id) ->
           if error
             alert(error.reason) 
           else

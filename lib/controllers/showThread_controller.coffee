@@ -14,7 +14,7 @@ exports.showThreadController = RouteController.extend(
 
   waitOn: ->
     Meteor.subscribe "messages", @threadId(), @sort()
-    Meteor.subscribe "thread", @threadId()
+    # Meteor.subscribe "thread", @threadId()
 
   messages: ->
     Messages.find
@@ -26,6 +26,7 @@ exports.showThreadController = RouteController.extend(
   data: ->
     return (
       messages: @messages()
+      threadId: @threadId()
     )
 )
 
