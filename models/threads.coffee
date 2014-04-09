@@ -28,7 +28,7 @@ Meteor.methods
       
       if !user
         throw new Meteor.Error(401, "You have to login to respond to a thread.")
-        
+
       now = new Date().getTime()
 
       Threads.update threadId, 
@@ -42,19 +42,39 @@ Meteor.methods
             }
 
   startTyping: (threadId)->
-    index = userIndex(threadId)
-    modifier = $set: {}
-    modifier.$set["participants." + index + ".isTyping"] = true
-    Threads.update(threadId, modifier);
+    if Meteor.isServer
+      index = userIndex(threadId)
+      modifier = $set: {}
+      modifier.$set["participants." + index + ".isTyping"] = true
+      Threads.update(threadId, modifier)
 
   endTyping: (threadId)->
-    index = userIndex(threadId)
-    modifier = $set: {}
-    modifier.$set["participants." + index + ".isTyping"] = false
-    Threads.update(threadId, modifier);
+    if Meteor.isServer
+      index = userIndex(threadId)
+      modifier = $set: {}
+      modifier.$set["participants." + index + ".isTyping"] = false
+      Threads.update(threadId, modifier)
+
+  checkIn: (threadId)->
+    if Meteor.isServer
+      index = userIndex(threadId)
+      modifier = $set: {}
+      modifier.$set["participants." + index + ".isInThread"] = true
+      # modifier.$set["participants." + Session.get("participantIndex") + ".isInThread"] = true
+      Threads.update(threadId, modifier)
+
+  checkOut: (threadId)->
+    if Meteor.isServer
+      index = userIndex(threadId)
+      # console.log Session.get("participantIndex")
+      modifier = $set: {}
+      modifier.$set["participants." + index + ".isInThread"] = false
+      modifier.$set["participants." + index + ".isTyping"] = false
+      Threads.update(threadId, modifier)
 
   userIndex = (threadId) ->
-    thread = Threads.findOne(threadId)
-    for participant, i in thread.participants
-      if participant.userId == Meteor.userId()
-        return i
+    if Meteor.isServer
+      thread = Threads.findOne(threadId)
+      for participant, i in thread.participants
+        if participant.userId == Meteor.userId()
+          return i

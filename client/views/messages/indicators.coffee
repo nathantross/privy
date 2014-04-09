@@ -1,20 +1,21 @@
 Template.messageIndicators.helpers
   readStatus: ->
-    lastMessage = Messages.findOne
+    lastMessage = Messages.findOne(
         threadId: @threadId
       ,
         sort:
-            updatedAt: -1
+            updatedAt: -1) 
 
-    unless lastMessage.senderId == Meteor.userId()
+    unless lastMessage && lastMessage.senderId == Meteor.userId()
       ""
-    else if lastMessage.isRead
+    else if lastMessage && lastMessage.isRead
       "Read " + messageDate(lastMessage)
     else
       "Sent " + messageDate(lastMessage)
 
   isTyping: ->
-    typist(@threadId).isTyping
+    participant = typist(@threadId)
+    if participant then participant.isTyping else false
 
   avatar: ->
     typist(@threadId).avatar

@@ -30,24 +30,25 @@ Meteor.methods
 
 
   readMessage: (threadId) ->
-    user = Meteor.user()
+    if Meteor.isServer
+      user = Meteor.user()
 
-    if !user
-      throw new Meteor.Error(401, "You have to login to update a message.")
+      if !user
+        throw new Meteor.Error(401, "You have to login to update a message.")
 
-    if !threadId
-      throw new Meteor.Error(404, "This thread does not exist.")
-      
-    # whitelisted keys
-    now = new Date().getTime()
-    messages = Messages.update
-        threadId: threadId
-        senderId: 
-          $ne: user._id
-        isRead: false
-      , 
-        $set:
-          isRead: true
-          updatedAt: now
-      ,
-        multi: true
+      if !threadId
+        throw new Meteor.Error(404, "This thread does not exist.")
+        
+      # whitelisted keys
+      now = new Date().getTime()
+      messages = Messages.update
+          threadId: threadId
+          senderId: 
+            $ne: user._id
+          isRead: false
+        , 
+          $set:
+            isRead: true
+            updatedAt: now
+        ,
+          multi: true

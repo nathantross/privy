@@ -23,15 +23,18 @@ Template.newMessage.events
 
     $body.val("") 
 
-  "keyup input": (e) ->
+  "keydown input": (e) ->
     $body = $(e.target).find('[name=message-body]')
-    inputText = $body.context.value
-    if inputText.length == 1
+    body = $body.context.value
+    if body.length == 1
       Meteor.call('startTyping', @threadId, (error, id) -> 
         alert(error.reason) if error 
       )
 
-    if inputText.length == 0
+  "keyup input": (e) ->
+    $body = $(e.target).find('[name=message-body]')
+    body = $body.context.value
+    if body.length == 0
       Meteor.call('endTyping', @threadId, (error, id) -> 
         alert(error.reason) if error 
-      )
+      ) 
