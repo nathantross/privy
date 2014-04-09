@@ -19,12 +19,21 @@ Meteor.methods
     if messageAttributes.threadId
       # whitelisted keys
       now = new Date().getTime()
+      
+      # isRead should be true if any of the participants is in the room
+      participants = Threads.findOne(messageAttributes.threadId).participants
+      isRead = false
+      for participant in participants
+        if participant.userId != user._id && participant.isInThread
+          isRead = true
+
       message = _.extend(_.pick(messageAttributes, 'threadId', 'body'),
         senderId: user._id
         createdAt: now
         updatedAt: now
-        isRead: false
+        isRead: isRead
       )
+            
 
       Messages.insert(message)
 
