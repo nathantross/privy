@@ -19,26 +19,45 @@ Meteor.methods
     if messageAttributes.threadId
       # whitelisted keys
       now = new Date().getTime()
+      
+      # isRead should be true if any of the participants is in the room
+      participants = Threads.findOne(messageAttributes.threadId).participants
+      isRead = false
+      for participant in participants
+        if participant.userId != user._id && participant.isInThread
+          isRead = true
+
       message = _.extend(_.pick(messageAttributes, 'threadId', 'body'),
         senderId: user._id
         createdAt: now
         updatedAt: now
-        isRead: false
+        isRead: isRead
       )
+            
 
       Messages.insert(message)
 
 
-  updateRead: (messageAttributes) ->
-    user = Meteor.user()
+  readMessage: (threadId) ->
+    if Meteor.isServer
+      user = Meteor.user()
 
-    if !user
-      throw new Meteor.Error(401, "You have to login to update a message.")
-      
-    # whitelisted keys
-    now = new Date().getTime()
-    message = _.extend(_.pick(messageAttributes, 'isRead'),
-      updatedAt: now
-    )
+      if !user
+        throw new Meteor.Error(401, "You have to login to update a message.")
 
-    Messages.update(messageAttributes.messageId, $set: message)
+      if !threadId
+        throw new Meteor.Error(404, "This thread does not exist.")
+        
+      # whitelisted keys
+      now = new Date().getTime()
+      messages = Messages.update
+          threadId: threadId
+          senderId: 
+            $ne: user._id
+          isRead: false
+        , 
+          $set:
+            isRead: true
+            updatedAt: now
+        ,
+          multi: true

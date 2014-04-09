@@ -1,41 +1,45 @@
 Template.messageIndicators.helpers
-  lastMessage: ->
-    Messages.find
-      threadId: @_id
-    ,
-      sort:
-          updatedAt: 1
-      limit: 1
-  
   readStatus: ->
-    "Sent"
+    lastMessage = Messages.findOne(
+        threadId: @threadId
+      ,
+        sort:
+            updatedAt: -1) 
 
-  readDate: ->
+    unless lastMessage && lastMessage.senderId == Meteor.userId()
+      ""
+    else if lastMessage && lastMessage.isRead
+      "Read " + messageDate(lastMessage)
+    else
+      "Sent " + messageDate(lastMessage)
+
+  isTyping: ->
+    participant = typist(@threadId)
+    if participant then participant.isTyping else false
+
+  avatar: ->
+    typist(@threadId).avatar
+
+  messageDate = (message) ->
     d = new Date(0)
-    d.setUTCSeconds(@lastMessage.updatedAt)
-
+    d.setUTCMilliseconds(message.updatedAt)
     d = d.toDateString()
+
+    # if the date is today, return "today"
     now = new Date()
     return "today" if now.toDateString() == d
-    return "yesterday" if now.setDate(now.getDate() - 1).toDateString() == d
-    dateArr = d.split(" ")
-    return dateArr[1] + " " + dateArr[2]
-
-# Template.messageIndicators.rendered = ->
-  # lastMessage = Messages.find
-  #     threadId: @_id
-  #   ,
-  #     sort:
-  #         updatedAt: 1
-  #     limit: 1
-  # unless lastMessage.senderId == Meteor.userId() && lastMessage.isRead
     
-  #   msgUpdates = 
-  #     isRead: true
-  #     messageId: lastMessage._id
-
-  #   Meteor.call('updateRead', msgUpdates, (error, id)->
-  #       alert(error.reason) if error # need better error handling
-  #       @readDate()
-  #       @readStatus = "Read"
-  #   )
+    # if the date is yesterday, return 'yesterday'
+    yesterday = new Date()
+    yesterday.setDate(now.getDate() - 1)
+    return "yesterday" if yesterday.toDateString() == d
+    
+    # if the date is before yesterday, return the date
+    dateArr = d.split(" ")
+    dateArr[2] = dateArr[2].slice(1) if dateArr[2].slice(0, 1) == "0"
+    return dateArr[1] + " " + dateArr[2]
+  
+  typist = (threadId) ->
+    for participant, i in Threads.findOne(threadId).participants
+      unless participant.userId == Meteor.userId()
+        return participant
