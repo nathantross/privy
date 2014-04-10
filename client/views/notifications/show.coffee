@@ -10,12 +10,7 @@ Template.notification.helpers
 Template.notification.events
   'click a': ->
     if @isNotified
-      Meteor.call('notified', @_id, (error, id) ->
+      Meteor.call('highlightOff', @_id, (error, id) ->
         alert(error.reason) if error
       )
-
-    # Meteor.call('readMessage', @threadId, (error, id) ->
-    #     alert(error.reason) if error
-    # )
-
     Router.go('showThread', _id: @threadId)

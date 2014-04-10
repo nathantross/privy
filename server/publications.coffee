@@ -1,42 +1,54 @@
 Meteor.publish "notifications", ->
-  Notifications.find userId: @userId,
-    sort:
-      updatedAt: -1
+  if @userId
+    Notifications.find userId: @userId,
+      sort:
+        updatedAt: -1
+  else
+    @ready()
 
 Meteor.publish "noteActions", ->
-  noteIds = 
-    Notes.find( 
-      isInstream: true
-    ).map((n) -> n._id)
+  if @userId
+    noteIds = 
+      Notes.find( 
+        isInstream: true
+      ).map((n) -> n._id)
 
-  NoteActions.find 
-    noteId:
-      $in: noteIds
-    receiverId: @userId
-    isSkipped: true
+    NoteActions.find 
+      noteId:
+        $in: noteIds
+      receiverId: @userId
+      isSkipped: true
+  else
+    @ready()
 
 Meteor.publish "notes", (options) ->
-  noteIds = 
-      NoteActions.find(
-        isSkipped: true 
-        receiverId: @userId
-      ).map((na) -> na.noteId) || []
-    
-    Notes.find
-        _id: 
-          $nin: noteIds
-        isInstream: true
-      , options
+  if @userId
+    noteIds = 
+        NoteActions.find(
+          isSkipped: true 
+          receiverId: @userId
+        ).map((na) -> na.noteId) || []
+      
+      Notes.find
+          _id: 
+            $nin: noteIds
+          isInstream: true
+        , options
+  else
+    @ready()
 
 Meteor.publish "threads", ->
-  Threads.find
-      participants:
-        $elemMatch:
-          userId: @userId
-    , 
-      fields:
-        createdAt: 0
-        noteId: 0
+  if @userId
+    Threads.find
+        participants:
+          $elemMatch:
+            userId: @userId
+      , 
+        fields:
+          createdAt: 0
+          noteId: 0
+  else
+    @ready()
 
 # Meteor.publish "thread", (threadId) ->
 #   Threads.find
@@ -48,10 +60,24 @@ Meteor.publish "threads", ->
 #         noteId: 0
 #       limit: 1
 
-Meteor.publish "messages", (threadId, sort) ->
-  Messages.find
-      threadId: threadId
+Meteor.publish "userData", ->
+  if @userId
+    Meteor.users.find
+      _id: @userId
     ,
-      sort:
-        sort
+      fields:
+        notifications: 1
+  else
+    @ready()
+
+
+Meteor.publish "messages", (threadId, sort) ->
+  if @userId
+    Messages.find
+        threadId: threadId
+      ,
+        sort:
+          sort
+  else
+    @ready()
 

@@ -7,6 +7,7 @@ Router.configure
   loadingTemplate: "loading"
   notFoundTemplate: 'notFound'
   waitOn: -> 
+    Meteor.subscribe 'userData'
     Meteor.subscribe 'notifications'
     Meteor.subscribe 'threads' #enables switching between threads
 

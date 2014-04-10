@@ -19,9 +19,16 @@ Template.noteReply.events
             reply = 
               body: $body.val()
               noteId: noteId
+              lastMessage: $body.val()
 
             Meteor.call('createMessage', reply, (error, id) ->
-              alert(error.reason) if error # need better error handling  
+              if error
+                alert(error.reason)  # need better error handling  
+              else
+                Meteor.call('createNotification', reply, (error, id)->
+                  alert(error.reason) if error
+                )
+
             )
             $(e.target).find('[name=reply-body]').val('')
         )

@@ -6,3 +6,8 @@ Template.navbar.events
           "profile.isNotified": false
       Meteor.defer ->
         $('#threads-link').addClass('open')
+
+Template.navbar.helpers
+  isNavNotified: ->
+    user = Meteor.user()
+    user.notifications[0].isNavNotified

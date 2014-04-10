@@ -17,7 +17,6 @@ Meteor.methods
         Threads.findOne(noteId: messageAttributes.noteId)._id
 
     if messageAttributes.threadId
-      # whitelisted keys
       now = new Date().getTime()
       
       # isRead should be true if any of the participants is in the room
@@ -32,8 +31,7 @@ Meteor.methods
         createdAt: now
         updatedAt: now
         isRead: isRead
-      )
-            
+      )     
 
       Messages.insert(message)
 

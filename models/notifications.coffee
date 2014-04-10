@@ -1,10 +1,103 @@
 exports = this
 exports.Notifications = new Meteor.Collection('notifications')
 
+userId = if Meteor.isClient then Meteor.userId() else @userId
+
+Notifications.find(
+    userId: userId
+  , 
+    fields: 
+      _id: 1
+      updatedAt: 1
+).observe(
+  changed: (oldNotification, newNotification) ->
+    userId = if Meteor.isClient then Meteor.userId() else @userId
+    user = Meteor.users.findOne(userId)
+    notification = Notifications.findOne(newNotification._id)
+    console.log notification
+    activate(notification, user)
+
+  playSound = (filename) ->
+    document.getElementById("sound").innerHTML = "<audio autoplay=\"autoplay\"><source src=\"" + filename + ".mp3\" type=\"audio/mpeg\" /><source src=\"" + filename + ".ogg\" type=\"audio/ogg\" /><embed hidden=\"true\" autostart=\"true\" loop=\"false\" src=\"" + filename + ".mp3\" /></audio><!-- \"Waterdrop\" by Porphyr (freesound.org/people/Porphyr) / CC BY 3.0 (creativecommons.org/licenses/by/3.0) -->"
+
+  toggleNavHighlight = (user, toggle)->
+    unless user.notifications[0].isNavNotified == toggle
+      userAttr = 
+        _id: user._id
+        'notifications.0.isNavNotified': toggle
+      Meteor.call('toggleNavHighlight', userAttr, (error, id)->
+        alert(error.reason) if error
+      )
+
+  toggleItemHighlight = (notification, toggle) ->
+    unless notification.isNotified == toggle
+      notAttr = 
+        _id: notification._id
+        isNotified: toggle
+      Meteor.call('toggleItemHighlight', notAttr, (error, id)->
+        alert(error.reason) if error
+      )
+
+  changeCount = (user, inc) ->
+    userAttr = 
+      _id: user._id
+      'notifications.0.count': inc
+    Meteor.call('changeCount', userAttr, (error, id)->
+      alert(error.reason) if error
+    )
+
+  toggleTitleFlashing = (user, toggle) ->
+    unless user.notifications[0].isTitleFlashing == toggle
+      userAttr =
+        _id: user._id
+        'notifications.0.isTitleFlashing': toggle
+      Meteor.call('toggleTitleFlashing', userAttr, (error, id)->
+        alert(error.reason) if error
+      )
+
+  titleLogic = (title) ->
+    newTitle = "New private message..."
+    document.title = if document.title == newTitle then title else newTitle
+
+  flashTitle = (user)->
+    if user.notifications[0].isTitleFlashing
+      notCount = user.notifications[0].count
+      title = 
+        if notCount > 0 then "Privy (" + notCount + " unread)" else "Privy"
+      Meteor.setInterval( () -> 
+          titleLogic(title)
+        , 2500)
+    else
+      Meteor.clearInterval
+
+  popup = ->
+    $("#popup").slideDown "slow", ->
+      Meteor.setTimeout(()-> 
+          $("#popup").slideUp("slow")
+        , 3000)
+
+  slideUp = ->
+    $("#popup").slideUp("slow")
+
+  activate = (notification, user) ->
+    unless notification.lastSenderId == user._id || !notification
+      playSound('/waterdrop')
+      toggleTitleFlashing(user, true)
+      flashTitle(user)
+      popup() # can I pass notification into popup?
+      changeCount(user, 1)
+      toggleNavHighlight(user, true)
+      toggleItemHighlight(notification, true)
+)
+
 Meteor.methods
   createNotification: (messageAttributes) ->
-    if Meteor.isServer
-      thread = Threads.findOne(messageAttributes.threadId)
+    if Meteor.isServer 
+      if messageAttributes.noteId
+        thread = Threads.findOne(noteId: messageAttributes.noteId)
+        messageAttributes['threadId'] = thread._id
+      else
+        thread = Threads.findOne(messageAttributes.threadId)
       
       now
       notification
@@ -12,67 +105,30 @@ Meteor.methods
       # create a notification for each participant in the conversation
       for participant in thread.participants
         now = new Date().getTime()
+
         notification = _.extend(_.pick(messageAttributes, 'threadId', 'lastMessage'),
             userId: participant.userId
             lastSenderId: Meteor.userId()
+            isNotified: false
             createdAt: now
             updatedAt: now
           )
 
-        # if participant is not the sender, set avatar to sender's avatar
-        # and notify the participant.
-        unless participant.userId == Meteor.userId()
+        if Notifications.findOne(_.pick(messageAttributes, 'threadId')) == undefined || participant.userId != Meteor.userId()
           notification['lastAvatar'] = Meteor.user().profile['avatar']
-          notification['isNotified'] = true
 
-          # notification = _.extend(_.pick(messageAttributes, 'threadId', 'lastMessage'),
-          #   userId: participant.userId
-          #   lastAvatar: Meteor.user().profile['avatar']
-          #   lastSenderId: Meteor.userId()
-          #   isNotified: true
-          #   createdAt: now
-          #   updatedAt: now
-          # )
-        # if participant is the sender, don't touch the avatar
-        # also, don't notify the sender
-        else
-          notification['isNotified'] = false
-          # If notification doesn't have an avatar yet, set it to sender's avatar
-          if Notifications.findOne(_.pick(messageAttributes, 'threadId')) == undefined
-            notification['lastAvatar'] = Meteor.user().profile['avatar']
-
-          # notification = _.extend(_.pick(messageAttributes, 'threadId', 'lastMessage'),
-          #   userId: participant.userId
-          #   lastSenderId: Meteor.userId()
-          #   isNotified: false
-          #   createdAt: now
-          #   updatedAt: now
-          # )
-
-        # create the notification
-        notId = Notifications.upsert(
+        Notifications.upsert(
             threadId: messageAttributes.threadId
             userId: participant.userId
           , 
             $set: notification
-          ).insertedId
-        
-        # If notification doesn't have an avatar yet, set it to sender's avatar
-        # unless Notifications.findOne(notId) == undefined || Notifications.findOne(notId).lastAvatar
-        #   Notifications.update notId,
-        #     $set:
-        #       lastAvatar: Meteor.user().profile['avatar']
+          )
 
-        # Notify all participants, except the sender
-        user = Meteor.users.findOne(participant.userId)
-        unless user.profile.isNotified || user._id == Meteor.userId()
-          Meteor.users.update user._id,
-            $set:
-              "profile.isNotified": true
-
-  notified: (notId) ->
-    now = new Date().getTime()
-    Notifications.update notId,
-        $set:
-          isNotified: false
-          updatedAt: now
+  toggleItemHighlight: (notAttr) ->
+    notId = notAttr._id
+    notUpdate = _.extend(_.pick(notAttr, 'isNotified'))
+    Notifications.update(
+        notId
+      ,
+        $set: notUpdate
+    )
