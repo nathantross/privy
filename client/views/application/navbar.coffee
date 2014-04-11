@@ -1,10 +1,7 @@
 Template.navbar.events
   'click #threads-link': (event)->
-    if Meteor.user().profile.isNotified
-      Meteor.users.update Meteor.userId(),
-        $set:
-          "profile.isNotified": false
-      Meteor.defer ->
+    Notify.toggleNavHighlight(Meteor.user(), false)
+    Meteor.defer ->
         $('#threads-link').addClass('open')
 
 Template.navbar.helpers
