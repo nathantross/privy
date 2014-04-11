@@ -524,6 +524,7 @@ h2 {
 .scrolllbar {
   height: 600px;
   overflow-y:scroll;
+  padding-bottom: 20px;
 }
 
 
@@ -566,5 +567,11 @@ h2 {
   padding-bottom: 50px
 }
 
+.fa-circle {
+  padding-right: 20px;
+  color: #FF6400;
+  border-color: #fff;
+  border-style: solid 1px;
+}
 
 
