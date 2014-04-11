@@ -403,8 +403,6 @@ h2 {
   background-color: #666 !important;
 }
 
-
-
 .title a {
   color: #fff;
 }
@@ -513,6 +511,12 @@ h2 {
 .main-logo a {
   font-size: 24px;
 }
+
+.scrolllbar {
+  height: 600px;
+  overflow-y:scroll;
+}
+
 
 /***********/
 
