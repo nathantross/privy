@@ -377,6 +377,12 @@ h2 {
 
 }
 
+.messages{
+    border: 1px solid #ccc;
+    height: 600px;
+    overflow-y:scroll;
+
+}
 
 /***********/
 
