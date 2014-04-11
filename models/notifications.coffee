@@ -1,31 +1,17 @@
 exports = this
 exports.Notifications = new Meteor.Collection('notifications')
 
-activate = (notification, user) ->
-  unless notification.lastSenderId == user._id || !notification
-    Notify.playSound(user, '/waterdrop')
-    Notify.toggleTitleFlashing(user, true)
-    Notify.popup() # can I pass notification into popup?
-    Notify.changeCount(user, 1)
-    Notify.toggleNavHighlight(user, true)
-    Notify.toggleItemHighlight(notification, true)
-
-userId = if Meteor.isClient then Meteor.userId() else @userId
-Notifications.find(
-    userId: userId
-  , 
-    fields: 
-      _id: 1
-      updatedAt: 1
-).observe(
-  changed: (oldNotification, newNotification) ->
-    userId = if Meteor.isClient then Meteor.userId() else @userId
-    user = Meteor.users.findOne(userId)
-    notification = Notifications.findOne(newNotification._id)
-    Meteor.clearInterval
-    activate(notification, user)
-)
-
+# Start monitoring whether a user is idle
+Meteor.startup ->
+  if Meteor.isClient
+    Deps.autorun ->
+      try
+        UserStatus.startMonitor
+          threshold: 10000 # Time until user is idle
+          interval: 5000
+        @pause()
+        
+# These methods modify the database
 Meteor.methods
   createNotification: (messageAttributes) ->
     if Meteor.isServer 

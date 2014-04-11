@@ -1,3 +1,14 @@
+Meteor.publish "userStatus", ->
+  if @userId
+    UserStatus.connections.find
+        userId: @userId
+      ,
+        fields: 
+          userId: 1
+          idle: 1
+  else
+    @ready()
+
 Meteor.publish "notifications", ->
   if @userId
     Notifications.find userId: @userId,
@@ -67,6 +78,7 @@ Meteor.publish "userData", ->
     ,
       fields:
         notifications: 1
+        status: 1
   else
     @ready()
 

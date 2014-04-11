@@ -5,24 +5,38 @@ exports.showThreadController = RouteController.extend(
   onRun: ->
     threadId = @params._id
 
+    # Add user as a participant on the thread
+    Meteor.call('checkIn', threadId, (error, id) ->
+      alert(error.reason) if error
+    )
+
+    # Turn off the notification, if there is one
+    notification = Notifications.findOne
+      threadId: threadId
+      userId: Meteor.userId()
+      isNotified: true
+
+    Notify.toggleItemHighlight(notification, false) if notification
+
+    Meteor.call('readMessage', threadId, (error, id) ->
+      alert(error.reason) if error 
+    )
+
+    Meteor.defer ->
+        $('#threads-link').removeClass('open')
+
     # if Meteor.isServer
     #   thread = Threads.findOne(threadId)
     #   for participant, i in thread.participants
     #     if participant.userId == Meteor.userId()
     #       Session.set("participantIndex", i)
 
-    Meteor.call('checkIn', threadId, (error, id) ->
-      alert(error.reason) if error
-    )
-    Meteor.call('readMessage', threadId, (error, id) ->
-      alert(error.reason) if error
-    )
 
   onStop: ->
     Meteor.call('checkOut', @threadId(), (error, id) ->
       alert(error.reason) if error
     )
-    $body = $("input") #.find('[name=message-body]')
+    $body = $("input")
     $body.val("")
 
   waitOn: ->

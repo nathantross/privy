@@ -9,4 +9,12 @@ Template.popup.helpers
 
 Template.popup.events
   'click #popup': (event)->
+    notification = Notifications.findOne(
+        {}
+      , 
+        sort:
+          updatedAt: -1
+    )
+    Notify.toggleItemHighlight(notification, false)
+    Notify.toggleNavHighlight(Meteor.user(), false)
     $('#popup').slideUp('slow')

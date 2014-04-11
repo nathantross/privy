@@ -59,3 +59,6 @@ Meteor.methods
             updatedAt: now
         ,
           multi: true
+          
+      # Decrement the notification count by the messages read
+      Notify.changeCount(Meteor.user(), -1*messages)

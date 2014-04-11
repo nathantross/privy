@@ -31,6 +31,7 @@ exports.Notify =
       )
 
   toggleTitleFlashing: (user, toggle) ->
+    Meteor.clearInterval(Session.get('intervalId'))
     unless user.notifications[0].isTitleFlashing == toggle
       userAttr =
         _id: user._id
@@ -40,9 +41,12 @@ exports.Notify =
       )
 
     if toggle
-      Meteor.clearInterval(Session.get('intervalId'))
       intervalId = @flashTitle(user)
       Session.set('intervalId', intervalId)
+    else
+      notCount = user.notifications[0].count
+      document.title = 
+        if notCount > 0 then "Privy (" + notCount + " unread)" else "Privy"
 
   flashTitle: (user)->
     if user.notifications[0].isTitleFlashing
@@ -54,10 +58,59 @@ exports.Notify =
           newTitle = "New private message..."
           document.title = 
             if document.title == newTitle then title else newTitle
-        , 3000)
+        , 2500)
 
   popup: ->
     $("#popup").slideDown "slow", ->
       Meteor.setTimeout(()-> 
           $("#popup").slideUp("slow")
         , 3000)
+
+  # This logic determines how to display notifications
+  activate: (notification, user) ->
+    if notification.lastSenderId != user._id && notification?
+      console.log "Activate function: Firing"
+      # Determine if user is in the notification's thread
+      isInThread = false
+      thread = Threads.findOne(notification.threadId)
+      for participant in thread.participants
+        if participant.userId == Meteor.userId() 
+          isInThread = participant.isInThread
+
+      # Notification depends on whether user is online, idle, 
+      # in the notification's thread, or not in the thread
+      unless user.status.online
+        @changeCount(user, 1)
+        @toggleNavHighlight(user, true)
+        @toggleItemHighlight(notification, true)
+      else if isInThread
+        @playSound(user, '/waterdrop')
+        @toggleTitleFlashing(user, true)
+      else 
+        @playSound(user, '/waterdrop')
+        @popup() # can I pass notifica/tion into popup?
+        @changeCount(user, 1)
+        @toggleNavHighlight(user, true)
+        @toggleItemHighlight(notification, true)
+        if user.status.idle
+          @toggleTitleFlashing(user, true)
+
+  trackChanges: ->
+    userId = if Meteor.isClient then Meteor.userId() else @userId
+    console.log userId
+    if userId
+      console.log "Firing!"
+      Notifications.find(
+            userId: userId
+          , 
+            fields: 
+              _id: 1
+              updatedAt: 1
+        ).observe(
+          changed: (oldNotification, newNotification) ->
+            "observe function: Firing"
+            userId = if Meteor.isClient then Meteor.userId() else @userId
+            user = Meteor.users.findOne(userId)
+            notification = Notifications.findOne(newNotification._id)
+            @activate(notification, user)
+        )

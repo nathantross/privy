@@ -38,3 +38,6 @@ Template.newMessage.events
       Meteor.call('endTyping', @threadId, (error, id) -> 
         alert(error.reason) if error 
       ) 
+
+  "click input": (e) ->
+    Notify.toggleTitleFlashing(Meteor.user(), false)

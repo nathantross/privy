@@ -72,7 +72,3 @@ requireLogin = ->
 
 Router.onBeforeAction requireLogin,
   except: ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "resetPassword", "forgotPassword"]
-
-# Deps.autorun ->
-#   if Session.get('currentThread') 
-#     Meteor.subscribe('thread', Session.get('currentThread'))
