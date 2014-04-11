@@ -6,3 +6,6 @@ function scrollFix() {
 window.onload = function() { scrollFix(); }
 
 
+Template.showThread.helpers({
+  show: scrollFix
+});

@@ -378,10 +378,19 @@ h2 {
 }
 
 .messages{
-    border: 1px solid #ccc;
-    height: 600px;
-    overflow-y:scroll;
+  border: 1px solid #ccc;
+  height: 1000px;
+  overflow-y:scroll;
+  padding-top: 50px;
+  padding-bottom: 25px;
+}
 
+.messages-bottom {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: -1030;
+  bottom: 0px;
 }
 
 /***********/
@@ -556,4 +565,6 @@ h2 {
 .topspace {
   padding-bottom: 50px
 }
+
+
 
