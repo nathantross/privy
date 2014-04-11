@@ -368,6 +368,16 @@ h2 {
   float: right;
 }
 
+.message-read {
+  color: #666;
+  font-size: 12px;
+}
+
+.message-typing {
+
+}
+
+
 /***********/
 
 /****** Navigation ******/
