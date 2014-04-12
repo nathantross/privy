@@ -107,6 +107,36 @@ h2 {
 
 /***********/
 
+/****** Register ******/
+
+
+.entry {
+  background-color:rgba(0, 0, 0, 0);
+}
+
+.entry .btn-default {
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
+  background-color: #008cba;
+  border-color: #008cba;
+  color: #fff;
+}
+
+.email-option .line-thru:before {
+  background-color: #f9f9f9;
+}
+
+.entry h3 {
+  font-size: 2.5em;
+  font-weight: 700;
+  color: #333;
+  padding: 0px;
+  margin-bottom: -20px;
+  margin: 0;
+}
+
+/***********/
+
 /****** Index ******/
 
 #main {
@@ -338,6 +368,31 @@ h2 {
   float: right;
 }
 
+.message-read {
+  color: #666;
+  font-size: 12px;
+}
+
+.message-typing {
+
+}
+
+.messages{
+  border: 1px solid #ccc;
+  height: 1000px;
+  overflow-y:scroll;
+  padding-top: 50px;
+  padding-bottom: 25px;
+}
+
+.messages-bottom {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: -1030;
+  bottom: 0px;
+}
+
 /***********/
 
 /****** Navigation ******/
@@ -356,8 +411,6 @@ h2 {
 .li-notify{
   background-color: #666 !important;
 }
-
-
 
 .title a {
   color: #fff;
@@ -468,6 +521,13 @@ h2 {
   font-size: 24px;
 }
 
+.scrolllbar {
+  height: 600px;
+  overflow-y:scroll;
+  padding-bottom: 20px;
+}
+
+
 /***********/
 
 /****** Notifications ******/
@@ -506,4 +566,12 @@ h2 {
 .topspace {
   padding-bottom: 50px
 }
+
+.fa-circle {
+  padding-right: 20px;
+  color: #FF6400;
+  border-color: #fff;
+  border-style: solid 1px;
+}
+
 
