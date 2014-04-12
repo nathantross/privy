@@ -5,7 +5,8 @@
   {{#if currentUser}}  
     <nav class="navbar-inverse">
       <ul class="list-inline">
-        <li class="dropdown {{#if isNavNotified}}nav-notify{{/if}}" id="threads-link">
+        <!-- <li class="dropdown {{#if isNavNotified}}nav-notify{{/if}} {{#if isDropDown" id="threads-link"> -->
+        <li class="dropdown {{isNavNotified}} {{isDropdownOpen}}" id="threads-link">
           <a href="#" class="large fa fa-comment fa-lg" data-toggle="dropdown"> <b class="caret"></b></a>
             <ul id="full-height" class="dropdown-menu">
               <li>
