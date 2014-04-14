@@ -24,3 +24,15 @@ if Meteor.isServer
 
   Meteor.methods sendEmail: ->
     sendContactEmail()
+
+
+  sendMessageNotificationEmail = ->
+    Email.send
+      from: "Privy <hello@privy.cc>"
+      to: "nathantross@gmail.com"
+      subject: "You have a new message . . ."
+      text: "You have a new message, click here to respond . . ."
+      html: "<p>You have a new message, click here to respond . . .<p>"
+
+  Meteor.methods sendNotificationEmail: ->
+    sendMessageNotificationEmail()
