@@ -3,6 +3,7 @@ exports.Notifications = new Meteor.Collection('notifications')
 
 # Start monitoring whether a user is idle
 Meteor.startup ->
+  Notify.trackChanges()
   if Meteor.isClient
     Deps.autorun ->
       try

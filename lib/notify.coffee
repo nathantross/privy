@@ -97,9 +97,9 @@ exports.Notify =
 
   trackChanges: ->
     userId = if Meteor.isClient then Meteor.userId() else @userId
-    console.log userId
+    console.log userId if userId
     if userId
-      console.log "Firing!"
+      console.log "track chages firing!"
       Notifications.find(
             userId: userId
           , 
@@ -108,9 +108,9 @@ exports.Notify =
               updatedAt: 1
         ).observe(
           changed: (oldNotification, newNotification) ->
-            "observe function: Firing"
+            console.log "observe function: Firing"
             userId = if Meteor.isClient then Meteor.userId() else @userId
             user = Meteor.users.findOne(userId)
             notification = Notifications.findOne(newNotification._id)
-            @activate(notification, user)
+            Notify.activate(notification, user)
         )
