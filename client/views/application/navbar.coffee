@@ -6,8 +6,7 @@ Template.navbar.events
 
 Template.navbar.helpers
   isNavNotified: ->
-    user = Meteor.user()
-    if user.notifications[0].isNavNotified then "nav-notify" else ""
+    if Meteor.user().notifications[0].isNavNotified then "nav-notify" else ""
 
   isDropdownOpen: ->
     if Session.get('isDropdownOpen') then "open" else ""
