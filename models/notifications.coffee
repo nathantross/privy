@@ -36,60 +36,61 @@ Meteor.methods
     if messageAttributes.lastMessage == ""
         throw new Meteor.Error(404, "Woops, looks like your message is blank!")
 
-    now
-    notification
+    if Meteor.isServer
+      now
+      notification
 
-    # create a notification for each participant in the conversation
-    for participant in thread.participants
-      now = new Date().getTime()
+      # create a notification for each participant in the conversation
+      for participant in thread.participants
+        now = new Date().getTime()
 
-      notification = _.extend(_.pick(messageAttributes, 'threadId', 'lastMessage'),
-          userId: participant.userId
-          lastSenderId: Meteor.userId()
-          isNotified: false
-          createdAt: now
-          updatedAt: now
-        )
-
-      if Notifications.findOne(_.pick(messageAttributes, 'threadId')) == undefined || participant.userId != Meteor.userId()
-        notification['lastAvatar'] = Meteor.user().profile['avatar']
-
-      # Insert the notifications for each participant
-      notId = Notifications.upsert(
-          threadId: messageAttributes.threadId
-          userId: participant.userId
-        , 
-          $set: notification
-        ).insertedId
-
-      fullParticipant = Meteor.users.find(participant.id)
-      
-      unless user.status.online
-        Meteor.users.update(participant.userId,
-          $set: 
+        notification = _.extend(_.pick(messageAttributes, 'threadId', 'lastMessage'),
+            userId: participant.userId
+            lastSenderId: Meteor.userId()
+            isNotified: false
+            createdAt: now
             updatedAt: now
-          $inc: 
-            'notifications.0.count': 1
-        )
-
-        # Turn on the nav notification
-        unless participant.notifications[0].isNavNotified
-          Meteor.users.update(
-              participant.userId
-            ,
-              $set:
-                'notifications.0.isNavNotified': true
-                updatedAt: now
           )
 
-        # Highlight the item in the nav
-        Notifications.update(
-            notId
-          ,
+        if Notifications.findOne(_.pick(messageAttributes, 'threadId')) == undefined || participant.userId != Meteor.userId()
+          notification['lastAvatar'] = Meteor.user().profile['avatar']
+
+        # Insert the notifications for each participant
+        notId = Notifications.upsert(
+            threadId: messageAttributes.threadId
+            userId: participant.userId
+          , 
+            $set: notification
+          ).insertedId
+
+        fullParticipant = Meteor.users.find(participant.id)
+        
+        unless user.status.online
+          Meteor.users.update(participant.userId,
             $set: 
-              isNotified: true
               updatedAt: now
-        )
+            $inc: 
+              'notifications.0.count': 1
+          )
+
+          # Turn on the nav notification
+          unless participant.notifications[0].isNavNotified
+            Meteor.users.update(
+                participant.userId
+              ,
+                $set:
+                  'notifications.0.isNavNotified': true
+                  updatedAt: now
+            )
+
+          # Highlight the item in the nav
+          Notifications.update(
+              notId
+            ,
+              $set: 
+                isNotified: true
+                updatedAt: now
+          )
 
 
   toggleItemHighlight: (notAttr) ->

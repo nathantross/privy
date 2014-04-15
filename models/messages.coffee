@@ -38,7 +38,7 @@ Meteor.methods
     Messages.insert(message)
 
 
-  readMessage: (threadId) ->    
+  readMessage: (threadId) ->  
     user = Meteor.user()
 
     unless user
@@ -50,20 +50,21 @@ Meteor.methods
     unless Threads.findOne(threadId)
       throw new Meteor.Error(404, "This thread does not exist.")
 
-    # whitelisted keys
-    now = new Date().getTime()
-    messages = Messages.update
-        threadId: threadId
-        senderId: 
-          $ne: user._id
-        isRead: false
-      , 
-        $set:
-          isRead: true
-          updatedAt: now
-      ,
-        multi: true
-        
-    # Decrement the notification count by the messages read
-    unless messages == 0
-      Notify.changeCount(Meteor.user(), -1*messages)
+      # whitelisted keys
+    if Meteor.isServer  
+      now = new Date().getTime()
+      messages = Messages.update
+          threadId: threadId
+          senderId: 
+            $ne: user._id
+          isRead: false
+        , 
+          $set:
+            isRead: true
+            updatedAt: now
+        ,
+          multi: true
+          
+      # Decrement the notification count by the messages read
+      unless messages == 0
+        Notify.changeCount(Meteor.user(), -1*messages)
