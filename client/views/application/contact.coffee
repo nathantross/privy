@@ -14,22 +14,22 @@ if Meteor.isClient
 
 Template.contact.events "submit form": (event, template) ->
   event.preventDefault()
-  firstname = template.find("input[name=firstname]")
-  lastname = template.find("input[name=firstname]")
-  email = template.find("input[name=email]")
+  # firstname = template.find("input[name=firstname]")
+  # lastname = template.find("input[name=firstname]")
+  # email = template.find("input[name=email]")
   Meteor.call "sendEmail", (err) ->
   console.log err  if err
   
-  # XXX Do form validation
-  data =
-    contactName: contactName.value
-    contactEmail: contactEmail.value
-    contactBody: contactBody.value
+  # # XXX Do form validation
+  # data =
+  #   contactName: contactName.value
+  #   contactEmail: contactEmail.value
+  #   contactBody: contactBody.value
 
-  contactEmail.value = ""
-  contactName.value = ""
-  contactBody.value = ""
-  MyCollection.insert data, (err) -> # handle error
+  # contactEmail.value = ""
+  # contactName.value = ""
+  # contactBody.value = ""
+  # MyCollection.insert data, (err) -> # handle error
 
 
 #   submitme = ->

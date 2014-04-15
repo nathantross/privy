@@ -20,3 +20,4 @@ percolatestudio-migrations
 email
 mandrill
 blaze-layout
+handlebars-server

@@ -6,8 +6,8 @@
 #	  text: "Its pretty easy to send emails via gmail."
 
 
-# Contact Email
-if Meteor.isServer
+
+  # Contact Email
   sendContactEmail = ->
     Email.send
       from: "Privy <hello@privy.cc>"
@@ -26,13 +26,27 @@ if Meteor.isServer
     sendContactEmail()
 
 
+  # Message Reply Email
   sendMessageNotificationEmail = ->
     Email.send
       from: "Privy <hello@privy.cc>"
       to: "nathantross@gmail.com"
       subject: "You have a new message . . ."
       text: "You have a new message, click here to respond . . ."
-      html: "<p>You have a new message, click here to respond . . .<p>"
+      html: Handlebars.templates.messageNotification({ message: Meteor.userId })
 
   Meteor.methods sendNotificationEmail: ->
     sendMessageNotificationEmail()
+
+
+
+
+
+
+
+
+
+
+
+
+
