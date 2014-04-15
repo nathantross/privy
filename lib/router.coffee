@@ -10,22 +10,16 @@ Router.configure
     Meteor.subscribe 'userData'
     Meteor.subscribe 'notifications'
     Meteor.subscribe 'threads' #enables switching between threads
+    console.log "Subscribed to userData, notifications"
 
 Router.map ->
   # Sets route for Index to '/' for the application
   @route "index",
     path: "/"
+    # onRun: ->
+    #   document.title = "Privy"
   
-  # User Routes
-  @route "entrySignUp",
-    path: "/sign-up"
-
-  @route "entrySignIn",
-    path: "/sign-in"
-
-  @route "resetPassword",
-    path: "/resetpassword"    
-
+  # User Routes    
   @route "editUser",
     path: "/profile/edit"
 
@@ -36,23 +30,21 @@ Router.map ->
     path: "/privacy-policy"
 
   @route "contact",
-    path: "/contact"
+    path: "/contact" 
 
-  @route "logout",
-    path: "/"
-
-  @route "forgotPassword",
-    path: "/forgotpassword" 
-  
 
   # Note Routes
   @route "newNote",
     path: "/notes/new"
 
+  @route "signedIn",
+    path: "/notes"
+    controller: signedInController
+
   @route "feed",
     path: "/notes" 
     controller: FeedController
-    
+
 
   # Thread Route
   @route "showThread",
@@ -63,10 +55,10 @@ Router.map ->
     path: "/faq"
   
 
-requireLogin = -> 
+requireLogin = (pause)-> 
   unless Meteor.user() 
     @render( if Meteor.loggingIn() then @loadingTemplate else "accessDenied" )
-    @pause()
+    pause()
   return
 
 

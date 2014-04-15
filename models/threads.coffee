@@ -3,10 +3,14 @@ exports.Threads = new Meteor.Collection('threads')
 
 Meteor.methods
   createThread: (threadAttributes) ->
+    console.log "Running createThread"
     user = Meteor.user()
     
-    if !user
+    unless user
       throw new Meteor.Error(401, "You have to login to create a thread.")
+
+    unless Notes.findOne(threadAttributes.noteId)
+      throw new Meteor.Error(404, "This thread does not have a note.")      
 
     # whitelisted keys
     now = new Date().getTime()
@@ -20,14 +24,23 @@ Meteor.methods
     )
 
     Threads.insert(thread)
+    console.log "Completed createThread"
+
 
   addParticipant: (noteId) ->
+    console.log "Running addParticipant"
     if Meteor.isServer
       threadId = Threads.findOne(noteId: noteId)._id
       user = Meteor.user()
       
-      if !user
+      unless user
         throw new Meteor.Error(401, "You have to login to respond to a thread.")
+
+      unless threadId
+        throw new Meteor.Error(404, "This thread doesn't exist.")
+
+      if thread.participants.length > 2
+        throw new Meteor.Error(401, "This thread is full.")
 
       now = new Date().getTime()
 
@@ -40,41 +53,66 @@ Meteor.methods
               userId: user._id
               avatar: user.profile['avatar']
             }
+    console.log "Completed addParticipant"
 
-  startTyping: (threadId)->
-    if Meteor.isServer
-      index = userIndex(threadId)
-      modifier = $set: {}
-      modifier.$set["participants." + index + ".isTyping"] = true
-      Threads.update(threadId, modifier)
 
-  endTyping: (threadId)->
-    if Meteor.isServer
-      index = userIndex(threadId)
-      modifier = $set: {}
-      modifier.$set["participants." + index + ".isTyping"] = false
-      Threads.update(threadId, modifier)
+  toggleIsTyping: (threadAttr) ->
+    console.log "Running toggleIsTyping"
+    threadId = threadAttr.threadId
+    thread = Threads.findOne(threadId)
+    user = Meteor.user()
+    index = threadAttr.userIndex
 
-  checkIn: (threadId)->
-    if Meteor.isServer
-      index = userIndex(threadId)
-      modifier = $set: {}
-      modifier.$set["participants." + index + ".isInThread"] = true
-      # modifier.$set["participants." + Session.get("participantIndex") + ".isInThread"] = true
-      Threads.update(threadId, modifier)
+    unless threadId
+        throw new Meteor.Error(404, "This threadId doesn't exist.")
 
-  checkOut: (threadId)->
-    if Meteor.isServer
-      index = userIndex(threadId)
-      # console.log Session.get("participantIndex")
-      modifier = $set: {}
-      modifier.$set["participants." + index + ".isInThread"] = false
-      modifier.$set["participants." + index + ".isTyping"] = false
-      Threads.update(threadId, modifier)
+    unless thread
+        throw new Meteor.Error(404, "This thread doesn't exist.")
 
-  userIndex = (threadId) ->
-    if Meteor.isServer
-      thread = Threads.findOne(threadId)
-      for participant, i in thread.participants
-        if participant.userId == Meteor.userId()
-          return i
+    unless user
+        throw new Meteor.Error(401, "Please login to type on this thread.")
+
+    unless Notify.isInThread(user._id, threadId) 
+        throw new Meteor.Error(401, "You cannot perform this action on this thread.")
+
+    unless threadAttr.toggle == true || threadAttr.toggle == false
+        throw new Meteor.Error(400, "Toggle must be set to true or false.")
+
+    unless thread.participants[index].userId == user._id
+      throw new Meteor.Error(401, "You cannot change this attribute for someone else.")
+
+    modifier = $set: {}
+    modifier.$set["participants." + index + ".isTyping"] = threadAttr.toggle
+    Threads.update(threadId, modifier)
+    console.log "Completed toggleIsTyping"
+
+
+  toggleIsInThread: (threadAttr)->
+    console.log "Running toggleIsInThread"
+    user = Meteor.user()
+    threadId = threadAttr.threadId
+    thread = Threads.findOne(threadId)
+    index = threadAttr.userIndex
+
+    unless threadId
+        throw new Meteor.Error(404, "This threadId doesn't exist.")
+
+    unless thread
+        throw new Meteor.Error(404, "This thread doesn't exist.")
+
+    unless user
+        throw new Meteor.Error(401, "Please login to check into this thread.")
+
+    unless threadAttr.toggle == true || threadAttr.toggle == false
+        throw new Meteor.Error(400, "Toggle must be set to true or false.")
+
+    unless thread.participants[index].userId == user._id
+      throw new Meteor.Error(401, "You cannot change this attribute for someone else.")
+
+    modifier = $set: {}
+    modifier.$set["participants." + index + ".isInThread"] = threadAttr.toggle
+    if threadAttr.toggle == false
+      modifier.$set["participants." + index + ".isTyping"] = false 
+    
+    Threads.update(threadId, modifier)
+    console.log "Completed toggleIsInThread"
