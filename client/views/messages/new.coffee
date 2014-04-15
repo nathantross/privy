@@ -22,6 +22,9 @@ Template.newMessage.events
       )
 
     $body.val("") 
+    # Email Notification
+    Meteor.call "sendNotificationEmail", (err) ->
+    console.log err  if err
 
   "keydown input": (e) ->
     $body = $(e.target).find('[name=message-body]')

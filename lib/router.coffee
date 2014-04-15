@@ -70,7 +70,7 @@ requireLogin = ->
 
 
 Router.onBeforeAction requireLogin,
-  except: ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "resetPassword", "forgotPassword"]
+  except: ["index", "register", "contact", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "resetPassword", "forgotPassword"]
 
 # Deps.autorun ->
 #   if Session.get('currentThread') 
