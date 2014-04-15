@@ -2,10 +2,10 @@
   "packages": {
     "font-awesome": {},
     "iron-router": {},
-    "iron-router-progress": {},
     "accounts-entry": {},
     "percolatestudio-migrations": {},
     "mandrill": {},
-    "user-status": {}
+    "user-status": {},
+    "iron-router-progress": {}
   }
 }

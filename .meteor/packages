@@ -9,7 +9,6 @@ accounts-base
 accounts-password
 font-awesome
 iron-router
-iron-router-progress
 accounts-oauth
 accounts-entry
 accounts-ui
@@ -20,3 +19,4 @@ percolatestudio-migrations
 email
 mandrill
 user-status
+iron-router-progress

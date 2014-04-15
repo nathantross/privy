@@ -110,11 +110,11 @@ Meteor.methods
     unless thread.participants[index].userId == user._id
       throw new Meteor.Error(401, "You cannot change this attribute for someone else.")
 
-    if Meteor.isServer 
-      modifier = $set: {}
-      modifier.$set["participants." + index + ".isInThread"] = threadAttr.toggle
-      if threadAttr.toggle == false
-        modifier.$set["participants." + index + ".isTyping"] = false 
+    # if Meteor.isServer 
+    modifier = $set: {}
+    modifier.$set["participants." + index + ".isInThread"] = threadAttr.toggle
+    if threadAttr.toggle == false
+      modifier.$set["participants." + index + ".isTyping"] = false 
     
     Threads.update(threadId, modifier)
     console.log "Completed toggleIsInThread"

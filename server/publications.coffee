@@ -1,25 +1,18 @@
 Meteor.publish "userStatus", ->
-  if @userId
-    UserStatus.connections.find
+  UserStatus.connections.find
         userId: @userId
       ,
         fields: 
           userId: 1
           idle: 1
-  else
-    @ready()
 
 Meteor.publish "notifications", ->
-  if @userId
-    Notifications.find userId: @userId,
+  Notifications.find userId: @userId,
       sort:
         updatedAt: -1
-  else
-    @ready()
 
 Meteor.publish "noteActions", ->
-  if @userId
-    noteIds = 
+  noteIds = 
       Notes.find( 
         isInstream: true
       ).map((n) -> n._id)
@@ -29,12 +22,9 @@ Meteor.publish "noteActions", ->
         $in: noteIds
       receiverId: @userId
       isSkipped: true
-  else
-    @ready()
 
 Meteor.publish "notes", (options) ->
-  if @userId
-    noteIds = 
+  noteIds = 
         NoteActions.find(
           isSkipped: true 
           receiverId: @userId
@@ -45,12 +35,9 @@ Meteor.publish "notes", (options) ->
             $nin: noteIds
           isInstream: true
         , options
-  else
-    @ready()
 
 Meteor.publish "threads", ->
-  if @userId
-    Threads.find
+  Threads.find
         participants:
           $elemMatch:
             userId: @userId
@@ -58,8 +45,6 @@ Meteor.publish "threads", ->
         fields:
           createdAt: 0
           noteId: 0
-  else
-    @ready()
 
 # Meteor.publish "thread", (threadId) ->
 #   Threads.find
@@ -72,24 +57,18 @@ Meteor.publish "threads", ->
 #       limit: 1
 
 Meteor.publish "userData", ->
-  if @userId
-    Meteor.users.find
+  Meteor.users.find
       _id: @userId
     ,
       fields:
         notifications: 1
         status: 1
-  else
-    @ready()
 
 
 Meteor.publish "messages", (threadId, sort) ->
-  if @userId
-    Messages.find
+  Messages.find
         threadId: threadId
       ,
         sort:
           sort
-  else
-    @ready()
 
