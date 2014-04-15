@@ -25,11 +25,13 @@ exports.showThreadController = RouteController.extend(
         # else
         #   document.title = Notify.defaultTitle(Meteor.user())
       )
+      console.log "Thread has loaded - id: " + threadId
 
   threadId: ->
     @params._id
 
   waitOn: ->
+    console.log "Subscribing to messages"
     Meteor.subscribe "messages", @threadId(), @sort()
     console.log "Subscribed to messages"
 
@@ -42,6 +44,12 @@ exports.showThreadController = RouteController.extend(
 
   onData: ->
     console.log "Data loaded/changed"
+
+  onBeforeAction: ->
+    console.log "Started action"
+    
+  onAfterAction: ->
+    console.log "Finished action"
 
   sort: ->
     createdAt: 1
