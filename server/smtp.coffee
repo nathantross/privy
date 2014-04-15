@@ -1,14 +1,6 @@
-# Email Template Testing
-#	Email.send
-#	  from: "hello@privy.cc"
-#	  to: "nathantross@gmail.com"
-#	  subject: "Meteor Can Send Emails via Gmail"
-#	  text: "Its pretty easy to send emails via gmail."
-
-
-
-  # Contact Email
+# Contact Email
   sendContactEmail = ->
+    # To User
     Email.send
       from: "Privy <hello@privy.cc>"
       to: "nathantross@gmail.com"
@@ -16,6 +8,7 @@
       text: "We will respond to your question as soon as we can."
       html: "<p>We will respond to your question as soon as we can.</p>"
 
+    # To Privy
     Email.send
       from: "Privy <hello@privy.cc>"
       to: "hello@privy.cc"
@@ -26,7 +19,7 @@
     sendContactEmail()
 
 
-  # Message Reply Email
+# Message Reply Email
   sendMessageNotificationEmail = ->
     Email.send
       from: "Privy <hello@privy.cc>"
@@ -37,16 +30,3 @@
 
   Meteor.methods sendNotificationEmail: ->
     sendMessageNotificationEmail()
-
-
-
-
-
-
-
-
-
-
-
-
-
