@@ -380,7 +380,6 @@ h2 {
 .messages{
   border: 1px solid #ccc;
   height: 1000px;
-  overflow-y:scroll;
   padding-top: 50px;
   padding-bottom: 25px;
 }
