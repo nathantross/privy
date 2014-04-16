@@ -16,8 +16,8 @@ Router.map ->
   # Sets route for Index to '/' for the application
   @route "index",
     path: "/"
-    # onRun: ->
-    #   document.title = "Privy"
+    onBeforeAction: ->
+      document.title = "Privy"
   
   # User Routes    
   @route "editUser",

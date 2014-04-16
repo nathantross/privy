@@ -8,8 +8,8 @@ exports.Notify =
     Meteor.call('changeCount', userAttr, (error, id)->
       if error
         alert(error.reason) 
-      # else
-      #   document.title = Notify.defaultTitle(Meteor.users.findOne(userAttr._id))
+      else
+        document.title = Notify.defaultTitle(Meteor.users.findOne(userAttr._id))
     )
     console.log "Completed changeCount"
 
@@ -90,7 +90,7 @@ exports.Notify =
       # in the notification's thread, or not in the thread
       if user.status.online
         @playSound(user, '/waterdrop')
-        # @toggleTitleFlashing(user, true)
+        @toggleTitleFlashing(user, true)
         
         unless isInThread 
           @popup() # can I pass notifica/tion into popup?
@@ -126,8 +126,8 @@ exports.Notify =
         if participant.userId == userId
           console.log "Completed notify isInThread"
           return participant.isInThread
-    console.log "Completed notify isInThread"
     false
+    console.log "Completed notify isInThread"
 
   defaultTitle: (user) ->
     console.log "Running defaultTitle"

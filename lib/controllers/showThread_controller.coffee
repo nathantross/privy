@@ -2,13 +2,13 @@ exports = this
 exports.showThreadController = RouteController.extend(
   template: "showThread"
   
-  onRun: ->
-    threadId = @params._id
+  onBeforeAction: ->
     console.log "Thread is reloaded - id: " + threadId
     user = Meteor.user()
+    threadId = @params._id
     thread = Threads.findOne(threadId)
-
-    if user && thread && threadId
+    
+    if @ready() && user && thread
       toggleCheckIn(threadId, true)
 
       # Turn off the notification, if there is one
@@ -22,10 +22,10 @@ exports.showThreadController = RouteController.extend(
       Meteor.call('readMessage', threadId, (error, id) ->
         if error 
           alert(error.reason) 
-        # else
-        #   document.title = Notify.defaultTitle(Meteor.user())
+        else
+          document.title = Notify.defaultTitle(Meteor.user())
       )
-      console.log "Thread has loaded - id: " + threadId
+    console.log "Thread has loaded - id: " + threadId
 
   threadId: ->
     @params._id
@@ -41,15 +41,6 @@ exports.showThreadController = RouteController.extend(
     $body = $("input")
     $body.val("")
     console.log "checked out"
-
-  onData: ->
-    console.log "Data loaded/changed"
-
-  onBeforeAction: ->
-    console.log "Started action"
-    
-  onAfterAction: ->
-    console.log "Finished action"
 
   sort: ->
     createdAt: 1
@@ -78,6 +69,7 @@ exports.showThreadController = RouteController.extend(
     )
 
   toggleCheckIn = (threadId, toggle) ->
+    console.log "Starting check-in"
     thread = Threads.findOne(threadId)
     index = userIndex(threadId)
     unless thread && thread.participants[index].isInThread == toggle 
@@ -89,6 +81,7 @@ exports.showThreadController = RouteController.extend(
       Meteor.call('toggleIsInThread', threadAttr, (error, id) ->
         alert(error.reason) if error
       )
+      console.log "Completed check-in"
 
   userIndex = (threadId) ->
     thread = Threads.findOne(threadId)

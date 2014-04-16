@@ -30,7 +30,7 @@ Template.newMessage.events
     toggleTyping(@threadId, @userIndex, false) if body.length == 0
 
   "click input": (e) ->
-    # Notify.toggleTitleFlashing(Meteor.user(), false)
+    Notify.toggleTitleFlashing(Meteor.user(), false)
 
 
   toggleTyping = (threadId, userIndex, toggle) ->

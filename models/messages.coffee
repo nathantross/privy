@@ -40,18 +40,18 @@ Meteor.methods
 
   readMessage: (threadId) ->  
     user = Meteor.user()
+    if Meteor.isServer  
+    
+      unless user
+        throw new Meteor.Error(401, "You have to login to update a message.")
 
-    unless user
-      throw new Meteor.Error(401, "You have to login to update a message.")
-
-    unless threadId
-      throw new Meteor.Error(404, "The threadId was not included in your call.")
+      unless threadId
+        throw new Meteor.Error(404, "The threadId was not included in your call.")
       
-    unless Threads.findOne(threadId)
-      throw new Meteor.Error(404, "This thread does not exist.")
+      unless Threads.findOne(threadId)
+        throw new Meteor.Error(404, "This thread does not exist.")
 
       # whitelisted keys
-    if Meteor.isServer  
       now = new Date().getTime()
       messages = Messages.update
           threadId: threadId
