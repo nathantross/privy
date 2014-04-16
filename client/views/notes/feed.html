@@ -2,13 +2,13 @@
   <div class="notes">
     <div class="container text-center">
       {{#if note}}
-        <h1 class="message-feed">{{note.body}}</h1>
-
+        <h1>{{note.body}}</h1>
         <div class="row small-centered">
           <div class="small-12 columns">
-            <a href="#" id="skip" class="grow btn btn-info fa fa-times fa-lg">
+            <a  type="button" 
+    value="Change background"
+    onclick="document.body.style.backgroundColor = '#' + ((Math.random()*10)+1).toString(16).slice(4, 6) + 'FF' + ((Math.random()*10)+1).toString(16).slice(4, 6);" href="#" id="skip" class="grow btn btn-info fa fa-times fa-lg">
               Next</a>
-
 
           <a data-toggle="collapse" href="#collapseOne" class="fa fa-check fa-lg grow btn btn-primary btn-big"> Start Chatting</a>
           </div>
