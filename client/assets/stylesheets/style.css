@@ -240,6 +240,9 @@ h2 {
   margin-left: 0px;
 }
 
+.navbar-fixed-bottom {
+}
+
 .reply-form form input {
   outline: none;
   box-shadow:none;
@@ -381,7 +384,8 @@ h2 {
   border: 1px solid #ccc;
   height: 1000px;
   padding-top: 50px;
-  padding-bottom: 25px;
+  padding-bottom: 105px;
+  margin-bottom: 100px;
 }
 
 .messages-bottom {
