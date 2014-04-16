@@ -3,28 +3,29 @@
     <div class="container text-center">
       {{#if note}}
         <h1 class="message-feed">{{note.body}}</h1>
+
         <div class="row small-centered">
           <div class="small-12 columns">
-            <a href="#" id="skip" class="grow btn btn-info">
-              <i class="fa fa-times fa-lg"> Next </i>
-            </a>
+            <a href="#" id="skip" class="grow btn btn-info fa fa-times fa-lg">
+              Next</a>
+
+
+          <a data-toggle="collapse" href="#collapseOne" class="fa fa-check fa-lg grow btn btn-primary btn-big"> Start Chatting</a>
           </div>
         </div>
-        <a data-toggle="collapse" href="#collapseOne" class="grow btn btn-primary btn-big">Start Chatting!</a>
+
         <div id="collapseOne" class="panel-collapse collapse" style="height: auto;">
+
           <div class="panel-body">
            {{> noteReply}}
           </div>
+
         </div>
         
-      {{else}}
-        {{> emptyFeed}}
-      {{/if}}
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
+        {{else}}
+          {{> emptyFeed}}
+        {{/if}}
+
     </div>
   </div>
 
