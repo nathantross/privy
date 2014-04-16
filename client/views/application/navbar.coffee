@@ -1,7 +1,7 @@
 Template.navbar.events
   'click #threads-link': (event)->
     Notify.toggleNavHighlight(Meteor.user(), false)
-    Notify.toggleTitleFlashing(Meteor.user(), false)
+    Notify.toggleTitleFlashing(false)
     isDropdownOpen = Session.get('isDropdownOpen')
     Session.set('isDropdownOpen', !isDropdownOpen)
 

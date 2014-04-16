@@ -1,26 +1,22 @@
 exports = this
 exports.Notify = 
   changeCount: (user, inc) ->
+    console.log "User's count:  " + Meteor.user().notifications[0].count
     console.log "ChangeCount Inc: " + inc
     userAttr = 
       _id: user._id
       'notifications.0.count': inc
     Meteor.call('changeCount', userAttr, (error, id)->
+      console.log "Count is now " + Meteor.user().notifications[0].count
       if error
-        alert(error.reason) 
-      else
-        document.title = Notify.defaultTitle(Meteor.users.findOne(userAttr._id))
+        alert(error.reason)
     )
-    console.log "Completed changeCount"
 
   playSound: (user, filename) ->
-    console.log "Started playSound"
     if user.notifications[0].sound
       document.getElementById("sound").innerHTML = "<audio autoplay=\"autoplay\"><source src=\"" + filename + ".mp3\" type=\"audio/mpeg\" /><source src=\"" + filename + ".ogg\" type=\"audio/ogg\" /><embed hidden=\"true\" autostart=\"true\" loop=\"false\" src=\"" + filename + ".mp3\" /></audio><!-- \"Waterdrop\" by Porphyr (freesound.org/people/Porphyr) / CC BY 3.0 (creativecommons.org/licenses/by/3.0) -->"
-    console.log "Completed playSound"
 
   toggleNavHighlight: (user, toggle)->
-    console.log "Started toggleNavHighlight"
     unless user.notifications[0].isNavNotified == toggle
       userAttr = 
         _id: user._id
@@ -28,10 +24,8 @@ exports.Notify =
       Meteor.call('toggleNavHighlight', userAttr, (error, id)->
         alert(error.reason) if error
       )
-    console.log "Completed toggleNavHighlight"
 
   toggleItemHighlight: (notification, toggle) ->
-    console.log "Started toggleItemHighlight"
     unless notification.isNotified == toggle
       notAttr = 
         _id: notification._id
@@ -39,49 +33,58 @@ exports.Notify =
       Meteor.call('toggleItemHighlight', notAttr, (error, id)->
         alert(error.reason) if error
       )
-    console.log "Completed toggleItemHighlight"
 
-  toggleTitleFlashing: (user, toggle) ->
-    console.log "Running toggleTitleFlashing"
+  # Toggling the title
+  toggleTitleFlashing: (toggle) ->
     Meteor.clearInterval(Session.get('intervalId'))
-    unless user.notifications[0].isTitleFlashing == toggle
+    unless Meteor.user().notifications[0].isTitleFlashing == toggle
       userAttr =
-        _id: user._id
+        _id: Meteor.userId()
         'notifications.0.isTitleFlashing': toggle
-      Meteor.call('toggleTitleFlashing', userAttr, (error, id)->
-        alert(error.reason) if error
-      )
+      $({})
+        .queue((next)->
+          Meteor.call('toggleTitleFlashing', userAttr, (error, id)->
+            alert(error.reason) if error
+          )
+          next()
+        )
+        .queue((next)->
+          Notify.resetTitle(toggle)
+          next()
+        )
+    else 
+      @resetTitle(toggle)
 
+  resetTitle: (toggle) ->
     if toggle
-      intervalId = @flashTitle(user)
+      intervalId = @flashTitle()
       Session.set('intervalId', intervalId)
     else
-      notCount = user.notifications[0].count
-      document.title = @defaultTitle(user)
-    console.log "Completed toggleTitleFlashing"
+      document.title = @defaultTitle()
 
-  flashTitle: (user)->
-    console.log "Running flashTitle"
-    if user.notifications[0].isTitleFlashing
-      title = @defaultTitle(user)
-      Meteor.setInterval( () -> 
-          newTitle = "New private message..."
-          document.title = 
-            if document.title == newTitle then title else newTitle
-        , 2500)
-    console.log "Completed flashTitle"
+  flashTitle: ->
+    title = @defaultTitle(Meteor.user())
+    Meteor.setInterval( () -> 
+        newTitle = "New private message..."
+        document.title = 
+          if document.title == newTitle then title else newTitle
+      , 2500)
 
+  defaultTitle: ->
+    notCount = Meteor.user().notifications[0].count
+    if notCount > 0 then "Privy (" + notCount + " unread)" else "Privy"
+
+  # Popup activates the popup notification 
   popup: ->
-    console.log "Started popup"
+    # console.log "Started popup"
     $("#popup").slideDown "slow", ->
       Meteor.setTimeout(()-> 
           $("#popup").slideUp("slow")
         , 3000)
-    console.log "Completed popup"
 
   # This logic determines how to display notifications
   activate: (notification, user) ->
-    console.log "Running activate"
+    # console.log "Running activate"
     if notification.lastSenderId != user._id && notification?
       # Determine if user is in the notification's thread
       isInThread = @isInThread(Meteor.userId(), notification.threadId)
@@ -89,16 +92,17 @@ exports.Notify =
       # Notification depends on whether user is online, idle, 
       # in the notification's thread, or not in the thread
       if user.status.online
-        @playSound(user, '/waterdrop')
-        @toggleTitleFlashing(user, true)
-        
         unless isInThread 
           @popup() # can I pass notifica/tion into popup?
           @changeCount(user, 1)
           @toggleNavHighlight(user, true)
           @toggleItemHighlight(notification, true)
-    console.log "Completed activate"
 
+        # If the user's online, always play sound and toggle title
+        @playSound(user, '/waterdrop')
+        @toggleTitleFlashing(true)
+
+  # trackChanges observes any changes in notifications and activates a response
   trackChanges: ->
     userId = if Meteor.isClient then Meteor.userId() else @userId
     if userId
@@ -110,27 +114,18 @@ exports.Notify =
               updatedAt: 1
         ).observe(
           changed: (oldNotification, newNotification) ->
-            console.log "Running trackChanges"
             userId = if Meteor.isClient then Meteor.userId() else @userId
             user = Meteor.users.findOne(userId)
             notification = Notifications.findOne(newNotification._id)
             Notify.activate(notification, user)
-            console.log "Completed trackChanges"
         )
 
+  # Helper function that determines whether a user is in a thread
   isInThread: (userId, threadId)->
-    console.log "Running notify isInThread"
     thread = Threads.findOne(threadId)
     if thread
       for participant in thread.participants
         if participant.userId == userId
-          console.log "Completed notify isInThread"
           return participant.isInThread
     false
-    console.log "Completed notify isInThread"
-
-  defaultTitle: (user) ->
-    console.log "Running defaultTitle"
-    notCount = user.notifications[0].count  
-    if notCount > 0 then "Privy (" + notCount + " unread)" else "Privy"
-    console.log "Completed defaultTitle"
+    

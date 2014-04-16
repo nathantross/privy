@@ -1,6 +1,5 @@
 Meteor.methods
   toggleNavHighlight: (userAttr) ->
-    console.log "Running toggleNavHighlight"
     userId = userAttr._id
 
     unless Meteor.userId()
@@ -18,10 +17,8 @@ Meteor.methods
       ,
         $set: userUpdate
     )
-    console.log "Completed toggleNavHighlight"
 
   toggleTitleFlashing: (userAttr) ->
-    console.log "Running toggleTitleFlashing"
     userId = userAttr._id
 
     unless Meteor.userId()
@@ -39,10 +36,8 @@ Meteor.methods
       ,
         $set: userUpdate
     )
-    console.log "Finished toggleTitleFlashing"
 
   changeCount: (userAttr) ->
-    console.log "Running changeCount"
     userId = userAttr._id
 
     unless Meteor.userId()
@@ -59,4 +54,3 @@ Meteor.methods
         updatedAt: now
       $inc: userUpdate
     )
-    console.log "Completed changeCount"

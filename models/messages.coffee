@@ -40,31 +40,32 @@ Meteor.methods
 
   readMessage: (threadId) ->  
     user = Meteor.user()
-    if Meteor.isServer  
-    
-      unless user
-        throw new Meteor.Error(401, "You have to login to update a message.")
-
-      unless threadId
-        throw new Meteor.Error(404, "The threadId was not included in your call.")
+    thread = Threads.findOne(threadId)
       
-      unless Threads.findOne(threadId)
-        throw new Meteor.Error(404, "This thread does not exist.")
+    unless user
+      throw new Meteor.Error(401, "You have to login to update a message.")
 
-      # whitelisted keys
-      now = new Date().getTime()
-      messages = Messages.update
-          threadId: threadId
-          senderId: 
-            $ne: user._id
-          isRead: false
-        , 
-          $set:
-            isRead: true
-            updatedAt: now
-        ,
-          multi: true
-          
-      # Decrement the notification count by the messages read
-      unless messages == 0
-        Notify.changeCount(Meteor.user(), -1*messages)
+    unless threadId
+      throw new Meteor.Error(404, "The threadId does not exist.")
+    
+    unless thread
+      throw new Meteor.Error(404, "This thread does not exist.")
+
+    # whitelisted keys
+    now = new Date().getTime()
+    messages = Messages.update
+        threadId: threadId
+        senderId: 
+          $ne: user._id
+        isRead: false
+      , 
+        $set:
+          isRead: true
+          updatedAt: now
+      ,
+        multi: true
+        
+    # Decrement the notification count by the messages read
+    unless messages == 0
+      console.log "Messages changed: " + messages
+      Notify.changeCount(Meteor.user(), -1*messages)

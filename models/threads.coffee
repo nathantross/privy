@@ -3,7 +3,6 @@ exports.Threads = new Meteor.Collection('threads')
 
 Meteor.methods
   createThread: (threadAttributes) ->
-    console.log "Running createThread"
     user = Meteor.user()
     
     unless user
@@ -24,11 +23,9 @@ Meteor.methods
     )
 
     Threads.insert(thread)
-    console.log "Completed createThread"
 
 
   addParticipant: (noteId) ->
-    console.log "Running addParticipant"
     if Meteor.isServer
       threadId = Threads.findOne(noteId: noteId)._id
       user = Meteor.user()
@@ -53,11 +50,9 @@ Meteor.methods
               userId: user._id
               avatar: user.profile['avatar']
             }
-    console.log "Completed addParticipant"
 
 
   toggleIsTyping: (threadAttr) ->
-    console.log "Running toggleIsTyping"
     threadId = threadAttr.threadId
     user = Meteor.user()
     index = threadAttr.userIndex
@@ -81,11 +76,9 @@ Meteor.methods
     modifier = $set: {}
     modifier.$set["participants." + index + ".isTyping"] = threadAttr.toggle
     Threads.update(threadId, modifier)
-    console.log "Completed toggleIsTyping"
 
 
-  toggleIsInThread: (threadAttr)->
-    console.log "Running toggleIsInThread"        
+  toggleIsInThread: (threadAttr)->       
     threadId = threadAttr.threadId
     index = threadAttr.userIndex
     user = Meteor.user()
@@ -112,4 +105,3 @@ Meteor.methods
       modifier.$set["participants." + index + ".isTyping"] = false 
     
     Threads.update(threadId, modifier)
-    console.log "Completed toggleIsInThread"

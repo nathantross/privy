@@ -10,7 +10,6 @@ Router.configure
     Meteor.subscribe 'userData'
     Meteor.subscribe 'notifications'
     Meteor.subscribe 'threads' #enables switching between threads
-    console.log "Subscribed to userData, notifications"
 
 Router.map ->
   # Sets route for Index to '/' for the application
