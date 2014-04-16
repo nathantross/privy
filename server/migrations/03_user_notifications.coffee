@@ -4,10 +4,20 @@ Migrations.add(
 
   up: ->
     Meteor.users.find().forEach( (user)->
-      count = Notifications.find(
-        userId: user._id
-        isNotified: true
-      ).count()
+      threadIds = Threads.find(
+        participants:
+          $elemMatch:
+            userId: user._id
+        ).map((t) -> t._id)
+
+      count = 0
+      for threadId in threadIds
+        count += Messages.find(
+          threadId: threadId
+          senderId: 
+            $ne: user._id
+          isRead: false
+        ).count()
 
       Meteor.users.update(
           user._id
