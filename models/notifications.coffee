@@ -3,14 +3,14 @@ exports.Notifications = new Meteor.Collection('notifications')
 
 # These methods modify the database
 Meteor.methods
-  createNotification: (messageAttributes) -> 
+  createNotification: (messageAttr) -> 
     user = Meteor.user()
 
-    if messageAttributes.noteId
-      thread = Threads.findOne(noteId: messageAttributes.noteId)
-      messageAttributes['threadId'] = thread._id
+    if messageAttr.noteId
+      thread = Threads.findOne(noteId: messageAttr.noteId)
+      messageAttr['threadId'] = thread._id
     else
-      thread = Threads.findOne(messageAttributes.threadId)
+      thread = Threads.findOne(messageAttr.threadId)
 
     # Declare errors
     unless thread
@@ -22,65 +22,54 @@ Meteor.methods
     unless Notify.isInThread(user._id, thread._id) 
         throw new Meteor.Error(401, "You cannot perform this action on this thread.")
 
-    if messageAttributes.lastMessage == ""
+    if messageAttr.lastMessage == ""
         throw new Meteor.Error(404, "Woops, looks like your message is blank!")
 
     if Meteor.isServer
+      # Declaring variables for the for loop
       now
       notification
+      pUser
+      isNotified
 
       # create a notification for each participant in the conversation
       for participant in thread.participants
+        pUser = Meteor.users.findOne(participant.userId) 
+        isNotified = 
+          if !pUser.status?.online || pUser.status?.idle then true else false
         now = new Date().getTime()
 
-        notification = _.extend(_.pick(messageAttributes, 'threadId', 'lastMessage'),
-            userId: participant.userId
+        notification = _.extend(_.pick(messageAttr, 'threadId', 'lastMessage'),
+            userId: pUser._id
             lastSenderId: Meteor.userId()
-            isNotified: false
+            isNotified: isNotified
             createdAt: now
             updatedAt: now
           )
 
-        if Notifications.findOne(_.pick(messageAttributes, 'threadId')) == undefined || participant.userId != Meteor.userId()
+        # Set the avatar the current user if it's a new note
+        if Notifications.findOne(_.pick(messageAttr, 'threadId')) == undefined || pUser._id != Meteor.userId()
           notification['lastAvatar'] = Meteor.user().profile['avatar']
 
         # Insert the notifications for each participant
-        notId = Notifications.upsert(
-            threadId: messageAttributes.threadId
-            userId: participant.userId
+        Notifications.upsert(
+            threadId: messageAttr.threadId
+            userId: pUser._id
           , 
             $set: notification
-          ).insertedId
-
-        fullParticipant = Meteor.users.find(participant.id)
-        
-        unless user.status.online
-          Meteor.users.update(participant.userId,
-            $set: 
-              updatedAt: now
-            $inc: 
-              'notifications.0.count': 1
           )
-
-          # Turn on the nav notification
-          unless participant.notifications[0].isNavNotified
-            Meteor.users.update(
-                participant.userId
-              ,
-                $set:
-                  'notifications.0.isNavNotified': true
-                  updatedAt: now
-            )
-
-          # Highlight the item in the nav
-          Notifications.update(
-              notId
+        
+        if !pUser.status?.online || pUser.status?.idle
+          # Put a notification on the nav if they're offline or idle
+          Meteor.users.update(
+              pUser._id
             ,
               $set: 
-                isNotified: true
+                'notifications.0.isNavNotified': true
                 updatedAt: now
+              $inc: 
+                'notifications.0.count': 1
           )
-
 
   toggleItemHighlight: (notAttr) ->
     user = Meteor.user()
