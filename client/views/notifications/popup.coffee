@@ -16,6 +16,6 @@ Template.popup.events
           updatedAt: -1
     )
     Notify.toggleItemHighlight(notification, false)
-    Notify.toggleNavHighlight(Meteor.user(), false)
+    Notify.toggleNavHighlight(false) unless Notify.anyItemsNotified()
     Notify.toggleTitleFlashing(false)
     $('#popup').slideUp('slow')

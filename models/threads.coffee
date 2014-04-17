@@ -64,9 +64,6 @@ Meteor.methods
     unless user
         throw new Meteor.Error(401, "Please login to type on this thread.")
 
-    unless Notify.isInThread(user._id, threadId) 
-        throw new Meteor.Error(401, "You cannot perform this action on this thread.")
-
     unless threadAttr.toggle == true || threadAttr.toggle == false
         throw new Meteor.Error(400, "Toggle must be set to true or false.")
 
@@ -104,4 +101,30 @@ Meteor.methods
     if threadAttr.toggle == false
       modifier.$set["participants." + index + ".isTyping"] = false 
     
-    Threads.update(threadId, modifier)
+    Threads.update(threadId, modifier, (err)->
+      throw new Meteor.Error(404, "This thread doesn't exist.") if err 
+      )
+    console.log "Thread " + threadId + " is updated to " + threadAttr.toggle
+    console.log Threads.findOne(threadId).participants[index]
+
+    # Add the user to the thread
+    now = new Date().getTime()
+    if threadAttr.toggle == true
+      console.log "Adding to inThreads of: " + user._id
+      Meteor.users.update(
+          _id: user._id
+        ,
+          $addToSet:
+            inThreads: threadId
+      )
+    else if threadAttr.toggle == false
+      console.log "Removing from inThreads of: " + user._id
+      Meteor.users.update(
+          user._id
+        ,
+          $pull: 
+            inThreads: threadId
+      )
+    console.log "Updated user:"
+    console.log Meteor.user()
+    console.log "Meteor.user().inThreads: " + Meteor.user().inThreads

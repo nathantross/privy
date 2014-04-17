@@ -8,15 +8,17 @@ exports.showThreadController = RouteController.extend(
     thread = Threads.findOne(threadId)
     
     if @ready() && user && thread
-      toggleCheckIn(threadId, true)
+      unless UserStatus.isIdle()
+        console.log 'Running threadController check-in'
+        Notify.toggleCheckIn(threadId, true) 
 
-      # Turn off the notification, if there is one
-      notification = Notifications.findOne
-        threadId: threadId
-        userId: Meteor.userId()
-        isNotified: true
+        # Turn off the notification, if there is one
+        notification = Notifications.findOne
+          threadId: threadId
+          userId: Meteor.userId()
+          isNotified: true
 
-      Notify.toggleItemHighlight(notification, false) if notification
+        Notify.toggleItemHighlight(notification, false) if notification
 
       $({})
         .queue((next)->
@@ -35,7 +37,7 @@ exports.showThreadController = RouteController.extend(
     Meteor.subscribe "messages", @threadId(), @sort()
 
   onStop: ->
-    toggleCheckIn(@threadId(), false)
+    Notify.toggleCheckIn(@threadId(), false)
     $body = $("input")
     $body.val("")
 
@@ -61,29 +63,8 @@ exports.showThreadController = RouteController.extend(
     return (
       messages: @messages()
       threadId: @threadId()
-      userIndex: userIndex(@threadId())
+      userIndex: Notify.userIndex(@threadId())
       # lastMessage: @lastMessage()
     )
-
-  toggleCheckIn = (threadId, toggle) ->
-    thread = Threads.findOne(threadId)
-    index = userIndex(threadId)
-    unless thread && thread.participants[index].isInThread == toggle 
-      threadAttr =
-        threadId: threadId
-        toggle: toggle
-        userIndex: index
-
-      Meteor.call('toggleIsInThread', threadAttr, (error, id) ->
-        alert(error.reason) if error
-      )
-
-  userIndex = (threadId) ->
-    thread = Threads.findOne(threadId)
-    if thread
-      for participant, i in thread.participants
-        if participant.userId == Meteor.userId()
-          return i
-    false
 )
 

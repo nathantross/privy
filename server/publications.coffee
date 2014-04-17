@@ -63,6 +63,7 @@ Meteor.publish "userData", ->
       fields:
         notifications: 1
         status: 1
+        inThreads: 1
 
 
 Meteor.publish "messages", (threadId, sort) ->

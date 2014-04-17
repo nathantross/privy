@@ -1,10 +1,10 @@
 exports = this
 exports.Notify = 
-  changeCount: (user, inc) ->
+  changeCount: (inc) ->
     console.log "User's count:  " + Meteor.user().notifications[0].count
     console.log "ChangeCount Inc: " + inc
     userAttr = 
-      _id: user._id
+      _id: Meteor.userId()
       'notifications.0.count': inc
     Meteor.call('changeCount', userAttr, (error, id)->
       console.log "Count is now " + Meteor.user().notifications[0].count
@@ -12,11 +12,12 @@ exports.Notify =
         alert(error.reason)
     )
 
-  playSound: (user, filename) ->
-    if user.notifications[0].sound
+  playSound: (filename) ->
+    if Meteor.user().notifications[0].sound
       document.getElementById("sound").innerHTML = "<audio autoplay=\"autoplay\"><source src=\"" + filename + ".mp3\" type=\"audio/mpeg\" /><source src=\"" + filename + ".ogg\" type=\"audio/ogg\" /><embed hidden=\"true\" autostart=\"true\" loop=\"false\" src=\"" + filename + ".mp3\" /></audio><!-- \"Waterdrop\" by Porphyr (freesound.org/people/Porphyr) / CC BY 3.0 (creativecommons.org/licenses/by/3.0) -->"
 
-  toggleNavHighlight: (user, toggle)->
+  toggleNavHighlight: (toggle)->
+    user = Meteor.user()
     unless user.notifications[0].isNavNotified == toggle
       userAttr = 
         _id: user._id
@@ -30,9 +31,16 @@ exports.Notify =
       notAttr = 
         _id: notification._id
         isNotified: toggle
-      Meteor.call('toggleItemHighlight', notAttr, (error, id)->
-        alert(error.reason) if error
-      )
+      $({})
+        .queue((next)->
+          Meteor.call('toggleItemHighlight', notAttr, (error, id)->
+            alert(error.reason) if error
+          )
+          next()
+        ).queue((next)->
+          unless toggle || Notify.anyItemsNotified()
+            Notify.toggleNavHighlight(false) 
+        )
 
   # Toggling the title
   toggleTitleFlashing: (toggle) ->
@@ -82,6 +90,41 @@ exports.Notify =
           $("#popup").slideUp("slow")
         , 3000)
 
+  # Toggles whether a user is checked into a thread
+  toggleCheckIn: (threadId, toggle, userIndex) ->
+    console.log "Toggle " + threadId + " checkIn to " + toggle + "?"
+    thread = Threads.findOne(threadId)
+    index = userIndex || @userIndex(threadId)
+    if thread && thread.participants[index].isInThread != toggle 
+      console.log "Yes!"
+      threadAttr =
+        threadId: threadId
+        toggle: toggle
+        userIndex: index
+
+      Meteor.call('toggleIsInThread', threadAttr, (error, id) ->
+        alert(error.reason) if error
+      )
+    else
+      console.log "Nope, it's already: " + thread.participants[index].isInThread
+
+  # Helper function that determines whether a user is in a thread
+  isInThread: (userId, threadId)->
+    thread = Threads.findOne(threadId)
+    if thread
+      for participant in thread.participants
+        if participant.userId == userId
+          return participant.isInThread
+    false
+
+  userIndex: (threadId) ->
+    thread = Threads.findOne(threadId)
+    if thread
+      for participant, i in thread.participants
+        if participant.userId == Meteor.userId()
+          return i
+    false
+
   # This logic determines how to display notifications
   activate: (notification, user) ->
     # console.log "Running activate"
@@ -94,18 +137,25 @@ exports.Notify =
       if user.status.online
         unless isInThread 
           @popup() # can I pass notifica/tion into popup?
-          @changeCount(user, 1)
-          @toggleNavHighlight(user, true)
+          @changeCount(1)
+          @toggleNavHighlight(true)
           @toggleItemHighlight(notification, true)
 
         # If the user's online, always play sound and toggle title
-        @playSound(user, '/waterdrop')
+        @playSound('/waterdrop')
         @toggleTitleFlashing(true)
 
   # trackChanges observes any changes in notifications and activates a response
   trackChanges: ->
     userId = if Meteor.isClient then Meteor.userId() else @userId
     if userId
+      console.log "Track changes is firing"
+      console.log "Notification count: " + Notifications.find(
+            userId: userId
+          , 
+            fields: 
+              _id: 1
+              updatedAt: 1).count()
       Notifications.find(
             userId: userId
           , 
@@ -114,18 +164,17 @@ exports.Notify =
               updatedAt: 1
         ).observe(
           changed: (oldNotification, newNotification) ->
+            console.log "Observer sees somethin's been changed"
             userId = if Meteor.isClient then Meteor.userId() else @userId
             user = Meteor.users.findOne(userId)
             notification = Notifications.findOne(newNotification._id)
             Notify.activate(notification, user)
         )
 
-  # Helper function that determines whether a user is in a thread
-  isInThread: (userId, threadId)->
-    thread = Threads.findOne(threadId)
-    if thread
-      for participant in thread.participants
-        if participant.userId == userId
-          return participant.isInThread
-    false
+  anyItemsNotified: ->
+    Notifications.findOne(
+      userId: Meteor.user()._id
+      isNotified: true
+    ) != undefined
+
     

@@ -17,6 +17,7 @@ Router.map ->
     path: "/"
     onBeforeAction: ->
       document.title = "Privy"
+      Session.set("isTrackingChanges", false)
   
   # User Routes    
   @route "editUser",
@@ -60,6 +61,7 @@ requireLogin = (pause)->
     pause()
   return
 
+loggedOutPages = ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "resetPassword", "forgotPassword"]
 
 Router.onBeforeAction requireLogin,
-  except: ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "resetPassword", "forgotPassword"]
+  except: loggedOutPages

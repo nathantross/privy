@@ -1,6 +1,7 @@
 Template.navbar.events
   'click #threads-link': (event)->
-    Notify.toggleNavHighlight(Meteor.user(), false)
+    console.log "Clicked the chat button"
+    Notify.toggleNavHighlight(false)
     Notify.toggleTitleFlashing(false)
     isDropdownOpen = Session.get('isDropdownOpen')
     Session.set('isDropdownOpen', !isDropdownOpen)

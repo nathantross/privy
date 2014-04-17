@@ -1,17 +1,6 @@
 exports = this
 exports.Notifications = new Meteor.Collection('notifications')
 
-# Start monitoring whether a user is idle
-Meteor.startup ->
-  Notify.trackChanges()
-  if Meteor.isClient
-    Deps.autorun ->
-      try
-        UserStatus.startMonitor
-          threshold: 10000 # Time until user is idle
-          interval: 5000
-        @pause()
-
 # These methods modify the database
 Meteor.methods
   createNotification: (messageAttributes) -> 

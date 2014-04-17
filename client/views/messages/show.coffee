@@ -1,7 +1,4 @@
 Template.showMessage.helpers
-  sender: ->
-    Meteor.users.findOne(_id: @senderId)
-
   senderAvatar: ->
     participants = Threads.findOne(@threadId).participants
     for p in participants
