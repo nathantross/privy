@@ -34,13 +34,44 @@
           </div>
         {{/if}}
 
-      {{else}}
+
 
           {{#if notification}}
                   <div class="alert alert-success alert-dismissable">
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
               <strong>Success!</strong> Things are looking good!</div>
           {{/if}}
+
+      {{else}}     
+      <nav class="navbar-inverse-loggedout navbar-fixed-top">
+        <ul class="list-inline">
+          <li class="dropdown pull-right">
+            <a href="#" class="large fa fa-bars fa-lg" data-toggle="dropdown"></a>
+              <ul id="full-height" class="dropdown-menu">
+                <li>
+                  <a class="fa fa-sign-in fa-lg" href="{{pathFor 'entrySignIn'}}" > Sign In</a>
+                </li>
+                <li>
+                  <a class="fa fa-sign-in fa-lg" href="/sign-up" > Register</a>
+                </li>
+                <li>
+                  <a class="fa fa-home fa-lg" href="/" > Home</a>
+                </li>
+                <li>
+                  <a class="fa fa-home fa-lg" href="/contact"> About</a>
+                </li>
+                <li>
+                  <a class="fa fa-cog" href="{{pathFor 'termsUrl'}}"> Terms</a>
+                </li>
+                <li>
+                  <a class="fa fa-cog" href="{{pathFor 'privacyUrl'}}"> Privacy Policy</a>
+                </li>                
+              </ul>
+            </li>
+
+        </ul>
+      </nav>
+
 
     {{/if}}
 
