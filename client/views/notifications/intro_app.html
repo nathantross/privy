@@ -1,0 +1,101 @@
+<template name="intro">
+	<div class="row text-center">
+		<img src="avatar_1.png" />
+		<h1>Welcome to Privy</h1>
+		<p>It's a safe place to strike up conversations with people anonymously.
+			<br>This is your avatar, the only thing you'll be seen as.</p>
+		<ul class="list-inline">
+			<li><a href="/intro_2">Give me a tour</a></li>
+			<li><a href="{{pathFor 'feed'}}">Skip it</a></li>
+		</ul>
+	</div>
+</template>
+
+
+
+<template name="intro2">
+	<div class="row">
+		<img class="arrow-left text-left" src="arrow.png" />
+	</div>
+
+	<div class="row">
+	<center>
+		<p>All conversations you have will be stored here.</p>
+		<ul class="list-inline">
+			<li><a href="/intro_3">Next</a></li>
+			<li><a href="{{pathFor 'feed'}}">Finish</a></li>
+		</ul>
+	</center>
+	</div>
+</template>
+
+
+<template name="intro3">
+	<div class="row">
+		<img class="arrow-right text-right" src="arrow.png" />
+	</div>
+
+	<div class="row">
+	<center>
+		<p>You can create a note too.</p>
+		<ul class="list-inline">
+			<li><a href="/intro_4">Next</a></li>
+			<li><a href="{{pathFor 'feed'}}">Finish</a></li>
+		</ul>
+	</center>
+	</div>
+</template>
+
+
+<template name="intro4">
+	<div class="row">
+
+		<center>
+			<p>Each reply starts a one-on-one conversation.</p>
+			<ul class="list-inline">
+				<li><a href="/intro_5">Next</a></li>
+				<li><a href="{{pathFor 'feed'}}">Finish</a></li>
+			</ul>
+		</center>
+
+		<center>
+			<img class="arrow-right-bottom text-right" src="arrow.png" />
+		</center>
+	</div>
+
+	<div class="row">
+
+	</div>
+	{{> noteReply}}
+</template>
+
+
+<template name="intro5">
+	<div class="row">
+
+		<center>
+
+			<ul class="list-inline">
+				<li><img src="avatar_1.png" /></li>
+				<li><i class="fa-arrows-h fa fa-4x" ></i></li>
+				<li><img src="avatar_2.png" /></li>
+			</ul>
+
+			<p>Conversations are only between you and one person.
+				<br>
+				And the only thing that is shared is your avatars.</p>
+			<ul class="list-inline">
+				<li><a href="{{pathFor 'feed'}}">Get Started</a></li>
+			</ul>
+
+		</center>
+
+	</div>
+
+	<div class="row">
+
+	</div>
+</template>
+
+
+
