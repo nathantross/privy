@@ -33,6 +33,8 @@ Meteor.publish "notes", (options) ->
       Notes.find
           _id: 
             $nin: noteIds
+          userId:
+            $ne: @userId
           isInstream: true
         , options
 
