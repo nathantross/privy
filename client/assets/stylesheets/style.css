@@ -144,28 +144,32 @@ h2 {
   background-color: #006363;
   margin-bottom: 0px;
   margin-top: -50px;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  height: 100% !important;
 }
 
 .section-two {
   background-color: #333;
-  padding: 300px;
+  padding-top: 200px;
+  padding-bottom: 200px;
+  padding-left: 40px;
+  padding-right: 40px;
   color: #fff;
 }
 
 .section-three {
   background-color: #999;
-  padding: 300px;
+  padding-top: 200px;
+  padding-bottom: 200px;
+  padding-left: 40px;
+  padding-right: 40px;
   color: #fff;
 }
 
 .section-four {
   background-color: #333;
-  padding: 300px;
+  padding-top: 200px;
+  padding-bottom: 200px;
+  padding-left: 40px;
+  padding-right: 40px;
   color: #fff;
 }
 
