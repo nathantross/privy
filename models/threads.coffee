@@ -104,13 +104,10 @@ Meteor.methods
     Threads.update(threadId, modifier, (err)->
       throw new Meteor.Error(404, "This thread doesn't exist.") if err 
       )
-    console.log "Thread " + threadId + " is updated to " + threadAttr.toggle
-    console.log Threads.findOne(threadId).participants[index]
 
     # Add the user to the thread
     now = new Date().getTime()
     if threadAttr.toggle == true
-      console.log "Adding to inThreads of: " + user._id
       Meteor.users.update(
           _id: user._id
         ,
@@ -118,13 +115,9 @@ Meteor.methods
             inThreads: threadId
       )
     else if threadAttr.toggle == false
-      console.log "Removing from inThreads of: " + user._id
       Meteor.users.update(
           user._id
         ,
           $pull: 
             inThreads: threadId
       )
-    console.log "Updated user:"
-    console.log Meteor.user()
-    console.log "Meteor.user().inThreads: " + Meteor.user().inThreads

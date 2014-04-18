@@ -59,7 +59,7 @@ Meteor.methods
             $set: notification
           )
         
-        if !pUser.status?.online || pUser.status?.idle
+        if !pUser.status?.online
           # Put a notification on the nav if they're offline or idle
           Meteor.users.update(
               pUser._id

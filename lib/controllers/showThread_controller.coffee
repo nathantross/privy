@@ -9,7 +9,6 @@ exports.showThreadController = RouteController.extend(
     
     if @ready() && user && thread
       unless UserStatus.isIdle()
-        console.log 'Running threadController check-in'
         Notify.toggleCheckIn(threadId, true) 
 
         # Turn off the notification, if there is one
@@ -20,15 +19,15 @@ exports.showThreadController = RouteController.extend(
 
         Notify.toggleItemHighlight(notification, false) if notification
 
-      $({})
-        .queue((next)->
-          Meteor.call('readMessage', threadId, (error, id) ->
-            alert(error.reason) if error
+        $({})
+          .queue((next)->
+            Meteor.call('readMessage', threadId, (error, id) ->
+              alert(error.reason) if error
+            )
+            next()
+          ).queue((next)->
+            document.title = Notify.defaultTitle(user)
           )
-          next()
-        ).queue((next)->
-          document.title = Notify.defaultTitle(user)
-        )
 
   threadId: ->
     @params._id

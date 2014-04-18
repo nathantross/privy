@@ -1,6 +1,5 @@
 Template.navbar.events
   'click #threads-link': (event)->
-    console.log "Clicked the chat button"
     Notify.toggleNavHighlight(false)
     Notify.toggleTitleFlashing(false)
     isDropdownOpen = Session.get('isDropdownOpen')

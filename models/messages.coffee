@@ -76,6 +76,4 @@ Meteor.methods
         multi: true
         
     # Decrement the notification count by the messages read
-    unless messages == 0
-      console.log "Messages changed: " + messages
-      Notify.changeCount(-1*messages)
+    Notify.changeCount(-1*messages) unless messages == 0

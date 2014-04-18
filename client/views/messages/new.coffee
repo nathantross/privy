@@ -23,7 +23,6 @@ Template.newMessage.events
     $body = $(e.target).find('[name=message-body]')
     body = $body.context.value
     toggleTyping(@threadId, @userIndex, true) if body.length == 1
-    # Notify.toggleCheckIn(@threadId, true, @userIndex) unless UserStatus.isIdle()
 
   "keyup input": (e) ->
     $body = $(e.target).find('[name=message-body]')
@@ -32,7 +31,6 @@ Template.newMessage.events
 
   "click input": (e) ->
     Notify.toggleTitleFlashing(false)
-    # Notify.toggleCheckIn(@threadId, true) unless UserStatus.isIdle()
 
 
   toggleTyping = (threadId, userIndex, toggle) ->

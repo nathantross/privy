@@ -1,15 +1,11 @@
 exports = this
 exports.Notify = 
   changeCount: (inc) ->
-    console.log "User's count:  " + Meteor.user().notifications[0].count
-    console.log "ChangeCount Inc: " + inc
     userAttr = 
       _id: Meteor.userId()
       'notifications.0.count': inc
     Meteor.call('changeCount', userAttr, (error, id)->
-      console.log "Count is now " + Meteor.user().notifications[0].count
-      if error
-        alert(error.reason)
+      alert(error.reason) if error
     )
 
   playSound: (filename) ->
@@ -84,7 +80,6 @@ exports.Notify =
 
   # Popup activates the popup notification 
   popup: ->
-    # console.log "Started popup"
     $("#popup").slideDown "slow", ->
       Meteor.setTimeout(()-> 
           $("#popup").slideUp("slow")
@@ -92,11 +87,9 @@ exports.Notify =
 
   # Toggles whether a user is checked into a thread
   toggleCheckIn: (threadId, toggle, userIndex) ->
-    console.log "Toggle " + threadId + " checkIn to " + toggle + "?"
     thread = Threads.findOne(threadId)
     index = userIndex || @userIndex(threadId)
     if thread && thread.participants[index].isInThread != toggle 
-      console.log "Yes!"
       threadAttr =
         threadId: threadId
         toggle: toggle
@@ -105,8 +98,6 @@ exports.Notify =
       Meteor.call('toggleIsInThread', threadAttr, (error, id) ->
         alert(error.reason) if error
       )
-    else
-      console.log "Nope, it's already: " + thread.participants[index].isInThread
 
   # Helper function that determines whether a user is in a thread
   isInThread: (userId, threadId)->
@@ -127,7 +118,6 @@ exports.Notify =
 
   # This logic determines how to display notifications
   activate: (notification, user) ->
-    # console.log "Running activate"
     if notification.lastSenderId != user._id && notification?
       # Determine if user is in the notification's thread
       isInThread = @isInThread(Meteor.userId(), notification.threadId)
@@ -149,13 +139,6 @@ exports.Notify =
   trackChanges: ->
     userId = if Meteor.isClient then Meteor.userId() else @userId
     if userId
-      console.log "Track changes is firing"
-      console.log "Notification count: " + Notifications.find(
-            userId: userId
-          , 
-            fields: 
-              _id: 1
-              updatedAt: 1).count()
       Notifications.find(
             userId: userId
           , 
@@ -163,8 +146,7 @@ exports.Notify =
               _id: 1
               updatedAt: 1
         ).observe(
-          changed: (oldNotification, newNotification) ->
-            console.log "Observer sees somethin's been changed"
+          changed: (oldNotification, newNotification) ->    
             userId = if Meteor.isClient then Meteor.userId() else @userId
             user = Meteor.users.findOne(userId)
             notification = Notifications.findOne(newNotification._id)
