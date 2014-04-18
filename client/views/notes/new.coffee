@@ -34,3 +34,5 @@ Template.newNote.events
     )
 
     Router.go "feed"
+
+

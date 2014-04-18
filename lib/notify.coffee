@@ -116,6 +116,14 @@ exports.Notify =
           return i
     false
 
+  isParticipant: (userId, threadId)->
+    thread = Threads.findOne(threadId)
+    if thread
+      for participant in thread.participants
+        if participant.userId == userId
+          return true
+    false
+
   # This logic determines how to display notifications
   activate: (notification, user) ->
     if notification.lastSenderId != user._id && notification?
