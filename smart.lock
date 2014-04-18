@@ -9,7 +9,6 @@
       "mandrill": {},
       "user-status": {},
       "iron-router-progress": {}
-      "handlebars-server": {}
     },
     "packages": {
       "font-awesome": {
@@ -46,10 +45,6 @@
         "git": "https://github.com/Multiply/iron-router-progress.git",
         "tag": "v0.3.1",
         "commit": "3f7900feb4bb70a1289b39a1fdcd1f438c0335b3"
-      "handlebars-server": {
-        "git": "https://github.com/EventedMind/meteor-handlebars-server.git",
-        "tag": "v1.2.0",
-        "commit": "1b72c4e9d82af66293e50be4516c487d15d97464"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
