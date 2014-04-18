@@ -37,10 +37,6 @@ Router.map ->
   @route "newNote",
     path: "/notes/new"
 
-  @route "signedIn",
-    path: "/notes"
-    controller: signedInController
-
   @route "feed",
     path: "/notes" 
     controller: FeedController
