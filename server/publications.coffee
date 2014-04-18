@@ -25,16 +25,18 @@ Meteor.publish "noteActions", ->
 
 Meteor.publish "notes", (options) ->
   noteIds = 
-        NoteActions.find(
-          isSkipped: true 
-          receiverId: @userId
-        ).map((na) -> na.noteId) || []
-      
-      Notes.find
-          _id: 
-            $nin: noteIds
-          isInstream: true
-        , options
+    NoteActions.find(
+        isSkipped: true 
+        receiverId: @userId
+      ).map((na) -> na.noteId) || []
+    
+  Notes.find
+      _id: 
+        $nin: noteIds
+      userId:
+        $ne: @userId
+      isInstream: true
+    , options
 
 Meteor.publish "threads", ->
   Threads.find
@@ -67,9 +69,11 @@ Meteor.publish "userData", ->
 
 
 Meteor.publish "messages", (threadId, sort) ->
-  Messages.find
-        threadId: threadId
-      ,
-        sort:
-          sort
-
+  if Notify.isParticipant(@userId, threadId) 
+    Messages.find
+          threadId: threadId
+        ,
+          sort:
+            sort
+  else
+    null

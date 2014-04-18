@@ -34,3 +34,8 @@ Template.newNote.events
     )
 
     Router.go "feed"
+
+  "keyup input": (e)->
+      val = $(e.target).find("[name=notes-body]").prevObject[0].value
+      len = val.length
+      $("#charNum").text(len + "/65")

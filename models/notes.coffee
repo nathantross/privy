@@ -2,36 +2,43 @@ exports = this
 exports.Notes = new Meteor.Collection('notes')
 
 Meteor.methods
-  createNote: (noteAttributes) ->
+  createNote: (noteAttr) ->
     user = Meteor.user()
-    duplicateNote = Notes.findOne(
-      body: noteAttributes.body
-      userId: user._id
-      isInstream: true
-    )
-    if !user
+    
+
+    unless user
       throw new Meteor.Error(401, "You have to login to create a note.")
 
-    if !noteAttributes.body
-      throw new Meteor.Error(422, 'Woops, looks like your note is blank!')
+    unless noteAttr.body || noteAttr.body.length <= 0
+      throw new Meteor.Error(422, 'Whoops, looks like your note is blank!')
 
-    if noteAttributes.body && duplicateNote 
-      throw new Meteor.Error(302,
-          'This note\'s already in your stream.',
-          duplicateNote._id
+    unless noteAttr.body.length < 66
+      throw new Meteor.Error(422, 'Your note is a liiiittle too long.')
+
+    if Meteor.isServer
+      duplicateNote = Notes.findOne(
+        body: noteAttr.body
+        userId: user._id
+        isInstream: true
+      )
+
+      if noteAttr.body && duplicateNote 
+        throw new Meteor.Error(302,
+            'This note\'s already in your stream.',
+            duplicateNote._id
       )
       
-    # whitelisted keys
-    now = new Date().getTime()
-    note = _.extend(_.pick(noteAttributes, 'body'),
-      userId: user._id
-      isInstream: true
-      createdAt: now
-      updatedAt: now
-      expiresAt: (now + 7*24*60*60*1000) # 7 days from now (in ms)
-    )
+      # whitelisted keys
+      now = new Date().getTime()
+      note = _.extend(_.pick(noteAttr, 'body'),
+        userId: user._id
+        isInstream: true
+        createdAt: now
+        updatedAt: now
+        expiresAt: (now + 7*24*60*60*1000) # 7 days from now (in ms)
+      )
 
-    Notes.insert(note)
+      Notes.insert(note)
 
   removeNoteFromStream: (noteId) ->
     isInstream = Notes.findOne(noteId).isInstream

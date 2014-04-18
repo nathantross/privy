@@ -53,7 +53,7 @@ Router.map ->
     path: "/notes/new"
 
   @route "feed",
-    path: "/notes" 
+    path: "/notes/:notesCount?" 
     controller: FeedController
 
 
@@ -74,5 +74,5 @@ requireLogin = (pause)->
 loggedOutPages = ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "resetPassword", "forgotPassword", "404"]
 
 Router.onBeforeAction requireLogin,
-
   except: loggedOutPages
+

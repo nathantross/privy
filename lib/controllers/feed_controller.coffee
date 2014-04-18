@@ -1,16 +1,17 @@
 exports = this
 exports.FeedController = RouteController.extend(
   template: "feed"
-  # increment: 2
-  # limit: ->
-  #   parseInt(@params.notesLimit) || @increment
+  # increment: 1
+  # notesCount: ->
+    # parseInt(@params.notesCount) || @increment
+
   onBeforeAction: ->
-    document.title = Notify.defaultTitle() if Meteor.user()
+    document.title = Notify.defaultTitle()
 
   findOptions: ->
     sort:
-      updatedAt: 1
-    # limit: @limit()
+      createdAt: 1
+    # limit: @increment
 
   waitOn: ->
     Meteor.subscribe "notes", @findOptions()
@@ -30,9 +31,12 @@ exports.FeedController = RouteController.extend(
       , @findOptions())
 
   data: ->
-    note: @note()
+    return(
+      note: @note()
+      # nextPath: @route.path(notesCount: @notesCount() + @increment)
+    )
     # hasMore = @notes().fetch().length is @limit()
-    # nextPath = @route.path(notesLimit: @limit() + @increment)
+    
     # return (
     #   isPassing: true
     #   notes: @notes()

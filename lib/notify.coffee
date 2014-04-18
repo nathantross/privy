@@ -75,7 +75,11 @@ exports.Notify =
       , 2500)
 
   defaultTitle: ->
-    notCount = Meteor.user().notifications[0].count
+    notCount = 
+      if Meteor.user() && Meteor.user().notifications
+        Meteor.user().notifications[0].count
+      else
+        0
     if notCount > 0 then "Privy (" + notCount + " unread)" else "Privy"
 
   # Popup activates the popup notification 
@@ -114,6 +118,14 @@ exports.Notify =
       for participant, i in thread.participants
         if participant.userId == Meteor.userId()
           return i
+    false
+
+  isParticipant: (userId, threadId)->
+    thread = Threads.findOne(threadId)
+    if thread
+      for participant in thread.participants
+        if participant.userId == userId
+          return true
     false
 
   # This logic determines how to display notifications
@@ -158,5 +170,3 @@ exports.Notify =
       userId: Meteor.user()._id
       isNotified: true
     ) != undefined
-
-    
