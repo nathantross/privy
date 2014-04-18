@@ -18,6 +18,10 @@ Template.newMessage.events
     )
     toggleTyping(@threadId, @userIndex, false)
     $body.val("") 
+    # Email Notification
+    # Meteor.call "sendNotificationEmail", (err) ->
+    #   console.log err  if err
+      
 
   "keydown input": (e) ->
     $body = $(e.target).find('[name=message-body]')

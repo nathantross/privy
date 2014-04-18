@@ -17,5 +17,9 @@
 /percolatestudio-migrations
 /mandrill
 /mongodb-server-aggregation
+<<<<<<< HEAD
 /user-status
 /timesync
+=======
+/handlebars-server
+>>>>>>> master

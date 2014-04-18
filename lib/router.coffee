@@ -57,7 +57,8 @@ requireLogin = (pause)->
     pause()
   return
 
-loggedOutPages = ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "resetPassword", "forgotPassword"]
+loggedOutPages = ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "resetPassword", "forgotPassword", "404"]
 
 Router.onBeforeAction requireLogin,
+
   except: loggedOutPages
