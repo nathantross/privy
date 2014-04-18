@@ -38,7 +38,7 @@ Router.map ->
     path: "/notes/new"
 
   @route "feed",
-    path: "/notes" 
+    path: "/notes/:notesCount?" 
     controller: FeedController
 
 

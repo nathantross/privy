@@ -75,7 +75,11 @@ exports.Notify =
       , 2500)
 
   defaultTitle: ->
-    notCount = Meteor.user().notifications[0].count
+    notCount = 
+      if Meteor.user() && Meteor.user().notifications
+        Meteor.user().notifications[0].count
+      else
+        0
     if notCount > 0 then "Privy (" + notCount + " unread)" else "Privy"
 
   # Popup activates the popup notification 
