@@ -32,6 +32,21 @@ Router.map ->
   @route "contact",
     path: "/contact" 
 
+  @route "intro",
+    path: "/intro"
+
+  @route "intro2",
+    path: "/intro_2"
+
+  @route "intro3",
+    path: "/intro_3"
+
+  @route "intro4",
+    path: "/intro_4"
+
+  @route "intro5",
+    path: "/intro_5"
+
 
   # Note Routes
   @route "newNote",
@@ -49,7 +64,6 @@ Router.map ->
 
   @route "faq",
     path: "/faq"
-  
 
 requireLogin = (pause)-> 
   unless Meteor.user() 
