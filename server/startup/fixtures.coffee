@@ -5,8 +5,8 @@ Meteor.startup ->
     # Create three users
     userIds.push(
       Accounts.createUser
-          email: "stuart.stein@gmail.com" 
-          password: "Welcome123"
+          email: "s@g.com" 
+          password: "tested"
           profile: 
             name: "Stu"
             avatar: "//images.all-free-download.com/images/graphicmedium/studiofibonacci_cartoon_grasshopper_clip_art_22257.jpg"
@@ -15,8 +15,8 @@ Meteor.startup ->
 
     userIds.push(
       Accounts.createUser
-          email: "nathantross@gmail.com" 
-          password: "Welcome123"
+          email: "n@g.com" 
+          password: "tested"
           profile: 
             name: "Nathan"
             avatar: "//rs1124.pbsrc.com/albums/l571/cocobiikan/ist2_8825822-panda-cartoon.jpg~c200"

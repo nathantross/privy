@@ -2,8 +2,8 @@ Meteor.startup ->
   AccountsEntry.config
     privacyUrl: '/privacy-policy'
     termsUrl: '/terms-of-use'
-    homeRoute: '/'
-    dashboardRoute: '/notes'
+    homeRoute: 'index'
+    dashboardRoute: 'feed'
     profileRoute: 'profile'
     passwordSignupFields: 'EMAIL_ONLY'
     showSignupCode: false

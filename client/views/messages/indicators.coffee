@@ -40,6 +40,8 @@ Template.messageIndicators.helpers
     return dateArr[1] + " " + dateArr[2]
   
   typist = (threadId) ->
-    for participant, i in Threads.findOne(threadId).participants
-      unless participant.userId == Meteor.userId()
-        return participant
+    thread = Threads.findOne(threadId)
+    if thread
+      for participant, i in thread.participants
+        unless participant.userId == Meteor.userId()
+          return participant

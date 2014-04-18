@@ -4,6 +4,8 @@ exports.FeedController = RouteController.extend(
   # increment: 2
   # limit: ->
   #   parseInt(@params.notesLimit) || @increment
+  onBeforeAction: ->
+    document.title = Notify.defaultTitle() if Meteor.user()
 
   findOptions: ->
     sort:

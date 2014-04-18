@@ -17,3 +17,6 @@
 /percolatestudio-migrations
 /mandrill
 /mongodb-server-aggregation
+/user-status
+/timesync
+/handlebars-server

@@ -5,17 +5,3 @@ Template.notification.helpers
     if previewLength < message.length
       message = message.slice(0, previewLength) + "..."
     message
-     
-
-Template.notification.events
-  'click a': ->
-    if @isNotified
-      Meteor.call('notified', @_id, (error, id) ->
-        alert(error.reason) if error
-      )
-
-    # Meteor.call('readMessage', @threadId, (error, id) ->
-    #     alert(error.reason) if error
-    # )
-
-    Router.go('showThread', _id: @threadId)

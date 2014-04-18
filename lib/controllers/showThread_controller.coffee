@@ -2,43 +2,46 @@ exports = this
 exports.showThreadController = RouteController.extend(
   template: "showThread"
   
-  onRun: ->
+  onBeforeAction: ->
+    user = Meteor.user()
     threadId = @params._id
+    thread = Threads.findOne(threadId)
+    
+    if @ready() && user && thread
+      unless UserStatus.isIdle()
+        Notify.toggleCheckIn(threadId, true) 
 
-    # if Meteor.isServer
-    #   thread = Threads.findOne(threadId)
-    #   for participant, i in thread.participants
-    #     if participant.userId == Meteor.userId()
-    #       Session.set("participantIndex", i)
+        # Turn off the notification, if there is one
+        notification = Notifications.findOne
+          threadId: threadId
+          userId: Meteor.userId()
+          isNotified: true
 
-    Meteor.call('checkIn', threadId, (error, id) ->
-      alert(error.reason) if error
-    )
-    Meteor.call('readMessage', threadId, (error, id) ->
-      alert(error.reason) if error
-    )
+        Notify.toggleItemHighlight(notification, false) if notification
 
-  onStop: ->
-    Meteor.call('checkOut', @threadId(), (error, id) ->
-      alert(error.reason) if error
-    )
-    $body = $("input") #.find('[name=message-body]')
-    $body.val("")
+        $({})
+          .queue((next)->
+            Meteor.call('readMessage', threadId, (error, id) ->
+              alert(error.reason) if error
+            )
+            next()
+          ).queue((next)->
+            document.title = Notify.defaultTitle(user)
+          )
+
+  threadId: ->
+    @params._id
 
   waitOn: ->
     Meteor.subscribe "messages", @threadId(), @sort()
-    # Meteor.subscribe 'threads'
-    # Meteor.subscribe "thread", Session.get("threadId")
-    
-  # FOR PAGINATION WHEN WE WANT TO ADD IT
-  # increment: 1
-  # limit: ->
-  #   parseInt(@params.notesLimit) || @increment
-  sort: ->
-    updatedAt: 1
 
-  threadId: ->
-      @params._id
+  onStop: ->
+    Notify.toggleCheckIn(@threadId(), false)
+    $body = $("input")
+    $body.val("")
+
+  sort: ->
+    createdAt: 1
 
   messages: ->
     Messages.find
@@ -46,12 +49,6 @@ exports.showThreadController = RouteController.extend(
     ,
       sort:
         @sort()
-
-  # participantIndex: ->
-  #   thread = Threads.findOne(@threadId())
-  #   for participant, i in thread.participants
-  #     if participant.userId == Meteor.userId()
-  #       return i
 
   # lastMessage: ->
   #   if Meteor.isServer
@@ -65,9 +62,8 @@ exports.showThreadController = RouteController.extend(
     return (
       messages: @messages()
       threadId: @threadId()
-      # participantIndex: @participantIndex()
+      userIndex: Notify.userIndex(@threadId())
       # lastMessage: @lastMessage()
-      
     )
 )
 

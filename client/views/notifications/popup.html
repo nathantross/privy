@@ -1,0 +1,9 @@
+<template name="popup">
+  <div class="alert alert-danger alert-dismissable" id="popup">
+    {{#with notification}}
+      <a href="{{pathFor 'showThread' _id=threadId}}">
+        <img src="{{lastAvatar}}" class="avatarleft" /><p>{{lastMessage}}</p>
+      </a>
+    {{/with}}
+  </div>
+</template>
