@@ -9,7 +9,7 @@ exports.FeedController = RouteController.extend(
 
   findOptions: ->
     sort:
-      updatedAt: 1
+      createdAt: 1
     # limit: @limit()
 
   waitOn: ->
