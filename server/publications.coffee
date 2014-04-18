@@ -69,9 +69,11 @@ Meteor.publish "userData", ->
 
 
 Meteor.publish "messages", (threadId, sort) ->
-  Messages.find
-        threadId: threadId
-      ,
-        sort:
-          sort
-
+  if Notify.isParticipant(@userId, threadId) 
+    Messages.find
+          threadId: threadId
+        ,
+          sort:
+            sort
+  else
+    null
