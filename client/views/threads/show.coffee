@@ -1,9 +1,6 @@
 Template.showThread.rendered = ->
-  $('body').scrollTop($("#messagesDiv")[0].scrollHeight)
-  if $("#messagesDiv")[0]
-    Messages.find(
-     threadId: @threadId
-    ).observe(
-      added: (document)->
-        $('body').scrollTop($("#messagesDiv")[0].scrollHeight)
+    Meteor.setTimeout( 
+      -> 
+        $('body').scrollTop($("#messages")[0].scrollHeight)
+      , 200
     )

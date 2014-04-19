@@ -17,11 +17,8 @@ Template.newMessage.events
         )
     )
     toggleTyping(@threadId, @userIndex, false)
-    $('body').scrollTop($("#messagesDiv")[0].scrollHeight)
+    $('body').scrollTop(@firstNode.scrollHeight)
     $body.val("") 
-    # Email Notification
-    # Meteor.call "sendNotificationEmail", (err) ->
-    #   console.log err  if err
       
 
   "keydown input": (e) ->
