@@ -15,7 +15,7 @@ Template.messageIndicators.helpers
 
   isTyping: ->
     participant = typist(@threadId)
-    $('body').scrollTop($("#messagesDiv")[0].scrollHeight) if participant && participant.isTyping
+    $('body').scrollTop($("#messages")[0].scrollHeight) if participant && participant.isTyping
     if participant then participant.isTyping else false
 
   avatar: ->

@@ -33,7 +33,7 @@ exports.showThreadController = RouteController.extend(
     @params._id
 
   waitOn: ->
-    Meteor.subscribe "messages", @threadId(), @sort() if Notify.isParticipant(Meteor.userId(), @threadId())     
+    Meteor.subscribe "messages", @threadId(), @sort() if Notify.isParticipant(Meteor.userId(), @threadId())
 
   onStop: ->
     Notify.toggleCheckIn(@threadId(), false)
@@ -50,13 +50,13 @@ exports.showThreadController = RouteController.extend(
       sort:
         @sort()
 
-# lastMessage: ->
-#   if Meteor.isServer
-#     Messages.findOne
-#         threadId: @threadId()
-#       ,
-#         sort:
-#             updatedAt: -1
+  # lastMessage: ->
+  #   if Meteor.isServer
+  #     Messages.findOne
+  #         threadId: @threadId()
+  #       ,
+  #         sort:
+  #             updatedAt: -1
 
   data: ->
     return (
