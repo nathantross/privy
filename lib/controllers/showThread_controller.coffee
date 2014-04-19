@@ -33,7 +33,7 @@ exports.showThreadController = RouteController.extend(
     @params._id
 
   waitOn: ->
-    Meteor.subscribe "messages", @threadId(), @sort() if Notify.isParticipant(Meteor.userId(), @threadId())
+    Meteor.subscribe "messages", @threadId(), @sort() if Notify.isParticipant(Meteor.userId(), @threadId()) 
 
   onStop: ->
     Notify.toggleCheckIn(@threadId(), false)
