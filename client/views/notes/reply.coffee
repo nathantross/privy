@@ -33,6 +33,5 @@ Template.noteReply.events
             $(e.target).find('[name=reply-body]').val('')
         )
     )
-
-  "keydown form": (e, template) ->
+    # Router.go @nextPath
     

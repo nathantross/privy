@@ -2,27 +2,28 @@ exports = this
 exports.Threads = new Meteor.Collection('threads')
 
 Meteor.methods
-  createThread: (threadAttributes) ->
-    user = Meteor.user()
-    
-    unless user
-      throw new Meteor.Error(401, "You have to login to create a thread.")
+  createThread: (threadAttr) ->
+      user = Meteor.user()
+      
+      unless user
+        throw new Meteor.Error(401, "You have to login to create a thread.")
+      
+      if Meteor.isServer
+        unless Notes.findOne(threadAttr.noteId)
+          throw new Meteor.Error(404, "This thread does not have a note.")      
 
-    unless Notes.findOne(threadAttributes.noteId)
-      throw new Meteor.Error(404, "This thread does not have a note.")      
+      # whitelisted keys
+      now = new Date().getTime()
+      thread = _.extend(_.pick(threadAttr, 'noteId'),
+        participants: [{
+          userId: user._id 
+          avatar: user.profile['avatar'] 
+          }]
+        createdAt: now
+        updatedAt: now
+      )
 
-    # whitelisted keys
-    now = new Date().getTime()
-    thread = _.extend(_.pick(threadAttributes, 'noteId'),
-      participants: [{
-        userId: user._id 
-        avatar: user.profile['avatar'] 
-        }]
-      createdAt: now
-      updatedAt: now
-    )
-
-    Threads.insert(thread)
+      Threads.insert(thread)
 
 
   addParticipant: (noteId) ->

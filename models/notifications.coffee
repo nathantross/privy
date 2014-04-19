@@ -19,11 +19,11 @@ Meteor.methods
     unless user
         throw new Meteor.Error(401, "You have to login to create a notification.")
 
-    unless Notify.isInThread(user._id, thread._id) 
+    unless Notify.isParticipant(user._id, thread._id) 
         throw new Meteor.Error(401, "You cannot perform this action on this thread.")
 
     if messageAttr.lastMessage == ""
-        throw new Meteor.Error(404, "Woops, looks like your message is blank!")
+        throw new Meteor.Error(404, "Whoops, looks like your message is blank!")
 
     if Meteor.isServer
       # Declaring variables for the for loop
