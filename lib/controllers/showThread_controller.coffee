@@ -28,15 +28,12 @@ exports.showThreadController = RouteController.extend(
           ).queue((next)->
             document.title = Notify.defaultTitle(user)
           )
-  onAfterAction: ->
-    $('body').scrollTop($("#messages")[0].scrollHeight) if $("#messages")[0]
 
   threadId: ->
     @params._id
 
   waitOn: ->
-    Meteor.subscribe "messages", @threadId(), @sort() if Notify.isParticipant(Meteor.userId(), @threadId()) 
-    
+    Meteor.subscribe "messages", @threadId(), @sort() if Notify.isParticipant(Meteor.userId(), @threadId())     
 
   onStop: ->
     Notify.toggleCheckIn(@threadId(), false)
@@ -53,20 +50,20 @@ exports.showThreadController = RouteController.extend(
       sort:
         @sort()
 
-  lastMessage: ->
-    Messages.findOne
-        threadId: @threadId()
-      ,
-        sort:
-            createdAt: -1
-        limit: 1
+# lastMessage: ->
+#   if Meteor.isServer
+#     Messages.findOne
+#         threadId: @threadId()
+#       ,
+#         sort:
+#             updatedAt: -1
 
   data: ->
     return (
       messages: @messages()
       threadId: @threadId()
       userIndex: Notify.userIndex(@threadId())
-      lastMessage: @lastMessage()
+      # lastMessage: @lastMessage()
     )
 )
 

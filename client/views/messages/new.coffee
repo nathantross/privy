@@ -17,7 +17,7 @@ Template.newMessage.events
         )
     )
     toggleTyping(@threadId, @userIndex, false)
-    $('body').scrollTop($("#messagesDiv")[0].scrollHeight)
+    $('body').scrollTop($("#messages")[0].scrollHeight)
     $body.val("") 
     # Email Notification
     # Meteor.call "sendNotificationEmail", (err) ->
