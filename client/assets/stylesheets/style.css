@@ -408,8 +408,6 @@ h2 {
 }
 
 .messages{
-  border: 1px solid #ccc;
-  height: 1000px;
   padding-top: 50px;
   padding-bottom: 105px;
   margin-bottom: 100px;
@@ -692,6 +690,7 @@ footer {
   margin-bottom: 0px !important;
 }
 
+
 /***********/
 
 /****** Intro_App ******/
@@ -733,6 +732,29 @@ footer {
   margin-top: 200px;
   margin-left: 100px;
   z-index: 1000000000;
+}
+
+
+/***********/
+
+/****** Iron-Router Loader ******/
+
+
+&.spinner:before {
+  opacity: 0 !important;
+}
+
+#iron-router-progress {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background-color: #F55D0C !important;
+  box-shadow: 0 0 0 rgba(170, 242, 0, .5);
+  opacity: 1;
+  z-index: 10000;
 }
 
 
