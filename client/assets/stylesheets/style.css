@@ -740,7 +740,7 @@ footer {
 /****** Iron-Router Loader ******/
 
 
-&.spinner:before {
+.spinner:before {
   opacity: 0 !important;
 }
 
@@ -758,6 +758,11 @@ footer {
 }
 
 
+h3 {
+  color: green;
+  font-weight: 400;
+  font-size: 0.5em;
+}
 
 
 
