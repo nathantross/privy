@@ -3,34 +3,31 @@ Template.noteReply.events
     e.preventDefault()
 
     # Set Note's isInstream to false
-    noteId = @note._id
+    noteAttr = 
+      noteId: @note._id
+      threadId: @note.threadId
 
-    Meteor.call('removeNoteFromStream', noteId, (error, id) ->
-      if error 
-        alert(error.reason)  # need better error handling  
-      else
-        # Update the thread's responderId
-        Meteor.call('addParticipant', noteId, (error, id) ->
-          if error
-            alert(error.reason) 
-          else
-            # Create a message
-            $body = $(e.target).find('[name=reply-body]')
-            reply = 
-              body: $body.val()
-              noteId: noteId
-              lastMessage: $body.val()
+    $body = $(e.target).find('[name=reply-body]')
 
-            Meteor.call('createMessage', reply, (error, id) ->
-              if error
-                alert(error.reason)  # need better error handling  
-              else
-                Meteor.call('createNotification', reply, (error, id)->
-                  alert(error.reason) if error
-                )
-            )
-        )
-    )
+    reply = 
+      body: $body.val()
+      threadId: @note.threadId
+      avatar: @note.userAvatar
+      lastMessage: $body.val()
+    
     $(e.target).find('[name=reply-body]').val('')
-    
-    
+
+    Meteor.call 'removeNoteFromStream', noteAttr, (error, id) ->
+      return alert(error.reason) if error   
+      
+      Meteor.call 'addParticipant', noteAttr, (error, id) ->
+        return alert(error.reason) if error
+        
+        Meteor.call 'createMessage', reply, (error, id) ->
+          return alert(error.reason) if error
+          
+          Meteor.call 'createNotification', reply, (error, id) ->
+            alert(error.reason) if error
+
+    document.body.style.backgroundColor = '#' + ((Math.random()*10)+1).toString(16).slice(4, 6) + 'FF' + ((Math.random()*10)+1).toString(16).slice(4, 6)
+             

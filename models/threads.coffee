@@ -2,55 +2,48 @@ exports = this
 exports.Threads = new Meteor.Collection('threads')
 
 Meteor.methods
-  createThread: (threadAttr) ->
+  createThread: ->
       user = Meteor.user()
       
       unless user
-        throw new Meteor.Error(401, "You have to login to create a thread.")
-      
-      if Meteor.isServer
-        unless Notes.findOne(threadAttr.noteId)
-          throw new Meteor.Error(404, "This thread does not have a note.")      
+        throw new Meteor.Error(401, "You have to login to create a thread.")   
 
       # whitelisted keys
       now = new Date().getTime()
-      thread = _.extend(_.pick(threadAttr, 'noteId'),
+      thread = 
         participants: [{
           userId: user._id 
           avatar: user.profile['avatar'] 
           }]
         createdAt: now
         updatedAt: now
-      )
 
       Threads.insert(thread)
 
 
-  addParticipant: (noteId) ->
+  addParticipant: (noteAttr) ->
     if Meteor.isServer
-      threadId = Threads.findOne(noteId: noteId)._id
+      thread = Threads.findOne(noteAttr.threadId)
       user = Meteor.user()
       
       unless user
-        throw new Meteor.Error(401, "You have to login to respond to a thread.")
+        throw new Meteor.Error 401, "You have to login to respond to a thread."
 
-      unless threadId
-        throw new Meteor.Error(404, "This thread doesn't exist.")
+      unless thread
+        throw new Meteor.Error 404, "This thread doesn't exist to add a participant."
 
       if thread.participants.length > 2
-        throw new Meteor.Error(401, "This thread is full.")
+        throw new Meteor.Error 401, "This thread is full."
 
       now = new Date().getTime()
 
-      Threads.update threadId, 
+      Threads.update thread._id, 
         $set:
           updatedAt: now
         $addToSet:
           participants: 
-            {
-              userId: user._id
-              avatar: user.profile['avatar']
-            }
+            userId: user._id
+            avatar: user.profile['avatar']  
 
 
   toggleIsTyping: (threadAttr) ->
