@@ -4,7 +4,7 @@ Meteor.startup ->
     termsUrl: '/terms-of-use'
     homeRoute: 'index'
     dashboardRoute: 'feed'
-    dashboardRouteIntro: 'intro'
+    IntroRoute: 'intro'
     profileRoute: 'profile'
     passwordSignupFields: 'EMAIL_ONLY'
     showSignupCode: false
