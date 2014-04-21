@@ -407,18 +407,9 @@ h2 {
 
 }
 
-.messages{
+#messages{
   padding-top: 50px;
-  padding-bottom: 0px;
   margin-bottom: 70px;
-}
-
-.messages-bottom {
-  position: fixed;
-  right: 0;
-  left: 0;
-  z-index: -1030;
-  bottom: 0px;
 }
 
 /***********/

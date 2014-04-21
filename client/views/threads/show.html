@@ -1,13 +1,11 @@
 <template name="showThread">
 
-<div id="messages" class="messages">
-  <div id="messagesDiv" class="message-bottom">
+  <div id="messages">
     {{#each messages}}
       {{> showMessage}}
     {{/each}}
     {{> messageIndicators}}
   </div>
-</div>
 
   <div>
     {{> newMessage}}

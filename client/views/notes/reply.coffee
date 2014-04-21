@@ -28,10 +28,9 @@ Template.noteReply.events
                 Meteor.call('createNotification', reply, (error, id)->
                   alert(error.reason) if error
                 )
-
             )
-            $(e.target).find('[name=reply-body]').val('')
         )
     )
-    # Router.go @nextPath
+    $(e.target).find('[name=reply-body]').val('')
+    
     
