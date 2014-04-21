@@ -407,10 +407,14 @@ h2 {
 
 }
 
-.messages{
+ .messages{
+  border: 1px solid #ccc;
+  height: 1000px;
   padding-top: 50px;
   padding-bottom: 105px;
   margin-bottom: 100px;
+  padding-bottom: 0px;
+  margin-bottom: 70px;
 }
 
 .messages-bottom {
