@@ -4,7 +4,7 @@ Template.messageIndicators.helpers
         threadId: @threadId
       ,
         sort:
-            updatedAt: -1) 
+            createdAt: -1) 
 
     unless lastMessage && lastMessage.senderId == Meteor.userId()
       ""
