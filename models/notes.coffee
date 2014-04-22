@@ -61,13 +61,14 @@ Meteor.methods
         updatedAt: now
 
   skipNote: (noteId) ->
-    isInstream = Notes.findOne(noteId).isInstream
-
     unless Meteor.userId()
       throw new Meteor.Error(401, "You have to login to remove a note.") 
 
-    unless isInstream
-      throw new Meteor.Error(409, "Bummer! Someone else replied while you were writing. Keep browsing.")
+    unless noteId
+      throw new Meteor.Error(404, "Your noteId is missing.")
+
+    unless Notes.findOne(noteId)
+      throw new Meteor.Error(404, "This note doesn't exist.")    
 
     now = new Date().getTime()
     Notes.update noteId, 
