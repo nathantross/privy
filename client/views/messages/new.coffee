@@ -20,8 +20,10 @@ Template.newMessage.events
     $('body').scrollTop($("#messages")[0].scrollHeight)
     $body.val("") 
     # Email Notification
-    # Meteor.call "sendNotificationEmail", (err) ->
-    #   console.log err  if err
+    # Email will only be received by logged out users
+    if Meteor.user().status.idle = true 
+      Meteor.call "sendNotificationEmail", (err) ->
+        console.log err  if err
       
 
   "keydown input": (e) ->
