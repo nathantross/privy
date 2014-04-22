@@ -1,0 +1,16 @@
+<template name="navbar">
+
+  <div class="topspace">
+
+    {{#if currentUser}}  
+      {{> signedInNav}}
+      {{> popup}}
+    {{else}}     
+      {{> signedOutNav}}
+    {{/if}}
+
+  </div>
+  
+</template>
+
+

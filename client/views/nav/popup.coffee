@@ -1,4 +1,4 @@
-Template.popup.helpers
+Template.newMessageAlert.helpers
   notification: ->
     Notifications.findOne(
         {}
@@ -7,8 +7,8 @@ Template.popup.helpers
           updatedAt: -1
     )
 
-Template.popup.events
-  'click #popup': (event)->
+Template.newMessageAlert.events
+  'click #newMessageAlert': (event)->
     notification = Notifications.findOne(
         {}
       , 
@@ -18,4 +18,6 @@ Template.popup.events
     Notify.toggleItemHighlight(notification, false)
     Notify.toggleNavHighlight(false) unless Notify.anyItemsNotified()
     Notify.toggleTitleFlashing(false)
-    $('#popup').slideUp('slow')
+    $('#newMessageAlert').slideUp('slow')
+
+Template.successAlert.alertCopy = Session.get('alertCopy')

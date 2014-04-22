@@ -1,0 +1,21 @@
+<template name="popup">
+  <div style="clear: both;"></div>
+  {{> newMessageAlert}}
+  {{> successAlert}}
+</template>
+
+<template name="newMessageAlert">
+  <div class="alert alert-danger alert-dismissable popup" id="newMessageAlert">
+    {{#with notification}}
+      <a href="{{pathFor 'showThread' _id=threadId}}">
+        <img src="{{lastAvatar}}" class="avatarleft" /><p>{{lastMessage}}</p>
+      </a>
+    {{/with}}
+  </div>
+</template>
+
+<template name="successAlert">
+  <div class="alert alert-success alert-dismissable popup" id="successAlert">
+      <p>{{alertCopy}}</p>
+  </div>
+</template>

@@ -24,6 +24,7 @@ Template.newNote.events
           Meteor.call 'createNotification', message, (error, id)->
             alert(error.reason) if error
 
+    Notify.popup('#successAlert', "Note created! Woot woooo!")
     Router.go "feed"
 
 
