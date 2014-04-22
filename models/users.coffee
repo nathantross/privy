@@ -15,19 +15,36 @@ if Meteor.isClient
     try
       user = Meteor.user()
       if user
-        if UserStatus.isIdle() && user.inThreads.length > 0
-          for threadId in user.inThreads
-            Notify.toggleCheckIn(threadId, false)
-        else unless UserStatus.isIdle()
+        if UserStatus.isIdle()
+          note = Notes.findOne(currentViewer: Meteor.userId())
+          if note
+            Meteor.call 'unlockAll', {}, (err) ->
+              alert(err) if err
+
+          # If idle, check out of all threads
+          if user.inThreads.length > 0
+            for threadId in user.inThreads
+              Notify.toggleCheckIn(threadId, false)
+
+        else
           url = window.location.pathname.split("/")
+
+          # Check into their current thread if they're in a thread
           if url[1] == "threads" 
             threadId = url[2]
             Notify.toggleCheckIn(threadId, true)
+
+            # Turn the flashing title off and the highlighted item
             notification = Notifications.findOne
                 userId: user._id
                 threadId: threadId
             Notify.toggleItemHighlight(notification, false) if notification
             Notify.toggleTitleFlashing(false)
+
+          # Check into their current note if they're in a note
+          if url[1] == "notes"
+            Notify.toggleLock(true)
+
 
 Meteor.methods
   toggleNavHighlight: (userAttr) ->

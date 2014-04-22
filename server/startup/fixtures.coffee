@@ -50,6 +50,8 @@ Meteor.startup ->
         )
 
     # Create noteActions
+    exports = this
+    exports.NoteActions = new Meteor.Collection('noteActions')
     for userId, i in userIds
       now = new Date().getTime()
       NoteActions.insert
