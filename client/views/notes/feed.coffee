@@ -5,6 +5,5 @@ Template.feed.events
     Meteor.call 'skipNote', @note._id, (error, id) -> 
       alert(error.reason) if error # need better error handling than "alerts"
 
-
   "click #startChat": ->
     $("[name=reply-body]").focus();
