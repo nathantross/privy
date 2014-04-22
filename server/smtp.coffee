@@ -27,7 +27,7 @@
       to: Meteor.user().emails[0].address
       subject: "You have a new message . . ."
       text: "You have a new message, click here to respond . . ."
-      html: "<a href='https://deploy-privy.meteor.com/threads/'" + Notifications.findOne().threadId + " >Click here</a> Last Message: " + Notifications.findOne().lastMessage
+      html: "You have a new message, " + Notifications.findOne().lastMessage + "<br><a href='https://deploy-privy.meteor.com/threads/'" + Notifications.findOne().threadId + " >Click here to respond.</a>"
 
   Meteor.methods sendNotificationEmail: ->
     sendMessageNotificationEmail()

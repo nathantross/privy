@@ -1,9 +1,11 @@
 <center>
 
   <p>You have a new message.</p> 
+  <p>{{ lastMessage }}</p>
+  <img src="{{ avatar }}" />
 
   <br>
-  <br>{{ email }}
-  <a href="http://localhost:3000/threads/{{ thread }}">Click here to respond.</a>
+
+  <a href="https://deploy-privy.meteor.com/threads/{{ thread }}"> Click here to respond.</a>
 
 </center>

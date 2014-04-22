@@ -20,10 +20,8 @@ Template.newMessage.events
     $('body').scrollTop($("#messages")[0].scrollHeight)
     $body.val("") 
     # Email Notification
-
-    #if message is sent from participant while logged out
-    if Meteor.user().status.online = false
-      console.log "hi"
+    # Email will only be received by logged out users
+    if Meteor.user().status.online = false 
       Meteor.call "sendNotificationEmail", (err) ->
         console.log err  if err
       
