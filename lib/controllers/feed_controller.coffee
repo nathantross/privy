@@ -8,27 +8,22 @@ exports.FeedController = RouteController.extend(
   onBeforeAction: ->
     document.title = Notify.defaultTitle()
 
-  findOptions: ->
-    sort:
-      createdAt: 1
-    # limit: @increment
+  sort: -> 
+    createdAt: 1
+
+  limit: ->
+    Math.floor(Math.random() * 10) + 20
 
   waitOn: ->
-    Meteor.subscribe "notes", @findOptions()
-    Meteor.subscribe "noteActions"
+    Meteor.subscribe "notes", @sort, @limit()
 
   note: ->
-    noteIds = 
-      NoteActions.find(
-        isSkipped: true 
-        receiverId: Meteor.userId()
-      ).map((na) -> na.noteId) || []
-    
-    Notes.findOne(
-        _id: 
-          $nin: noteIds
+    Notes.findOne
         isInstream: true
-      , @findOptions())
+        skipperIds:
+          $ne: Meteor.userId()
+      , 
+        sort: @sort()
 
   data: ->
     return(

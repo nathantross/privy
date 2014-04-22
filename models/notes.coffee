@@ -59,3 +59,20 @@ Meteor.methods
       $set:
         isInstream: false
         updatedAt: now
+
+  skipNote: (noteId) ->
+    unless Meteor.userId()
+      throw new Meteor.Error(401, "You have to login to remove a note.") 
+
+    unless noteId
+      throw new Meteor.Error(404, "Your noteId is missing.")
+
+    unless Notes.findOne(noteId)
+      throw new Meteor.Error(404, "This note doesn't exist.")    
+
+    now = new Date().getTime()
+    Notes.update noteId, 
+      $set:
+        updatedAt: now
+      $addToSet:
+        skipperIds: Meteor.userId()
