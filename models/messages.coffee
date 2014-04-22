@@ -6,12 +6,6 @@ Meteor.methods
     user = Meteor.user()
     threadId = messageAttr.threadId
     thread = Threads.findOne(threadId)
-    index = Notify.userIndex(threadId)
-
-    # special call for replies
-    if messageAttr.noteId && Meteor.isServer
-      messageAttr.threadId = 
-        Threads.findOne(noteId: messageAttr.noteId)._id
 
     unless user
       throw new Meteor.Error(401, "You have to login to create a message.")
@@ -19,27 +13,26 @@ Meteor.methods
     unless messageAttr.body
       throw new Meteor.Error(422, 'Woops, looks like your message is blank!')
     
-    unless messageAttr.threadId
-      throw new Meteor.Error(404, "This thread does not exist.")
+    unless threadId
+      throw new Meteor.Error(404, "Thread does not exist to create a message.")
 
-    unless thread.participants[index].userId == user._id
+    unless Notify.isParticipant(user._id, threadId)
       throw new Meteor.Error(401, "You can't create messages on this thread.")
 
-    now = new Date().getTime()
-    
     # isRead should be true if any of the participants is in the room
-    participants = Threads.findOne(messageAttr.threadId).participants
     isRead = false
-    for participant in participants
-      if participant.userId != user._id && participant.isInThread
-        isRead = true
+    if thread || Meteor.isServer
+      for participant in thread.participants
+        if participant.userId != user._id && participant.isInThread
+          isRead = true
 
+    now = new Date().getTime()
     message = _.extend(_.pick(messageAttr, 'threadId', 'body'),
       senderId: user._id
       createdAt: now
       updatedAt: now
-      isRead: isRead
-    )     
+      isRead: isRead 
+    )    
 
     Messages.insert(message)
 

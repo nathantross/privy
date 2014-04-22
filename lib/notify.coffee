@@ -83,11 +83,12 @@ exports.Notify =
     if notCount > 0 then "Privy (" + notCount + " unread)" else "Privy"
 
   # Popup activates the popup notification 
-  popup: ->
-    $("#popup").slideDown "slow", ->
+  popup: (divId, alertCopy) ->
+    $(divId).slideDown "slow", ->
       Meteor.setTimeout(()-> 
-          $("#popup").slideUp("slow")
+          $(divId).slideUp("slow")
         , 3000)
+    Session.set('alertCopy', alertCopy) if alertCopy
 
   # Toggles whether a user is checked into a thread
   toggleCheckIn: (threadId, toggle, userIndex) ->
@@ -138,7 +139,7 @@ exports.Notify =
       # in the notification's thread, or not in the thread
       if user.status.online
         unless isInThread 
-          @popup() # can I pass notifica/tion into popup?
+          @popup('#newMessageAlert') # can I pass notifica/tion into popup?
           @changeCount(1)
           @toggleNavHighlight(true)
           @toggleItemHighlight(notification, true)

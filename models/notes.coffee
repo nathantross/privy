@@ -4,16 +4,18 @@ exports.Notes = new Meteor.Collection('notes')
 Meteor.methods
   createNote: (noteAttr) ->
     user = Meteor.user()
-    
 
     unless user
-      throw new Meteor.Error(401, "You have to login to create a note.")
+      throw new Meteor.Error 401, "You have to login to create a note."
 
     unless noteAttr.body || noteAttr.body.length <= 0
-      throw new Meteor.Error(422, 'Whoops, looks like your note is blank!')
+      throw new Meteor.Error 422, 'Whoops, looks like your note is blank!'
 
     unless noteAttr.body.length < 66
-      throw new Meteor.Error(422, 'Your note is a liiiittle too long.')
+      throw new Meteor.Error 422, 'Your note is a liiiittle too long.'
+
+    unless noteAttr.threadId
+      throw new Meteor.Error 422, 'You need a threadId for your note.'
 
     if Meteor.isServer
       duplicateNote = Notes.findOne(
@@ -23,41 +25,37 @@ Meteor.methods
       )
 
       if noteAttr.body && duplicateNote 
-        throw new Meteor.Error(302,
-            'This note\'s already in your stream.',
-            duplicateNote._id
-      )
+        throw new Meteor.Error 302, 'This note\'s already in your stream.', duplicateNote._id 
+
+      thread = Threads.findOne(noteAttr.threadId) if Meteor.isServer
+      unless thread
+        throw new Meteor.Error 422, 'You need a thread for your note.'
       
-      # whitelisted keys
-      now = new Date().getTime()
-      note = _.extend(_.pick(noteAttr, 'body'),
-        userId: user._id
-        isInstream: true
-        createdAt: now
-        updatedAt: now
-        expiresAt: (now + 7*24*60*60*1000) # 7 days from now (in ms)
-      )
+    # whitelisted keys
+    now = new Date().getTime()
+    note = _.extend(_.pick(noteAttr, 'body', 'threadId'),
+      userId: user._id
+      isInstream: true
+      userAvatar: user.profile['avatar']
+      createdAt: now
+      updatedAt: now
+      expiresAt: (now + 7*24*60*60*1000) # 7 days from now (in ms)
+    )
 
-      Notes.insert(note)
+    Notes.insert(note)
+    return noteAttr.threadId
 
-  removeNoteFromStream: (noteId) ->
-    isInstream = Notes.findOne(noteId).isInstream
+  removeNoteFromStream: (noteAttr) ->
+    isInstream = Notes.findOne(noteAttr.noteId).isInstream
 
-    if !Meteor.userId()
-      throw new Meteor.Error(401, "You have to login to remove a note.")
+    unless Meteor.userId()
+      throw new Meteor.Error(401, "You have to login to remove a note.") 
 
-    if Notes.findOne(noteId).userId != Meteor.userId()
-      throw new Meteor.Error(401, "You do not have access to this note.")      
-
-
-    if !isInstream
+    unless isInstream
       throw new Meteor.Error(409, "Bummer! Someone else replied while you were writing. Keep browsing.")
 
     now = new Date().getTime()
-    Notes.update(noteId, 
+    Notes.update noteAttr.noteId, 
       $set:
         isInstream: false
         updatedAt: now
-    )
-
-    noteId

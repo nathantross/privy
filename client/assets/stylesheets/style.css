@@ -407,18 +407,9 @@ h2 {
 
 }
 
-.messages{
+#messages{
   padding-top: 50px;
-  padding-bottom: 0px;
   margin-bottom: 70px;
-}
-
-.messages-bottom {
-  position: fixed;
-  right: 0;
-  left: 0;
-  z-index: -1030;
-  bottom: 0px;
 }
 
 /***********/
@@ -610,17 +601,16 @@ h2 {
 
 /****** Notifications ******/
 
-#popup {
+.popup {
   display: none;
   position: absolute;
   width: 100%;
   z-index: 1;
 }
 
-#popup a{
+.popup a{
   display: block;
   width: 100%;
-  padding: 15px;
   color: #fff;
 }
 
@@ -628,7 +618,8 @@ h2 {
   text-align: center;
   border-radius: 0px;
   border: 0;
-  padding: 0px !important;
+  padding: 15px !important;
+  margin-top: 60px;
 }
 
 .alert-danger {

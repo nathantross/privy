@@ -5,71 +5,79 @@ exports.Notifications = new Meteor.Collection('notifications')
 Meteor.methods
   createNotification: (messageAttr) -> 
     user = Meteor.user()
-
-    if messageAttr.noteId
-      thread = Threads.findOne(noteId: messageAttr.noteId)
-      messageAttr['threadId'] = thread._id
-    else
-      thread = Threads.findOne(messageAttr.threadId)
+    threadId = messageAttr.threadId
 
     # Declare errors
-    unless thread
-        throw new Meteor.Error(404, "This thread doesn't exist.")
-
     unless user
-        throw new Meteor.Error(401, "You have to login to create a notification.")
+      throw new Meteor.Error 401, "Please login to create a notification."
 
-    unless Notify.isParticipant(user._id, thread._id) 
-        throw new Meteor.Error(401, "You cannot perform this action on this thread.")
+    unless Notify.isParticipant(user._id, threadId) 
+      throw new Meteor.Error 401, "You can't create notifications in this thread."
 
     if messageAttr.lastMessage == ""
-        throw new Meteor.Error(404, "Whoops, looks like your message is blank!")
+      throw new Meteor.Error 404, "Whoops, looks like your message is blank!"
 
+    unless threadId
+        throw new Meteor.Error 404, "ThreadId doesn't exist to make this notification."
+  
+    # Create a notification for the current user
+    now = new Date().getTime()
+    notification = _.extend(_.pick(messageAttr, 'threadId', 'lastMessage'),
+      userId: user._id
+      lastSenderId: user._id
+      isNotified: false
+      createdAt: now
+      updatedAt: now
+    )
+
+    # set avatar if replying to a note
+    if messageAttr.avatar 
+      notification['lastAvatar'] = messageAttr.avatar
+    
+    # set avatar if creating a note
+    else if Notifications.findOne(_.pick(messageAttr, 'threadId')) == undefined
+       notification['lastAvatar'] = user.profile['avatar']
+
+    # create the notification
+    Notifications.upsert
+        threadId: threadId
+        userId: user._id
+      , 
+        $set: notification         
+
+    # Create a notification for each of the other users
     if Meteor.isServer
-      # Declaring variables for the for loop
-      now
-      notification
+      thread = Threads.findOne(threadId)
+
+      unless thread
+        throw new Meteor.Error 404, "Thread doesn't exist to make this notification."
+      
+      # create a notification for each participant (pUser) in the thread
       pUser
-      isNotified
-
-      # create a notification for each participant in the conversation
       for participant in thread.participants
-        pUser = Meteor.users.findOne(participant.userId) 
-        isNotified = 
-          if !pUser.status?.online || pUser.status?.idle then true else false
-        now = new Date().getTime()
+        unless participant.userId == user._id
+          pUser = Meteor.users.findOne participant.userId
+          notification['userId'] = pUser._id
+          notification['isNotified'] = 
+            if !pUser.status?.online || pUser.status?.idle then true else false
+          notification['lastAvatar'] = user.profile['avatar']
 
-        notification = _.extend(_.pick(messageAttr, 'threadId', 'lastMessage'),
-            userId: pUser._id
-            lastSenderId: Meteor.userId()
-            isNotified: isNotified
-            createdAt: now
-            updatedAt: now
-          )
-
-        # Set the avatar the current user if it's a new note
-        if Notifications.findOne(_.pick(messageAttr, 'threadId')) == undefined || pUser._id != Meteor.userId()
-          notification['lastAvatar'] = Meteor.user().profile['avatar']
-
-        # Insert the notifications for each participant
-        Notifications.upsert(
-            threadId: messageAttr.threadId
-            userId: pUser._id
-          , 
-            $set: notification
-          )
-        
-        if !pUser.status?.online
-          # Put a notification on the nav if they're offline or idle
-          Meteor.users.update(
-              pUser._id
-            ,
+          # Insert the notifications for each participant
+          Notifications.upsert
+              threadId: messageAttr.threadId
+              userId: pUser._id
+            , 
+              $set: notification
+          
+          if !pUser.status?.online
+            # Put a notification on the nav if they're offline or idle
+            Meteor.users.update pUser._id,
               $set: 
                 'notifications.0.isNavNotified': true
                 updatedAt: now
               $inc: 
                 'notifications.0.count': 1
-          )
+
 
   toggleItemHighlight: (notAttr) ->
     user = Meteor.user()

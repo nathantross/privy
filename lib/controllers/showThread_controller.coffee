@@ -7,7 +7,7 @@ exports.showThreadController = RouteController.extend(
     threadId = @params._id
     thread = Threads.findOne(threadId)
 
-    if @ready() && user && thread
+    if user && thread
       unless UserStatus.isIdle()
         Notify.toggleCheckIn(threadId, true) 
 
