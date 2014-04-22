@@ -7,4 +7,4 @@ Template.feed.events
       alert(error.reason) if error # need better error handling than "alerts"
 
   "click #startChat": ->
-    $("[name=notes-body]").focus();
+    $("[name=reply-body]").focus();

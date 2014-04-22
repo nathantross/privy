@@ -606,7 +606,6 @@ h2 {
   position: absolute;
   width: 100%;
   z-index: 1;
-  margin-top: 60px;
 }
 
 .popup a{
@@ -620,6 +619,7 @@ h2 {
   border-radius: 0px;
   border: 0;
   padding: 15px !important;
+  margin-top: 60px;
 }
 
 .alert-danger {
