@@ -59,3 +59,19 @@ Meteor.methods
       $set:
         isInstream: false
         updatedAt: now
+
+  skipNote: (noteId) ->
+    isInstream = Notes.findOne(noteId).isInstream
+
+    unless Meteor.userId()
+      throw new Meteor.Error(401, "You have to login to remove a note.") 
+
+    unless isInstream
+      throw new Meteor.Error(409, "Bummer! Someone else replied while you were writing. Keep browsing.")
+
+    now = new Date().getTime()
+    Notes.update noteId, 
+      $set:
+        updatedAt: now
+      $addToSet:
+        skipperIds: Meteor.userId()

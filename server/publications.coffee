@@ -11,32 +11,18 @@ Meteor.publish "notifications", ->
       sort:
         updatedAt: -1
 
-Meteor.publish "noteActions", ->
-  noteIds = 
-      Notes.find( 
-        isInstream: true
-      ).map((n) -> n._id)
-
-    NoteActions.find 
-      noteId:
-        $in: noteIds
-      receiverId: @userId
-      isSkipped: true
-
-Meteor.publish "notes", (options) ->
-  noteIds = 
-    NoteActions.find(
-        isSkipped: true 
-        receiverId: @userId
-      ).map((na) -> na.noteId) || []
-    
+Meteor.publish "notes", (sort, limit) ->
   Notes.find
-      _id: 
-        $nin: noteIds
       userId:
         $ne: @userId
       isInstream: true
-    , options
+      skipperIds: 
+        $ne: @userId
+    , 
+      sort: sort
+      limit: limit
+      fields: 
+        skipperIds: 0
 
 Meteor.publish "threads", ->
   Threads.find

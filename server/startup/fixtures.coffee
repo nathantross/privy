@@ -35,7 +35,7 @@ Meteor.startup ->
     
     # Create notes
     noteIds = []
-    now = new Date().getTime()
+    now
     for userId in userIds
       for i in [1...3]
         now = new Date().getTime()
@@ -48,6 +48,16 @@ Meteor.startup ->
             updatedAt: now
             expiresAt: (now + 7*24*60*60*1000) # 7 days from now (in ms)
         )
+
+    # Create noteActions
+    for userId, i in userIds
+      now = new Date().getTime()
+      NoteActions.insert
+        noteId: noteIds[i]
+        receiverId: userId
+        isSkipped: true
+        createdAt: now
+        updatedAt: now
     
     # Create threads
     threadIds = []
