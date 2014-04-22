@@ -647,7 +647,7 @@ h2 {
 }
 
 .topspace {
-  padding-bottom: 50px
+  padding-bottom: 90px
 }
 
 .fa-circle {
@@ -731,7 +731,7 @@ footer {
 /****** Iron-Router Loader ******/
 
 
-&.spinner:before {
+.spinner:before {
   opacity: 0 !important;
 }
 
@@ -749,6 +749,12 @@ footer {
 }
 
 
+.entry h3 {
+  color: #666;
+  font-weight: 400;
+  font-size: 2em;
+  padding-bottom: 30px;
+}
 
 
 
