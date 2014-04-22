@@ -8,7 +8,10 @@
   <div class="alert alert-danger alert-dismissable popup" id="newMessageAlert">
     {{#with notification}}
       <a href="{{pathFor 'showThread' _id=threadId}}">
-        <img src="{{lastAvatar}}" class="avatarleft" /><p>{{lastMessage}}</p>
+        <ul class="list-inline">
+          <li><img src="{{lastAvatar}}" class="avatar-notify" /></li>
+          <li><p>&nbsp;{{lastMessage}}</p></li>
+        </ul>        
       </a>
     {{/with}}
   </div>
@@ -19,3 +22,5 @@
       <p>{{alertCopy}}</p>
   </div>
 </template>
+
+
