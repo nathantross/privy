@@ -36,7 +36,7 @@ exports.FeedController = RouteController.extend(
         , 
           sort: @sort()
 
-    if note && !UserStatus.isIdle()
+    if note && !Meteor.user().status.idle
       Session.set('currentNoteId', note._id)
       Notify.toggleLock note._id, true
     

@@ -173,15 +173,12 @@ exports.Notify =
     ) != undefined
 
   toggleLock: (noteId, isLocked) ->
-    console.log "Checking whether to lock noteId: " + noteId
     if noteId
       note = Notes.findOne(noteId)
-      console.log "Note viewer: " + note.currentViewer
-      console.log "isLocked: " + isLocked
       if (note.currentViewer == Meteor.userId() && !isLocked) || (note.currentViewer == undefined && isLocked)
         noteAttr = 
           noteId: noteId
           isLocked: isLocked
-        console.log "Calling toggleLock with isLocked: " + noteAttr.isLocked + " and noteId: " + noteAttr.noteId
         Meteor.call 'toggleLock', noteAttr, (err) ->
           alert(err) if err
+          

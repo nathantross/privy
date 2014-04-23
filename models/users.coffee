@@ -15,11 +15,12 @@ if Meteor.isClient
     try
       user = Meteor.user()
       if user
-        if UserStatus.isIdle()
+        if Meteor.user().status.idle
           note = Notes.findOne(currentViewer: Meteor.userId())
           if note
             Meteor.call 'unlockAll', {}, (err) ->
-              alert(err) if err
+              return alert(err) if err
+              Session.set("currentNoteId", false)
 
           # If idle, check out of all threads
           if user.inThreads.length > 0
@@ -43,7 +44,7 @@ if Meteor.isClient
 
           # Check into their current note if they're in a note
           if url[1] == "notes"
-            Notify.toggleLock(true)
+            Notify.toggleLock(Session.get("currentNoteId"), true)
 
 
 Meteor.methods
