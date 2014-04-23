@@ -16,6 +16,12 @@ Meteor.publish "notes", (sort, limit) ->
       userId:
         $ne: @userId
       isInstream: true
+      $or: [
+            currentViewer: @userId
+          ,
+            currentViewer:
+              $exists: false
+          ]
       skipperIds: 
         $ne: @userId
     , 
@@ -26,13 +32,13 @@ Meteor.publish "notes", (sort, limit) ->
 
 Meteor.publish "threads", ->
   Threads.find
-        participants:
-          $elemMatch:
-            userId: @userId
-      , 
-        fields:
-          createdAt: 0
-          noteId: 0
+      participants:
+        $elemMatch:
+          userId: @userId
+    , 
+      fields:
+        createdAt: 0
+        noteId: 0
 
 # Meteor.publish "thread", (threadId) ->
 #   Threads.find

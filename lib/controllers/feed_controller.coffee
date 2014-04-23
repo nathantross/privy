@@ -17,13 +17,30 @@ exports.FeedController = RouteController.extend(
   waitOn: ->
     Meteor.subscribe "notes", @sort, @limit()
 
+  onStop: -> 
+    Notify.toggleLock(Session.get('currentNoteId'), false)
+    Session.set('currentNoteId', false)
+
   note: ->
-    Notes.findOne
-        isInstream: true
-        skipperIds:
-          $ne: Meteor.userId()
-      , 
-        sort: @sort()
+    note = 
+      Notes.findOne
+          isInstream: true
+          $or: [
+            currentViewer: Meteor.userId()
+          ,
+            currentViewer:
+              $exists: false
+          ]
+          skipperIds:
+            $ne: Meteor.userId()
+        , 
+          sort: @sort()
+
+    if note && !Meteor.user().status.idle
+      Session.set('currentNoteId', note._id)
+      Notify.toggleLock note._id, true
+    
+    return note
 
   data: ->
     return(

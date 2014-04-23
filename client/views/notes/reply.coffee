@@ -28,8 +28,11 @@ Template.noteReply.events
           
           Meteor.call 'createNotification', reply, (error, id) ->
             alert(error.reason) if error
+    
+    Notify.toggleLock Session.get('currentNoteId'), false
 
     document.body.style.backgroundColor = '#' + ((Math.random()*10)+1).toString(16).slice(4, 6) + 'FF' + ((Math.random()*10)+1).toString(16).slice(4, 6)
 
     Notify.popup('#successAlert', "Reply sent!")
+
              
