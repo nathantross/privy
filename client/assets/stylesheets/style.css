@@ -224,6 +224,17 @@ h2 {
   font-size: 20px;
 }
 
+.avatar-feed {
+  width: 75px;
+  height: 75px;
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
+  padding: 10px;
+}
+
+#online {
+  color: green;
+}
 
 /***********/
 
@@ -294,7 +305,7 @@ h2 {
 .message-feed {
   font-size: 56px;
   padding-bottom: 30px;
-  padding-top: 10%;
+  padding-top: 0;
   color: #F55D0C;
   border: 0 !important;
 }
@@ -753,7 +764,6 @@ footer {
   opacity: 1;
   z-index: 10000;
 }
-
 
 .entry h3 {
   color: #666;
