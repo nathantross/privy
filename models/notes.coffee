@@ -36,8 +36,6 @@ Meteor.methods
     note = _.extend(_.pick(noteAttr, 'body', 'threadId'),
       userId: user._id
       isInstream: true
-      isLocked: false
-      userAvatar: user.profile['avatar']
       createdAt: now
       updatedAt: now
       expiresAt: (now + 7*24*60*60*1000) # 7 days from now (in ms)
@@ -118,5 +116,3 @@ Meteor.methods
           updatedAt: now
       ,
         multi: true
-
-

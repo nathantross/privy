@@ -7,4 +7,8 @@ Template.feed.events
     Notify.toggleLock Session.get('currentNoteId'), false
 
   "click #startChat": ->
-    $("[name=reply-body]").focus();
+    $("[name=reply-body]").focus()
+
+Template.feed.helpers
+  isUserActive: ->
+    if @userAttr && @userAttr.isIdle then "Online" else "Not online"
