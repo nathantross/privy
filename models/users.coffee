@@ -103,3 +103,11 @@ Meteor.methods
         updatedAt: now
       $inc: userUpdate
     )
+
+  getUserAttr: (userId) ->
+    if Meteor.isServer
+      user = Meteor.users.findOne(userId)
+      return (
+        isIdle: user.status?.idle
+        avatar: user.profile.avatar
+      )
