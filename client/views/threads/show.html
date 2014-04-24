@@ -1,10 +1,16 @@
 <template name="showThread">
-
-  <div id="messages">
-    {{#each messages}}
-      {{> showMessage}}
-    {{/each}}
-    {{> messageIndicators}}
+  <div id="msg-wrap">
+    {{#if nextPath}}
+    <div id="load-more">
+      <a id="load-link" class="load-more" href="{{nextPath}}">Load more</a>
+    </div>
+    {{/if}}
+    <div id="messages">
+      {{#each messages}}
+        {{> showMessage}}
+      {{/each}}
+      {{> messageIndicators}}
+    </div>
   </div>
 
   <div>

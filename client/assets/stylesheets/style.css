@@ -408,8 +408,28 @@ h2 {
 }
 
 #messages{
-  padding-top: 50px;
   margin-bottom: 70px;
+}
+
+#load-more{
+  padding-bottom: 20px;
+
+}
+
+.load-more {
+    display: block;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.05);
+    text-align: center;
+    height: 60px;
+    line-height: 60px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.load-more:hover {
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.1);
 }
 
 /***********/

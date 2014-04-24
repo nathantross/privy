@@ -59,7 +59,7 @@ Router.map ->
 
   # Thread Route
   @route "showThread",
-    path: "/threads/:_id"
+    path: "/threads/:_id/:msgLimit?"
     controller: showThreadController
 
   @route "faq",
