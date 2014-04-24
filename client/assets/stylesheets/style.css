@@ -649,6 +649,14 @@ h2 {
   font-style: none;
 }
 
+.alert-flag {
+  background-color: #d0ce00;
+  color: #fff;
+  font-family: helvetica, arial, sans-serif;
+  font-weight: 100;
+  font-style: none;
+}
+
 .alert-success {
   background-color: #3F92D2;
   font-family: helvetica, arial, sans-serif;

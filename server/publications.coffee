@@ -24,6 +24,14 @@ Meteor.publish "notes", (sort, limit) ->
           ]
       skipperIds: 
         $ne: @userId
+      flaggerIds:
+        $ne: @userId
+      $or: [
+        flagCount:
+          $exists: false
+      , flagCount:
+          $lt: 2
+      ]
     , 
       sort: sort
       limit: limit
@@ -58,6 +66,7 @@ Meteor.publish "userData", ->
         notifications: 1
         status: 1
         inThreads: 1
+        'flags.isSuspended': 1
 
 
 Meteor.publish "messages", (threadId, limit) ->
