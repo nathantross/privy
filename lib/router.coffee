@@ -65,14 +65,17 @@ Router.map ->
   @route "faq",
     path: "/faq"
 
-requireLogin = (pause)-> 
-  unless Meteor.user() 
+
+loginChecks = (pause)->
+  if Meteor.user() 
+    if Meteor.user().flags?.isSuspended
+      @render "suspended" 
+      pause()
+  else
     @render( if Meteor.loggingIn() then @loadingTemplate else "accessDenied" )
     pause()
-  return
 
 loggedOutPages = ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "resetPassword", "forgotPassword", "404"]
 
-Router.onBeforeAction requireLogin,
+Router.onBeforeAction loginChecks,
   except: loggedOutPages
-

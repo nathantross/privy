@@ -30,6 +30,14 @@ exports.FeedController = RouteController.extend(
           ]
           skipperIds:
             $ne: Meteor.userId()
+          flaggerIds:
+            $ne: Meteor.userId()
+          $or: [
+              flagCount:
+                $lt: 2
+            , flagCount:
+                $exists: false
+          ]
         , 
           sort: @sort()
 

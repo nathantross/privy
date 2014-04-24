@@ -116,3 +116,42 @@ Meteor.methods
           updatedAt: now
       ,
         multi: true
+
+  flag: (noteId)->
+    note = Notes.findOne(noteId)
+    
+    unless Meteor.userId()
+      throw new Meteor.Error(401, "You have to flag a note.") 
+
+    unless noteId
+      throw new Meteor.Error(404, "Your noteId is missing.")
+
+    unless note
+      throw new Meteor.Error(404, "This note doesn't exist.")
+
+    Notes.update noteId,
+      $addToSet:
+        flaggerIds: Meteor.userId()
+      $inc:
+        flagCount: 1
+    
+    # Increment the note creator's flag count
+    if Meteor.isServer && note.flagCount == 2
+      user = Meteor.users.findOne(note.userId)
+      userAttr = 
+          $inc:
+            'flags.count': 1
+      
+      if user.flags?.count >= 2
+        userAttr['$set'] = 
+          'flags.isSuspended': true 
+      
+        Notes.update 
+            userId: note.userId
+          ,
+            $set:
+              isInstream: false
+          ,
+            multi: true
+      
+      Meteor.users.update note.userId, userAttr

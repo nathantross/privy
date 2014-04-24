@@ -9,6 +9,10 @@ Template.feed.events
   "click #startChat": ->
     $("[name=reply-body]").focus()
 
+  "click #flag": (e)->
+    e.preventDefault()
+    $('#flagAlert').slideDown "slow"
+
 Template.feed.helpers
   isUserActive: ->
     if @userAttr && @userAttr.isIdle then "Online" else "Not online"
