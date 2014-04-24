@@ -75,23 +75,7 @@ loginChecks = (pause)->
     @render( if Meteor.loggingIn() then @loadingTemplate else "accessDenied" )
     pause()
 
-# requireLogin = -> 
-#   unless Meteor.user() 
-#     @render( if Meteor.loggingIn() then @loadingTemplate else "accessDenied" )
-
-# blockSuspendedUser = ->
-#   if Meteor.user() && Meteor.user().flags?.isSuspended
-#     @render "suspended"
-
-
 loggedOutPages = ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "resetPassword", "forgotPassword", "404"]
 
 Router.onBeforeAction loginChecks,
   except: loggedOutPages
-
-# Router.onBeforeAction requireLogin,
-#   except: loggedOutPages
-
-# Router.onBeforeAction blockSuspendedUser,
-#   except: loggedOutPages
-
