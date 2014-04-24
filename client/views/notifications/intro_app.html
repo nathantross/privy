@@ -1,31 +1,108 @@
 <template name="intro">
-	<div class="row text-center">
-		<img src="avatar_1.png" />
-		<h1>Welcome to Privy</h1>
-		<p>It's a safe place to strike up conversations with people anonymously.
-			<br>This is your avatar, the only thing you'll be seen as.</p>
-		<ul class="list-inline">
-			<li><a href="/intro_2">Give me a tour</a></li>
-			<li><a href="{{pathFor 'feed'}}">Skip it</a></li>
-		</ul>
-	</div>
+	<div class="row">
+    <div class="col-sm-3">
+    </div>
+    <div class="col-sm-6 text-center">
+  		<h1>Welcome to Privy</h1>
+  		<p>The only place to chat anonymously about what you want to talk about. To start, choose your avatar. Your avatar is your only identifier on Privy. We keep your information secret!</p>
+    </div>
+    <div class="col-sm-3">
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm-2">
+    </div>
+    <div class="col-sm-8 text-center">
+      <form>
+        <ul class="list-inline">
+          <li><a class="image-choice" id="avatar_1" href="#"><img src="avatar_2.png" /></a></li>
+          <li><a class="image-choice" id="avatar_2" href="#"><img src="avatar_3.png" /></a></li>
+          <li><a class="image-choice" id="avatar_3" href="#"><img src="avatar_4.png" /></a></li>
+          <li><a class="image-choice" id="avatar_1" href="#"><img src="avatar_2.png" /></a></li>
+          <li><a class="image-choice" id="avatar_2" href="#"><img src="avatar_3.png" /></a></li>
+          <li><a class="image-choice" id="avatar_3" href="#"><img src="avatar_4.png" /></a></li>
+        </ul>
+        <br>
+        <a id="#" href="intro_1" class="btn btn-primary btn-lg">Choose</a>
+      </form>
+    </div>
+    <div class="col-sm-2">
+    </div>
+  </div>
+
 </template>
 
 
+<template name="intro1">
+
+  <div class="row">
+    <div class="col-sm-3">
+    </div>
+    <div class="col-sm-6 text-center">
+      <h2>Do you want the tour?</h2>
+      <ul class="list-inline">
+        <li><a href="/intro_2" class="btn btn-primary btn-lg">Give me a tour</a></li>
+        <li><a href="{{pathFor 'feed'}}" class="btn btn-primary btn-lg">Skip it</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-3">
+    </div>
+  </div>
+
+</template>
+
 
 <template name="intro2">
-	<div class="row">
-		<img class="arrow-left text-left" src="arrow.png" />
+  <div class="row">
+    <img class="arrow-left text-left" src="arrow.png" />
 	</div>
 
 	<div class="row">
 	<center>
-		<p>All conversations you have will be stored here.</p>
+    <h2>This is your note feed</h2>
+		<p>These notes are written by other people who want to chat. You can see who wrote the note, and whether they are online or not.</p>
 		<ul class="list-inline">
-			<li><a href="/intro_3">Next</a></li>
-			<li><a href="{{pathFor 'feed'}}">Finish</a></li>
+			<li><a href="/intro_3" class="btn btn-primary btn-lg">Next</a></li>
+			<li><a href="{{pathFor 'feed'}}" class="btn btn-primary btn-lg">Finish</a></li>
 		</ul>
 	</center>
+
+
+<div class="container text-center">
+      
+        <img class="avatar-feed" src="avatar_1.png">
+        <p id="online">Currently Online</p>
+        <h1 class="message-feed">Hi 2 from rXNiNgPW3DCo5rxCY</h1>
+        <div class="row small-centered">
+          <div class="small-12 columns">
+            <a type="button" value="Change background" href="#" id="skip" class="grow btn btn-info fa fa-times fa-lg">
+              Next</a>
+
+          <a data-toggle="collapse" href="#collapseOne" class="fa fa-check fa-lg grow btn btn-primary btn-big" id="startChat"> Start Chatting</a>
+          </div>
+        </div>
+
+        <div id="collapseOne" class="panel-collapse collapse" style="height: auto;">
+
+          <div class="panel-body">
+    <form class="reply-form navbar-fixed-bottom">
+      <input name="reply-body" type="text" class="form-control reply-form" maxlength="65" placeholder="What do you think?" autofocus="">
+      <span class="input-group-btn">
+        <button class="btn btn-default reply-form-button" type="button"><i class="fa fa-pencil"></i></button>
+      </span>
+    </form>
+          </div>
+
+        </div>
+        
+        
+
+    </div>
+
+
+
 	</div>
 </template>
 
@@ -37,11 +114,27 @@
 
 	<div class="row">
 	<center>
-		<p>You can create a note too.</p>
+		<h2>You can choose to skip a note or reply to it.</h2>
 		<ul class="list-inline">
 			<li><a href="/intro_4">Next</a></li>
 			<li><a href="{{pathFor 'feed'}}">Finish</a></li>
 		</ul>
+
+    <div class="small-12 columns">
+      <a type="button" value="Change background" href="#" id="skip" class="grow btn btn-info fa fa-times fa-lg">
+        Next</a>
+
+      <a data-toggle="collapse" href="#collapseOne" class="fa fa-check fa-lg grow btn btn-primary btn-big" id="startChat"> Start Chatting</a>
+    </div>
+
+
+    <form class="reply-form navbar-fixed-bottom">
+      <input name="reply-body" type="text" class="form-control reply-form" maxlength="65" placeholder="What do you think?" autofocus="">
+      <span class="input-group-btn">
+        <button class="btn btn-default reply-form-button" type="button"><i class="fa fa-pencil"></i></button>
+      </span>
+    </form>
+
 	</center>
 	</div>
 </template>
@@ -50,50 +143,25 @@
 <template name="intro4">
 	<div class="row">
 
-		<center>
 			<p>Each reply starts a one-on-one conversation.</p>
 			<ul class="list-inline">
 				<li><a href="/intro_5">Next</a></li>
 				<li><a href="{{pathFor 'feed'}}">Finish</a></li>
 			</ul>
-		</center>
 
-		<center>
 			<img class="arrow-right-bottom text-right" src="arrow.png" />
-		</center>
-	</div>
-
-	<div class="row">
 
 	</div>
+
 	{{> noteReply}}
+
 </template>
 
 
 <template name="intro5">
-	<div class="row">
-
-		<center>
-
-			<ul class="list-inline">
-				<li><img src="avatar_1.png" /></li>
-				<li><i class="fa-arrows-h fa fa-4x" ></i></li>
-				<li><img src="avatar_2.png" /></li>
-			</ul>
-
-			<p>Conversations are only between you and one person.
-				<br>
-				And the only thing that is shared is your avatars.</p>
-			<ul class="list-inline">
-				<li><a href="{{pathFor 'feed'}}">Get Started</a></li>
-			</ul>
-
-		</center>
-
-	</div>
-
-	<div class="row">
-
+	<div class="row text-center">
+			<h2>Time to make your own note</h2>
+      <a href="{{pathFor 'feed'}}" class="btn btn-primary btn-lg">Get Started</a>
 	</div>
 </template>
 

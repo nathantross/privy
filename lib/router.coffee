@@ -18,7 +18,8 @@ Router.map ->
     onBeforeAction: ->
       document.title = "Privy"
       Session.set("isTrackingChanges", false)
-  
+
+
   # User Routes    
   @route "editUser",
     path: "/profile/edit"
@@ -34,6 +35,9 @@ Router.map ->
 
   @route "intro",
     path: "/intro"
+
+  @route "intro1",
+    path: "/intro_1"
 
   @route "intro2",
     path: "/intro_2"
@@ -71,8 +75,20 @@ requireLogin = (pause)->
     pause()
   return
 
+# goToFeed = (pause) ->
+#   if Meteor.user()
+#     @route "index"
+#     @path: "/notes"
+#   else
+#     @route "index"
+#     @path: "/"
+
 loggedOutPages = ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "resetPassword", "forgotPassword", "404"]
 
 Router.onBeforeAction requireLogin,
   except: loggedOutPages
+
+# Router.onBeforeAction goToFeed,
+#   only: loggedOutPages
+
 

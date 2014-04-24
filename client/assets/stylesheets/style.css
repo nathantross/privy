@@ -742,6 +742,18 @@ footer {
   z-index: 1000000000;
 }
 
+.image-choice {
+  opacity: 0.4;
+  border-style: solid 10px;
+  border-color: #333;
+}
+
+.image-choice:hover {
+  opacity: 1;
+  border-style: solid 10px;
+  border-color: #333;
+}
+
 
 /***********/
 
