@@ -60,12 +60,14 @@ Meteor.publish "userData", ->
         inThreads: 1
 
 
-Meteor.publish "messages", (threadId, sort) ->
+Meteor.publish "messages", (threadId, limit) ->
   if Notify.isParticipant(@userId, threadId) 
     Messages.find
           threadId: threadId
         ,
-          sort:
-            sort
+          sort: 
+            createdAt: -1
+          limit: limit
+
   else
     null

@@ -1,7 +1,7 @@
 exports = this
 exports.showThreadController = RouteController.extend(
   template: "showThread"
-  
+
   onBeforeAction: ->
     user = Meteor.user()
     threadId = @params._id
@@ -29,41 +29,42 @@ exports.showThreadController = RouteController.extend(
             document.title = Notify.defaultTitle(user)
           )
 
-  threadId: ->
-    @params._id
-
-  waitOn: ->
-    Meteor.subscribe "messages", @threadId(), @sort() if Notify.isParticipant(Meteor.userId(), @threadId()) 
-
   onStop: ->
     Notify.toggleCheckIn(@threadId(), false)
     $body = $("input")
     $body.val("")
 
-  sort: ->
-    createdAt: 1
+  increment: 15
+
+  limit: ->
+    parseInt(@params.msgLimit) || @increment
+
+  threadId: ->
+    @params._id
+
+  waitOn: ->
+    if Notify.isParticipant(Meteor.userId(), @threadId()) 
+      Meteor.subscribe "messages", @threadId(), @limit()
 
   messages: ->
     Messages.find
       threadId: @threadId()
     ,
-      sort:
-        @sort()
-
-  # lastMessage: ->
-  #   if Meteor.isServer
-  #     Messages.findOne
-  #         threadId: @threadId()
-  #       ,
-  #         sort:
-  #             updatedAt: -1
+      sort: 
+        createdAt: 1
+      limit: @limit()
 
   data: ->
-    return (
+    hasMore = @messages().count() == @limit()
+    nextPath = @route.path
+      _id: @threadId()
+      msgLimit: (@limit() + @increment)
+
+    return(  
       messages: @messages()
+      nextPath: (if hasMore then nextPath else null)
       threadId: @threadId()
       userIndex: Notify.userIndex(@threadId())
       # lastMessage: @lastMessage()
     )
 )
-
