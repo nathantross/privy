@@ -413,10 +413,9 @@ h2 {
 
 #load-more{
   padding-bottom: 20px;
-
 }
 
-.load-more {
+.load-link {
     display: block;
     border-radius: 3px;
     background: rgba(0, 0, 0, 0.05);
@@ -427,7 +426,7 @@ h2 {
     margin: 0 auto;
 }
 
-.load-more:hover {
+.load-link:hover {
     text-decoration: none;
     background: rgba(0, 0, 0, 0.1);
 }

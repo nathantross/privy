@@ -68,13 +68,3 @@ exports.showThreadController = RouteController.extend(
       # lastMessage: @lastMessage()
     )
 )
-
-
-  # lastMessage: ->
-  #   if Meteor.isServer
-  #     Messages.findOne
-  #         threadId: @threadId()
-  #       ,
-  #         sort:
-  #             updatedAt: -1
-
