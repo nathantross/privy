@@ -83,7 +83,7 @@ requireLogin = (pause)->
 #     @route "index"
 #     @path: "/"
 
-loggedOutPages = ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "resetPassword", "forgotPassword", "404"]
+loggedOutPages = ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "entryResetPassword", "entryForgotPassword", "404"]
 
 Router.onBeforeAction requireLogin,
   except: loggedOutPages
