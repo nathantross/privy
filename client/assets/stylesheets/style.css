@@ -639,6 +639,7 @@ h2 {
   border: 0;
   padding: 15px !important;
   margin-top: 60px;
+  position: fixed;
 }
 
 .alert-danger {
@@ -659,10 +660,10 @@ h2 {
 
 .alert-success {
   background-color: #3F92D2;
-  font-family: helvetica, arial, sans-serif;
-  font-weight: 100;  font-family: helvetica, arial, sans-serif;
-  font-weight: 100;
   color: #fff;
+  font-family: helvetica, arial, sans-serif;
+  font-weight: 100;
+  font-style: none;
 }
 
 .alert-dismissable {

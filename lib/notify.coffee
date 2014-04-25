@@ -4,9 +4,8 @@ exports.Notify =
     userAttr = 
       _id: Meteor.userId()
       'notifications.0.count': inc
-    Meteor.call('changeCount', userAttr, (error, id)->
-      alert(error.reason) if error
-    )
+    Meteor.call 'changeCount', userAttr, (error, id)->
+      console.log(error.reason) if error
 
   playSound: (filename) ->
     if Meteor.user().notifications[0].sound
@@ -18,9 +17,8 @@ exports.Notify =
       userAttr = 
         _id: user._id
         'notifications.0.isNavNotified': toggle
-      Meteor.call('toggleNavHighlight', userAttr, (error, id)->
-        alert(error.reason) if error
-      )
+      Meteor.call 'toggleNavHighlight', userAttr, (error, id) ->
+        console.log(error.reason) if error
 
   toggleItemHighlight: (notification, toggle) ->
     unless notification.isNotified == toggle
@@ -29,9 +27,8 @@ exports.Notify =
         isNotified: toggle
       $({})
         .queue((next)->
-          Meteor.call('toggleItemHighlight', notAttr, (error, id)->
-            alert(error.reason) if error
-          )
+          Meteor.call 'toggleItemHighlight', notAttr, (error, id) ->
+            console.log(error.reason) if error
           next()
         ).queue((next)->
           unless toggle || Notify.anyItemsNotified()
@@ -47,9 +44,8 @@ exports.Notify =
         'notifications.0.isTitleFlashing': toggle
       $({})
         .queue((next)->
-          Meteor.call('toggleTitleFlashing', userAttr, (error, id)->
-            alert(error.reason) if error
-          )
+          Meteor.call 'toggleTitleFlashing', userAttr, (error, id)->
+            console.log(error.reason) if error
           next()
         )
         .queue((next)->
@@ -88,7 +84,7 @@ exports.Notify =
       Meteor.setTimeout(()-> 
           $(divId).slideUp("slow")
         , 3000)
-    Session.set('alertCopy', alertCopy) if alertCopy
+    $(divId).text(alertCopy)
 
   # Toggles whether a user is checked into a thread
   toggleCheckIn: (threadId, toggle, userIndex) ->
@@ -100,9 +96,8 @@ exports.Notify =
         toggle: toggle
         userIndex: index
 
-      Meteor.call('toggleIsInThread', threadAttr, (error, id) ->
-        alert(error.reason) if error
-      )
+      Meteor.call 'toggleIsInThread', threadAttr, (error, id) ->
+        console.log(error.reason) if error
 
   # Helper function that determines whether a user is in a thread
   isInThread: (userId, threadId)->
@@ -180,5 +175,5 @@ exports.Notify =
           noteId: noteId
           isLocked: isLocked
         Meteor.call 'toggleLock', noteAttr, (err) ->
-          alert(err) if err
+          console.log(err) if err
           

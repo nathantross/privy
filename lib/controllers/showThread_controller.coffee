@@ -21,9 +21,8 @@ exports.showThreadController = RouteController.extend(
 
         $({})
           .queue((next)->
-            Meteor.call('readMessage', threadId, (error, id) ->
-              alert(error.reason) if error
-            )
+            Meteor.call 'readMessage', threadId, (error, id) ->
+              console.log(error.reason) if error
             next()
           ).queue((next)->
             document.title = Notify.defaultTitle(user)
