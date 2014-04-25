@@ -84,7 +84,7 @@ exports.Notify =
       Meteor.setTimeout(()-> 
           $(divId).slideUp("slow")
         , 3000)
-    Session.set('alertCopy', alertCopy) if alertCopy
+    $(divId).text(alertCopy)
 
   # Toggles whether a user is checked into a thread
   toggleCheckIn: (threadId, toggle, userIndex) ->

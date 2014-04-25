@@ -20,8 +20,6 @@ Template.newMessageAlert.events
     Notify.toggleTitleFlashing(false)
     $('#newMessageAlert').slideUp('slow')
 
-Template.successAlert.alertCopy = Session.get('alertCopy')
-
 Template.flagAlert.events
   'click .flag-btn': (e)->
     e.preventDefault()

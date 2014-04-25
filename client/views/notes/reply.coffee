@@ -12,7 +12,7 @@ Template.noteReply.events
     reply = 
       body: $body.val()
       threadId: @note.threadId
-      avatar: @note.userAvatar
+      avatar: @userAttr.avatar
       lastMessage: $body.val()
     
     $(e.target).find('[name=reply-body]').val('')
