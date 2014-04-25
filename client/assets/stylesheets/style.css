@@ -277,8 +277,6 @@ h2 {
   margin-left: 0px;
 }
 
-.navbar-fixed-bottom {
-}
 
 .reply-form form input {
   outline: none;
@@ -703,6 +701,45 @@ footer {
 
 /****** Intro_App ******/
 
+.intro-headline {
+  font-family: 'Roboto', 'sans-serif';
+  font-weight: 100;
+  font-size: 42px;
+  color: #333;
+  padding-bottom: 10px;
+}
+
+.intro-body
+ {
+  font-family: 'Roboto', 'sans-serif';
+  font-weight: 300;
+  font-size: 16px;
+  color: #444;
+}
+
+.intro-next {
+  font-family: 'Roboto', 'sans-serif';
+  font-weight: 300;
+  font-size: 18px;
+}
+
+.intro-next:hover {
+  text-decoration: underline;
+}
+
+.intro-finish {
+  font-family: 'Roboto', 'sans-serif';
+  font-weight: 300;
+  font-size: 18px;
+  color: #777;
+
+}
+
+.intro-finish:hover {
+  color: #777;
+  text-decoration: underline;
+}
+
 .arrow-left {
   width: 150px;
   -moz-transform: scaleX(-1);
@@ -743,17 +780,36 @@ footer {
 }
 
 .image-choice {
-  opacity: 0.4;
-  border-style: solid 10px;
-  border-color: #333;
+  opacity: 0.6;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  padding: 8px;
 }
 
 .image-choice:hover {
   opacity: 1;
-  border-style: solid 10px;
-  border-color: #333;
+  border-style: solid 2px;
+  border: 0px solid #008cba;
+  background-color: #008cba;
 }
 
+.intro-feed {
+  background: url(intro_2.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.phone-image {
+  z-index: -9999999999 !important;
+/*  position:fixed;*/
+  bottom: -30px;
+  width: 400px;
+  text-align: center;
+
+}
 
 /***********/
 

@@ -1,8 +1,12 @@
 <template name="intro">
+
 	<div class="row">
     <div class="col-sm-3">
     </div>
     <div class="col-sm-6 text-center">
+      <br>
+      <br>
+      <br>
   		<h1>Welcome to Privy</h1>
   		<p>The only place to chat anonymously about what you want to talk about. To start, choose your avatar. Your avatar is your only identifier on Privy. We keep your information secret!</p>
     </div>
@@ -10,23 +14,18 @@
     </div>
   </div>
 
-
   <div class="row">
     <div class="col-sm-2">
     </div>
     <div class="col-sm-8 text-center">
-      <form>
-        <ul class="list-inline">
-          <li><a class="image-choice" id="avatar_1" href="#"><img src="avatar_2.png" /></a></li>
-          <li><a class="image-choice" id="avatar_2" href="#"><img src="avatar_3.png" /></a></li>
-          <li><a class="image-choice" id="avatar_3" href="#"><img src="avatar_4.png" /></a></li>
-          <li><a class="image-choice" id="avatar_1" href="#"><img src="avatar_2.png" /></a></li>
-          <li><a class="image-choice" id="avatar_2" href="#"><img src="avatar_3.png" /></a></li>
-          <li><a class="image-choice" id="avatar_3" href="#"><img src="avatar_4.png" /></a></li>
-        </ul>
-        <br>
-        <a id="#" href="intro_1" class="btn btn-primary btn-lg">Choose</a>
-      </form>
+      <ul class="list-inline">
+        <li><a id="avatarChoice1" href="intro_1"><img class="image-choice" src="avatar_2.png" /></a></li>
+        <li><a id="avatarChoice2" href="intro_1"><img class="image-choice" src="avatar_3.png" /></a></li>
+        <li><a id="avatarChoice3" href="intro_1"><img class="image-choice" src="avatar_4.png" /></a></li>
+        <li><a id="avatarChoice4" href="intro_1"><img class="image-choice" src="avatar_2.png" /></a></li>
+        <li><a id="avatarChoice5" href="intro_1"><img class="image-choice" src="avatar_3.png" /></a></li>
+        <li><a id="avatarChoice6" href="intro_1"><img class="image-choice" src="avatar_4.png" /></a></li>
+      </ul>
     </div>
     <div class="col-sm-2">
     </div>
@@ -35,16 +34,20 @@
 </template>
 
 
-<template name="intro1">
 
+<template name="intro1">
+      <br>
+      <br>
+      <br>
   <div class="row">
     <div class="col-sm-3">
     </div>
     <div class="col-sm-6 text-center">
-      <h2>Do you want the tour?</h2>
+      <h1 class="intro-headline">Do you want the tour?</h1>
+      <br>
       <ul class="list-inline">
-        <li><a href="/intro_2" class="btn btn-primary btn-lg">Give me a tour</a></li>
-        <li><a href="{{pathFor 'feed'}}" class="btn btn-primary btn-lg">Skip it</a></li>
+        <li><a href="{{pathFor 'feed'}}" class="btn btn-info btn-lg">I'll Pass</a></li>
+        <li><a href="/intro_2" class="btn btn-primary btn-lg btn-big">Why Yes!</a></li>
       </ul>
     </div>
     <div class="col-sm-3">
@@ -54,115 +57,82 @@
 </template>
 
 
+
 <template name="intro2">
+
   <div class="row">
-    <img class="arrow-left text-left" src="arrow.png" />
-	</div>
-
-	<div class="row">
-	<center>
-    <h2>This is your note feed</h2>
-		<p>These notes are written by other people who want to chat. You can see who wrote the note, and whether they are online or not.</p>
-		<ul class="list-inline">
-			<li><a href="/intro_3" class="btn btn-primary btn-lg">Next</a></li>
-			<li><a href="{{pathFor 'feed'}}" class="btn btn-primary btn-lg">Finish</a></li>
-		</ul>
-	</center>
-
-
-<div class="container text-center">
-      
-        <img class="avatar-feed" src="avatar_1.png">
-        <p id="online">Currently Online</p>
-        <h1 class="message-feed">Hi 2 from rXNiNgPW3DCo5rxCY</h1>
-        <div class="row small-centered">
-          <div class="small-12 columns">
-            <a type="button" value="Change background" href="#" id="skip" class="grow btn btn-info fa fa-times fa-lg">
-              Next</a>
-
-          <a data-toggle="collapse" href="#collapseOne" class="fa fa-check fa-lg grow btn btn-primary btn-big" id="startChat"> Start Chatting</a>
-          </div>
+    <center>
+    <h1 class="intro-headline">This is your note feed</h1>
+    <p class="intro-body">These notes are written by other people who want to chat.<br>You can see who wrote the note, and whether they are online or not.</p>
+      <ul class="list-inline">
+        <li><a href="{{pathFor 'feed'}}" class="intro-finish">Finish</a></li>
+        <li><a href="/intro_3" class="intro-next">Next</a></li>
+      </ul>
+      <div class="row">
+        <div class="col-sm-12">
+          <img src="phone_0.png" class="phone-image pull-center" />
         </div>
+      </div>
+    </center>
+  </div>
 
-        <div id="collapseOne" class="panel-collapse collapse" style="height: auto;">
-
-          <div class="panel-body">
-    <form class="reply-form navbar-fixed-bottom">
-      <input name="reply-body" type="text" class="form-control reply-form" maxlength="65" placeholder="What do you think?" autofocus="">
-      <span class="input-group-btn">
-        <button class="btn btn-default reply-form-button" type="button"><i class="fa fa-pencil"></i></button>
-      </span>
-    </form>
-          </div>
-
-        </div>
-        
-        
-
-    </div>
-
-
-
-	</div>
 </template>
 
 
+
 <template name="intro3">
-	<div class="row">
-		<img class="arrow-right text-right" src="arrow.png" />
-	</div>
 
 	<div class="row">
-	<center>
-		<h2>You can choose to skip a note or reply to it.</h2>
-		<ul class="list-inline">
-			<li><a href="/intro_4">Next</a></li>
-			<li><a href="{{pathFor 'feed'}}">Finish</a></li>
-		</ul>
-
-    <div class="small-12 columns">
-      <a type="button" value="Change background" href="#" id="skip" class="grow btn btn-info fa fa-times fa-lg">
-        Next</a>
-
-      <a data-toggle="collapse" href="#collapseOne" class="fa fa-check fa-lg grow btn btn-primary btn-big" id="startChat"> Start Chatting</a>
-    </div>
-
-
-    <form class="reply-form navbar-fixed-bottom">
-      <input name="reply-body" type="text" class="form-control reply-form" maxlength="65" placeholder="What do you think?" autofocus="">
-      <span class="input-group-btn">
-        <button class="btn btn-default reply-form-button" type="button"><i class="fa fa-pencil"></i></button>
-      </span>
-    </form>
-
-	</center>
+	  <center>
+		  <h1 class="intro-headline">Skip or Reply to a note</h1>
+      <p class="intro-body">These notes are written by other people who want to chat.<br>If you want to have a conversation simply hit chat.</p>
+  		<ul class="list-inline">
+        <li><a href="{{pathFor 'feed'}}" class="intro-finish">Finish</a></li>
+        <li><a href="/intro_4" class="intro-next">Next</a></li>
+  		</ul>
+      <div class="row">
+        <div class="col-sm-12">
+          <img src="phone_0.png" class="phone-image pull-center" />
+        </div>
+      </div>
+    </center>
 	</div>
+<!-- 
+  <div class="row">
+    <img class="arrow-right-bottom text-right" src="arrow.png" />
+  </div> -->
+
 </template>
 
 
 <template name="intro4">
-	<div class="row">
 
-			<p>Each reply starts a one-on-one conversation.</p>
-			<ul class="list-inline">
-				<li><a href="/intro_5">Next</a></li>
-				<li><a href="{{pathFor 'feed'}}">Finish</a></li>
-			</ul>
-
-			<img class="arrow-right-bottom text-right" src="arrow.png" />
-
-	</div>
-
-	{{> noteReply}}
+  <div class="row">
+    <center>
+      <h1 class="intro-headline">One on one conversation</h1>
+      <p class="intro-body">Each reply starts a one-on-one conversation with the person who created the note.</p>
+      <ul class="list-inline">
+        <li><a href="{{pathFor 'feed'}}" class="intro-finish">Finish</a></li>
+        <li><a href="/intro_5" class="intro-next">Next</a></li>
+      </ul>
+      <div class="row">
+        <div class="col-sm-12">
+          <img src="phone_0.png" class="phone-image pull-center" />
+        </div>
+      </div>
+    </center>
+  </div>
 
 </template>
 
 
 <template name="intro5">
+
 	<div class="row text-center">
 			<h2>Time to make your own note</h2>
       <a href="{{pathFor 'feed'}}" class="btn btn-primary btn-lg">Get Started</a>
 	</div>
+
 </template>
 
 
