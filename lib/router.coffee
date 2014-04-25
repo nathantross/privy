@@ -75,20 +75,9 @@ requireLogin = (pause)->
     pause()
   return
 
-# goToFeed = (pause) ->
-#   if Meteor.user()
-#     @route "index"
-#     @path: "/notes"
-#   else
-#     @route "index"
-#     @path: "/"
-
 loggedOutPages = ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "entryResetPassword", "entryForgotPassword", "404"]
 
 Router.onBeforeAction requireLogin,
   except: loggedOutPages
-
-# Router.onBeforeAction goToFeed,
-#   only: loggedOutPages
 
 
