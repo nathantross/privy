@@ -19,7 +19,7 @@ if Meteor.isClient
           note = Notes.findOne(currentViewer: Meteor.userId())
           if note
             Meteor.call 'unlockAll', {}, (err) ->
-              return alert(err) if err
+              return console.log(err) if err
               Session.set("currentNoteId", false)
 
           # If idle, check out of all threads

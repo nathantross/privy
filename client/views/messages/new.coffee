@@ -10,11 +10,10 @@ Template.newMessage.events
 
     Meteor.call('createMessage', message, (error, id) -> 
       if error
-        alert(error.reason) 
+        console.log(error.reason) 
       else
-        Meteor.call('createNotification', message, (error, id) ->
-          alert(error.reason) if error 
-        )
+        Meteor.call 'createNotification', message, (error, id) ->
+          console.log(error.reason) if error 
     )
     toggleTyping(@threadId, @userIndex, false)
     $('body').scrollTop($("#messages")[0].scrollHeight)
@@ -23,8 +22,7 @@ Template.newMessage.events
     # Email will only be received by logged out users
     if Meteor.user().status.idle = true 
       Meteor.call "sendNotificationEmail", (err) ->
-        console.log err  if err
-      
+        console.log err  if err     
 
   "keydown input": (e) ->
     $body = $(e.target).find('[name=message-body]')
@@ -47,7 +45,5 @@ Template.newMessage.events
         toggle: toggle
         userIndex: userIndex
 
-      Meteor.call('toggleIsTyping', threadAttr, (error, id) -> 
-          alert(error.reason) if error 
-        )
-
+      Meteor.call 'toggleIsTyping', threadAttr, (error, id) -> 
+          console.log(error.reason) if error 

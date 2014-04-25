@@ -12,22 +12,22 @@ Template.noteReply.events
     reply = 
       body: $body.val()
       threadId: @note.threadId
-      avatar: @note.userAvatar
+      avatar: @userAttr.avatar
       lastMessage: $body.val()
     
     $(e.target).find('[name=reply-body]').val('')
 
     Meteor.call 'removeNoteFromStream', noteAttr, (error, id) ->
-      return alert(error.reason) if error   
+      return console.log(error.reason) if error   
       
       Meteor.call 'addParticipant', noteAttr, (error, id) ->
-        return alert(error.reason) if error
+        return console.log(error.reason) if error
         
         Meteor.call 'createMessage', reply, (error, id) ->
-          return alert(error.reason) if error
+          return console.log(error.reason) if error
           
           Meteor.call 'createNotification', reply, (error, id) ->
-            alert(error.reason) if error
+            console.log(error.reason) if error
     
     Notify.toggleLock Session.get('currentNoteId'), false
 

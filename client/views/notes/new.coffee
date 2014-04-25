@@ -3,14 +3,14 @@ Template.newNote.events
     e.preventDefault()
 
     Meteor.call 'createThread', {}, (error, threadId) -> 
-      return alert(error.reason) if error
+      return console.log(error.reason) if error
       
       noteAttr = 
         body: $(e.target).find("[name=notes-body]").val()
         threadId: threadId
 
       Meteor.call 'createNote', noteAttr, (error, threadId) -> 
-        return alert(error.reason) if error
+        return console.log(error.reason) if error
 
         # Creates new note
         message = 
@@ -19,10 +19,10 @@ Template.newNote.events
           lastMessage: noteAttr.body       
 
         Meteor.call 'createMessage', message, (error, id) ->
-          return alert(error.reason) if error 
+          return console.log(error.reason) if error 
 
           Meteor.call 'createNotification', message, (error, id)->
-            alert(error.reason) if error
+            console.log(error.reason) if error
 
     Notify.popup('#successAlert', "Note created! Woot woooo!")
     Router.go "feed"
