@@ -32,6 +32,22 @@ Meteor.startup ->
             avatar: "//rs560.pbsrc.com/albums/ss48/burneggroll/SMILEYS/Coffee%20and%20Food/chef_hat_cartoon_01P018.jpg~c200"
             isNotified: false 
     )
+
+    userIds.push(
+      Accounts.createUser
+          email: "j@g.com" 
+          password: "tested"
+          profile: 
+            name: "Jason"
+            avatar: "//cdn.instructables.com/F7V/Y56V/GTB9PF1L/F7VY56VGTB9PF1L.SQUARE.jpg"
+            isNotified: false 
+    )
+
+    Meteor.users.update userIds[3],
+      $set:
+        flags:
+          count: 6
+          isSuspended: true
     
     # Create notes
     noteIds = []
@@ -50,6 +66,8 @@ Meteor.startup ->
         )
 
     # Create noteActions
+    exports = this
+    exports.NoteActions = new Meteor.Collection('noteActions')
     for userId, i in userIds
       now = new Date().getTime()
       NoteActions.insert

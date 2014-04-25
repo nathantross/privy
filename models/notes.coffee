@@ -36,7 +36,6 @@ Meteor.methods
     note = _.extend(_.pick(noteAttr, 'body', 'threadId'),
       userId: user._id
       isInstream: true
-      userAvatar: user.profile['avatar']
       createdAt: now
       updatedAt: now
       expiresAt: (now + 7*24*60*60*1000) # 7 days from now (in ms)
@@ -76,3 +75,83 @@ Meteor.methods
         updatedAt: now
       $addToSet:
         skipperIds: Meteor.userId()
+
+  toggleLock: (noteAttr) ->
+    noteId = noteAttr.noteId
+    isLocked = noteAttr.isLocked
+
+    unless Meteor.userId()
+      throw new Meteor.Error(401, "You have to login to lock a note.") 
+
+    unless noteId
+      throw new Meteor.Error(404, "Your noteId is missing.")
+
+    unless Notes.findOne(noteId)
+      throw new Meteor.Error(404, "This note doesn't exist.")        
+
+    now = new Date().getTime()
+    if isLocked 
+      Notes.update noteId, 
+        $set:
+          currentViewer: Meteor.userId()
+          updatedAt: now
+    else
+      Notes.update noteId, 
+        $unset:
+          currentViewer: ""
+        $set:
+          updatedAt: now   
+
+  unlockAll: ->
+    unless Meteor.userId()
+      throw new Meteor.Error(401, "You have to login to lock a note.") 
+
+    now = new Date().getTime()
+    Notes.update 
+        currentViewer: Meteor.userId()
+      ,
+        $unset:
+          currentViewer: ""
+        $set:
+          updatedAt: now
+      ,
+        multi: true
+
+  flag: (noteId)->
+    note = Notes.findOne(noteId)
+    
+    unless Meteor.userId()
+      throw new Meteor.Error(401, "You have to flag a note.") 
+
+    unless noteId
+      throw new Meteor.Error(404, "Your noteId is missing.")
+
+    unless note
+      throw new Meteor.Error(404, "This note doesn't exist.")
+
+    Notes.update noteId,
+      $addToSet:
+        flaggerIds: Meteor.userId()
+      $inc:
+        flagCount: 1
+    
+    # Increment the note creator's flag count
+    if Meteor.isServer && note.flagCount == 2
+      user = Meteor.users.findOne(note.userId)
+      userAttr = 
+          $inc:
+            'flags.count': 1
+      
+      if user.flags?.count >= 2
+        userAttr['$set'] = 
+          'flags.isSuspended': true 
+      
+        Notes.update 
+            userId: note.userId
+          ,
+            $set:
+              isInstream: false
+          ,
+            multi: true
+      
+      Meteor.users.update note.userId, userAttr

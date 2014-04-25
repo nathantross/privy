@@ -416,8 +416,27 @@ h2 {
 }
 
 #messages{
-  padding-top: 50px;
   margin-bottom: 70px;
+}
+
+#load-more{
+  padding-bottom: 20px;
+}
+
+.load-link {
+    display: block;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.05);
+    text-align: center;
+    height: 60px;
+    line-height: 60px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.load-link:hover {
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.1);
 }
 
 /***********/
@@ -632,6 +651,14 @@ h2 {
 
 .alert-danger {
   background-color: #FF6400;
+  color: #fff;
+  font-family: helvetica, arial, sans-serif;
+  font-weight: 100;
+  font-style: none;
+}
+
+.alert-flag {
+  background-color: #d0ce00;
   color: #fff;
   font-family: helvetica, arial, sans-serif;
   font-weight: 100;

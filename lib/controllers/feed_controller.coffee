@@ -1,9 +1,6 @@
 exports = this
 exports.FeedController = RouteController.extend(
   template: "feed"
-  # increment: 1
-  # notesCount: ->
-    # parseInt(@params.notesCount) || @increment
 
   onBeforeAction: ->
     document.title = Notify.defaultTitle()
@@ -17,24 +14,50 @@ exports.FeedController = RouteController.extend(
   waitOn: ->
     Meteor.subscribe "notes", @sort, @limit()
 
+  onStop: -> 
+    Notify.toggleLock(Session.get('currentNoteId'), false)
+    Session.set('currentNoteId', false)
+
   note: ->
-    Notes.findOne
-        isInstream: true
-        skipperIds:
-          $ne: Meteor.userId()
-      , 
-        sort: @sort()
+    note = 
+      Notes.findOne
+          isInstream: true
+          $or: [
+            currentViewer: Meteor.userId()
+          ,
+            currentViewer:
+              $exists: false
+          ]
+          skipperIds:
+            $ne: Meteor.userId()
+          flaggerIds:
+            $ne: Meteor.userId()
+          $or: [
+              flagCount:
+                $lt: 2
+            , flagCount:
+                $exists: false
+          ]
+        , 
+          sort: @sort()
+
+    if note && !Meteor.user().status.idle
+      Session.set('currentNoteId', note._id)
+      Notify.toggleLock note._id, true
+    
+    return note
+
+  userAttr: ->
+    if @note()
+      Meteor.call 'getUserAttr', @note().userId, (err, response) ->
+        return console.log err if err
+        Session.set 'userAttr', response
+
+      Session.get 'userAttr'
 
   data: ->
     return(
       note: @note()
-      # nextPath: @route.path(notesCount: @notesCount() + @increment)
+      userAttr: @userAttr()
     )
-    # hasMore = @notes().fetch().length is @limit()
-    
-    # return (
-    #   isPassing: true
-    #   notes: @notes()
-    #   nextPath: (if hasMore then nextPath else null)
-    # )
 )

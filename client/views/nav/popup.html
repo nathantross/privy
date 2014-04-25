@@ -2,6 +2,7 @@
   <div style="clear: both;"></div>
   {{> newMessageAlert}}
   {{> successAlert}}
+  {{> flagAlert}}
 </template>
 
 <template name="newMessageAlert">
@@ -23,4 +24,10 @@
   </div>
 </template>
 
-
+<template name="flagAlert">
+  <div class="alert alert-flag alert-dismissable popup" id="flagAlert">
+      <p>Are you sure you want to flag this note?</p>
+      <button id="flag-confirm" class="flag-btn">Yes</button>
+      <button id="flag-cancel" class="flag-btn">Cancel</button>
+  </div>
+</template>

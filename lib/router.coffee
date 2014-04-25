@@ -63,21 +63,23 @@ Router.map ->
 
   # Thread Route
   @route "showThread",
-    path: "/threads/:_id"
+    path: "/threads/:_id/:msgLimit?"
     controller: showThreadController
 
   @route "faq",
     path: "/faq"
 
-requireLogin = (pause)-> 
-  unless Meteor.user() 
+
+loginChecks = (pause)->
+  if Meteor.user() 
+    if Meteor.user().flags?.isSuspended
+      @render "suspended" 
+      pause()
+  else
     @render( if Meteor.loggingIn() then @loadingTemplate else "accessDenied" )
     pause()
-  return
 
 loggedOutPages = ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "entryResetPassword", "entryForgotPassword", "404"]
 
-Router.onBeforeAction requireLogin,
+Router.onBeforeAction loginChecks,
   except: loggedOutPages
-
-

@@ -21,3 +21,12 @@ Template.newMessageAlert.events
     $('#newMessageAlert').slideUp('slow')
 
 Template.successAlert.alertCopy = Session.get('alertCopy')
+
+Template.flagAlert.events
+  'click .flag-btn': (e)->
+    e.preventDefault()
+    $('#flagAlert').slideUp('slow')
+
+  'click #flag-confirm': (e)->
+    Meteor.call 'flag', @note._id, (err, res) ->
+      console.log err if err

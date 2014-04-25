@@ -16,8 +16,22 @@ Meteor.publish "notes", (sort, limit) ->
       userId:
         $ne: @userId
       isInstream: true
+      $or: [
+            currentViewer: @userId
+          ,
+            currentViewer:
+              $exists: false
+          ]
       skipperIds: 
         $ne: @userId
+      flaggerIds:
+        $ne: @userId
+      $or: [
+        flagCount:
+          $exists: false
+      , flagCount:
+          $lt: 2
+      ]
     , 
       sort: sort
       limit: limit
@@ -26,13 +40,13 @@ Meteor.publish "notes", (sort, limit) ->
 
 Meteor.publish "threads", ->
   Threads.find
-        participants:
-          $elemMatch:
-            userId: @userId
-      , 
-        fields:
-          createdAt: 0
-          noteId: 0
+      participants:
+        $elemMatch:
+          userId: @userId
+    , 
+      fields:
+        createdAt: 0
+        noteId: 0
 
 # Meteor.publish "thread", (threadId) ->
 #   Threads.find
@@ -52,14 +66,17 @@ Meteor.publish "userData", ->
         notifications: 1
         status: 1
         inThreads: 1
+        'flags.isSuspended': 1
 
 
-Meteor.publish "messages", (threadId, sort) ->
+Meteor.publish "messages", (threadId, limit) ->
   if Notify.isParticipant(@userId, threadId) 
     Messages.find
           threadId: threadId
         ,
-          sort:
-            sort
+          sort: 
+            createdAt: -1
+          limit: limit
+
   else
     null
