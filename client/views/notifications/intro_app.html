@@ -4,9 +4,6 @@
     <div class="col-sm-3">
     </div>
     <div class="col-sm-6 text-center">
-      <br>
-      <br>
-      <br>
   		<h1>Welcome to Privy</h1>
   		<p>The only place to chat anonymously about what you want to talk about. To start, choose your avatar. Your avatar is your only identifier on Privy. We keep your information secret!</p>
     </div>
@@ -19,12 +16,12 @@
     </div>
     <div class="col-sm-8 text-center">
       <ul class="list-inline">
-        <li><a id="avatarChoice1" href="intro_1"><img class="image-choice" src="avatar_2.png" /></a></li>
-        <li><a id="avatarChoice2" href="intro_1"><img class="image-choice" src="avatar_3.png" /></a></li>
-        <li><a id="avatarChoice3" href="intro_1"><img class="image-choice" src="avatar_4.png" /></a></li>
-        <li><a id="avatarChoice4" href="intro_1"><img class="image-choice" src="avatar_2.png" /></a></li>
-        <li><a id="avatarChoice5" href="intro_1"><img class="image-choice" src="avatar_3.png" /></a></li>
-        <li><a id="avatarChoice6" href="intro_1"><img class="image-choice" src="avatar_4.png" /></a></li>
+        <li><a id="avatarChoice1" href="{{pathFor 'intro1'}}"><img class="image-choice" src="avatar_2.png" /></a></li>
+        <li><a id="avatarChoice2" href="{{pathFor 'intro1'}}"><img class="image-choice" src="avatar_3.png" /></a></li>
+        <li><a id="avatarChoice3" href="{{pathFor 'intro1'}}"><img class="image-choice" src="avatar_4.png" /></a></li>
+        <li><a id="avatarChoice4" href="{{pathFor 'intro1'}}"><img class="image-choice" src="avatar_2.png" /></a></li>
+        <li><a id="avatarChoice5" href="{{pathFor 'intro1'}}"><img class="image-choice" src="avatar_3.png" /></a></li>
+        <li><a id="avatarChoice6" href="{{pathFor 'intro1'}}"><img class="image-choice" src="avatar_4.png" /></a></li>
       </ul>
     </div>
     <div class="col-sm-2">
@@ -36,18 +33,15 @@
 
 
 <template name="intro1">
-      <br>
-      <br>
-      <br>
+
   <div class="row">
     <div class="col-sm-3">
     </div>
     <div class="col-sm-6 text-center">
       <h1 class="intro-headline">Do you want the tour?</h1>
-      <br>
       <ul class="list-inline">
         <li><a href="{{pathFor 'feed'}}" class="btn btn-info btn-lg">I'll Pass</a></li>
-        <li><a href="/intro_2" class="btn btn-primary btn-lg btn-big">Why Yes!</a></li>
+        <li><a href="{{pathFor 'intro2'}}" class="btn btn-primary btn-lg btn-big">Why Yes!</a></li>
       </ul>
     </div>
     <div class="col-sm-3">
@@ -64,15 +58,15 @@
     <center>
     <h1 class="intro-headline">This is your note feed</h1>
     <p class="intro-body">These notes are written by other people who want to chat.<br>You can see who wrote the note, and whether they are online or not.</p>
-      <ul class="list-inline">
-        <li><a href="{{pathFor 'feed'}}" class="intro-finish">Finish</a></li>
-        <li><a href="/intro_3" class="intro-next">Next</a></li>
-      </ul>
-      <div class="row">
-        <div class="col-sm-12">
-          <img src="phone_0.png" class="phone-image pull-center" />
-        </div>
+    <ul class="list-inline">
+      <li><a href="{{pathFor 'feed'}}" class="intro-finish">Finish</a></li>
+      <li><a href="{{pathFor 'intro3'}}" class="intro-next">Next</a></li>
+    </ul>
+    <div class="row">
+      <div class="col-sm-12">
+        <img src="phone_0.png" class="phone-image pull-center" />
       </div>
+    </div>
     </center>
   </div>
 
@@ -88,7 +82,7 @@
       <p class="intro-body">These notes are written by other people who want to chat.<br>If you want to have a conversation simply hit chat.</p>
   		<ul class="list-inline">
         <li><a href="{{pathFor 'feed'}}" class="intro-finish">Finish</a></li>
-        <li><a href="/intro_4" class="intro-next">Next</a></li>
+        <li><a href="{{pathFor 'intro4'}}" class="intro-next">Next</a></li>
   		</ul>
       <div class="row">
         <div class="col-sm-12">
@@ -97,12 +91,9 @@
       </div>
     </center>
 	</div>
-<!-- 
-  <div class="row">
-    <img class="arrow-right-bottom text-right" src="arrow.png" />
-  </div> -->
 
 </template>
+
 
 
 <template name="intro4">
@@ -113,7 +104,7 @@
       <p class="intro-body">Each reply starts a one-on-one conversation with the person who created the note.</p>
       <ul class="list-inline">
         <li><a href="{{pathFor 'feed'}}" class="intro-finish">Finish</a></li>
-        <li><a href="/intro_5" class="intro-next">Next</a></li>
+        <li><a href="{{pathFor 'intro5'}}" class="intro-next">Next</a></li>
       </ul>
       <div class="row">
         <div class="col-sm-12">
@@ -124,6 +115,7 @@
   </div>
 
 </template>
+
 
 
 <template name="intro5">
