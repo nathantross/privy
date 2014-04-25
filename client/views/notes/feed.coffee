@@ -3,7 +3,7 @@ Template.feed.events
     e.preventDefault()
     document.body.style.backgroundColor = '#' + ((Math.random()*10)+1).toString(16).slice(4, 6) + 'FF' + ((Math.random()*10)+1).toString(16).slice(4, 6)
     Meteor.call 'skipNote', @note._id, (error, id) -> 
-      alert(error.reason) if error # need better error handling than "alerts"
+      console.log(error.reason) if error
     Notify.toggleLock Session.get('currentNoteId'), false
 
   "click #startChat": ->
