@@ -111,3 +111,24 @@ Meteor.methods
         isIdle: user.status?.idle
         avatar: user.profile.avatar
       )
+
+  setAvatar: (avatarAttr) ->
+    user = Meteor.user()
+
+    unless user
+      throw new Meteor.Error(401, "You have to log in to make this change.")
+
+    Meteor.users.update(user._id,
+      $set:
+        'profile.avatar': avatarAttr
+      $addToSet:
+          notifications:
+            $each: [
+              count: 0
+              email: true
+              sound: true
+              sms: true
+              isTitleFlashing: false
+              isNavNotified: false
+            ]
+    )
