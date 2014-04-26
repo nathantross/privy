@@ -76,7 +76,7 @@ loginChecks = (pause)->
       @render "suspended" 
       pause()
   else
-    @render( if Meteor.loggingIn() then @loadingTemplate else "accessDenied" )
+    @render( if Meteor.loggingIn() then @loadingTemplate else "entrySignIn" )
     pause()
 
 loggedOutPages = ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "entryResetPassword", "entryForgotPassword", "404"]

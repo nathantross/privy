@@ -1,11 +1,11 @@
 <template name="notification">
 
   <li class="divider"></li>
-  <li class=""><p class="{{#if isNotified}}pull-right fa fa-circle{{/if}}"></p>
-    <a href="{{pathFor 'showThread' _id=threadId}}">
+  <li>
+      <a href="{{pathFor 'showThread' _id=threadId}}" class="notification-link">
+      <p class="{{#if isNotified}}pull-right fa fa-circle{{/if}}"></p>
       <img src="{{lastAvatar}}" class="avatar-nav" />{{messageIntro}}
     </a>
-
   </li>
     
 </template>
