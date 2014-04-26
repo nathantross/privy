@@ -16,12 +16,9 @@
     </div>
     <div class="col-sm-8 text-center">
       <ul class="list-inline">
-        <li><a id="avatarChoice1" href="{{pathFor 'intro1'}}"><img class="image-choice" src="avatar_2.png" /></a></li>
-        <li><a id="avatarChoice2" href="{{pathFor 'intro1'}}"><img class="image-choice" src="avatar_3.png" /></a></li>
-        <li><a id="avatarChoice3" href="{{pathFor 'intro1'}}"><img class="image-choice" src="avatar_4.png" /></a></li>
-        <li><a id="avatarChoice4" href="{{pathFor 'intro1'}}"><img class="image-choice" src="avatar_2.png" /></a></li>
-        <li><a id="avatarChoice5" href="{{pathFor 'intro1'}}"><img class="image-choice" src="avatar_3.png" /></a></li>
-        <li><a id="avatarChoice6" href="{{pathFor 'intro1'}}"><img class="image-choice" src="avatar_4.png" /></a></li>
+        {{#each avatars}}
+          {{> avatar }}
+        {{/each}}
       </ul>
     </div>
     <div class="col-sm-2">

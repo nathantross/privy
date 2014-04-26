@@ -170,7 +170,7 @@ exports.Notify =
   toggleLock: (noteId, isLocked) ->
     if noteId
       note = Notes.findOne(noteId)
-      if (note.currentViewer == Meteor.userId() && !isLocked) || (note.currentViewer == undefined && isLocked)
+      if note && ((note.currentViewer == Meteor.userId() && !isLocked) || (note.currentViewer == undefined && isLocked))
         noteAttr = 
           noteId: noteId
           isLocked: isLocked
