@@ -27,14 +27,12 @@
       to: Meteor.user().emails[0].address
       subject: "You have a new message . . ."
       text: "You have a new message, click here to respond . . ."
-      html: "You have a new message, " + Notifications.findOne().lastMessage + "<br><a href='https://deploy-privy.meteor.com/threads/'" + Notifications.findOne().threadId + " >Click here to respond.</a>"
+      html: "<center>You have a new message <a src=" + "/avatar_3.png" + "></a><br><br>" + Notifications.findOne().lastMessage + "<br><br><a href='https://deploy-privy.meteor.com/threads/'" + Notifications.findOne().threadId + " >Click here to respond.</a></center>"
 
   Meteor.methods sendNotificationEmail: ->
     sendMessageNotificationEmail()
-# Threads.findOne().participants[0].userId
 # Threads.findOne().participants[0].avatar
-# Notifications.findOne().lastMessage #Last message sent
-# Messages.findOne().threadId
+
 
 # User New Note
   sendMessageNewNoteEmail = ->

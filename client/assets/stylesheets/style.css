@@ -144,14 +144,25 @@ h2 {
   background-color: #006363;
   margin-bottom: 0px;
   margin-top: -50px;
-  padding-top: 150px;
-  padding-bottom: 200px;
+  padding-top: 70px;
+  padding-bottom: 120px;
   padding-left: 40px;
   padding-right: 40px;
 }
 
+.section-one {
+  background-color: #FFF;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #F55D0C;
+}
+
+.section-one h1 {
+  color: #F55D0C;
+}
+
 .section-two {
-  background-color: #333;
+  background-color: #008cba;
   padding-top: 200px;
   padding-bottom: 200px;
   padding-left: 40px;
@@ -160,7 +171,7 @@ h2 {
 }
 
 .section-three {
-  background-color: #999;
+  background-color: #EB8D00;
   padding-top: 200px;
   padding-bottom: 200px;
   padding-left: 40px;
@@ -190,6 +201,43 @@ h2 {
   font-weight: 400;
 }
 
+.mainheadline-left {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 400;
+  text-align: left !important;
+}
+
+.mainheadline-right {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 400;
+  text-align: right !important;
+}
+
+.byline-left {
+  text-align: left !important;
+  font-size: 18px;
+}
+
+.byline-right {
+  text-align: right !important;
+  font-size: 18px;
+}
+
+.mainheadlinenumber-left {
+  color: #fff;
+  font-size: 80px;
+  font-weight: 400; 
+  text-align: left !important; 
+}
+
+.mainheadlinenumber-right {
+  color: #fff;
+  font-size: 80px;
+  font-weight: 400; 
+  text-align: right !important; 
+}
 
 .secondheader {
   color: #fff;
@@ -859,6 +907,7 @@ footer {
   }
 
 }
+
 /***********/
 
 /****** Iron-Router Loader ******/
@@ -888,7 +937,20 @@ footer {
   padding-bottom: 30px;
 }
 
+/***********/
+
+/****** Flag ******/
 
 
+.fa-flag {
+  color: #333;
+}
 
+.fa-flag:hover {
+  color: #222;
+}
+
+.alert-flag {
+  background-color: red;
+}
 
