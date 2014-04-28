@@ -859,6 +859,7 @@ footer {
   }
 
 }
+
 /***********/
 
 /****** Iron-Router Loader ******/
@@ -888,7 +889,20 @@ footer {
   padding-bottom: 30px;
 }
 
+/***********/
+
+/****** Flag ******/
 
 
+.fa-flag {
+  color: #333;
+}
 
+.fa-flag:hover {
+  color: #222;
+}
+
+.alert-flag {
+  background-color: red;
+}
 
