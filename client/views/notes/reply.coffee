@@ -31,7 +31,7 @@ Template.noteReply.events
     
     Notify.toggleLock Session.get('currentNoteId'), false
 
-    document.body.style.backgroundColor = '#' + ((Math.random()*10)+1).toString(16).slice(4, 6) + 'FF' + ((Math.random()*10)+1).toString(16).slice(4, 6)
+    # document.body.style.backgroundColor = '#' + ((Math.random()*10)+1).toString(16).slice(4, 6) + 'FF' + ((Math.random()*10)+1).toString(16).slice(4, 6)
 
     Notify.popup('#successAlert', "Reply sent!")
 

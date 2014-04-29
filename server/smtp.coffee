@@ -27,8 +27,8 @@
       to: Meteor.user().emails[0].address
       subject: "You have a new message . . ."
       text: "You have a new message, click here to respond . . ."
-      html: "<center>You have a new message <a src=" + "/avatar_3.png" + "></a><br><br>" + Notifications.findOne().lastMessage + "<br><br><a href='https://deploy-privy.meteor.com/threads/'" + Notifications.findOne().threadId + " >Click here to respond.</a></center>"
-
+      html: "asfd"
+      
   Meteor.methods sendNotificationEmail: ->
     sendMessageNotificationEmail()
 # Threads.findOne().participants[0].avatar
