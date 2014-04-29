@@ -942,12 +942,13 @@ footer {
 /****** Flag ******/
 
 
-.fa-flag {
-  color: #333;
+.flag {
+  color: #777;
 }
 
-.fa-flag:hover {
-  color: #222;
+.flag:hover {
+  color: #555;
+  text-decoration: underline;
 }
 
 .alert-flag {
