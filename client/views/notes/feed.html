@@ -2,9 +2,9 @@
   <div class="notes">
     <div class="container text-center">
       {{#if note}}
-        <div class="is-user-active">{{isUserActive}}</div>
+        <div class="online is-user-active">{{isUserActive}}</div>
         <div class="avatar"><img src="{{userAttr.avatar}}" /></div>
-        <p><a href="#" class="fa fa-flag fa-lg" id="flag"> flag</a></p>
+        <p><a href="#" class="flag" id="flag">flag</a></p>
         <h1 class="message-feed">{{note.body}}</h1>
         <div class="row small-centered">
           <div class="small-12 columns">
