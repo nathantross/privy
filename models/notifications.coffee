@@ -90,9 +90,9 @@ Meteor.methods
             Email.send
               from: "Privy <hello@privy.cc>"
               to: emailAttr.receiverEmail
-              subject: "You have a new message . . ."
-              text: "You have a new message, click here to respond . . ."
-              html: emailAttr.receiverEmail + emailAttr.senderAvatar + emailAttr.threadId + emailAttr.lastMessage
+              subject: "You have a new message"
+              text: "You have a new message at https://privy.cc"
+              html: "<center>You have a new message from <img src='http://localhost:3000/" + emailAttr.senderAvatar + "' /><br><br>" + emailAttr.lastMessage + "<br><br><a href='localhost:3000/" + emailAttr.threadId + "' >Click here to respond</a></center>"       
             console.log "3"
 
 
