@@ -6,7 +6,7 @@
 </template>
 
 <template name="newMessageAlert">
-  <div class="alert alert-danger alert-dismissable popup" id="newMessageAlert">
+  <div class="alert-nav alert-danger alert-dismissable popup" id="newMessageAlert">
     {{#with notification}}
       <a href="{{pathFor 'showThread' _id=threadId}}">
         <ul class="list-inline">
@@ -19,11 +19,11 @@
 </template>
 
 <template name="successAlert">
-  <div class="alert alert-success alert-dismissable popup" id="successAlert"></div>
+  <div class="alert-nav alert-success-nav alert-dismissable popup" id="successAlert"></div>
 </template>
 
 <template name="flagAlert">
-  <div class="alert alert-flag alert-dismissable popup" id="flagAlert">
+  <div class="alert-nav alert-flag alert-dismissable popup" id="flagAlert">
       <p>Are you sure you want to flag this note?</p>
       <br>
       <ul class="list-inline">

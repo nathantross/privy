@@ -23,12 +23,6 @@ Template.newMessage.events
       userId: Meteor.userId()
     })
 
-    # Email Notification
-    # Email will only be received by logged out users
-    if Meteor.user().status.idle == true 
-      Meteor.call "sendNotificationEmail", (err) ->
-        console.log err  if err     
-
   "keydown input": (e) ->
     $body = $(e.target).find('[name=message-body]')
     body = $body.context.value
