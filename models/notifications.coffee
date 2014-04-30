@@ -85,15 +85,12 @@ Meteor.methods
               threadId: threadId
               lastMessage: messageAttr.lastMessage
 
-            console.log "2"
-
             Email.send
               from: "Privy <hello@privy.cc>"
               to: emailAttr.receiverEmail
               subject: "You have a new message"
               text: "You have a new message at https://privy.cc"
-              html: "<center>You have a new message from <img src='http://localhost:3000/" + emailAttr.senderAvatar + "' /><br><br>" + emailAttr.lastMessage + "<br><br><a href='localhost:3000/" + emailAttr.threadId + "' >Click here to respond</a></center>"       
-            console.log "3"
+              html: "<center>You have a new message from <img src='http://localhost:3000/" + emailAttr.senderAvatar + "' /><br><br>" + emailAttr.lastMessage + "<br><br><a href='localhost:3000/" + emailAttr.threadId + "' >Click here to respond</a></center>"
 
 
   toggleItemHighlight: (notAttr) ->
