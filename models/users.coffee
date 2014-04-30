@@ -113,11 +113,12 @@ Meteor.methods
   getUserAttr: (userId) ->
     if Meteor.isServer
       user = Meteor.users.findOne(userId)
-      isIdle = user.status?.idle == true || user.status.idle == undefined
+      isIdle = user.status?.idle == true || user.status?.idle == undefined
+      avatar = user.profile.avatar || false
         
       return (
         isIdle: isIdle
-        avatar: user.profile.avatar
+        avatar: avatar
       )
 
   setAvatar: (avatarAttr) ->

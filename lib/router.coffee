@@ -79,6 +79,9 @@ loginChecks = (pause)->
     if Meteor.user().flags?.isSuspended
       @render "suspended" 
       pause()
+    unless Meteor.user().profile.avatar
+      @render "intro"
+      pause()
   else
     @render( if Meteor.loggingIn() then @loadingTemplate else "entrySignIn" )
     pause()
