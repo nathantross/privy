@@ -58,8 +58,7 @@ Meteor.methods
         unless participant.userId == user._id
           pUser = Meteor.users.findOne participant.userId
           notification['userId'] = pUser._id
-          notification['isNotified'] = 
-            if !pUser.status?.online || pUser.status?.idle then true else false
+          notification['isNotified'] = !pUser.status?.online || pUser.status?.idle
           notification['lastAvatar'] = user.profile['avatar']
 
           # Insert the notifications for each participant
@@ -77,6 +76,24 @@ Meteor.methods
                 updatedAt: now
               $inc: 
                 'notifications.0.count': 1
+          
+          if !pUser.status?.online || pUser.status?.idle
+            # Send notification email to offline user
+            emailAttr = 
+              receiverEmail: pUser.emails[0].address
+              senderAvatar: user.profile.avatar
+              threadId: threadId
+              lastMessage: messageAttr.lastMessage
+
+            console.log "2"
+
+            Email.send
+              from: "Privy <hello@privy.cc>"
+              to: emailAttr.receiverEmail
+              subject: "You have a new message . . ."
+              text: "You have a new message, click here to respond . . ."
+              html: emailAttr.receiverEmail + emailAttr.senderAvatar + emailAttr.threadId + emailAttr.lastMessage
+            console.log "3"
 
 
   toggleItemHighlight: (notAttr) ->
