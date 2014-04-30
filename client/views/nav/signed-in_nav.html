@@ -5,21 +5,21 @@
       <a href="#" class="large fa fa-comment fa-lg {{isNavNotified}}" data-toggle="dropdown"> <b class="caret"></b></a>
         <ul id="full-height" class="dropdown-menu">
           <li>
-            <a class="fa fa-home fa-lg" href="{{pathFor 'feed'}}"> Note Feed</a>
+            <a class="fa fa-home fa-lg" href="{{pathFor 'feed'}}" id="noteFeed"> Note Feed</a>
           </li>
           <li>
-            <a class="fa fa-cog" href="{{pathFor 'editUser'}}"> Settings</a>
+            <a class="fa fa-cog" href="{{pathFor 'editUser'}}" id="settings"> Settings</a>
           </li>
           <li>
-            <a class="fa fa-sign-out fa-lg" href="/sign-out"> {{{beforeSignOut}}}{{i18n "signOut"}}</a>
+            <a class="fa fa-sign-out fa-lg" href="/sign-out" id="sign-out"> {{{beforeSignOut}}}{{i18n "signOut"}}</a>
           </li>
           <li>
             {{> allNotifications}}
           </li>
         </ul>
       </li>
-      <li class="pull-center main-logo"><a href="{{pathFor 'feed'}}">Privy</a></li>
-    <li class="pull-right"><a class="large pull-right fa fa-plus fa-lg" href="{{ pathFor 'newNote' }}"></a></li>
+      <li class="pull-center main-logo"><a href="{{pathFor 'feed'}}" id="logo">Privy</a></li>
+    <li class="pull-right"><a class="large pull-right fa fa-plus fa-lg" href="{{ pathFor 'newNote' }}" id="addNote"></a></li>
   </ul>
 </nav>
 </template>

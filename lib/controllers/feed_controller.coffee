@@ -44,6 +44,9 @@ exports.FeedController = RouteController.extend(
     if note && !Meteor.user().status.idle
       Session.set('currentNoteId', note._id)
       Notify.toggleLock note._id, true
+
+    if Meteor.user() && !note
+      mixpanel.track("Empty feed: rendered")  
     
     return note
 
