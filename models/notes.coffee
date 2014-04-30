@@ -42,6 +42,7 @@ Meteor.methods
     )
 
     Notes.insert(note)
+    mixpanel.track('Note/Thread: created') if Meteor.isClient
     return noteAttr.threadId
 
   removeNoteFromStream: (noteAttr) ->
@@ -75,6 +76,7 @@ Meteor.methods
         updatedAt: now
       $addToSet:
         skipperIds: Meteor.userId()
+      
 
   toggleLock: (noteAttr) ->
     noteId = noteAttr.noteId

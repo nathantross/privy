@@ -28,3 +28,10 @@ Template.flagAlert.events
   'click #flag-confirm': (e)->
     Meteor.call 'flag', @note._id, (err, res) ->
       console.log err if err
+    
+    mixpanel.track("Flag: created", {
+      noteId: @note._id, 
+      body: @note.body, 
+      creatorId: @note.userId, 
+      creatorIsOnline: if !@userAttr.isIdle then "Yes" else "No"
+    })

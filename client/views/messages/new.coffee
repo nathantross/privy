@@ -17,7 +17,11 @@ Template.newMessage.events
     )
     toggleTyping(@threadId, @userIndex, false)
     $('body').scrollTop($("#messages")[0].scrollHeight)
-    $body.val("")    
+    $body.val("") 
+    mixpanel.track("Message: created", {
+      threadId: @threadId
+      userId: Meteor.userId()
+    })
 
   "keydown input": (e) ->
     $body = $(e.target).find('[name=message-body]')
