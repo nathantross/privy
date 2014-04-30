@@ -11,7 +11,7 @@ Router.configure
     Meteor.subscribe 'notifications'
     Meteor.subscribe 'threads' #enables switching between threads
   onRun: ->
-    # mixpanel.disable() if window.location.host == "localhost:3000"
+    mixpanel.disable() if window.location.host == "localhost:3000"
 
 Router.map ->
   # Sets route for Index to '/' for the application
