@@ -6,7 +6,7 @@ Meteor.startup ->
       try
         UserStatus.startMonitor
           threshold: (15*1000) # Time until user is idle
-          interval: 5000
+          interval: (15*1000)
         @pause()
 
 # Check in/out depending on whether user is idle
@@ -15,7 +15,7 @@ if Meteor.isClient
     try
       user = Meteor.user()
       if user
-        if user.status.idle && !Session.get('isIdle')
+        if user.status?.idle && !Session.get('isIdle')
           mixpanel.track("User: is idle")  
           note = Notes.findOne(currentViewer: Meteor.userId())
           if note
@@ -30,7 +30,7 @@ if Meteor.isClient
 
           Session.set('isIdle', true)
 
-        else if !user.status.idle && Session.get('isIdle')
+        else if !user.status?.idle && Session.get('isIdle')
           mixpanel.track("User: is not idle")
           url = window.location.pathname.split("/")
 

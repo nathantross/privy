@@ -4,8 +4,8 @@
     <div class="col-sm-3">
     </div>
     <div class="col-sm-6 text-center">
-  		<h1>First, choose your Avatar</h1>
-  		<p>Your avatar is your only identifier on Privy. We keep your information secret!</p>
+  		<h1>First, choose your avatar</h1>
+  		<p>Your avatar is your only identifier on Privy. We'll keep your information secret!</p>
     </div>
     <div class="col-sm-3">
     </div>
@@ -27,24 +27,22 @@
 
 </template>
 
-
-
 <template name="intro1">
 
   <div class="row">
     <center>
-    <h1 class="intro-headline">You'll start on your feed</h1>
-    <p class="intro-body">You can see notes written by other people who want to chat.</p>
-    <ul class="list-inline">
-      <li><a href="{{pathFor 'feed'}}" class="intro-finish">Finish</a></li>
-      <li><a href="{{pathFor 'intro3'}}" class="intro-next">Next <i class="intro-next fa fa-caret-right"></i></a></li>
-    </ul>
-    <br>
-    <div class="row">
-      <div class="col-sm-12">
-        <img src="screen1.png" class="pull-center" />
+      <h1 class="intro-headline">Privy starts with your feed</h1>
+      <p class="intro-body">You can browse notes written by other people who want to chat.</p>
+      <ul class="list-inline">
+        <li><a href="{{pathFor 'feed'}}" class="intro-finish">Finish</a></li>
+        <li><a href="{{pathFor 'intro2'}}" class="intro-next">Next <i class="intro-next fa fa-caret-right"></i></a></li>
+      </ul>
+      <br>
+      <div class="row">
+        <div class="col-sm-12">
+          <img src="screen1.png" class="pull-center" />
+        </div>
       </div>
-    </div>
     </center>
   </div>
 
@@ -52,15 +50,15 @@
 
 
 
-<template name="intro3">
+<template name="intro2">
 
 	<div class="row">
 	  <center>
-		  <h1 class="intro-headline">Get chatting</h1>
-      <p class="intro-body">Flip through notes until you find one you want to talk about</p>
+		  <h1 class="intro-headline">Chat with people, 1-on-1</h1>
+      <p class="intro-body">When you find a note you like, click "Start Chatting" to strike up a conversation.</p>
   		<ul class="list-inline">
         <li><a href="{{pathFor 'feed'}}" class="intro-finish">Finish</a></li>
-        <li><a href="{{pathFor 'intro4'}}" class="intro-next">Next <i class="intro-next fa fa-caret-right"></i></a></li>
+        <li><a href="{{pathFor 'intro3'}}" class="intro-next">Next <i class="intro-next fa fa-caret-right"></i></a></li>
   		</ul>
       <br>
       <div class="row">
@@ -75,14 +73,14 @@
 
 
 
-<template name="intro4">
+<template name="intro3">
 
   <div class="row">
     <center>
-      <h1 class="intro-headline">Talk one-on-one</h1>
-      <p class="intro-body">Your reply starts a one-on-one conversation with the person who created the note.</p>
+      <h1 class="intro-headline">Add your own notes, too</h1>
+      <p class="intro-body">Click the plus sign in the upper right corner to share your own note with people.</p>
       <ul class="list-inline">
-        <li><a href="{{pathFor 'feed'}}" class="intro-next">Get Started <i class="intro-next fa fa-check"></i></a></li>
+        <li><a href="{{pathFor 'feed'}}" class="intro-next">Now, get started! <i class="intro-next fa fa-check"></i></a></li>
       </ul>
       <br>
       <div class="row">

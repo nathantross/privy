@@ -10,8 +10,8 @@ Router.configure
     Meteor.subscribe 'userData'
     Meteor.subscribe 'notifications'
     Meteor.subscribe 'threads' #enables switching between threads
-  onRun: ->
-    mixpanel.disable() if window.location.host == "localhost:3000"
+  # onRun: ->
+  #   mixpanel.disable() if window.location.host == "localhost:3000"
 
 Router.map ->
   # Sets route for Index to '/' for the application
@@ -46,12 +46,6 @@ Router.map ->
 
   @route "intro3",
     path: "/intro_3"
-
-  @route "intro4",
-    path: "/intro_4"
-
-  @route "intro5",
-    path: "/intro_5"
 
 
   # Note Routes

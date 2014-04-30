@@ -7,13 +7,16 @@ Template.intro.events
 
 Template.intro.avatars = ["/avatar_1.png","/avatar_2.png","/avatar_3.png","/avatar_4.png"]
 
+Template.intro.rendered = ->
+  Notify.popup("#successAlert", "Welcome to Privy! Let's take a tour.", true)
 
 Template.intro1.events
-  'click #declineTour': -> 
-    mixpanel.track("Tour(1): declined")
+  'click .intro-finish': ->
+    mixpanel.track("Tour(1): exited")
 
-  'click #startTour': -> 
-    mixpanel.track("Tour(1): started")
+  'click .intro-next': ->
+    mixpanel.track("Tour(1): continued")
+    
 
 Template.intro2.events
   'click .intro-finish': ->
@@ -22,21 +25,7 @@ Template.intro2.events
   'click .intro-next': ->
     mixpanel.track("Tour(2): continued")
 
+
 Template.intro3.events
-  'click .intro-finish': ->
-    mixpanel.track("Tour(3): exited")
-
   'click .intro-next': ->
-    mixpanel.track("Tour(3): continued")
-
-Template.intro4.events
-  'click .intro-finish': ->
-    mixpanel.track("Tour(4): exited")
-
-  'click .intro-next': ->
-    mixpanel.track("Tour(4): continued")
-    Notify.popup('#successAlert', "You're ready. Now, chat away!")
-
-Template.intro5.events
-  'click #getStarted': ->
-    mixpanel.track("Tour(5): completed")
+    mixpanel.track("Tour(3): completed")

@@ -85,6 +85,14 @@ h2 {
   margin-top: 10px;
 }
 
+.darken {
+  opacity:0.4;
+  filter:alpha(opacity=40); /* For IE8 and earlier */
+  background: #fff;
+  height: 100%; 
+  /*521px*/
+}
+
 /* Grow */
 
 .grow {
