@@ -5,7 +5,7 @@ Template.intro.events
       return console.log (error.reason) if error 
 
 
-Template.intro.avatars = ["/avatar_1.png","/avatar_2.png","/avatar_3.png","/avatar_4.png"]
+Template.intro.avatars = ["https://s3-us-west-2.amazonaws.com/privy-application/avatar_1.png","https://s3-us-west-2.amazonaws.com/privy-application/avatar_2.png","https://s3-us-west-2.amazonaws.com/privy-application/avatar_3.png","https://s3-us-west-2.amazonaws.com/privy-application/avatar_4.png", "https://s3-us-west-2.amazonaws.com/privy-application/avatar_5.png", "https://s3-us-west-2.amazonaws.com/privy-application/avatar_6.png",]
 
 
 Template.intro1.events
