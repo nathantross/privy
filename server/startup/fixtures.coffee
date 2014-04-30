@@ -9,7 +9,7 @@ Meteor.startup ->
           password: "tested"
           profile: 
             name: "Stu"
-            # avatar: "//images.all-free-download.com/images/graphicmedium/studiofibonacci_cartoon_grasshopper_clip_art_22257.jpg"
+            avatar: "//images.all-free-download.com/images/graphicmedium/studiofibonacci_cartoon_grasshopper_clip_art_22257.jpg"
             isNotified: false  
     )
 

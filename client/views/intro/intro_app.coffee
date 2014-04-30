@@ -35,6 +35,7 @@ Template.intro4.events
 
   'click .intro-next': ->
     mixpanel.track("Tour(4): continued")
+    Notify.popup('#successAlert', "You're ready. Now, chat away!")
 
 Template.intro5.events
   'click #getStarted': ->
