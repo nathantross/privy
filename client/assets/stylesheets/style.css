@@ -141,11 +141,11 @@ h2 {
 /****** Index ******/
 
 .main {
-  background-color: #006363;
+  background-color: #41728a;
   margin-bottom: 0px;
   margin-top: -50px;
-  padding-top: 70px;
-  padding-bottom: 120px;
+  padding-top: 80px;
+  padding-bottom: 80px;
   padding-left: 40px;
   padding-right: 40px;
 }
@@ -188,6 +188,26 @@ h2 {
   color: #fff;
 }
 
+.main-line {
+  height: 10px;
+  background-color: #54656e;
+}
+
+.action-item {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-color: #285c76;
+}
+
+.sub-head {
+  color: #87d1f5;
+  font-size: 34px;
+}
+
+.home-body {
+  color: #b6e7ff;
+  font-size: 18px;
+}
 
 .fill {
   background-color: rgba(0, 0, 0, .4);
@@ -642,7 +662,7 @@ h2 {
 .navbar-inverse-loggedout {
   border-radius: 0;
   color: #fff;
-  background-color: #009999;
+  background-color: #222;
   border: 0;
   outline : none;
   padding-top: 10px;
