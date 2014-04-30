@@ -18,9 +18,14 @@ Template.newMessage.events
     toggleTyping(@threadId, @userIndex, false)
     $('body').scrollTop($("#messages")[0].scrollHeight)
     $body.val("") 
+    mixpanel.track("Message: created", {
+      threadId: @threadId
+      userId: Meteor.userId()
+    })
+
     # Email Notification
     # Email will only be received by logged out users
-    if Meteor.user().status.idle = true 
+    if Meteor.user().status.idle == true 
       Meteor.call "sendNotificationEmail", (err) ->
         console.log err  if err     
 

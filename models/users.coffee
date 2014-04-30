@@ -15,7 +15,8 @@ if Meteor.isClient
     try
       user = Meteor.user()
       if user
-        if Meteor.user().status.idle
+        if user.status.idle && !Session.get('isIdle')
+          mixpanel.track("User: is idle")  
           note = Notes.findOne(currentViewer: Meteor.userId())
           if note
             Meteor.call 'unlockAll', {}, (err) ->
@@ -27,7 +28,10 @@ if Meteor.isClient
             for threadId in user.inThreads
               Notify.toggleCheckIn(threadId, false)
 
-        else
+          Session.set('isIdle', true)
+
+        else if !user.status.idle && Session.get('isIdle')
+          mixpanel.track("User: is not idle")
           url = window.location.pathname.split("/")
 
           # Check into their current thread if they're in a thread
@@ -45,6 +49,8 @@ if Meteor.isClient
           # Check into their current note if they're in a note
           if url[1] == "notes"
             Notify.toggleLock(Session.get("currentNoteId"), true)
+
+          Session.set('isIdle', false)
 
 
 Meteor.methods
@@ -107,9 +113,12 @@ Meteor.methods
   getUserAttr: (userId) ->
     if Meteor.isServer
       user = Meteor.users.findOne(userId)
+      isIdle = user.status?.idle == true || user.status?.idle == undefined
+      avatar = user.profile.avatar || false
+        
       return (
-        isIdle: user.status?.idle
-        avatar: user.profile.avatar
+        isIdle: isIdle
+        avatar: avatar
       )
 
   setAvatar: (avatarAttr) ->
@@ -132,3 +141,4 @@ Meteor.methods
               isNavNotified: false
             ]
     )
+    mixpanel.track "User: avatar", {avatar: avatarAttr} if Meteor.isClient

@@ -10,6 +10,8 @@ Router.configure
     Meteor.subscribe 'userData'
     Meteor.subscribe 'notifications'
     Meteor.subscribe 'threads' #enables switching between threads
+  onRun: ->
+    mixpanel.disable() if window.location.host == "localhost:3000"
 
 Router.map ->
   # Sets route for Index to '/' for the application
@@ -55,6 +57,8 @@ Router.map ->
   # Note Routes
   @route "newNote",
     path: "/notes/new"
+    onRun: ->
+      mixpanel.track('Note: visited newNote')
 
   @route "feed",
     path: "/notes/:notesCount?" 
@@ -74,6 +78,9 @@ loginChecks = (pause)->
   if Meteor.user() 
     if Meteor.user().flags?.isSuspended
       @render "suspended" 
+      pause()
+    unless Meteor.user().profile.avatar
+      @render "intro"
       pause()
   else
     @render( if Meteor.loggingIn() then @loadingTemplate else "entrySignIn" )
