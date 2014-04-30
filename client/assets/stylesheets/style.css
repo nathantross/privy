@@ -662,7 +662,7 @@ h2 {
 .navbar-inverse-loggedout {
   border-radius: 0;
   color: #fff;
-  background-color: #009999;
+  background-color: #222;
   border: 0;
   outline : none;
   padding-top: 10px;
