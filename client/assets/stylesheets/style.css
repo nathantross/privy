@@ -787,7 +787,7 @@ footer {
   font-weight: 100;
   font-size: 42px;
   color: #333;
-  padding-bottom: 10px;
+  padding-bottom: 0px;
 }
 
 .intro-body
@@ -800,8 +800,8 @@ footer {
 
 .intro-next {
   font-family: 'Roboto', 'sans-serif';
-  font-weight: 300;
-  font-size: 18px;
+  font-weight: 600;
+  font-size: 22px;
 }
 
 .intro-next:hover {
