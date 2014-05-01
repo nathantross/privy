@@ -121,6 +121,11 @@ Meteor.methods
         avatar: avatar
       )
 
+  getAvatar: (userId) ->
+    if Meteor.isServer
+      user = Meteor.users.findOne(userId)      
+      avatar = user.profile.avatar || false
+        
   setAvatar: (avatarAttr) ->
     user = Meteor.user()
 
@@ -141,4 +146,36 @@ Meteor.methods
               isNavNotified: false
             ]
     )
+
+    threads = Threads.find
+      participants:
+        $elemMatch:
+          userId: user._id
+
+    if threads 
+      threads.forEach (thread) ->
+        index = Notify.userIndex(thread._id)
+        modifier = $set: {}
+        modifier.$set["participants." + index + ".avatar"] = avatarAttr
+        Threads.update(thread._id, modifier)
+        
+        if thread.participants.length == 1 
+            Notifications.update
+              userId: user._id
+              threadId: thread._id
+            ,
+              $set: 
+                lastAvatar: avatarAttr
+            , 
+              multi: true
+
+        if Meteor.isServer
+          Notifications.update
+              userId: 
+                $ne: user._id
+              threadId: thread._id
+            ,
+              lastAvatar: avatarAttr
+
+        
     mixpanel.track "User: avatar", {avatar: avatarAttr} if Meteor.isClient

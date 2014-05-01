@@ -73,14 +73,22 @@ loginChecks = (pause)->
     if Meteor.user().flags?.isSuspended
       @render "suspended" 
       pause()
-    unless Meteor.user().profile.avatar
-      @render "intro"
+    if !Meteor.user().profile.avatar || Meteor.user().profile.avatar == null
+      @render if Meteor.loggingIn() then @loadingTemplate else "intro"
       pause()
   else
     @render( if Meteor.loggingIn() then @loadingTemplate else "entrySignIn" )
     pause()
 
+# redirectToFeed = (pause)->
+#   if Meteor.user()
+#     @render "feed"
+#     pause()
+
 loggedOutPages = ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "entryResetPassword", "entryForgotPassword", "404"]
 
 Router.onBeforeAction loginChecks,
   except: loggedOutPages
+
+# Router.onBeforeAction redirectToFeed
+#   only: ["index", "entrySignIn"]
