@@ -45,8 +45,8 @@ exports.FeedController = RouteController.extend(
       Session.set('currentNoteId', note._id)
       Notify.toggleLock note._id, true
 
-    if Meteor.user() && !note
-      mixpanel.track("Empty feed: rendered")  
+    # if Meteor.user() && !note
+    #   mixpanel.track("Empty feed: rendered")  
     
     return note
 
