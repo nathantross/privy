@@ -13,6 +13,7 @@ Router.configure
   onRun: ->
     mixpanel.disable() if window.location.host == "localhost:3000"
 
+
 Router.map ->
   # Sets route for Index to '/' for the application
   @route "index",
@@ -20,6 +21,7 @@ Router.map ->
     onBeforeAction: ->
       document.title = "Privy"
       Session.set("isTrackingChanges", false)
+      Router.go "feed" if Meteor.user()
 
 
   # User Routes    
@@ -80,15 +82,7 @@ loginChecks = (pause)->
     @render( if Meteor.loggingIn() then @loadingTemplate else "entrySignIn" )
     pause()
 
-# redirectToFeed = (pause)->
-#   if Meteor.user()
-#     @render "feed"
-#     pause()
-
 loggedOutPages = ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "entryResetPassword", "entryForgotPassword", "404"]
 
 Router.onBeforeAction loginChecks,
   except: loggedOutPages
-
-# Router.onBeforeAction redirectToFeed
-#   only: ["index", "entrySignIn"]
