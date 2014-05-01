@@ -147,6 +147,7 @@ Meteor.methods
             ]
     )
 
+    # Update the avatar in each thread
     threads = Threads.find
       participants:
         $elemMatch:
@@ -159,6 +160,7 @@ Meteor.methods
         modifier.$set["participants." + index + ".avatar"] = avatarAttr
         Threads.update(thread._id, modifier)
         
+        # Update the notification when the user is the only one in thread
         if thread.participants.length == 1 
             Notifications.update
               userId: user._id
@@ -169,6 +171,7 @@ Meteor.methods
             , 
               multi: true
 
+        # Update the user's avatar in other people's notifications
         if Meteor.isServer
           Notifications.update
               userId: 
