@@ -79,10 +79,14 @@ exports.Notify =
     if notCount > 0 then "Privy (" + notCount + " unread)" else "Privy"
 
   # Popup activates the popup notification 
-  popup: (divId, alertCopy) ->
+  popup: (divId, alertCopy, darken) ->
+    if darken
+        Session.set('darken', true)
+        $('#main-body').height($(window).height() - 91)
     $(divId).slideDown "slow", ->
       Meteor.setTimeout(()-> 
           $(divId).slideUp("slow")
+          Session.set('darken', false) if darken
         , 3000)
     $(divId).text(alertCopy)
 

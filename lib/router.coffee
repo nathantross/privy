@@ -47,12 +47,6 @@ Router.map ->
   @route "intro3",
     path: "/intro_3"
 
-  @route "intro4",
-    path: "/intro_4"
-
-  @route "intro5",
-    path: "/intro_5"
-
 
   # Note Routes
   @route "newNote",
