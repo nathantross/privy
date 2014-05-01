@@ -30,7 +30,7 @@ Meteor.methods
         throw new Meteor.Error 401, "You have to login to respond to a thread."
 
       unless thread
-        throw new Meteor.Error 404, "This thread doesn't exist to add a participant."
+        throw new Meteor.Error 404, "This thread " + noteAttr.threadId + "doesn't exist to add a participant."
 
       if thread.participants.length > 2
         throw new Meteor.Error 401, "This thread is full."
