@@ -90,7 +90,7 @@ Meteor.methods
               to: emailAttr.receiverEmail
               subject: "You have a new message"
               text: "You have a new message at https://privy.cc"
-              html: "<center>You have a new message from <img src='http://localhost:3000/" + emailAttr.senderAvatar + "' /><br><br>" + emailAttr.lastMessage + "<br><br><a href='localhost:3000/" + emailAttr.threadId + "' >Click here to respond</a></center>"
+              html: "<center><img src='" + emailAttr.senderAvatar + "' /><br><br>You have a new message:<br><br><h1>" + emailAttr.lastMessage + "</h1><br><a href='privy.cc/threads/" + emailAttr.threadId + "' >Click here to respond</a></center>"
 
 
   toggleItemHighlight: (notAttr) ->
