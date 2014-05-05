@@ -82,7 +82,7 @@ loginChecks = (pause)->
     @render( if Meteor.loggingIn() then @loadingTemplate else "entrySignIn" )
     pause()
 
-loggedOutPages = ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "entryResetPassword", "entryForgotPassword", "404"]
+loggedOutPages = ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "entryResetPassword", "contact", "entryForgotPassword", "404"]
 
 Router.onBeforeAction loginChecks,
   except: loggedOutPages
