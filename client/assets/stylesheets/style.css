@@ -14,7 +14,7 @@ body {
 }
 
 .container {
-  padding-top: 20px;
+  padding-top: 0px;
 }
 
 ul {
@@ -377,7 +377,7 @@ h2 {
 }
 
 .message-feed {
-  font-size: 56px;
+  font-size: 40px;
   padding-bottom: 10px !important;
   margin-bottom: 10px !important;
   padding-top: 0;
