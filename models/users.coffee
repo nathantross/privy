@@ -52,30 +52,34 @@ if Meteor.isClient
 
           Session.set('isIdle', false)
 
-# if Meteor.isServer
-#   Accounts.onCreateUser (options, user) ->
-    
-#     user.notifications = [
-#       count: 0
-#       email: true
-#       sound: true
-#       sms: true
-#       isTitleFlashing: false
-#       isNavNotified: false
-#     ]
-    
-#     if user.services?
-#       service = _.keys(user.services)[0]
-#       if service == "facebook" || service == "google"
-#         if user.services[service].email?
-#           user.emails = [{
-#             address: user.services[service].email, 
-#             verified: true
-#           }]          
-#         else
-#           throw new Meteor.Error(500, "#{service} account has no email attached")
+if Meteor.isServer
+  Accounts.onCreateUser (options, user) ->
 
-#     return user
+    # Setup notifications tracking for the user
+    user.notifications = [
+      count: 0
+      email: true
+      sound: true
+      sms: true
+      isTitleFlashing: false
+      isNavNotified: false
+    ]
+
+    user.profile = options.profile if options.profile
+    
+    # Set user's email if user created account w/Facebook or Google
+    if user.services?
+      service = _.keys(user.services)[0]
+      if service == "facebook" || service == "google"
+        if user.services[service].email?
+          user.emails = [{
+            address: user.services[service].email, 
+            verified: true
+          }]          
+        else
+          throw new Meteor.Error(500, "#{service} account has no email attached")
+
+    return user
 
 
 
