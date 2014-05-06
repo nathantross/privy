@@ -986,3 +986,20 @@ footer {
   color: green;
 }
 
+@media (min-width: 800px) {
+  .navbar-inverse ul {
+  visibility: visible !important;
+  display: block !important;
+  }
+
+  .container {
+    padding-left: 250px !important;
+  }
+}
+
+
+
+
+
+
+
