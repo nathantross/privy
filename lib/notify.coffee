@@ -179,5 +179,4 @@ exports.Notify =
           noteId: noteId
           isLocked: isLocked
         Meteor.call 'toggleLock', noteAttr, (err) ->
-          console.log(err) if err
-          
+          console.log(err) if err          

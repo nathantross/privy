@@ -16,7 +16,7 @@ if Meteor.isClient
       user = Meteor.user()
       if user
         if user.status?.idle && !Session.get('isIdle')
-          mixpanel.track("User: is idle")  
+          # mixpanel.track("User: is idle")  
           note = Notes.findOne(currentViewer: Meteor.userId())
           if note
             Meteor.call 'unlockAll', {}, (err) ->
@@ -31,7 +31,7 @@ if Meteor.isClient
           Session.set('isIdle', true)
 
         else if !user.status?.idle && Session.get('isIdle')
-          mixpanel.track("User: is not idle")
+          # mixpanel.track("User: is not idle")
           url = window.location.pathname.split("/")
 
           # Check into their current thread if they're in a thread
@@ -51,6 +51,32 @@ if Meteor.isClient
             Notify.toggleLock(Session.get("currentNoteId"), true)
 
           Session.set('isIdle', false)
+
+# if Meteor.isServer
+#   Accounts.onCreateUser (options, user) ->
+    
+#     user.notifications = [
+#       count: 0
+#       email: true
+#       sound: true
+#       sms: true
+#       isTitleFlashing: false
+#       isNavNotified: false
+#     ]
+    
+#     if user.services?
+#       service = _.keys(user.services)[0]
+#       if service == "facebook" || service == "google"
+#         if user.services[service].email?
+#           user.emails = [{
+#             address: user.services[service].email, 
+#             verified: true
+#           }]          
+#         else
+#           throw new Meteor.Error(500, "#{service} account has no email attached")
+
+#     return user
+
 
 
 Meteor.methods
@@ -135,16 +161,16 @@ Meteor.methods
     Meteor.users.update(user._id,
       $set:
         'profile.avatar': avatarAttr
-      $addToSet:
-          notifications:
-            $each: [
-              count: 0
-              email: true
-              sound: true
-              sms: true
-              isTitleFlashing: false
-              isNavNotified: false
-            ]
+      # $addToSet:
+      #     notifications:
+      #       $each: [
+      #         count: 0
+      #         email: true
+      #         sound: true
+      #         sms: true
+      #         isTitleFlashing: false
+      #         isNavNotified: false
+      #       ]
     )
 
     # Update the avatar in each thread
