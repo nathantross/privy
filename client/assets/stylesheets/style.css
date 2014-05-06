@@ -17,6 +17,14 @@ body {
   padding-top: 0px;
 }
 
+.login-instead {
+  margin-top: 40px !important;
+  color: #fff;
+  opacity: 0.7;
+  font-size: 20px;
+  text-decoration: underline;
+}
+
 ul {
   list-style: none;
 }
@@ -151,7 +159,7 @@ h2 {
   background-color: #41728a;
   margin-bottom: 0px;
   margin-top: -50px;
-  padding-top: 80px;
+  padding-top: 50px;
   padding-bottom: 80px;
   padding-left: 40px;
   padding-right: 40px;
@@ -226,6 +234,8 @@ h2 {
   color: #fff;
   font-size: 30px;
   font-weight: 400;
+  margin-top: -30px;
+  margin-bottom: -20px;
 }
 
 .mainheadline-left {
