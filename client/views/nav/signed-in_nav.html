@@ -2,7 +2,7 @@
 <nav class="navbar-inverse navbar-fixed-top">
   <ul class="list-inline">
     <li class="dropdown {{isDropdownOpen}}" id="threads-link">
-      <a href="#" class="large fa fa-comment fa-lg {{isNavNotified}}" data-toggle="dropdown"> <b class="caret"></b></a>
+      <a href="#" class="large fa fa-comment fa-lg {{isNavNotified}}" data-toggle="dropdown"></a>
         <ul id="full-height" class="dropdown-menu">
           <li>
             <a class="fa fa-home fa-lg" href="{{pathFor 'feed'}}" id="noteFeed"> Note Feed</a>
@@ -16,9 +16,11 @@
           <li>
             {{> allNotifications}}
           </li>
+          <li class="dropdown-spacing">
+          </li>
         </ul>
       </li>
-      <li class="pull-center main-logo"><a href="{{pathFor 'feed'}}" id="logo">Privy</a></li>
+      <a class="main-logo" href="{{pathFor 'feed'}}">Privy</a>
     <li class="pull-right"><a class="large pull-right fa fa-plus fa-lg" href="{{ pathFor 'newNote' }}" id="addNote"></a></li>
   </ul>
 </nav>

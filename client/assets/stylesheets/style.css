@@ -14,7 +14,15 @@ body {
 }
 
 .container {
-  padding-top: 20px;
+  padding-top: 0px;
+}
+
+.login-instead {
+  margin-top: 40px !important;
+  color: #fff;
+  opacity: 0.7;
+  font-size: 20px;
+  text-decoration: underline;
 }
 
 ul {
@@ -151,7 +159,7 @@ h2 {
   background-color: #41728a;
   margin-bottom: 0px;
   margin-top: -50px;
-  padding-top: 80px;
+  padding-top: 50px;
   padding-bottom: 80px;
   padding-left: 40px;
   padding-right: 40px;
@@ -226,6 +234,8 @@ h2 {
   color: #fff;
   font-size: 30px;
   font-weight: 400;
+  margin-top: -30px;
+  margin-bottom: -20px;
 }
 
 .mainheadline-left {
@@ -377,8 +387,9 @@ h2 {
 }
 
 .message-feed {
-  font-size: 56px;
-  padding-bottom: 30px;
+  font-size: 40px;
+  padding-bottom: 10px !important;
+  margin-bottom: 10px !important;
   padding-top: 0;
   color: #F55D0C;
   border: 0 !important;
@@ -538,10 +549,6 @@ h2 {
   color: #fff;
 }
 
-#full-height {
-  height: 2000%;
-}
-
 .dropdown-menu {
   background-color: #222;
   border: 0;
@@ -694,9 +701,13 @@ h2 {
 }
 
 .scrolllbar {
-  height: 600px;
-  overflow-y:scroll;
-  padding-bottom: 20px;
+  height: 400px !important;
+  overflow-y: scroll;
+  padding-bottom: 100px;
+}
+
+.dropdown-spacing {
+  height: 2000px;
 }
 
 
