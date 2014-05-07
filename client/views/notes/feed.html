@@ -1,6 +1,6 @@
 <template name="feed">
   <div class="notes">
-    <div class="container text-center">
+    <div class="container container-open text-center">
       {{#if note}}
       <div class="row">
         <div class="col-sm-2">
@@ -8,8 +8,8 @@
         <div class="col-sm-8">
         <div class="online is-user-active">{{isUserActive}}</div>
         <div class="avatar"><img class="avatar-feed" src="{{userAttr.avatar}}" /></div>
-        <p><a href="#" class="flag" id="flag">flag</a></p>
         <h1 class="message-feed">{{note.body}}</h1>
+        <p><a href="#" class="flag fa fa-flag-o" id="flag"> Flag note</a></p>
         <div class="row small-centered">
           <div class="small-12 columns">
             <a  type="button" value="Change background" href="#" id="skip" class="grow btn btn-info fa fa-times fa-lg">

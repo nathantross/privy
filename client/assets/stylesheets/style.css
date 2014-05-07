@@ -394,8 +394,8 @@ h2 {
 .message-feed {
   font-size: 24px;
   font-weight: 300;
-  padding-bottom: 10px !important;
-  margin-bottom: 10px !important;
+  padding-bottom: 0px !important;
+  margin-bottom: 0px !important;
   padding-top: 0;
   color: #F55D0C;
   border: 0 !important;
@@ -1003,6 +1003,9 @@ footer {
 
 .flag {
   color: #777;
+  padding-top: 5px;
+  padding-bottom: 20px;
+  font-size: 12px;
 }
 
 .flag:hover {
@@ -1023,7 +1026,7 @@ footer {
   visibility: visible !important;
   display: block !important;
   }
-  .container {
+  .container-open {
     padding-left: 200px !important;
   }
   .comment {
@@ -1037,7 +1040,7 @@ footer {
     max-width: 800px;
   }
   .reply-form {
-    padding-left: 200px;
+    padding-left: 105px;
   }
   .alert-nav {
     padding-left: 200px !important;
@@ -1046,7 +1049,6 @@ footer {
     min-width: 50% !important;
     text-align: center !important;
     background-color: green !important;
-/*  padding-left: -200px !important;*/
   }
   .create-form {
     font-size: 30px;
@@ -1054,8 +1056,20 @@ footer {
   .new-note {
     padding-left: 300px;
   }
+
+  .message-feed {
+    font-size: 34px;
+  }
+
+  .message-feed-empty {
+    font-size: 50px;
+  }
+
+  .avatar-feed {
+    width: 70px !important;
+    height: 70px !important;
+  }
+
 }
-
-
 
 
