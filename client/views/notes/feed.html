@@ -2,8 +2,12 @@
   <div class="notes">
     <div class="container text-center">
       {{#if note}}
+      <div class="row">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-8">
         <div class="online is-user-active">{{isUserActive}}</div>
-        <div class="avatar"><img src="{{userAttr.avatar}}" /></div>
+        <div class="avatar"><img class="avatar-feed" src="{{userAttr.avatar}}" /></div>
         <p><a href="#" class="flag" id="flag">flag</a></p>
         <h1 class="message-feed">{{note.body}}</h1>
         <div class="row small-centered">
@@ -13,6 +17,10 @@
 
           <a data-toggle="collapse" href="#collapseOne" class="fa fa-check fa-lg grow btn btn-primary btn-big" id="startChat"> Start Chatting</a>
           </div>
+        </div>
+      </div>
+        <div class="col-sm-2">
+        </div>
         </div>
 
         <div id="collapseOne" class="panel-collapse collapse" style="height: auto;">

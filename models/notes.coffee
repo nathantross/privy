@@ -11,7 +11,7 @@ Meteor.methods
     unless noteAttr.body || noteAttr.body.length <= 0
       throw new Meteor.Error 422, 'Whoops, looks like your note is blank!'
 
-    unless noteAttr.body.length < 66
+    unless noteAttr.body.length < 121
       throw new Meteor.Error 422, 'Your note is a liiiittle too long.'
 
     unless noteAttr.threadId
