@@ -1022,37 +1022,47 @@ footer {
 }
 
 @media (min-width: 800px) {
+
   .navbar-inverse ul {
   visibility: visible !important;
   display: block !important;
   }
+
   .container-open {
     padding-left: 200px !important;
   }
+
   .comment {
     max-width: 500px;
   }
+
   .response {
     max-width: 500px;
   }    
+
   .messageWidth {
     min-width: 640px;
     max-width: 800px;
   }
+
   .reply-form {
     padding-left: 105px;
   }
+
   .alert-nav {
     padding-left: 200px !important;
   }
+
   .entry-container {
     min-width: 50% !important;
     text-align: center !important;
     background-color: green !important;
   }
+
   .create-form {
     font-size: 30px;
   }  
+
   .new-note {
     padding-left: 300px;
   }
