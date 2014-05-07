@@ -77,6 +77,7 @@ if Meteor.isServer
             verified: true
           }]          
         else
+          console.log "#{service} account has no email attached"
           throw new Meteor.Error(500, "#{service} account has no email attached")
 
     return user
