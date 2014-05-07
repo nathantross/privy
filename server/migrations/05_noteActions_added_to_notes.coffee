@@ -3,12 +3,13 @@ Migrations.add
   version: 5
 
   up: ->
-    NoteActions.find().forEach (noteAction) ->
-      Notes.update noteAction.noteId,
-        $addToSet:
-          skipperIds: noteAction.receiverId
+    if NoteActions?
+      NoteActions.find().forEach (noteAction) ->
+        Notes.update noteAction.noteId,
+          $addToSet:
+            skipperIds: noteAction.receiverId
 
-      NoteActions.remove()
+        NoteActions.remove()
 
   down: ->
     exports = this
