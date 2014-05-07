@@ -54,7 +54,6 @@ if Meteor.isClient
 
 if Meteor.isServer
   Accounts.onCreateUser (options, user) ->
-
     # Setup notifications tracking for the user
     user.notifications = [
       count: 0
@@ -66,6 +65,7 @@ if Meteor.isServer
     ]
 
     user.profile = options.profile if options.profile
+    user.services.password.srp = options.srp if options.srp
     
     # Set user's email if user created account w/Facebook or Google
     if user.services?
@@ -162,20 +162,9 @@ Meteor.methods
     unless user
       throw new Meteor.Error(401, "You have to log in to make this change.")
 
-    Meteor.users.update(user._id,
+    Meteor.users.update user._id,
       $set:
         'profile.avatar': avatarAttr
-      # $addToSet:
-      #     notifications:
-      #       $each: [
-      #         count: 0
-      #         email: true
-      #         sound: true
-      #         sms: true
-      #         isTitleFlashing: false
-      #         isNavNotified: false
-      #       ]
-    )
 
     # Update the avatar in each thread
     threads = Threads.find
@@ -210,5 +199,4 @@ Meteor.methods
             ,
               lastAvatar: avatarAttr
 
-        
-    mixpanel.track "User: avatar", {avatar: avatarAttr} if Meteor.isClient
+    avatarAttr
