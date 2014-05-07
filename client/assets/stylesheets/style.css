@@ -306,6 +306,11 @@ h2 {
   width: 250px;
 }
 
+.avatar-feed {
+  width: 60px !important;
+  height: 60px !important;
+}
+
 .feed-message {
   font-size: 20px;
 }
@@ -328,7 +333,7 @@ h2 {
 
 .create-form {
   padding-top: 150px;
-  font-size: 30px;
+  font-size: 24px;
   border: 0;
   background-color: rgba(200, 54, 54, 0);
   outline: none;
@@ -387,9 +392,19 @@ h2 {
 }
 
 .message-feed {
-  font-size: 40px;
-  padding-bottom: 10px !important;
-  margin-bottom: 10px !important;
+  font-size: 24px;
+  font-weight: 300;
+  padding-bottom: 0px !important;
+  margin-bottom: 0px !important;
+  padding-top: 0;
+  color: #F55D0C;
+  border: 0 !important;
+}
+
+.message-feed-empty {
+  font-size: 30px;
+  padding-bottom: 0px !important;
+  margin-bottom: 0px !important;
   padding-top: 0;
   color: #F55D0C;
   border: 0 !important;
@@ -441,6 +456,8 @@ h2 {
   display: inline-block;
   -webkit-box-shadow: 0 3px 1px 0 rgba(000,000,000,0.2);
   box-shadow: 0 3px 1px 0 rgba(000,000,000,0.2);
+  max-width: 200px;
+  word-wrap: break-word;
 }
 
 .avatarright {
@@ -477,6 +494,8 @@ h2 {
   box-shadow: 0 1px 5px 0 rgba(000,000,000,0.2);
   -webkit-box-shadow: 0 3px 1px 0 rgba(000,000,000,0.2);
   box-shadow: 0 3px 1px 0 rgba(000,000,000,0.2);
+  max-width: 200px;
+  word-wrap: break-word;
 }
 
 .fixed-comment {
@@ -953,6 +972,8 @@ footer {
 
 .spinner:before {
   opacity: 0 !important;
+  color: 0 0 0 rgba(0, 0, 0, 0) !important;
+  background-color: 0 0 0 rgba(0, 0, 0, 0) !important;
 }
 
 #iron-router-progress {
@@ -982,6 +1003,9 @@ footer {
 
 .flag {
   color: #777;
+  padding-top: 5px;
+  padding-bottom: 20px;
+  font-size: 12px;
 }
 
 .flag:hover {
@@ -998,19 +1022,64 @@ footer {
 }
 
 @media (min-width: 800px) {
+
   .navbar-inverse ul {
   visibility: visible !important;
   display: block !important;
   }
 
-  .container {
-    padding-left: 250px !important;
+  .container-open {
+    padding-left: 200px !important;
   }
+
+  .comment {
+    max-width: 500px;
+  }
+
+  .response {
+    max-width: 500px;
+  }    
+
+  .messageWidth {
+    min-width: 640px;
+    max-width: 800px;
+  }
+
+  .reply-form {
+    padding-left: 105px;
+  }
+
+  .alert-nav {
+    padding-left: 200px !important;
+  }
+
+  .entry-container {
+    min-width: 50% !important;
+    text-align: center !important;
+    background-color: green !important;
+  }
+
+  .create-form {
+    font-size: 30px;
+  }  
+
+  .new-note {
+    padding-left: 300px;
+  }
+
+  .message-feed {
+    font-size: 34px;
+  }
+
+  .message-feed-empty {
+    font-size: 50px;
+  }
+
+  .avatar-feed {
+    width: 70px !important;
+    height: 70px !important;
+  }
+
 }
-
-
-
-
-
 
 
