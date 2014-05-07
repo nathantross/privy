@@ -4,6 +4,14 @@ if Meteor.isClient
     Deps.autorun ->
       user = Meteor.user()
       if user && !Meteor.loggingIn()
-        mixpanel.identify(user._id)
-        mixpanel.people.set 
-          $email: user.emails[0].address
+
+        email =
+          if user.emails?[0].address 
+            user.emails[0].address 
+          else if user.services?.facebook?.email
+            user.services.facebook.email
+        
+        if email? && window.location.host != "localhost:3000"
+          mixpanel.identify(user._id)
+          mixpanel.people.set
+            $email: email
