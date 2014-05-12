@@ -22,6 +22,8 @@ Meteor.publish "notes", (sort, limit) ->
             currentViewer:
               $exists: false
           ]
+      replierIds:
+        $ne: @userId
       skipperIds: 
         $ne: @userId
       flaggerIds:
@@ -37,6 +39,7 @@ Meteor.publish "notes", (sort, limit) ->
       limit: limit
       fields: 
         skipperIds: 0
+        replierIds: 0
 
 Meteor.publish "threads", ->
   Threads.find

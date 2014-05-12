@@ -7,6 +7,7 @@ Template.newNote.events
       
       noteAttr = 
         body: $(e.target).find("[name=notes-body]").val()
+        maxReplies: parseInt($(e.target).find("#max-replies").val())
         threadId: threadId
 
       Meteor.call 'createNote', noteAttr, (error, threadId) -> 

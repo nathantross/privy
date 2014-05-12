@@ -24,7 +24,7 @@ Meteor.startup ->
     )
 
     users.push(
-      email: "johndoe@gmail" 
+      email: "z@g.com" 
       password: "Welcome123"
       profile: 
         name: "John"
@@ -41,6 +41,25 @@ Meteor.startup ->
         isNotified: false 
     )
 
+    users.push(
+      email: "a@g.com" 
+      password: "tested"
+      profile: 
+        name: "Alex"
+        avatar: "//cdn.instructables.com/F7V/Y56V/GTB9PF1L/F7VY56VGTB9PF1L.SQUARE.jpg"
+        isNotified: false 
+    )
+
+    users.push(
+      email: "b@g.com" 
+      password: "tested"
+      profile: 
+        name: "Bob"
+        avatar: "//cdn.instructables.com/F7V/Y56V/GTB9PF1L/F7VY56VGTB9PF1L.SQUARE.jpg"
+        isNotified: false 
+    )
+
+
     for user in users
       userIds.push(Accounts.createUser(user))
 
@@ -53,30 +72,32 @@ Meteor.startup ->
     # Create notes
     noteIds = []
     now
-    for userId in userIds
-      for i in [1...3]
-        now = new Date().getTime()
-        noteIds.push(
-          Notes.insert
-            userId: userId
-            body: "Hi " + i + " from " + userId
-            isInstream: true
-            createdAt: now
-            updatedAt: now
-            expiresAt: (now + 7*24*60*60*1000) # 7 days from now (in ms)
-        )
-
-    # Create noteActions
-    exports = this
-    exports.NoteActions = new Meteor.Collection('noteActions')
-    for userId, i in userIds
-      now = new Date().getTime()
-      NoteActions.insert
-        noteId: noteIds[i]
-        receiverId: userId
-        isSkipped: true
+    # for userId in userIds
+    #   for i in [1...3]
+    now = new Date().getTime()
+    noteIds.push(
+      Notes.insert
+        # userId: userId
+        userId: userIds[4]
+        # body: "Hi " + i + " from " + userId
+        body: "Hello, world!"
+        isInstream: true
         createdAt: now
         updatedAt: now
+        expiresAt: (now + 7*24*60*60*1000) # 7 days from now (in ms)
+    )
+
+    # Create noteActions
+    # exports = this
+    # exports.NoteActions = new Meteor.Collection('noteActions')
+    # for userId, i in userIds
+    #   now = new Date().getTime()
+    #   NoteActions.insert
+    #     noteId: noteIds[i]
+    #     receiverId: userId
+    #     isSkipped: true
+    #     createdAt: now
+    #     updatedAt: now
     
     # Create threads
     threadIds = []
@@ -98,64 +119,64 @@ Meteor.startup ->
         updatedAt: now      
     
     # Stu responds to Nathan
-    responses = [3]
-    for response in responses
-      Notes.update noteIds[response], 
-        $set:
-          isInstream: false
-          updatedAt: now
+    # responses = [3]
+    # for response in responses
+    #   Notes.update noteIds[response], 
+    #     $set:
+    #       isInstream: false
+    #       updatedAt: now
     
-      Threads.update threadIds[response], 
-        $set:
-          responderId: userIds[0]
-          updatedAt: now
+    #   Threads.update threadIds[response], 
+    #     $set:
+    #       responderId: userIds[0]
+    #       updatedAt: now
 
-      # Stu answers
-      stuId = userIds[0]
-      nathanId = userIds[1]
-      stuMsg = "hi back from " + stuId
-      nathanMsg = "thanks, hello from " + nathanId 
+    #   # Stu answers
+    #   stuId = userIds[0]
+    #   nathanId = userIds[1]
+    #   stuMsg = "hi back from " + stuId
+    #   nathanMsg = "thanks, hello from " + nathanId 
 
-      # Stu creates message
-      now = new Date().getTime()
-      Messages.insert
-        threadId: threadIds[response]
-        body: stuMsg
-        senderId: stuId
-        isRead: true
-        createdAt: now
-        updatedAt: now
+    #   # Stu creates message
+    #   now = new Date().getTime()
+    #   Messages.insert
+    #     threadId: threadIds[response]
+    #     body: stuMsg
+    #     senderId: stuId
+    #     isRead: true
+    #     createdAt: now
+    #     updatedAt: now
 
-      #Nathan gets a notifcation
-      now = new Date().getTime()
-      Notifications.insert
-        userId: nathanId
-        threadId: threadIds[response]
-        lastMessage: stuMsg
-        lastAvatar: Meteor.users.findOne(stuId).profile['avatar']
-        isNotified: false
-        createdAt: now
-        updatedAt: now
+    #   #Nathan gets a notifcation
+    #   now = new Date().getTime()
+    #   Notifications.insert
+    #     userId: nathanId
+    #     threadId: threadIds[response]
+    #     lastMessage: stuMsg
+    #     lastAvatar: Meteor.users.findOne(stuId).profile['avatar']
+    #     isNotified: false
+    #     createdAt: now
+    #     updatedAt: now
 
-      # Nathan creates a response
-      now = new Date().getTime()
-      Messages.insert
-        threadId: threadIds[response]
-        body: nathanMsg
-        senderId: nathanId
-        isRead: true
-        createdAt: now
-        updatedAt: now
+    #   # Nathan creates a response
+    #   now = new Date().getTime()
+    #   Messages.insert
+    #     threadId: threadIds[response]
+    #     body: nathanMsg
+    #     senderId: nathanId
+    #     isRead: true
+    #     createdAt: now
+    #     updatedAt: now
 
-      #Stu gets a notifcation
-      now = new Date().getTime()
-      Notifications.insert
-        userId: stuId
-        threadId: threadIds[response]
-        lastMessage: nathanMsg
-        lastAvatar: Meteor.users.findOne(nathanId).profile['avatar']
-        isNotified: true
-        createdAt: now
-        updatedAt: now
+    #   #Stu gets a notifcation
+    #   now = new Date().getTime()
+    #   Notifications.insert
+    #     userId: stuId
+    #     threadId: threadIds[response]
+    #     lastMessage: nathanMsg
+    #     lastAvatar: Meteor.users.findOne(nathanId).profile['avatar']
+    #     isNotified: true
+    #     createdAt: now
+    #     updatedAt: now
       
 

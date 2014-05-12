@@ -83,6 +83,7 @@ exports.Notify =
     if darken
         Session.set('darken', true)
         $('#main-body').height($(window).height() - 91)
+
     $(divId).slideDown "slow", ->
       Meteor.setTimeout(()-> 
           $(divId).slideUp("slow")
@@ -129,16 +130,16 @@ exports.Notify =
     false
 
   # This logic determines how to display notifications
-  activate: (notification, user) ->
-    if notification.lastSenderId != user._id && notification?
+  activate: (notification) ->
+    if notification? && notification.lastSenderId != Meteor.userId()
       # Determine if user is in the notification's thread
       isInThread = @isInThread(Meteor.userId(), notification.threadId)
 
       # Notification depends on whether user is online, idle, 
       # in the notification's thread, or not in the thread
-      if user.status.online
+      if Meteor.user().status.online
         unless isInThread 
-          @popup('#newMessageAlert') # can I pass notifica/tion into popup?
+          @popup('#newMessageAlert')
           @changeCount(1)
           @toggleNavHighlight(true)
           @toggleItemHighlight(notification, true)
@@ -151,18 +152,22 @@ exports.Notify =
   trackChanges: ->
     userId = if Meteor.isClient then Meteor.userId() else @userId
     if userId
+      startTracking = new Date().getTime()
       Notifications.find(
             userId: userId
           , 
             fields: 
               _id: 1
               updatedAt: 1
+              lastSenderId: 1
+              threadId: 1
         ).observe(
           changed: (oldNotification, newNotification) ->    
-            userId = if Meteor.isClient then Meteor.userId() else @userId
-            user = Meteor.users.findOne(userId)
-            notification = Notifications.findOne(newNotification._id)
-            Notify.activate(notification, user)
+            Notify.activate(newNotification)
+          
+          added: (notification) ->  
+            if startTracking < notification.updatedAt
+              Notify.activate(notification) 
         )
 
   anyItemsNotified: ->
@@ -179,4 +184,4 @@ exports.Notify =
           noteId: noteId
           isLocked: isLocked
         Meteor.call 'toggleLock', noteAttr, (err) ->
-          console.log(err) if err          
+          console.log(err) if err   
