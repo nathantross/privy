@@ -28,8 +28,7 @@ Template.noteReply.events
       reply.threadId = threadId
       Meteor.call 'createMessage', reply, (error, id) ->
         return console.log(error.reason) if error
-        console.log "Reply:"
-        console.log reply
+  
         Meteor.call 'createNotification', reply, (error, id) ->
           console.log(error.reason) if error
     

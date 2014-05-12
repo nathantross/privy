@@ -159,15 +159,15 @@ exports.Notify =
             fields: 
               _id: 1
               updatedAt: 1
-              lastSenderId: 1
-              threadId: 1
         ).observe(
-          changed: (oldNotification, newNotification) ->    
-            Notify.activate(newNotification)
+          changed: (oldNotification, newNotification) ->  
+            notification = Notifications.findOne(newNotification._id)
+            Notify.activate(notification)
           
-          added: (notification) ->  
-            if startTracking < notification.updatedAt
-              Notify.activate(notification) 
+          added: (newNotification) ->  
+            if startTracking < newNotification.updatedAt
+              notification = Notifications.findOne(newNotification._id)
+              Notify.activate(notification)
         )
 
   anyItemsNotified: ->

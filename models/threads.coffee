@@ -18,32 +18,7 @@ Meteor.methods
         createdAt: now
         updatedAt: now
 
-      Threads.insert(thread)
-
-
-  # addParticipant: (noteAttr) ->
-  #   if Meteor.isServer
-  #     thread = Threads.findOne(noteAttr.threadId)
-  #     user = Meteor.user()
-      
-  #     unless user
-  #       throw new Meteor.Error 401, "You have to login to respond to a thread."
-
-  #     unless thread
-  #       throw new Meteor.Error 404, "This thread " + noteAttr.threadId + "doesn't exist to add a participant."
-
-  #     if thread.participants.length > 2
-  #       throw new Meteor.Error 401, "This thread is full."
-
-  #     now = new Date().getTime()
-
-  #     Threads.update thread._id, 
-  #       $set:
-  #         updatedAt: now
-  #       $addToSet:
-  #         participants: 
-  #           userId: user._id
-  #           avatar: user.profile['avatar']  
+      Threads.insert(thread) 
 
 
   toggleIsTyping: (threadAttr) ->
