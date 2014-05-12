@@ -22,13 +22,10 @@ Template.noteReply.events
     Meteor.call 'addNoteReplier', noteAttr, (error, threadId) ->
       return console.log(error.reason) if error   
 
-      # Meteor.call 'addParticipant', noteAttr, (error, id) ->
-      #   return console.log(error.reason) if error
-      
       reply.threadId = threadId
       Meteor.call 'createMessage', reply, (error, id) ->
         return console.log(error.reason) if error
-  
+
         Meteor.call 'createNotification', reply, (error, id) ->
           console.log(error.reason) if error
     
