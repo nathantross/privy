@@ -32,6 +32,8 @@ exports.FeedController = RouteController.extend(
             $ne: Meteor.userId()
           flaggerIds:
             $ne: Meteor.userId()
+          replierIds:
+            $ne: Meteor.userId()
           $or: [
               flagCount:
                 $lt: 2

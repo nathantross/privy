@@ -6,28 +6,28 @@ Template.noteReply.events
     noteAttr = 
       noteId: @note._id
       threadId: @note.threadId
+      senderId: @note.userId
+      createdAt: @note.createdAt
+      body: @note.body
 
     $body = $(e.target).find('[name=reply-body]')
 
     reply = 
       body: $body.val()
-      threadId: @note.threadId
       avatar: @userAttr.avatar
       lastMessage: $body.val()
     
     $(e.target).find('[name=reply-body]').val('')
 
-    Meteor.call 'removeNoteFromStream', noteAttr, (error, id) ->
+    Meteor.call 'addNoteReplier', noteAttr, (error, threadId) ->
       return console.log(error.reason) if error   
-      
-      Meteor.call 'addParticipant', noteAttr, (error, id) ->
+
+      reply.threadId = threadId
+      Meteor.call 'createMessage', reply, (error, id) ->
         return console.log(error.reason) if error
-        
-        Meteor.call 'createMessage', reply, (error, id) ->
-          return console.log(error.reason) if error
-          
-          Meteor.call 'createNotification', reply, (error, id) ->
-            console.log(error.reason) if error
+
+        Meteor.call 'createNotification', reply, (error, id) ->
+          console.log(error.reason) if error
     
     mixpanel.track("Reply: created", {
       noteId: @note._id, 

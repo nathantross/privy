@@ -4,6 +4,7 @@ exports.Notes = new Meteor.Collection('notes')
 Meteor.methods
   createNote: (noteAttr) ->
     user = Meteor.user()
+    maxReplies = noteAttr.maxReplies
 
     unless user
       throw new Meteor.Error 401, "You have to login to create a note."
@@ -16,6 +17,9 @@ Meteor.methods
 
     unless noteAttr.threadId
       throw new Meteor.Error 422, 'You need a threadId for your note.'
+
+    unless maxReplies == 1 || maxReplies == 3 || maxReplies == 5
+      throw new Meteor.Error 422, "You can only get 1, 3, or 5 replies."
 
     if Meteor.isServer
       duplicateNote = Notes.findOne(
@@ -33,7 +37,7 @@ Meteor.methods
       
     # whitelisted keys
     now = new Date().getTime()
-    note = _.extend(_.pick(noteAttr, 'body', 'threadId'),
+    note = _.extend(_.pick(noteAttr, 'body', 'threadId', 'maxReplies'),
       userId: user._id
       isInstream: true
       createdAt: now
@@ -42,23 +46,94 @@ Meteor.methods
     )
 
     Notes.insert(note)
-    mixpanel.track('Note/Thread: created') if Meteor.isClient
+
+    if Meteor.isClient
+      mixpanel.track('Note/Thread: created') 
+      mixpanel.track('Note: #{maxReplies} replies') 
+
     return noteAttr.threadId
 
-  removeNoteFromStream: (noteAttr) ->
-    isInstream = Notes.findOne(noteAttr.noteId).isInstream
+  addNoteReplier: (noteAttr) ->
+    # Add a replier to the note
+    user = Meteor.user()
+    note = Notes.findOne(noteAttr.noteId)
 
-    unless Meteor.userId()
+    unless user._id
       throw new Meteor.Error(401, "You have to login to remove a note.") 
 
-    unless isInstream
-      throw new Meteor.Error(409, "Bummer! Someone else replied while you were writing. Keep browsing.")
+    unless note
+      throw new Meteor.Error(404, "Your note is missing.")
+
+    unless !note.replierIds? || _.indexOf(note.replierIds, user._id) == -1
+      throw new Meteor.Error 302, 'You already replied to this note.'
+
+    unless note.isInstream
+      throw new Meteor.Error(409, "Bummer! This note's been removed.")
+
+    isInstream = !(note.replierIds && note.replierIds.length >= note.maxReplies - 1)
 
     now = new Date().getTime()
     Notes.update noteAttr.noteId, 
       $set:
-        isInstream: false
+        isInstream: isInstream
         updatedAt: now
+      $addToSet:
+        replierIds: user._id
+
+    # Add a participant to the thread
+    if Meteor.isServer
+      thread = Threads.findOne(noteAttr.threadId)
+      user = Meteor.user()
+      sender = Meteor.users.findOne(noteAttr.senderId)
+      
+      unless user
+        throw new Meteor.Error 401, "You have to login to respond to a thread."
+
+      unless thread
+        throw new Meteor.Error 401, "This thread doesn't exist."
+      
+      unless sender
+        throw new Meteor.Error 404, "The note creator doesn't exist as a user."
+
+      unless noteAttr.body
+          throw new Meteor.Error 422, 'Looks like your message is blank!'
+
+      # if the thread has more than two participants, we'll create a new thread
+      if thread.participants.length >= 2
+
+        # We create the thread here
+        thread = 
+          participants: [
+              userId: user._id 
+              avatar: user.profile['avatar'] 
+            ,
+              userId: sender._id 
+              avatar: sender.profile['avatar'] 
+          ]
+          createdAt: now
+          updatedAt: now
+
+        threadId = Threads.insert(thread)
+        
+        # Here we create backfill the note here
+        message = _.extend(_.pick(noteAttr, 'senderId', 'body', 'createdAt'),
+          threadId: threadId
+          updatedAt: now
+          isRead: false 
+        )    
+        Messages.insert(message)
+        return threadId
+
+      else
+        Threads.update thread._id, 
+          $set:
+            updatedAt: now
+          $addToSet:
+            participants: 
+              userId: user._id
+              avatar: user.profile['avatar'] 
+        
+        return thread._id
 
   skipNote: (noteId) ->
     unless Meteor.userId()
