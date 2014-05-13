@@ -1,9 +1,7 @@
 exports = this
 exports.FeedController = RouteController.extend(
   template: "feed"
-
-  increment: 5
-
+  
   sort: -> 
     createdAt: -1
 
@@ -47,7 +45,7 @@ exports.FeedController = RouteController.extend(
     if note && !Meteor.user().status.idle
       Session.set('currentNoteId', note._id)
       Notify.toggleLock note._id, true
-          
+
     return note
 
   userAttr: ->
