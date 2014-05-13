@@ -3,4 +3,4 @@ Template.emptyFeed.events
     mixpanel.track("Empty feed: clicked 'create'")
 
 Template.emptyFeed.rendered = ->
-  console.log "empty"  
+  mixpanel.track('emptyFeed: rendered') if Meteor.user()
