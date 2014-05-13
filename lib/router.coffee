@@ -57,7 +57,7 @@ Router.map ->
       mixpanel.track('Note: visited newNote')
 
   @route "feed",
-    path: "/notes/:notesCount?" 
+    path: "/notes/:notesLimit?" 
     controller: FeedController
 
 

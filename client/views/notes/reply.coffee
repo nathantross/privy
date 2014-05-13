@@ -42,5 +42,4 @@ Template.noteReply.events
     # document.body.style.backgroundColor = '#' + ((Math.random()*10)+1).toString(16).slice(4, 6) + 'FF' + ((Math.random()*10)+1).toString(16).slice(4, 6)
 
     Notify.popup('#successAlert', "Reply sent!")
-
              

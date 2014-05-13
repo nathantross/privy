@@ -74,18 +74,19 @@ Meteor.startup ->
     now
     # for userId in userIds
     #   for i in [1...3]
-    now = new Date().getTime()
-    noteIds.push(
-      Notes.insert
-        # userId: userId
-        userId: userIds[4]
-        # body: "Hi " + i + " from " + userId
-        body: "Hello, world!"
-        isInstream: true
-        createdAt: now
-        updatedAt: now
-        expiresAt: (now + 7*24*60*60*1000) # 7 days from now (in ms)
-    )
+    for i in [1...30]
+      now = new Date().getTime()
+      noteIds.push(
+        Notes.insert
+          # userId: userId
+          userId: userIds[4]
+          # body: "Hi " + i + " from " + userId
+          body: "Hi " + i
+          isInstream: true
+          createdAt: now
+          updatedAt: now
+          expiresAt: (now + 7*24*60*60*1000) # 7 days from now (in ms)
+      )
 
     # Create noteActions
     # exports = this

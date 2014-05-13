@@ -131,7 +131,7 @@ exports.Notify =
 
   # This logic determines how to display notifications
   activate: (notification) ->
-    if notification? && notification.lastSenderId != Meteor.userId()
+    if notification? && notification.lastSenderId != Meteor.userId() && Meteor.user()
       # Determine if user is in the notification's thread
       isInThread = @isInThread(Meteor.userId(), notification.threadId)
 
