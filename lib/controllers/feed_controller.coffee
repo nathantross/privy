@@ -2,17 +2,18 @@ exports = this
 exports.FeedController = RouteController.extend(
   template: "feed"
 
+  increment: 5
+
+  sort: -> 
+    createdAt: -1
+
+  limit: -> 5
+
   onBeforeAction: ->
     document.title = Notify.defaultTitle()
 
-  sort: -> 
-    createdAt: 1
-
-  limit: ->
-    Math.floor(Math.random() * 10) + 20
-
   waitOn: ->
-    Meteor.subscribe "notes", @sort, @limit()
+    Meteor.subscribe "notes", @sort(), @limit()
 
   onStop: -> 
     Notify.toggleLock(Session.get('currentNoteId'), false)
@@ -42,14 +43,11 @@ exports.FeedController = RouteController.extend(
           ]
         , 
           sort: @sort()
-
+    
     if note && !Meteor.user().status.idle
       Session.set('currentNoteId', note._id)
       Notify.toggleLock note._id, true
-
-    # if Meteor.user() && !note
-    #   mixpanel.track("Empty feed: rendered")  
-    
+          
     return note
 
   userAttr: ->
