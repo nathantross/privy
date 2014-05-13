@@ -39,8 +39,6 @@ exports.FeedController = RouteController.extend(
             , flagCount:
                 $exists: false
           ]
-        , 
-          sort: @sort()
     
     if note && !Meteor.user().status.idle
       Session.set('currentNoteId', note._id)
