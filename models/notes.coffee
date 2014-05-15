@@ -2,10 +2,35 @@ exports = this
 exports.Notes = new Meteor.Collection('notes')
 
 Meteor.methods
-  createNote: (noteAttr) ->
+
+  createNote: (noteAttr, isChecked) ->
+
+    # Declare variables / functions
+    getLocation = (ipAddr) ->
+      if Meteor.settings.ipInfo
+        locationJSON = 
+          HTTP.get "https://api.ipinfodb.com/v3/ip-city/?",
+            timeout: 5000
+            params:
+              format: "json"
+              key: Meteor.settings.ipInfo
+              ip: ipAddr
+        
+        if locationJSON.statusCode == 200
+          loc = locationJSON.data
+          locId = Locations.insert loc
+          return loc
+
+        else
+          console.log "IpInfo call failed with error: " + locationJSON.statusMessage
+        
+      false
+
     user = Meteor.user()
     maxReplies = noteAttr.maxReplies
 
+
+    # Check for errors 
     unless user
       throw new Meteor.Error 401, "You have to login to create a note."
 
@@ -31,27 +56,51 @@ Meteor.methods
       if noteAttr.body && duplicateNote 
         throw new Meteor.Error 302, 'This note\'s already in your stream.', duplicateNote._id 
 
-      thread = Threads.findOne(noteAttr.threadId) if Meteor.isServer
-      unless thread
+      unless Threads.findOne(noteAttr.threadId)
         throw new Meteor.Error 422, 'You need a thread for your note.'
-      
-    # whitelisted keys
+
+
+    # Set note attributes
     now = new Date().getTime()
-    note = _.extend(_.pick(noteAttr, 'body', 'threadId', 'maxReplies'),
+    noteAttr = _.extend(_.pick(noteAttr, 'body', 'threadId', 'maxReplies'),
       userId: user._id
       isInstream: true
       createdAt: now
       updatedAt: now
       expiresAt: (now + 7*24*60*60*1000) # 7 days from now (in ms)
     )
+    
 
-    Notes.insert(note)
+    # Add location to note
+    if isChecked && Meteor.isServer
+      ipAddr = @connection.clientAddress
+      location = Locations.findOne ipAddress: ipAddr  
+      location = getLocation(ipAddr) unless location  
+      
+      if location 
+        noteAttr = _.extend noteAttr,
+          loc:
+              lng: location.longitude
+              lat: location.latitude
+          place:
+            city: location.cityName
+            region: location.regionName
+            country: location.countryName
 
+    # Create the note
+    noteId = Notes.insert(noteAttr)
+
+
+    # Track note creation in mixpanel
     if Meteor.isClient
       mixpanel.track('Note/Thread: created') 
       mixpanel.track('Note: #{maxReplies} replies') 
 
-    return noteAttr.threadId
+
+    # Return attributes to callback
+    response = 
+      threadId: noteAttr.threadId
+      noteId: noteId
 
   addNoteReplier: (noteAttr) ->
     # Add a replier to the note
@@ -193,6 +242,31 @@ Meteor.methods
           updatedAt: now
       ,
         multi: true
+
+  setLocation: (location, noteId) ->
+    if Meteor.isServer
+      unless location.longitude > -90 && location.longitude < 90
+        throw new Meteor.Error 401, "Invalid longitude."
+
+      unless location.latitude > -180 && location.latitude < 180
+        throw new Meteor.Error 401, "Invalid latitude."
+
+      unless location.name 
+        throw new Meteor.Error 401, "You must include a location name."
+
+      unless Notes.findOne noteId
+        throw new Meteor.Error 404, "This note does not exist"
+
+      Notes.update noteId,
+        $addToSet:
+          loc:
+            lng: location.lng
+            lat: location.lat
+          place:
+            city: location.city
+            state: location.state
+            country: location.country
+            name: location.name
 
   flag: (noteId)->
     note = Notes.findOne(noteId)

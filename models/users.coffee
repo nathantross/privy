@@ -9,6 +9,7 @@ Meteor.startup ->
           interval: (15*1000)
         @pause()
 
+
 # Check in/out depending on whether user is idle
 if Meteor.isClient
   Deps.autorun ->
@@ -201,3 +202,59 @@ Meteor.methods
               lastAvatar: avatarAttr
 
     avatarAttr
+
+  # setSessionLocation: (connectionId, ipAddr) ->
+  #   if Meteor.isServer
+  #     conn = "hi" 
+  #     # UserStatus.connections.find().fetch()
+  #     Notify.cLog "conn", conn
+  #     # connection = UserStatus.connections.findOne connectionId
+
+  #     user = Meteor.user()
+
+  #     unless user
+  #       throw new Meteor.Error(401, "You have to log in to make this change.")  
+
+  #     unless connection
+  #       throw new Meteor.Error(404, "This connection does not exist.")
+
+  #     unless connection.userId = user._id
+  #       throw new Meteor.Error(401, "You do not have access to this connection.")
+
+  #     getLocation = (ip) ->
+  #       unless Meteor.settings.ipInfo
+  #         throw new Meteor.Error(500, "Please provide a IpInfo token in Meteor.settings")  
+        
+  #       unless Meteor.user() 
+  #         throw new Meteor.Error(401, "Please sign in to get the IP address")
+
+  #       location = HTTP.get("https://api.ipinfodb.com/v3/ip-city/?",
+  #         timeout: 5000
+  #         params:
+  #           format: "json"
+  #           key: Meteor.settings.ipInfo
+  #           ip: ip
+  #       )
+  #       if location.statusCode is 200
+  #         return location.data
+
+  #       else
+  #         throw new Meteor.Error(500, "IpInfo call failed with error: " + location.statusMessage)
+
+  #     location = getLocation(ipAddr)
+
+  #   #### Location #######
+  #   Notify.cLog "Location in method", location
+
+  #   if location?
+  #     Session.set("timeZone", location.timeZone)
+      
+  #     locAttr = _.pick(location, 'cityName', 'regionName', 'countryName', 'latitude', 'longitude')
+
+  #     #################
+  #     Notify.cLog "locAttr", locAttr
+
+  #     UserSessions.connections.update(connectionId, locAttr)
+
+  #     #################
+  #     Notify.cLog("Updated session", UserStatus.connections.findOne( connectionId))

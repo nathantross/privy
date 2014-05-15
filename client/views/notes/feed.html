@@ -9,6 +9,9 @@
         <div class="online is-user-active">{{isUserActive}}</div>
         <div class="avatar"><img class="avatar-feed" src="{{userAttr.avatar}}" /></div>
         <h1 class="message-feed">{{note.body}}</h1>
+        {{#if note.place}}
+          <p>{{location}}</p>
+        {{/if}}
         <p><a href="#" class="flag fa fa-flag-o" id="flag"> Flag note</a></p>
         <div class="row small-centered">
           <div class="small-12 columns">
@@ -38,8 +41,5 @@
         <br>
     </div>
   </div>
-
-
-
 
 </template>

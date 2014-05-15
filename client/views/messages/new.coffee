@@ -8,30 +8,29 @@ Template.newMessage.events
       threadId: @threadId
       lastMessage: $body.val()
 
-    Meteor.call('createMessage', message, (error, id) -> 
+    Meteor.call 'createMessage', message, (error, id) -> 
       if error
         console.log(error.reason) 
       else
         Meteor.call 'createNotification', message, (error, id) ->
           console.log(error.reason) if error 
-    )
-    toggleTyping(@threadId, @userIndex, false)
+    
+    toggleTyping @threadId, @userIndex, false
     $('body').scrollTop($("#messages")[0].scrollHeight)
     $body.val("") 
-    mixpanel.track("Message: created", {
-      threadId: @threadId
-      userId: Meteor.userId()
-    })
+    
 
   "keydown input": (e) ->
     $body = $(e.target).find('[name=message-body]')
     body = $body.context.value
     toggleTyping(@threadId, @userIndex, true) if body.length == 1
 
+
   "keyup input": (e) ->
     $body = $(e.target).find('[name=message-body]')
     body = $body.context.value
     toggleTyping(@threadId, @userIndex, false) if body.length == 0
+
 
   "click input": (e) ->
     Notify.toggleTitleFlashing(false)

@@ -185,3 +185,7 @@ exports.Notify =
           isLocked: isLocked
         Meteor.call 'toggleLock', noteAttr, (err) ->
           console.log(err) if err   
+
+  cLog: (desc, x) ->
+    console.log desc + ":"
+    console.log x

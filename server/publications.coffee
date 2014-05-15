@@ -40,6 +40,7 @@ Meteor.publish "notes", (sort, limit) ->
       fields: 
         skipperIds: 0
         replierIds: 0
+        loc: 0
 
 Meteor.publish "threads", ->
   Threads.find
