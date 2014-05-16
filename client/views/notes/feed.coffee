@@ -13,9 +13,6 @@ Template.feed.events
     Notify.toggleLock Session.get('currentNoteId'), false
 
   "click #startChat": ->
-    Meteor.call 'testStatus', {}, (err)->
-      console.log err.reason if err
-  
     $("[name=reply-body]").focus()
     mixpanel.track("Reply: clicked", {
       noteId: @note._id, 

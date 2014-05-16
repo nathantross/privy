@@ -30,20 +30,6 @@ Template.newNote.events
     Notify.popup('#successAlert', "Note created! Woot woooo!")
     Router.go "feed"
 
-  'click #myonoffswitch': (e)->
-    isChecked = $('input[name=onoffswitch]').prop('checked')
-    
-    if isChecked
-      #Get the latitude and the longitude;
-      successFunction = (position) ->
-        Session.set('lat', position.coords.latitude)
-        Session.set('lng', position.coords.longitude)
-
-      errorFunction = ->
-        console.log  "Geocoder failed"
-      
-      if navigator.geolocation
-        navigator.geolocation.getCurrentPosition successFunction, errorFunction  
 
   "keyup #notes-body": (e)->
       val = $(e.target).find("[name=notes-body]").prevObject[0].value

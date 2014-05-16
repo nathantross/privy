@@ -243,30 +243,6 @@ Meteor.methods
       ,
         multi: true
 
-  setLocation: (location, noteId) ->
-    if Meteor.isServer
-      unless location.longitude > -90 && location.longitude < 90
-        throw new Meteor.Error 401, "Invalid longitude."
-
-      unless location.latitude > -180 && location.latitude < 180
-        throw new Meteor.Error 401, "Invalid latitude."
-
-      unless location.name 
-        throw new Meteor.Error 401, "You must include a location name."
-
-      unless Notes.findOne noteId
-        throw new Meteor.Error 404, "This note does not exist"
-
-      Notes.update noteId,
-        $addToSet:
-          loc:
-            lng: location.lng
-            lat: location.lat
-          place:
-            city: location.city
-            state: location.state
-            country: location.country
-            name: location.name
 
   flag: (noteId)->
     note = Notes.findOne(noteId)
