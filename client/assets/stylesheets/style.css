@@ -1,5 +1,5 @@
 body {
-  background: #F5F5F5;
+  background-color: rgba( 28, 136, 200, 1);
   font-family: 'Cabin', sans-serif;
   font-weight: 400;
   color: #555;
@@ -61,27 +61,97 @@ h2 {
   font-size: 3em;
 }
 
+.notes {
+  background-color: rgba( 28, 136, 200, 1);
+}
+
+
 .btn-primary {
-  -webkit-border-radius: 100px;
-  border-radius: 100px;
-  background-color: #008cba;
-  border-color: #008cba;
+  border-color: rgb( 0, 0, 0 );
+  border-style: solid;
+  border-style: solid;
+  border-width: 5px;
+  border-color: rgb( 255, 255, 255 );
+  border-radius: 50%;
+  background-color: rgb( 105, 206, 78 );
+  width: 124px;
+  height: 124px;
+  margin: 5px;
 }
 
 .btn-primary:hover {
-  -webkit-border-radius: 100px;
-  border-radius: 100px;
-  background-color: #007ABA;
-  border-color: #007ABA;
+  border-color: rgb( 0, 0, 0 );
+  border-style: solid;
+  border-style: solid;
+  border-width: 5px;
+  border-color: rgb( 255, 255, 255 );
+  border-radius: 50%;
+  background-color: rgb( 105, 206, 78 );
+  width: 124px;
+  height: 124px;
+}
+
+.btn-primary:active {
+  border-color: rgb( 0, 0, 0 );
+  border-style: solid;
+  border-style: solid;
+  border-width: 5px;
+  border-color: rgb( 255, 255, 255 );
+  border-radius: 50%;
+  background-color: rgb( 105, 206, 78 );
+  width: 124px;
+  height: 124px;
+}
+
+.fa-mail-forward {
+  margin-top: 50px;
+  font-size: 50px !important;
+  line-height: 80px !important;
 }
 
 .btn-info {
-  -webkit-border-radius: 100px;
-  border-radius: 100px;
-  margin-right: 10px;
+  border-color: rgb( 0, 0, 0 );
+  border-style: solid;
+  border-style: solid;
+  border-width: 5px;
+  border-color: rgb( 255, 255, 255 );
+  border-radius: 50%;
   background-color: #999;
-  border: 0;
+  width: 80px;
+  height: 80px;
+  margin: 5px;
 }
+
+.btn-info:hover {
+  border-color: rgb( 0, 0, 0 );
+  border-style: solid;
+  border-style: solid;
+  border-width: 5px;
+  border-color: rgb( 255, 255, 255 );
+  border-radius: 50%;
+  background-color: rgb( 999, 999, 999 );
+  width: 80px;
+  height: 80px;
+}
+
+.btn-info:active {
+  border-color: rgb( 0, 0, 0 );
+  border-style: solid;
+  border-style: solid;
+  border-width: 5px;
+  border-color: rgb( 255, 255, 255 );
+  border-radius: 50%;
+  background-color: rgb( 999, 999, 999 );
+  width: 80px;
+  height: 80px;
+}
+
+.fa-times {
+  margin-top: 45px;
+  font-size: 30px !important;
+  line-height: 50px !important;
+}
+
 
 .btn-info:hover {
   background-color: #777;
@@ -112,7 +182,7 @@ h2 {
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  box-shadow: 0 !important;
 }
 
 .grow:hover {
@@ -449,13 +519,19 @@ h2 {
 }
 
 .message-feed {
-  font-size: 24px;
-  font-weight: 300;
-  padding-bottom: 0px !important;
-  margin-bottom: 0px !important;
-  padding-top: 0;
-  color: #F55D0C;
-  border: 0 !important;
+  font-size: 40px;
+  font-family: "Droid Serif";
+  color: rgb( 242, 242, 242 );
+  text-align: left;
+}
+
+.message-feed-drop {
+  color: #fff;
+  font-size: 30px;
+}
+
+.message-feed-drop:hover {
+  color: #fff;
 }
 
 .message-feed-empty {
@@ -1076,6 +1152,7 @@ footer {
 
 .online {
   color: green;
+  font-size: 50px;
 }
 
 @media (min-width: 800px) {
