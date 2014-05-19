@@ -201,3 +201,4 @@ Meteor.methods
               lastAvatar: avatarAttr
 
     avatarAttr
+

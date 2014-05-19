@@ -34,8 +34,15 @@ Meteor.methods
       isRead: isRead 
     )    
 
-    Messages.insert(message)
+    msgId = Messages.insert(message)
 
+    if Meteor.isClient
+      mixpanel.track("Message: created", {
+        threadId: threadId
+        userId: user._id
+      })
+
+    msgId
 
   readMessage: (threadId) ->  
     user = Meteor.user()
