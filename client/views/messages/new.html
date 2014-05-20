@@ -1,5 +1,21 @@
 <template name="newMessage">
   <form class="reply-form navbar-fixed-bottom">
-    <input  name="message-body"  type="text" class="form-control reply-form" maxlength="300" placeholder="Reply here ya'll" autofocus />       
+    <div class="input-group">
+      <input  name="message-body"  type="text" class="form-control reply-form" maxlength="300" placeholder="" autofocus />
+      <span class="input-group-btn">
+        <button class="btn-message btn-default" type="button"><i class="fa fa-pencil fa-lg"></i></button>
+      </span>  
+    </div>   
   </form>
+
+<!--   <div class="input-group">
+    <input type="text" class="form-control">
+    <span class="input-group-btn">
+      <button class="btn fa  fa-pencil fa-lg btn-default" type="button"></button>
+    </span>
+  </div>-->
+
 </template>
+
+
+

@@ -1,15 +1,15 @@
 <template name="signedInNav">
-<nav class="navbar-inverse">
+<nav class="navbar-inverse navbar-fixed-top">
   <ul class="list-inline">
     <li class="dropdown {{isDropdownOpen}}" id="threads-link">
       <a href="#" class="large fa fa-comment fa-lg {{isNavNotified}}" data-toggle="dropdown"></a>
         <ul id="full-height" class="dropdown-menu">
           <ul class="dropdown-menu-top list-inline">
             <li class="pull-left">
-              <a class="fa fa-chevron-left fa-lg" href="{{pathFor 'feed'}}" id="noteFeed"></a>
+              <a class="fa fa-chevron-left fa-lg" href="#" id="noteFeed"></a>
             </li>
             <li class="text-center">
-              <h1 class="nav-logo">Strange</h1>
+              <a href="{{pathFor 'feed'}}"><h1 class="nav-logo">Strange</h1></a>
             </li>
             <li class="pull-right">
               <a class="pull-right fa fa-cog fa-lg text-right" href="{{pathFor 'editUser'}}" id="settings"></a>

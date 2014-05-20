@@ -1,9 +1,9 @@
 body {
-  background-color: rgba( 28, 136, 200, 1);
   font-family: 'Cabin', sans-serif;
   font-weight: 400;
   color: #555;
   height: 100%;
+  background-color: rgba( 28, 136, 200, 1);
   /*background: -moz-linear-gradient(left,  rgba(198,198,198,0.65) 0%, rgba(249,249,249,0.83) 50%, rgba(198,198,198,1) 100%); /* FF3.6+ */
   /*background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(198,198,198,0.65)), color-stop(50%,rgba(249,249,249,0.83)), color-stop(100%,rgba(198,198,198,1))); /* Chrome,Safari4+ */
   /*background: -webkit-linear-gradient(left,  rgba(198,198,198,0.65) 0%,rgba(249,249,249,0.83) 50%,rgba(198,198,198,1) 100%); /* Chrome10+,Safari5.1+ */
@@ -497,40 +497,24 @@ h2 {
 
 .reply-form {
   font-size: 20px;
-  height: 45px;
+  height: 70px;
   width: 100%;
   left: 0;
   z-index: 1000;
   bottom: 0;
-  padding-left: 0px;
   border-radius: 0px !important;
-  text-align: center;
+  text-align: left;
   outline: none;
   box-shadow:none;
-  margin-left: 0px;
+  border: 0px solid #ccc;
 }
 
 
 .reply-form form input {
   outline: none;
   box-shadow:none;
-}
-
-.reply-form-button {
-  font-size: 20px;
-  height: 60px;
-  width: 10%;
-  left: 0;
-  position: absolute;
-  right: 0;
-  padding-left: 0px;
-  border-radius: 0px !important;
-  text-align: center;
-  outline: none;
-  box-shadow:none;
-  float: right;
-  color: #999;
-  z-index: 2000;
+  padding-left: 100px !important;
+  margin-right: -100px;
 }
 
 .message-feed {
@@ -591,22 +575,20 @@ h2 {
 
 .response {
   border: 1px;
-  border-color: #bbb;
-  background-color: #cdcdcd;
+  border-color: rgba( 230, 235, 240, 1 );
   padding-top: 5px;
   padding-bottom: 10px;
   padding-left: 15px;
   padding-right: 15px;
   font-size: 14px;
-  -webkit-border-radius: 10px 10px 10px 10px;
-  border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 12px 12px 12px 12px;
+  border-radius: 12px 12px 12px 12px;
   color: #333;
   font-weight: 100;
   display: inline-block;
-  -webkit-box-shadow: 0 3px 1px 0 rgba(000,000,000,0.2);
-  box-shadow: 0 3px 1px 0 rgba(000,000,000,0.2);
   max-width: 200px;
   word-wrap: break-word;
+  background-color: rgba( 230, 235, 240, 1 );
 }
 
 .avatarright {
@@ -627,24 +609,23 @@ h2 {
 
 .comment {
   border: 1px;
-  border-color: #008ddd;
-  background-color: #008cba;
+  border-color: rgba( 84, 165, 246, 1 );
+/*  background-color: #008cba;*/
   padding-top: 5px;
   padding-bottom: 10px;
   padding-left: 15px;
   padding-right: 15px;
   font-size: 14px;
-  -webkit-border-radius: 10px 10px 10px 10px;
-  border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 12px 12px 12px 12px;
+  border-radius: 12px 12px 12px 12px;
   color: #fefefe;
   font-weight: 100;
   display: inline-block;
-  -webkit-box-shadow: 0 1px 5px 0 rgba(000,000,000,0.2);
-  box-shadow: 0 1px 5px 0 rgba(000,000,000,0.2);
-  -webkit-box-shadow: 0 3px 1px 0 rgba(000,000,000,0.2);
-  box-shadow: 0 3px 1px 0 rgba(000,000,000,0.2);
   max-width: 200px;
   word-wrap: break-word;
+
+/*  border-radius: 10px;*/
+  background-color: rgba( 84, 165, 246, 1 );
 }
 
 .fixed-comment {
@@ -680,19 +661,44 @@ h2 {
 
 .load-link {
     display: block;
-    border-radius: 3px;
+    border-radius: 12px;
     background: rgba(0, 0, 0, 0.05);
     text-align: center;
     height: 60px;
     line-height: 60px;
     width: 80%;
     margin: 0 auto;
+    font-size: 18px;
+    color: #757575;
+
 }
 
 .load-link:hover {
     text-decoration: none;
     background: rgba(0, 0, 0, 0.1);
+    color: #444444;
 }
+
+.message-background {
+  font-color: #f5f8fe !important;
+}
+
+.btn-message {
+  background-color: rgba( 105, 206, 78, 1 );
+  width: 76px;
+  height: 70px;
+  color: #ffffff;
+  font-size: 26px;
+  padding-bottom: 0px;
+  bottom: 0;
+  right: 0;
+}
+
+.btn-message:hover, .btn-message:active {
+  background-color: rgba( 114, 223, 85, 1 );
+  color: #ffffff;
+}
+
 
 /***********/
 
@@ -730,7 +736,8 @@ h2 {
   padding-bottom: 10px;
   -webkit-box-shadow: 0 1px 3px 1px rgba(0,0,0,0.2);
   box-shadow: 0 1px 3px 1px rgba(0,0,0,0.2);
-  margin-bottom: 0px;
+  height: 58px;
+  margin-bottom: -9px;
   z-index: 9999999999999999999999999999 !important;
 }
 
@@ -775,11 +782,9 @@ h2 {
   line-height: 1;
   text-align: center !important;
   padding-left: 35px;
-  padding-top: 5px;
+  padding-top: 0px;
+  margin-top: -35px;
 }
-
-
-
 
 .dropdown-menu > li > a {
   color: #EDEDED;
@@ -1300,7 +1305,7 @@ footer {
   }
 
   .reply-form {
-    padding-left: 105px;
+    padding-left: 321px;
   }
 
   .alert-nav {
