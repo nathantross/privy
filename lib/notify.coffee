@@ -195,3 +195,48 @@ exports.Notify =
   cLog: (desc, x) ->
     console.log desc + ":"
     console.log x
+
+  toggleIsMuted: (toggle, msgBody, threadId, userIndex) ->
+    Notify.toggleCheckIn(threadId, !toggle, userIndex, toggle)
+    
+    messageAttr = 
+      body: msgBody
+      threadId: threadId
+      hasExited: true
+
+    Meteor.call 'createMessage', messageAttr, (error, id) -> 
+      console.log(error.reason)  if error
+
+    tracking = if toggle then "exited" else "entered"
+    mixpanel.track "Note: #{tracking}" if Meteor.isClient
+
+  toggleBlock: (toggle, threadId, userIndex) ->
+    blockedIndex = if userIndex == 1 then 0 else 1
+    blockedId = Threads.findOne(threadId).participants[blockedIndex].userId
+    
+    Meteor.call 'toggleBlockUser', toggle, blockedId, (err, id) ->
+      console.log err if err
+
+    # Track that user was blocked/unblocked
+    if Meteor.isClient
+      tracking = if toggle then "blocked" else "unblocked"
+      mixpanel.track("Block user: #{tracking}", {
+        threadId: @threadId 
+        blockerId: Meteor.userId()
+        blockedId: blockedId
+      })
+
+    # User exits/re-enters all threads with the blocked user
+    msgBody = if toggle then "left the chat" else "entered the chat"
+
+    threads = 
+      Threads.find
+        participants:
+          $elemMatch:
+            userId: 
+              $in: [@userId, blockedId]
+
+    threads.forEach (thread) ->
+      Notify.toggleIsMuted(toggle, msgBody, thread._id)
+      Meteor.call 'toggleNotificationBlocked', toggle, thread._id, (err) ->
+        console.log err if err

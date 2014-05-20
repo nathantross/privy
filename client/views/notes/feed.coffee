@@ -46,7 +46,12 @@ Template.feed.helpers
 
       city = toTitleCase(@note.place.city)
 
-      "#{city}, #{region}"
+      unless city == "-" || region == "-"
+        "#{city}, #{region}"
+      else
+        false
+    else 
+      false
 
   usStates = 
     'ALABAMA': 'AL'
