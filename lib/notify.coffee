@@ -195,3 +195,17 @@ exports.Notify =
   cLog: (desc, x) ->
     console.log desc + ":"
     console.log x
+
+  toggleIsMuted = (toggle, msgBody, threadId, userIndex) ->
+    Notify.toggleCheckIn(threadId, !toggle, userIndex, toggle)
+    
+    messageAttr = 
+      body: msgBody
+      threadId: threadId
+      hasExited: true
+
+    Meteor.call 'createMessage', messageAttr, (error, id) -> 
+      console.log(error.reason)  if error
+
+    tracking = if toggle then "exited" else "entered"
+    Mixpanel.track "Note: #{tracking}"
