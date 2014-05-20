@@ -44,4 +44,13 @@ Template.blockUserAlert.events
   'click #block-confirm': (e)->
     Notify.toggleBlock(true, @threadId, @userIndex)
     Router.go('feed')
+
+Template.firstSkipAlert.events
+  'click .skip-btn': (e) ->
+    e.preventDefault()
+    $('#first-skip-alert').slideUp "slow"
+
+  'click #skip-confirm': (e)->
+    Meteor.call 'skipNote', @note._id, @userAttr.isIdle, (error, id) -> 
+      console.log(error.reason) if error
     

@@ -1,16 +1,12 @@
 Template.feed.events
-  "click #skip": (e, template) ->   
-    Meteor.call 'skipNote', @note._id, (error, id) -> 
-      console.log(error.reason) if error
-
-    mixpanel.track('Note: skipped', {
-      noteId: @note._id, 
-      body: @note.body, 
-      creatorId: @note.userId, 
-      creatorIsOnline: if !@userAttr.isIdle then "Yes" else "No"
-    }) 
-    
-    Notify.toggleLock Session.get('currentNoteId'), false
+  "click #skip": (e, template) ->
+    if Meteor.user().notifications[0].firstSkip?   
+      Meteor.call 'skipNote', @note._id, @userAttr.isIdle, (error, id) -> 
+        console.log(error.reason) if error
+    else
+      Meteor.call 'toggleFirstSkip', {}, (err) ->
+        console.log err if err
+      $('#first-skip-alert').slideDown "slow"
 
   "click #startChat": ->
     $("[name=reply-body]").focus()
