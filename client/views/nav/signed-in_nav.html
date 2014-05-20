@@ -4,20 +4,24 @@
     <li class="dropdown {{isDropdownOpen}}" id="threads-link">
       <a href="#" class="large fa fa-comment fa-lg {{isNavNotified}}" data-toggle="dropdown"></a>
         <ul id="full-height" class="dropdown-menu">
-          <li>
-            <a class="fa fa-home fa-lg" href="{{pathFor 'feed'}}" id="noteFeed"> Note Feed</a>
-          </li>
-          <li>
-            <a class="fa fa-cog" href="{{pathFor 'editUser'}}" id="settings"> Settings</a>
-          </li>
-          <li>
-            <a class="fa fa-sign-out fa-lg" href="/sign-out" id="sign-out"> {{{beforeSignOut}}}{{i18n "signOut"}}</a>
-          </li>
-          <li>
-            {{> allNotifications}}
-          </li>
-          <li class="dropdown-spacing">
-          </li>
+          <ul class="dropdown-menu-top list-inline">
+            <li class="pull-left">
+              <a class="fa fa-chevron-left fa-lg" href="{{pathFor 'feed'}}" id="noteFeed"></a>
+            </li>
+            <li class="text-center">
+              <h1 class="nav-logo">Strange</h1>
+            </li>
+            <li class="pull-right">
+              <a class="pull-right fa fa-cog fa-lg text-right" href="{{pathFor 'editUser'}}" id="settings"></a>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              {{> allNotifications}}
+            </li>
+            <li class="dropdown-spacing">
+            </li>
+          </ul>
         </ul>
       </li>
     <li class="pull-right"><a class="large pull-right fa fa-plus fa-lg" href="{{ pathFor 'newNote' }}" id="addNote"></a></li>

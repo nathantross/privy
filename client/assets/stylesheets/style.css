@@ -403,7 +403,7 @@ h2 {
 
 .create-form {
   padding-top: 150px;
-  font-size: 24px;
+  font-size: 36px;
   border: 0;
   background-color: rgba(200, 54, 54, 0);
   outline: none;
@@ -411,11 +411,26 @@ h2 {
   resize: none;
   overflow-x: hidden;
   width: 60%;
+  color: #fff;
 }
+
+.create-form::-webkit-input-placeholder {
+  color: rgba(242, 242, 242, 0.8); 
+}
+
+.create-form::-moz-placeholder {  /* Firefox 19+ */
+  color: rgba(242, 242, 242, 0.8); 
+}
+
+.create-form::-ms-input-placeholder {  
+  color: rgba(242, 242, 242, 0.8); 
+}
+
+
 
 .pencil-form {
     font-size: 40px;
-    color: #999;
+    color: #fff;
     padding-right: 10px;
 }
 
@@ -702,22 +717,71 @@ h2 {
   color: #fff;
 }
 
-.dropdown-menu {
-  background-color: #222;
+.dropdown-menu-top {
+  background-color: #f3f5f7;
   border: 0;
   text-shadow: none;
   border-radius: 0;
-  min-width: 250px;
+  webkit-box-shadow: 0;
+  box-shadow: 0;
+  margin-left: 0px;
+  outline : none;
+  font-size: 32px !important;
+  padding-bottom: 10px;
+  -webkit-box-shadow: 0 1px 3px 1px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 3px 1px rgba(0,0,0,0.2);
+}
+
+.dropdown-menu-top > li > a {
+  color: #7a7a7a !important;
+  outline : none;
+  font-size: 24px !important;
+  padding: 0 20px;
+  margin-top: -10px !important;
+}
+
+.dropdown-menu-top > li > a:hover {
+  color: #444444 !important;
+  outline : none;
+}
+
+.dropdown-menu {
+  background-color: #ffffff;
+  border: 0;
+  text-shadow: none;
+  border-radius: 0;
   webkit-box-shadow: 0;
   box-shadow: 0;
   margin-left: -2px;
-  margin-top: 0px;
+  margin-top: -63px;
   outline : none;
+  font-size: 18px;
+  min-width: 327px;
 }
+
+.fa-cog {
+  padding-top: 30px !important;
+  padding-right: 20px !important;
+}
+
+.nav-logo {
+  font-size: 32px;
+  font-family: "Roboto" !important;
+  font-weight: 100 !important;
+  color: rgba( 83, 83, 83, 1 );
+  line-height: 1;
+  text-align: center !important;
+  padding-left: 35px;
+  padding-top: 5px;
+}
+
+
+
 
 .dropdown-menu > li > a {
   color: #EDEDED;
   outline : none;
+  font-size: 18px;
 }
 
 .dropdown-menu > li > a:hover a:active {
@@ -1229,6 +1293,7 @@ footer {
 
   .create-form {
     font-size: 30px;
+    color: #fff;
   }  
 
   .new-note {
