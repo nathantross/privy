@@ -528,6 +528,7 @@ h2 {
 .message-feed-drop {
   color: #fff;
   font-size: 30px;
+  text-align: right
 }
 
 .message-feed-drop:hover {
@@ -805,7 +806,7 @@ h2 {
 .navbar-inverse {
   border-radius: 0;
   color: #fff;
-  background-color: #222;
+  background-color: rgba( 28, 136, 200, 1);
   border: 0;
   outline : none;
   padding-top: 10px;
@@ -815,12 +816,12 @@ h2 {
 .navbar-inverse a {
   text-decoration: none;
   font-size: 13px;
-  color: #fff;
+  color: rgba( 255, 255, 255, 0.8);
   outline : none;
 }
 
 .navbar-inverse a:hover {
-  color: #ccc;
+  color: rgba( 255, 255, 255, 1);
   text-decoration: none;
   outline : none;
 }
@@ -885,12 +886,33 @@ h2 {
 }
 
 .alert-nav {
+  border-width: 0.34px;
+  border-color: rgb( 0, 0, 0 );
+  border-style: solid;
+  background-color: rgba( 255, 48, 48, 0.95 ) !important;
   text-align: center;
   border-radius: 0px;
   border: 0;
   padding: 15px !important;
-  margin-top: 60px;
+  margin-top: 0px;
   position: fixed;
+
+  font-size: 20px;
+  font-family: "Open Sans";
+  color: rgba( 242, 242, 242, 1 );
+  text-align: center;
+}
+
+.alert-nav button {
+  color: rgba( 242, 242, 242, 1 );
+  border-color: rgb( 0, 0, 0 );
+  border-style: solid;
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgb( 255, 255, 255 );
+  margin: 0px; 
+  background-color: #999;
+  font-size: 14px;
 }
 
 .alert-danger {
@@ -1151,8 +1173,20 @@ footer {
 }
 
 .online {
-  color: green;
-  font-size: 50px;
+  color: rgb( 105, 206, 78 );
+  font-size: 70px;
+  margin-left: -36px;
+  margin-top: -20px;
+}
+
+.location {
+  color: #fff;
+  font-size: 18px;
+  font-size: 14px;
+  font-family: "Droid Serif";
+  color: rgba( 242, 242, 242, 0.6 );
+  text-align: left;
+  margin-left: -20px;
 }
 
 @media (min-width: 800px) {

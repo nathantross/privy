@@ -1,5 +1,5 @@
 <template name="signedInNav">
-<nav class="navbar-inverse navbar-fixed-top">
+<nav class="navbar-inverse">
   <ul class="list-inline">
     <li class="dropdown {{isDropdownOpen}}" id="threads-link">
       <a href="#" class="large fa fa-comment fa-lg {{isNavNotified}}" data-toggle="dropdown"></a>
@@ -20,7 +20,6 @@
           </li>
         </ul>
       </li>
-      <a class="main-logo" href="{{pathFor 'feed'}}">Privy</a>
     <li class="pull-right"><a class="large pull-right fa fa-plus fa-lg" href="{{ pathFor 'newNote' }}" id="addNote"></a></li>
   </ul>
 </nav>
