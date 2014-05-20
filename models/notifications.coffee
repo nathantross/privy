@@ -26,6 +26,7 @@ Meteor.methods
       userId: user._id
       lastSenderId: user._id
       isNotified: false
+      isArchived: false
       createdAt: now
       updatedAt: now
     )
@@ -129,7 +130,33 @@ Meteor.methods
       throw new Meteor.Error 404, "Cannot find a matching notification."      
 
     if notification || Meteor.isServer
+      now = new Date().getTime()
       Notifications.update notification._id,
         $set:
           isBlocked: toggle
-    
+          updatedAt: now
+
+  toggleArchived: (notId, toggle) ->
+    user = Meteor.user()
+    notification = 
+      Notifications.findOne 
+        _id: notId
+        userId: user._id
+
+    unless user
+      throw new Meteor.Error 401, "You have to login to create a notification."
+
+    unless notification
+      throw new Meteor.Error 404, "Cannot find a matching notification."
+
+    unless typeof toggle == "boolean"
+      throw new Meteor.Error 401, "Toggle must be a boolean."
+
+    now = new Date().getTime()
+    Notifications.update notId,
+      $set:
+        isArchived: toggle
+        updatedAt: now
+
+    mixpanel.track "Notification: archived" if Meteor.isClient
+    notId
