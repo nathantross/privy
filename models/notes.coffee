@@ -185,14 +185,16 @@ Meteor.methods
         
         return thread._id
 
-  skipNote: (noteId) ->
+  skipNote: (noteId, userIsIdle) ->
+    note = Notes.findOne(noteId)
+
     unless Meteor.userId()
       throw new Meteor.Error(401, "You have to login to remove a note.") 
 
     unless noteId
       throw new Meteor.Error(404, "Your noteId is missing.")
 
-    unless Notes.findOne(noteId)
+    unless note
       throw new Meteor.Error(404, "This note doesn't exist.")    
 
     now = new Date().getTime()
@@ -201,6 +203,16 @@ Meteor.methods
         updatedAt: now
       $addToSet:
         skipperIds: Meteor.userId()
+
+    if Meteor.isClient
+      mixpanel.track('Note: skipped', {
+        noteId: note._id, 
+        body: note.body, 
+        creatorId: note.userId, 
+        creatorIsOnline: if !userIsIdle then "Yes" else "No"
+      }) 
+      
+      Notify.toggleLock Session.get('currentNoteId'), false
       
 
   toggleLock: (noteAttr) ->

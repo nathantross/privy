@@ -241,3 +241,10 @@ Meteor.methods
           $pull:
             blockerIds: Meteor.userId()
 
+  toggleFirstSkip: ->
+    unless Meteor.user()
+      throw new Meteor.Error(401, "You have to log in to make this change.")
+
+    Meteor.users.update Meteor.userId(),
+      $set:
+        'notifications.0.firstSkip': true

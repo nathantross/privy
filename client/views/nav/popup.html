@@ -4,6 +4,7 @@
   {{> successAlert}}
   {{> flagAlert}}
   {{> blockUserAlert}}
+  {{> firstSkipAlert}}
 </template>
 
 <template name="newMessageAlert">
@@ -41,6 +42,17 @@
       <ul class="list-inline">
         <button id="block-confirm" class="block-btn btn-default">Yes</button> 
         <button id="block-cancel" class="block-btn btn-default">Cancel</button>
+      </ul>
+  </div>
+</template>
+
+<template name="firstSkipAlert">
+  <div class="alert-nav alert-first-skip alert-dismissable popup" id="first-skip-alert">
+      <p>When you skip a note, you won't see it again. Skip wisely!</p>
+      <br>
+      <ul class="list-inline">
+        <button id="skip-confirm" class="skip-btn btn-default">Ok, skip it</button> 
+        <button id="skip-cancel" class="skip-btn btn-default">Cancel</button>
       </ul>
   </div>
 </template>
