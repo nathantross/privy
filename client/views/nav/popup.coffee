@@ -35,3 +35,4 @@ Template.flagAlert.events
       creatorId: @note.userId, 
       creatorIsOnline: if !@userAttr.isIdle then "Yes" else "No"
     })
+    

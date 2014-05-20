@@ -24,6 +24,9 @@ Template.showThread.events
     Meteor.call 'createMessage', messageAttr, (error, id) -> 
       console.log(error.reason)  if error
 
+    tracking = if toggle then "exited" else "entered"
+    Mixpanel.track "Note: #{tracking}"
+
 
 Template.showThread.helpers
   isMuted: ->
