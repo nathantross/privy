@@ -18,8 +18,18 @@ exports.FeedController = RouteController.extend(
     Session.set('currentNoteId', false)
 
   note: ->
+    user = Meteor.user()
+
     note = 
       Notes.findOne
+          $and: [
+            userId:
+              $ne: Meteor.userId()
+          , userId:
+              $nin: user.blockerIds || []
+          , userId:
+              $nin: user.blockedIds || []
+          ]
           isInstream: true
           $or: [
             currentViewer: Meteor.userId()

@@ -35,4 +35,13 @@ Template.flagAlert.events
       creatorId: @note.userId, 
       creatorIsOnline: if !@userAttr.isIdle then "Yes" else "No"
     })
+
+Template.blockUserAlert.events
+  'click .block-btn': (e)->
+    e.preventDefault()
+    $('#block-user-alert').slideUp('slow')
+
+  'click #block-confirm': (e)->
+    Notify.toggleBlock(true, @threadId, @userIndex)
+    Router.go('feed')
     

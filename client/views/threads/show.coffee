@@ -2,8 +2,13 @@ Template.showThread.helpers
   isMuted: ->
     Threads.findOne(@threadId)?.participants[@userIndex].isMuted
 
+  isBlocked: ->
+    if @threadId? && @userIndex?
+      blockedIndex = if @userIndex == 1 then 0 else 1
+      blockedId = Threads.findOne(@threadId).participants[blockedIndex].userId
+      return _.indexOf(Meteor.user().blockedIds, blockedId) > -1
+
 Template.showThread.events
-  
   'click .load-more': (e)->
     e.preventDefault()
     Session.set('bodyScrollTop', $('body').scrollTop())
@@ -17,10 +22,18 @@ Template.showThread.events
     Notify.toggleIsMuted(false, "entered the chat", @threadId, @userIndex)
 
   'click #block-user': (e)->
-    Notify.toggleIsMuted(true, "left the chat", @threadId, @userIndex)
+    e.preventDefault()
+    $('#block-user-alert').slideDown "slow"
 
     blockedIndex = if @userIndex == 1 then 0 else 1
     blockedId = Threads.findOne(@threadId).participants[blockedIndex].userId
-    
-    Meteor.call 'toggleBlockUser', true, blockedId (err, id) ->
-      console.log err if err
+
+    mixpanel.track("Block user: clicked", {
+      threadId: @threadId 
+      blockerId: Meteor.userId()
+      blockedId: blockedId
+    })
+
+  'click #unblock-user': (e)->
+    e.preventDefault()
+    Notify.toggleBlock(false, @threadId, @userIndex)

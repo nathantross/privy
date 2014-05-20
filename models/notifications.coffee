@@ -99,17 +99,37 @@ Meteor.methods
     notification = Notifications.findOne(notId)
 
     unless notification
-        throw new Meteor.Error(404, "This notification doesn't exist.")
+      throw new Meteor.Error 404, "This notification doesn't exist." 
 
     unless user
-        throw new Meteor.Error(401, "You have to login to create a notification.")
+      throw new Meteor.Error 401, "You have to login to create a notification."
 
-    if notification.userId != user._id
-      throw new Meteor.Error(401, "You cannot access this notification.")
+    unless notification.userId == user._id
+      throw new Meteor.Error 401, "You cannot access this notification."
 
     notUpdate = _.extend(_.pick(notAttr, 'isNotified'))
-    Notifications.update(
-        notId
-      ,
-        $set: notUpdate
-    )
+    Notifications.update notId,
+      $set: notUpdate
+
+
+  toggleNotificationBlocked: (toggle, threadId) ->
+    user = Meteor.user()
+    notification = 
+      Notifications.findOne 
+        userId: user._id
+        threadId: threadId
+
+    unless user
+      throw new Meteor.Error 401, "You have to login to create a notification."
+
+    unless typeof toggle == "boolean"
+      throw new Meteor.Error 401, "Toggle must be a boolean."
+
+    unless notification || Meteor.isClient
+      throw new Meteor.Error 404, "Cannot find a matching notification."      
+
+    if notification || Meteor.isServer
+      Notifications.update notification._id,
+        $set:
+          isBlocked: toggle
+    

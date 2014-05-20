@@ -20,7 +20,7 @@ Meteor.methods
     unless Notify.isParticipant(user._id, threadId)
       throw new Meteor.Error(401, "You can't create messages on this thread.")
 
-    if hasExited? && hasExited != true && hasExited != false
+    if hasExited? && typeof hasExited != "boolean"
       throw new Meteor.Error(400, "hasExited must be set to true or false.")
 
 

@@ -3,6 +3,7 @@
   {{> newMessageAlert}}
   {{> successAlert}}
   {{> flagAlert}}
+  {{> blockUserAlert}}
 </template>
 
 <template name="newMessageAlert">
@@ -29,6 +30,17 @@
       <ul class="list-inline">
         <button id="flag-confirm" class="flag-btn btn-default">Yes</button> 
         <button id="flag-cancel" class="flag-btn btn-default">Cancel</button>
+      </ul>
+  </div>
+</template>
+
+<template name="blockUserAlert">
+  <div class="alert-nav alert-block-user alert-dismissable popup" id="block-user-alert">
+      <p>Are you sure you want to block this user?</p>
+      <br>
+      <ul class="list-inline">
+        <button id="block-confirm" class="block-btn btn-default">Yes</button> 
+        <button id="block-cancel" class="block-btn btn-default">Cancel</button>
       </ul>
   </div>
 </template>
