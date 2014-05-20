@@ -248,3 +248,14 @@ Meteor.methods
     Meteor.users.update Meteor.userId(),
       $set:
         'notifications.0.firstSkip': true
+
+  toggleSound: (toggle) ->
+    unless Meteor.user()
+      throw new Meteor.Error(401, "You have to log in to make this change.")
+
+    unless typeof toggle == "boolean"
+      throw new Meteor.Error(400, "Toggle must be a boolean.")
+
+    Meteor.users.update Meteor.userId(),
+      $set:
+        'notifications.0.sound': toggle
