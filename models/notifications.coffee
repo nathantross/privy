@@ -55,7 +55,7 @@ Meteor.methods
       # create a notification for each participant (pUser) in the thread
       pUser
       for participant in thread.participants
-        unless participant.userId == user._id
+        unless participant.userId == user._id || participant.isMuted
           pUser = Meteor.users.findOne participant.userId
           notification['userId'] = pUser._id
           notification['isNotified'] = !pUser.status?.online || pUser.status?.idle

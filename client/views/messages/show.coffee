@@ -7,6 +7,9 @@ Template.showMessage.helpers
   currentUserIsSender: ->
     @senderId == Meteor.userId()
 
+  hasExited: ->
+    @hasExited == true
+
 Template.showMessage.rendered = ->
   lastMessage =
     Messages.findOne
