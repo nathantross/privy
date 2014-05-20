@@ -92,14 +92,20 @@ exports.Notify =
     $(divId).text(alertCopy)
 
   # Toggles whether a user is checked into a thread
-  toggleCheckIn: (threadId, toggle, userIndex) ->
+  toggleCheckIn: (threadId, toggle, userIndex, isMuted) ->
     thread = Threads.findOne(threadId)
     index = userIndex || @userIndex(threadId)
-    if thread && thread.participants[index].isInThread != toggle 
+    updateMute = isMuted? && thread?.participants[index].isMuted != isMuted
+    updateCheckIn = thread?.participants[index].isInThread != toggle
+
+    if thread? && (updateMute || updateCheckIn)
+
       threadAttr =
         threadId: threadId
         toggle: toggle
         userIndex: index
+
+      threadAttr['isMuted'] = isMuted if isMuted?
 
       Meteor.call 'toggleIsInThread', threadAttr, (error, id) ->
         console.log(error.reason) if error

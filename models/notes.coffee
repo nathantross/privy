@@ -95,7 +95,8 @@ Meteor.methods
     if Meteor.isClient
       mixpanel.track('Note/Thread: created') 
       mixpanel.track('Note: #{maxReplies} replies') 
-
+      includeLocation = if isChecked then "on" else "off"
+      mixpanel.track('Note: location #{includeLocation}')
 
     # Return attributes to callback
     response = 
