@@ -14,6 +14,7 @@ Meteor.publish "notifications", ->
           , isBlocked:
               $exists: false
           ]
+      isArchived: false
     , sort:
         updatedAt: -1
 
