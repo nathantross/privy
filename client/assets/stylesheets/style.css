@@ -164,7 +164,6 @@ h2 {
   line-height: 50px !important;
 }
 
-
 .btn-info:hover {
   background-color: #777;
 }
@@ -203,10 +202,10 @@ h2 {
   transform: scale(1.1);
 }
 
+
 /***********/
 
 /****** Register ******/
-
 
 .entry {
   background-color:rgba(0, 0, 0, 0);
@@ -232,6 +231,7 @@ h2 {
   margin-bottom: -20px;
   margin: 0;
 }
+
 
 /***********/
 
@@ -377,6 +377,7 @@ h2 {
   text-shadow: 2px 2px 2px #FFFFFF;
 }
 
+
 /****** Feed ******/
 
 .message-box {
@@ -438,7 +439,6 @@ h2 {
   margin-top: 0px;
   margin-right: 25px;
 }
-
 
 .create-form {
   padding-top: 0px;
@@ -523,7 +523,9 @@ h2 {
     padding-right: 10px;
 }
 
+
 /* geolocation on-off switch */
+
 .myswitch {
   display: inline-block;
   vertical-align: middle;
@@ -710,6 +712,7 @@ h2 {
   border-top: 1px solid #999;
 }
 
+
 /****** Message ******/
 
 .nav-thread-title {
@@ -788,7 +791,6 @@ h2 {
   }
 }
 
-
 .thread-header > ul > li > a {
   color: #7a7a7a !important;
   outline : none;
@@ -852,8 +854,6 @@ h2 {
   display: inline-block;
   max-width: 200px;
   word-wrap: break-word;
-
-/*  border-radius: 10px;*/
   background-color: rgba( 84, 165, 246, 1 );
 }
 
@@ -863,7 +863,6 @@ h2 {
    bottom:0px;
    height:0px;
    width:100%;
-
 }
 
 #right-align {
@@ -874,10 +873,6 @@ h2 {
 .message-read {
   color: #666;
   font-size: 12px;
-}
-
-.message-typing {
-
 }
 
 #messages{
@@ -899,7 +894,6 @@ h2 {
     margin: 0 auto;
     font-size: 18px;
     color: #757575;
-
 }
 
 .load-link:hover {
@@ -932,6 +926,7 @@ h2 {
   font-size: 50px !important;
   line-height: 1.5 !important;
 }
+
 
 /***********/
 
@@ -1171,10 +1166,6 @@ h2 {
   padding-bottom: 100px;
 }
 
-/*.dropdown-spacing {
-  height: 800px;
-}*/
-
 .firstMessageIntro {
   font-weight: 700;
   padding-left: 80px;
@@ -1186,8 +1177,6 @@ h2 {
   margin-top: -10px;
   padding-bottom: 20px;
 }
-
-
 
 
 /***********/
@@ -1309,6 +1298,7 @@ h2 {
   margin-bottom: -10px;
 }
 
+
 /***********/
 
 /****** 404 ******/
@@ -1319,6 +1309,7 @@ h2 {
   margin-bottom: -200px;
 }
   
+
 /***********/
 
 /****** Footer ******/
@@ -1368,7 +1359,6 @@ footer {
   font-weight: 300;
   font-size: 18px;
   color: #777;
-
 }
 
 .intro-finish:hover {
@@ -1444,7 +1434,6 @@ footer {
   bottom: -30px;
   width: 400px;
   text-align: center;
-
 }
 
 .phone-front{
@@ -1460,7 +1449,6 @@ footer {
   .phone-front{
     width: 200px;
   }
-
 }
 
 /***********/

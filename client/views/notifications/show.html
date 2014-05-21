@@ -1,14 +1,19 @@
 <template name="notification">
 
   <li class="nav-note">
-<!--   	  <p>Original Note Message</p> -->
       <a href="{{pathFor 'showThread' _id=threadId}}" class="notification-link">
       <p class="{{#if isNotified}}pull-right fa fa-circle{{/if}}"></p>
       <img src="{{lastAvatar}}" class="avatar-nav" />
+
       <ul>
-      	<li><p class="firstMessageIntro">{{messageIntro}}</p></li>
-      	<li><p class="messageIntro">{{messageIntro}}</p></li>
+      	<li>
+      		<p class="firstMessageIntro">{{messageIntro}}</p>
+      	</li>
+      	<li>
+      		<p class="messageIntro">{{messageIntro}}</p>
+      	</li>
       </ul>
+
     </a>
   </li>
     
