@@ -25,7 +25,9 @@ Meteor.methods
       for participant in thread.participants
         if participant.userId != user._id && participant.isInThread
           isRead = true
-
+ 
+    Notify.changeCount(1) unless isRead
+    
     now = new Date().getTime()
     message = _.extend(_.pick(messageAttr, 'threadId', 'body'),
       senderId: user._id

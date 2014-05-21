@@ -123,23 +123,18 @@ Meteor.methods
         $set: userUpdate
     )
 
-  changeCount: (userAttr) ->
-    userId = userAttr._id
-
+  changeCount: (inc)->
     unless Meteor.userId()
-      throw new Meteor.Error(401, "You have to log in to make this change.")
+      throw new Meteor.Error 401, "You have to log in to make this change."
 
-    unless userId == Meteor.userId()
-      throw new Meteor.Error(401, "You can't make this change to other people's profiles")
+    unless typeof inc == "number" && inc % 1 == 0 
+      throw new Meteor.Error 401, "#{inc} is not an integer."
 
     now = new Date().getTime()
-    userUpdate = _.pick(userAttr, 'notifications.0.count')
-    
-    Meteor.users.update(userId,
+    Meteor.users.update Meteor.userId(),
       $set: 
         updatedAt: now
-      $inc: userUpdate
-    )
+      $inc: inc
 
   getUserAttr: (userId) ->
     if Meteor.isServer

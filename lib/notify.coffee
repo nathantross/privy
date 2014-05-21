@@ -1,10 +1,7 @@
 exports = this
 exports.Notify = 
   changeCount: (inc) ->
-    userAttr = 
-      _id: Meteor.userId()
-      'notifications.0.count': inc
-    Meteor.call 'changeCount', userAttr, (error, id)->
+    Meteor.call 'changeCount', inc, (error, id)->
       console.log(error.reason) if error
 
   playSound: (filename) ->
@@ -140,7 +137,6 @@ exports.Notify =
       if Meteor.user().status.online
         unless isInThread 
           @popup('#newMessageAlert')
-          @changeCount(1)
           @toggleNavHighlight(true)
           @toggleItemHighlight(notification, true)
 
