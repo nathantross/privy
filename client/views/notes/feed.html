@@ -8,10 +8,10 @@
         <div class="col-sm-8">
         <p><a href="#" class="message-feed-drop text-right" id="flag">• • •</a></p>
         <h1 class="message-feed">{{note.body}}</h1>
-        <ul class="list-inline text-left">
+        <ul class="note-feed list-inline text-left">
           <li><div class="avatar"><img class="avatar-feed" src="{{userAttr.avatar}}" /></div></li>
           <li><div class="online is-user-active">{{isUserActive}}</div></li>
-          <li><p class="location">Florida, IN</p></li>
+          <li><p class="location">Florida, IN</p></li><!-- Placeholder -->
           {{#if note.place}}
             <li><p class="location">{{location}}</p></li>
           {{/if}}
