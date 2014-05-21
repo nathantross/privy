@@ -109,6 +109,14 @@ h2 {
   line-height: 80px !important;
 }
 
+.fa-check {
+  font-size: 50px !important;
+  line-height: 70px !important;
+  color: #fff;
+}
+
+
+
 .btn-info {
   border-color: rgb( 0, 0, 0 );
   border-style: solid;
@@ -401,29 +409,96 @@ h2 {
 
 /****** New Note ******/
 
+.new-note-header {
+  z-index: 999999999999999999999999999999999999999999999999999999999999999999999999999999999;
+  background-color: rgba( 28, 136, 200, 1);
+  height: 56px;
+  font-size: 56px;
+  color: #ffffff;
+}
+
+.new-note-header > a {
+  color: #ffffff !important;
+  margin-top: 0px;
+  margin-right: 25px;
+}
+
+
 .create-form {
-  padding-top: 150px;
-  font-size: 36px;
+  padding-top: 0px;
+  padding-left: 20px;
+  font-size: 30px;
   border: 0;
   background-color: rgba(200, 54, 54, 0);
   outline: none;
   height: 100%;
+  height: 180px;
   resize: none;
   overflow-x: hidden;
-  width: 60%;
+  width: 80%;
   color: #fff;
+  font-weight: 100;
+  font-family: "Droid Serif";
+  color: rgba( 242, 242, 242, 1 );
+  text-align: left;
+}
+
+.btn-primary-new-note {
+  border-color: rgb( 0, 0, 0 );
+  border-style: solid;
+  border-style: solid;
+  border-width: 5px;
+  border-color: rgb( 255, 255, 255 );
+  border-radius: 50%;
+  background-color: rgb( 105, 206, 78 );
+  width: 90px;
+  height: 90px;
+  margin: 5px;
+  color: #ffffff;
+}
+
+.btn-primary-new-note:hover {
+  border-color: rgb( 0, 0, 0 );
+  border-style: solid;
+  border-style: solid;
+  border-width: 5px;
+  border-color: rgb( 255, 255, 255 );
+  border-radius: 50%;
+  background-color: rgb( 105, 206, 78 );
+  width: 90px;
+  height: 90px;
+  color: #ffffff;
+}
+
+.btn-primary-new-note:active {
+  border-color: rgb( 0, 0, 0 );
+  border-style: solid;
+  border-style: solid;
+  border-width: 5px;
+  border-color: rgb( 255, 255, 255 );
+  border-radius: 50%;
+  background-color: rgb( 105, 206, 78 );
+  width: 90px;
+  height: 90px;
+  color: #ffffff;
 }
 
 .create-form::-webkit-input-placeholder {
   color: rgba(242, 242, 242, 0.8); 
+  text-align: center;
+  font-size: 36px;
 }
 
 .create-form::-moz-placeholder {  /* Firefox 19+ */
   color: rgba(242, 242, 242, 0.8); 
+  text-align: center;
+  font-size: 36px;
 }
 
 .create-form::-ms-input-placeholder {  
-  color: rgba(242, 242, 242, 0.8); 
+  color: rgba(242, 242, 242, 0.8);
+  text-align: center; 
+  font-size: 36px;
 }
 
 
@@ -438,7 +513,6 @@ h2 {
 .myswitch {
   display: inline-block;
   vertical-align: middle;
-  margin-left: 10px;
 }
 
 .onoffswitch {
@@ -453,7 +527,7 @@ h2 {
 }
 .onoffswitch-label {
     display: block; overflow: hidden; cursor: pointer;
-    border: 2px solid #999999; border-radius: 20px;
+    border: 2px solid rgba( 28, 136, 200, 1); border-radius: 20px;
 }
 .onoffswitch-inner {
     width: 200%; margin-left: -100%;
@@ -466,20 +540,23 @@ h2 {
     -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
 }
 .onoffswitch-inner:before {
-    content: "ON";
+    content: "On";
     padding-left: 10px;
-    background-color: #2FCCFF; color: #FFFFFF;
+    text-align: left;
+    background-color: #ffffff; 
+    color: rgba( 28, 136, 200, 1);
 }
 .onoffswitch-inner:after {
     content: "OFF";
     padding-right: 10px;
-    background-color: #EEEEEE; color: #999999;
+    background-color: #EEEEEE; 
+    color: rgba( 28, 136, 200, 1);
     text-align: right;
 }
 .onoffswitch-switch {
-    width: 18px; margin: 6px;
-    background: #FFFFFF;
-    border: 2px solid #999999; border-radius: 20px;
+    width: 22px; margin: 6px;
+    background-color: rgba( 28, 136, 200, 1);
+    border: 2px solid rgba( 28, 136, 200, 1); border-radius: 100px;
     position: absolute; top: 0; bottom: 0; right: 56px;
     -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
     -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s; 
@@ -489,6 +566,30 @@ h2 {
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
     right: 0px; 
+}
+
+.number-count {
+  font-size: 20px;
+  font-weight: 100;
+  font-family: "Roboto";
+  color: rgba( 242, 242, 242, 0.702 );
+}
+
+.label-name {
+  font-size: 16px;
+  padding-right: 5px;
+  font-weight: 100;
+  font-family: "Roboto";
+  color: rgba( 242, 242, 242, 0.702 );
+  padding-left: 20px;
+}
+
+.btn-select {
+  padding-right: 20px;
+}
+
+.newnote-selectors {
+  padding-bottom: 40px !important;
 }
 
 /***********/
@@ -539,7 +640,7 @@ h2 {
   padding-bottom: 0px !important;
   margin-bottom: 0px !important;
   padding-top: 0;
-  color: #F55D0C;
+  color: #ffffff;
   border: 0 !important;
 }
 
@@ -1031,7 +1132,7 @@ h2 {
 }
 
 .topspace {
-  padding-bottom: 90px
+  padding-bottom: 70px
 }
 
 .fa-circle {
