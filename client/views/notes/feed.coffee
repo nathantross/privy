@@ -30,8 +30,8 @@ Template.feed.events
 
 Template.feed.helpers
   isUserActive: ->
-    if @userAttr && !@userAttr.isIdle then "Online"
-
+    "Online" if @userAttr? && !@userAttr.isIdle 
+    
   location: ->
     if @note.place
       region = 

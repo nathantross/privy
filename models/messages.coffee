@@ -25,12 +25,13 @@ Meteor.methods
 
 
     # isRead should be true if any of the participants is in the room
-    isRead = false
-    if thread || Meteor.isServer
+    isRead = if hasExited? then true else false
+    
+    if !isRead && (thread || Meteor.isServer)
       for participant in thread.participants
         if participant.userId != user._id && participant.isInThread
           isRead = true
-
+    
     now = new Date().getTime()
     message = _.extend(_.pick(messageAttr, 'threadId', 'body'),
       senderId: user._id

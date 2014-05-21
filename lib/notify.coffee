@@ -1,11 +1,9 @@
 exports = this
 exports.Notify = 
   changeCount: (inc) ->
-    userAttr = 
-      _id: Meteor.userId()
-      'notifications.0.count': inc
-    Meteor.call 'changeCount', userAttr, (error, id)->
-      console.log(error.reason) if error
+    unless inc == 0
+      Meteor.call 'changeCount', inc, (error, id)->
+        console.log(error.reason) if error
 
   playSound: (filename) ->
     if Meteor.user().notifications[0].sound
@@ -37,46 +35,34 @@ exports.Notify =
 
   # Toggling the title
   toggleTitleFlashing: (toggle) ->
-    Meteor.clearInterval(Session.get('intervalId'))
+    Meteor.clearInterval Session.get('intervalId')
+    
     unless Meteor.user().notifications[0].isTitleFlashing == toggle
-      userAttr =
-        _id: Meteor.userId()
-        'notifications.0.isTitleFlashing': toggle
-      $({})
-        .queue((next)->
-          Meteor.call 'toggleTitleFlashing', userAttr, (error, id)->
-            console.log(error.reason) if error
-          next()
-        )
-        .queue((next)->
-          Notify.resetTitle(toggle)
-          next()
-        )
+      Meteor.call 'toggleTitleFlashing', toggle, (error, toggle)->
+        return console.log(error.reason) if error
+        Notify.flashTitle toggle
     else 
-      @resetTitle(toggle)
+      @flashTitle toggle
 
-  resetTitle: (toggle) ->
-    if toggle
-      intervalId = @flashTitle()
-      Session.set('intervalId', intervalId)
-    else
-      document.title = @defaultTitle()
-
-  flashTitle: ->
-    title = @defaultTitle(Meteor.user())
-    Meteor.setInterval( () -> 
-        newTitle = "New private message..."
-        document.title = 
-          if document.title == newTitle then title else newTitle
-      , 2500)
+  flashTitle: (toggle) ->
+    title = @defaultTitle()
+    
+    # if toggling flash on, then create interval flashing, else make it static
+    if toggle 
+      intervalId = 
+        Meteor.setInterval () -> 
+            newTitle = "New private message..."
+            document.title = 
+              if document.title == newTitle then Notify.defaultTitle() else newTitle
+          , 2500
+      Session.set('intervalId', intervalId) 
+  
+    else 
+      document.title = title
 
   defaultTitle: ->
-    notCount = 
-      if Meteor.user() && Meteor.user().notifications
-        Meteor.user().notifications[0].count
-      else
-        0
-    if notCount > 0 then "Privy (" + notCount + " unread)" else "Privy"
+    notCount = Meteor.user()?.notifications?[0].count
+    if notCount > 0 then "Strange (" + notCount + " unread)" else "Strange"
 
   # Popup activates the popup notification 
   popup: (divId, alertCopy, darken) ->
@@ -138,21 +124,18 @@ exports.Notify =
   # This logic determines how to display notifications
   activate: (notification) ->
     if notification? && notification.lastSenderId != Meteor.userId() && Meteor.user()
+
       # Determine if user is in the notification's thread
       isInThread = @isInThread(Meteor.userId(), notification.threadId)
 
-      # Notification depends on whether user is online, idle, 
-      # in the notification's thread, or not in the thread
       if Meteor.user().status.online
-        unless isInThread 
-          @popup('#newMessageAlert')
-          @changeCount(1)
-          @toggleNavHighlight(true)
-          @toggleItemHighlight(notification, true)
+        # Show a popup unless the user is in a thread
+        @popup('#newMessageAlert') unless isInThread
 
         # If the user's online, always play sound and toggle title
-        @playSound('/waterdrop')
-        @toggleTitleFlashing(true)
+        @playSound '/waterdrop'
+        @toggleTitleFlashing true
+
 
   # trackChanges observes any changes in notifications and activates a response
   trackChanges: ->

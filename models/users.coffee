@@ -104,47 +104,40 @@ Meteor.methods
         $set: userUpdate
     )
 
-  toggleTitleFlashing: (userAttr) ->
-    userId = userAttr._id
-
+  toggleTitleFlashing: (toggle) ->
     unless Meteor.userId()
       throw new Meteor.Error(401, "You have to log in to make this change.")
 
-    unless userId == Meteor.userId()
-      throw new Meteor.Error(401, "You can't make this change to other people's profiles")
+    unless typeof toggle == "boolean"
+      throw new Meteor.Error 401, "Toggle must be a boolean"
         
     now = new Date().getTime()
-    userUpdate = _.extend(_.pick(userAttr, 'notifications.0.isTitleFlashing'),
-      updatedAt: now
-    )
-    Meteor.users.update(
-        userId
-      ,
-        $set: userUpdate
-    )
+    Meteor.users.update Meteor.userId(),
+      $set: 
+        'notifications.0.isTitleFlashing': toggle
+        updatedAt: now
 
-  changeCount: (userAttr) ->
-    userId = userAttr._id
+    toggle
 
+  changeCount: (inc)->
     unless Meteor.userId()
-      throw new Meteor.Error(401, "You have to log in to make this change.")
+      throw new Meteor.Error 401, "You have to log in to make this change."
 
-    unless userId == Meteor.userId()
-      throw new Meteor.Error(401, "You can't make this change to other people's profiles")
+    unless typeof inc == "number" && inc % 1 == 0 
+      throw new Meteor.Error 401, "#{inc} is not an integer."
 
     now = new Date().getTime()
-    userUpdate = _.pick(userAttr, 'notifications.0.count')
-    
-    Meteor.users.update(userId,
+    Meteor.users.update Meteor.userId(),
       $set: 
         updatedAt: now
-      $inc: userUpdate
-    )
+      $inc: 
+        'notifications.0.count': inc
 
   getUserAttr: (userId) ->
     if Meteor.isServer
       user = Meteor.users.findOne(userId)
-      isIdle = user.status?.idle == true
+      isIdle = 
+        if user.status?.online? then user.status?.idle == true else !online?
       avatar = user.profile.avatar || false
         
       return (
