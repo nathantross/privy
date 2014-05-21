@@ -421,7 +421,7 @@ h2 {
 /****** New Note ******/
 
 .new-note-header {
-  z-index: 9;
+  z-index: 9999999999999999999999999999999999999999999999999999999999999999999999999999;
   background-color: rgba( 28, 136, 200, 1);
   height: 56px;
   font-size: 56px;
