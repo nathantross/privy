@@ -19,43 +19,43 @@ Meteor.publish "notifications", ->
         updatedAt: -1
 
 Meteor.publish "notes", (sort, limit) ->
-  user = Meteor.users.findOne @userId
-  
-  Notes.find
-      $and: [
-        userId:
+  if @userId
+    user = Meteor.users.findOne @userId
+    
+    Notes.find
+        $and: [
+          userId:
+            $ne: @userId
+        , userId:
+            $nin: user.blockerIds || []
+        , userId:
+            $nin: user.blockedIds || []
+        ]
+        isInstream: true
+        $or: [
+              currentViewer: @userId
+            , currentViewer:
+                $exists: false
+            ]
+        replierIds:
           $ne: @userId
-      , userId:
-          $nin: user.blockerIds || []
-      , userId:
-          $nin: user.blockedIds || []
-      ]
-      isInstream: true
-      $or: [
-            currentViewer: @userId
-          ,
-            currentViewer:
-              $exists: false
-          ]
-      replierIds:
-        $ne: @userId
-      skipperIds: 
-        $ne: @userId
-      flaggerIds:
-        $ne: @userId
-      $or: [
-        flagCount:
-          $exists: false
-      , flagCount:
-          $lt: 2
-      ]
-    , 
-      sort: sort
-      limit: limit
-      fields: 
-        skipperIds: 0
-        replierIds: 0
-        loc: 0
+        skipperIds: 
+          $ne: @userId
+        flaggerIds:
+          $ne: @userId
+        $or: [
+          flagCount:
+            $exists: false
+        , flagCount:
+            $lt: 2
+        ]
+      , 
+        sort: sort
+        limit: limit
+        fields: 
+          skipperIds: 0
+          replierIds: 0
+          loc: 0
 
 Meteor.publish "threads", ->
   Threads.find

@@ -104,24 +104,20 @@ Meteor.methods
         $set: userUpdate
     )
 
-  toggleTitleFlashing: (userAttr) ->
-    userId = userAttr._id
-
+  toggleTitleFlashing: (toggle) ->
     unless Meteor.userId()
       throw new Meteor.Error(401, "You have to log in to make this change.")
 
-    unless userId == Meteor.userId()
-      throw new Meteor.Error(401, "You can't make this change to other people's profiles")
+    unless typeof toggle == "boolean"
+      throw new Meteor.Error 401, "Toggle must be a boolean"
         
     now = new Date().getTime()
-    userUpdate = _.extend(_.pick(userAttr, 'notifications.0.isTitleFlashing'),
-      updatedAt: now
-    )
-    Meteor.users.update(
-        userId
-      ,
-        $set: userUpdate
-    )
+    Meteor.users.update Meteor.userId(),
+      $set: 
+        'notifications.0.isTitleFlashing': toggle
+        updatedAt: now
+
+    toggle
 
   changeCount: (inc)->
     unless Meteor.userId()
@@ -134,7 +130,8 @@ Meteor.methods
     Meteor.users.update Meteor.userId(),
       $set: 
         updatedAt: now
-      $inc: inc
+      $inc: 
+        'notifications.0.count': inc
 
   getUserAttr: (userId) ->
     if Meteor.isServer
