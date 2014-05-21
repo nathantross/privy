@@ -1,6 +1,8 @@
 Template.newNote.events
+
   "submit form": (e) ->
     e.preventDefault()
+    isChecked = $('input[name=onoffswitch]').prop('checked')
 
     Meteor.call 'createThread', {}, (error, threadId) -> 
       return console.log(error.reason) if error
@@ -10,13 +12,13 @@ Template.newNote.events
         maxReplies: parseInt($(e.target).find("#max-replies").val())
         threadId: threadId
 
-      Meteor.call 'createNote', noteAttr, (error, threadId) -> 
+      Meteor.call 'createNote', noteAttr, isChecked, (error, response) -> 
         return console.log(error.reason) if error
 
         # Creates new note
         message = 
           body: noteAttr.body
-          threadId: threadId
+          threadId: response.threadId
           lastMessage: noteAttr.body       
 
         Meteor.call 'createMessage', message, (error, id) ->
@@ -29,7 +31,7 @@ Template.newNote.events
     Router.go "feed"
 
 
-  "keyup input": (e)->
+  "keyup #notes-body": (e)->
       val = $(e.target).find("[name=notes-body]").prevObject[0].value
       len = val.length
       $("#charNum").text(len + "/120")

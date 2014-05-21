@@ -7,14 +7,29 @@ Meteor.publish "userStatus", ->
           idle: 1
 
 Meteor.publish "notifications", ->
-  Notifications.find userId: @userId,
-      sort:
+  Notifications.find 
+      userId: @userId
+      $or: [
+            isBlocked: false
+          , isBlocked:
+              $exists: false
+          ]
+      isArchived: false
+    , sort:
         updatedAt: -1
 
 Meteor.publish "notes", (sort, limit) ->
+  user = Meteor.users.findOne @userId
+  
   Notes.find
-      userId:
-        $ne: @userId
+      $and: [
+        userId:
+          $ne: @userId
+      , userId:
+          $nin: user.blockerIds || []
+      , userId:
+          $nin: user.blockedIds || []
+      ]
       isInstream: true
       $or: [
             currentViewer: @userId
@@ -40,6 +55,7 @@ Meteor.publish "notes", (sort, limit) ->
       fields: 
         skipperIds: 0
         replierIds: 0
+        loc: 0
 
 Meteor.publish "threads", ->
   Threads.find
@@ -70,6 +86,7 @@ Meteor.publish "userData", ->
         status: 1
         inThreads: 1
         'flags.isSuspended': 1
+        blockedIds: 1
 
 
 Meteor.publish "messages", (threadId, limit) ->

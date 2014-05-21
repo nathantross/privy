@@ -197,3 +197,61 @@ Meteor.methods
               lastAvatar: avatarAttr
 
     avatarAttr
+
+
+  toggleBlockUser: (toggle, blockedId) ->
+
+    # check for invalid inputs
+    unless Meteor.userId()
+      throw new Meteor.Error(401, "You have to log in to make this change.")
+
+    unless typeof toggle == "boolean"
+      throw new Meteor.Error(400, "Toggle must be a boolean.")
+
+    unless blockedId
+      throw new Meteor.Error(404, "You must included a blockedId.")      
+
+    if Meteor.isServer
+      unless Meteor.users.findOne(blockedId)
+        throw new Meteor.Error(404, "This user does not exist.")   
+
+    # Add/remove blockedId to/from blocker's block list
+    if toggle
+      Meteor.users.update Meteor.userId(),
+        $addToSet:
+          blockedIds: blockedId
+          
+    else
+      Meteor.users.update Meteor.userId(),
+        $pull:
+          blockedIds: blockedId
+
+    # Add/remove blockerId to/from blocker's blocker list
+    if Meteor.isServer
+      if toggle
+        Meteor.users.update blockedId,
+          $addToSet:
+            blockerIds: Meteor.userId()
+      else
+        Meteor.users.update blockedId,
+          $pull:
+            blockerIds: Meteor.userId()
+
+  toggleFirstSkip: ->
+    unless Meteor.user()
+      throw new Meteor.Error(401, "You have to log in to make this change.")
+
+    Meteor.users.update Meteor.userId(),
+      $set:
+        'notifications.0.firstSkip': true
+
+  toggleSound: (toggle) ->
+    unless Meteor.user()
+      throw new Meteor.Error(401, "You have to log in to make this change.")
+
+    unless typeof toggle == "boolean"
+      throw new Meteor.Error(400, "Toggle must be a boolean.")
+
+    Meteor.users.update Meteor.userId(),
+      $set:
+        'notifications.0.sound': toggle
