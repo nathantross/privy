@@ -3,10 +3,18 @@ Template.showThread.helpers
     Threads.findOne(@threadId)?.participants[@userIndex].isMuted
 
   isBlocked: ->
-    if @threadId? && @userIndex?
+    thread = Threads.findOne(@threadId) if @threadId?
+    if thread && @userIndex? && thread.participants.size == 2
       blockedIndex = if @userIndex == 1 then 0 else 1
-      blockedId = Threads.findOne(@threadId).participants[blockedIndex].userId
+      blockedId = thread.participants[blockedIndex].userId
       return _.indexOf(Meteor.user().blockedIds, blockedId) > -1
+    else
+      false
+
+  hasTwoParticipants: ->
+    thread = Threads.findOne(@threadId) if @threadId?
+    thread.participants.size == 2 if thread
+
 
 Template.showThread.events
   'click .load-more': (e)->

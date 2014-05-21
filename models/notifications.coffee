@@ -58,19 +58,22 @@ Meteor.methods
       for participant in thread.participants
         unless participant.userId == user._id || participant.isMuted
           pUser = Meteor.users.findOne participant.userId
-          notification['userId'] = pUser._id
-          notification['isNotified'] = !pUser.status?.online || pUser.status?.idle
-          notification['lastAvatar'] = user.profile['avatar']
+          isInThread = Notify.isInThread(pUser._id, threadId)
+
+          notification = _.extend notification,
+            userId: pUser._id
+            isNotified: !isInThread
+            lastAvatar: user.profile.avatar
 
           # Insert the notifications for each participant
           Notifications.upsert
-              threadId: messageAttr.threadId
+              threadId: threadId
               userId: pUser._id
             , 
               $set: notification
           
-          if !pUser.status?.online
-            # Put a notification on the nav if they're offline or idle
+          # Highlight nav and increment unread count if user's not in thread
+          unless isInThread
             Meteor.users.update pUser._id,
               $set: 
                 'notifications.0.isNavNotified': true
@@ -78,8 +81,9 @@ Meteor.methods
               $inc: 
                 'notifications.0.count': 1
           
-          if !pUser.status?.online || pUser.status?.idle
-            # Send notification email to offline user
+          # Send notification email to idle/offline user          
+          if pUser.notifications[0].email && (!pUser.status?.online || pUser.status?.idle)
+
             emailAttr = 
               receiverEmail: pUser.emails[0].address
               senderAvatar: user.profile.avatar

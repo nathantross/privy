@@ -113,4 +113,3 @@ Template.feed.helpers
   toTitleCase = (str)->
     str.replace /\w\S*/g, (txt) ->
       txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()   
->>>>>>> 0c6fd29f5156932eee5a966dd993fc9ead916807
