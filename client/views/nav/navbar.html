@@ -2,9 +2,9 @@
 
   <div class="topspace">
 
-    {{#if currentUser}}  
+    {{#if currentUser}} 
+      {{> popup}} 
       {{> signedInNav}}
-      {{> popup}}
     {{else}}     
       {{> signedOutNav}}
     {{/if}}

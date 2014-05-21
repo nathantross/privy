@@ -30,7 +30,7 @@ Template.feed.events
 
 Template.feed.helpers
   isUserActive: ->
-    "Online" if @userAttr? && !@userAttr.isIdle 
+    "•" if @userAttr? && !@userAttr.isIdle 
     
   location: ->
     if @note.place

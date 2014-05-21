@@ -1,34 +1,44 @@
 <template name="newNote">
-  <div class="container container-open">
-    <div class="row text-center">
-      <form class="new-note text-center">
+  <div class="notes">
+    <div class="text-center">
+      <div class="navbar-fixed-top new-note-header">
+        <a href="{{pathFor 'feed'}}" class="fa fa-times fa-lg pull-right"></a>
+      </div>
 
-        <i class="pencil-form fa fa-pencil"></i>
-        <input id="notes-body" name="notes-body" class="create-form text-left" type="text" maxlength="120" style="overflow:hidden" placeholder="What's on your mind?" autofocus />
-        <div id="charNum">0/120</div>
-        
-        <label>I am seeking</label>
-        <select id="max-replies" name="max-replies">
-          <option value="5">5 replies</option>
-          <option value="3" selected>3 replies</option>
-          <option value="1">1 replies</option>
-        </select>
-        <br />
-        <br />
-        <label>Include your city: </label>
-        <div class="myswitch">
-          <div class="onoffswitch">
-            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-            <label class="onoffswitch-label" for="myonoffswitch">
-              <div class="onoffswitch-inner"></div>
-              <div class="onoffswitch-switch"></div>
-            </label>
+      <div class="text-center">
+        <form class="new-note text-center">
+          <div class="number-count" id="charNum">0/120</div>
+          <div>
+            <textarea id="notes-body" name="notes-body" class="create-form text-left" type="text" maxlength="120" placeholder="{ Write your new note }" ></textarea>
           </div>
-        </div>
 
-      </form><!-- /input-group-->
+          <div class="row small-centered">
+            <div class="small-12 columns text-center">
+              <input type="submit" value="&#x2713;" href="#" class="fa fa-check fa-lg grow btn btn-primary-new-note">
+            </div>
+          </div>  
+
+          <div class="navbar-fixed-bottom newnote-selectors">
+            <label class="label-name">I want</label>
+              <select class="btn-select" id="max-replies" name="max-replies">
+                <option value="5">5 replies</option>
+                <option value="3" selected>3 replies</option>
+                <option value="1">1 reply</option>
+              </select>
+
+            <label class="label-name">City </label>
+            <div class="myswitch">
+              <div class="onoffswitch">
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                <label class="onoffswitch-label" for="myonoffswitch">
+                  <div class="onoffswitch-inner"></div>
+                  <div class="onoffswitch-switch"></div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </form><!-- /input-group-->
+      </div>
     </div>
   </div>
 </template>
-
-

@@ -1,26 +1,26 @@
 <template name="intro">
-  <div class="container">
+  <div class="container container-open topspace">
   	<div class="row">
       <div class="col-sm-3">
       </div>
       <div class="col-sm-6 text-center">
     		<h1>First, choose your avatar</h1>
-    		<p>Your avatar is your only identifier on Privy. We'll keep your information secret!</p>
+    		<p>Your avatar is your only identifier on Strange. We'll keep your information secret!</p>
       </div>
       <div class="col-sm-3">
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-2">
+      <div class="col-sm-1">
       </div>
-      <div class="col-sm-8 text-center">
+      <div class="col-sm-10 text-center">
         <ul class="list-inline">
           {{#each avatars}}
             {{> avatar }}
           {{/each}}
         </ul>
       </div>
-      <div class="col-sm-2">
+      <div class="col-sm-1">
       </div>
     </div>
   </div>
@@ -28,13 +28,13 @@
 
 
 <template name="intro1">
-  <div class="container">
+  <div class="container container-open topspace">
     <div class="row">
       <div class="col-sm-2">
       </div>
       <div class="col-sm-8">
         <center>
-          <h1 class="intro-headline">Privy starts with your feed</h1>
+          <h1 class="intro-headline">Strange starts with your feed</h1>
           <p class="intro-body">You can browse notes written by other people who want to chat.</p>
           <ul class="list-inline">
             <li><a href="{{pathFor 'feed'}}" class="intro-finish">Finish</a></li>
@@ -56,7 +56,7 @@
 
 
 <template name="intro2">
-  <div class="container">
+  <div class="container container-open topspace">
     <div class="row">
       <div class="col-sm-2">
       </div>
@@ -84,7 +84,7 @@
 
 
 <template name="intro3">
-  <div class="container">
+  <div class="container container-open topspace">
     <div class="row">
       <div class="col-sm-2">
       </div>
@@ -93,7 +93,7 @@
         <h1 class="intro-headline">Add your own notes, too</h1>
         <p class="intro-body">Click the <strong><b class="fa fa-plus fa-lg"></b></strong> in the upper right to share a note. Your note stays in the feed until someone replies.</p>
         <ul class="list-inline">
-          <li><a href="{{pathFor 'feed'}}" class="intro-next">Now, get started <i class="fa fa-check"></i></a></li>
+          <li><a href="{{pathFor 'feed'}}" class="intro-next">Now, get started</a></li>
         </ul>
         <br>
         <div class="row">
