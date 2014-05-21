@@ -11,12 +11,10 @@
         <ul class="note-feed list-inline text-left">
           <li><div class="avatar"><img class="avatar-feed" src="{{userAttr.avatar}}" /></div></li>
           <li><div class="online is-user-active">{{isUserActive}}</div></li>
-          <li><p class="location">Florida, IN</p></li><!-- Placeholder -->
-          {{#if note.place}}
+          {{#if location}}
             <li><p class="location">{{location}}</p></li>
           {{/if}}
         </ul>
-
         <div class="row small-centered">
           <div class="small-12 columns text-center">
             <a  type="button" value="Change background" href="#" id="skip" class="grow btn btn-info fa fa-times fa-lg"></a>

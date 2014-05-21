@@ -1,5 +1,7 @@
 Template.allNotifications.helpers
   notifications: ->
-    Notifications.find userId: Meteor.userId(),
-      sort:
-        updatedAt: -1
+    Notifications.find 
+        userId: Meteor.userId()
+        isArchived: false
+      , sort:
+          updatedAt: -1

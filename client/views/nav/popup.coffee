@@ -35,3 +35,22 @@ Template.flagAlert.events
       creatorId: @note.userId, 
       creatorIsOnline: if !@userAttr.isIdle then "Yes" else "No"
     })
+
+Template.blockUserAlert.events
+  'click .block-btn': (e)->
+    e.preventDefault()
+    $('#block-user-alert').slideUp('slow')
+
+  'click #block-confirm': (e)->
+    Notify.toggleBlock(true, @threadId, @userIndex)
+    Router.go('feed')
+
+Template.firstSkipAlert.events
+  'click .skip-btn': (e) ->
+    e.preventDefault()
+    $('#first-skip-alert').slideUp "slow"
+
+  'click #skip-confirm': (e)->
+    Meteor.call 'skipNote', @note._id, @userAttr.isIdle, (error, id) -> 
+      console.log(error.reason) if error
+    

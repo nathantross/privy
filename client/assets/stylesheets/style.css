@@ -1246,7 +1246,7 @@ h2 {
   font-style: none;
 }
 
-.alert-flag {
+.alert-flag, .alert-block-user {
   background-color: #d0ce00;
   color: #fff;
   font-family: helvetica, arial, sans-serif;
@@ -1254,7 +1254,7 @@ h2 {
   font-style: none;
 }
 
-.alert-success-nav {
+.alert-success-nav, .alert-first-skip {
   background-color: rgb( 105, 206, 78 );
   color: #fff;
   font-family: helvetica, arial, sans-serif;
@@ -1499,7 +1499,7 @@ footer {
   text-decoration: underline;
 }
 
-.alert-flag {
+.alert-flag, .alert-block-user {
   background-color: red;
 }
 
