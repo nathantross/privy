@@ -2,44 +2,38 @@
   <div class="notes">
     <div class="container container-open">
       {{#if note}}
-      <div class="row">
-        <div class="col-sm-2">
-        </div>
-        <div class="col-sm-8">
-        <p><a href="#" class="message-feed-drop text-right" id="flag">• • •</a></p>
-        <h1 class="message-feed">{{note.body}}</h1>
-        <ul class="note-feed list-inline text-left">
-          <li><div class="avatar"><img class="avatar-feed" src="{{userAttr.avatar}}" /></div></li>
-          <li><div class="online is-user-active">{{isUserActive}}</div></li>
-          {{#if location}}
-            <li><p class="location">{{location}}</p></li>
-          {{/if}}
-        </ul>
-        <div class="row small-centered">
-          <div class="small-12 columns text-center">
-            <a  type="button" value="Change background" href="#" id="skip" class="grow btn btn-info fa fa-times fa-lg"></a>
+        <div class="row">
+          <div class="col-sm-2"></div>
+          <div class="col-sm-8">
+            <p><a href="#" class="message-feed-drop text-right" id="flag">• • •</a></p>
+            <h1 class="message-feed">{{note.body}}</h1>
+            <ul class="note-feed list-inline text-left">
+              <li><div class="avatar"><img class="avatar-feed" src="{{userAttr.avatar}}" /></div></li>
+              <li><div class="online is-user-active">{{isUserActive}}</div></li>
+              {{#if location}}
+                <li><p class="location">{{location}}</p></li>
+              {{/if}}
+            </ul>
+            <div class="row small-centered">
+              <div class="small-12 columns text-center">
+                <a  type="button" value="Change background" href="#" id="skip" class="grow btn btn-info fa fa-times fa-lg"></a>
 
-          <a data-toggle="collapse" href="#collapseOne" class="fa fa-mail-forward fa-lg grow btn btn-primary btn-big" id="startChat"></a>
+                <a data-toggle="collapse" href="#collapseOne" class="fa fa-mail-forward fa-lg grow btn btn-primary btn-big" id="startChat"></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2"></div>
+          <div id="collapseOne" class="panel-collapse collapse" style="height: auto;">
+            <div class="panel-body">
+             {{> noteReply}}
+            </div>
           </div>
         </div>
-      </div>
-        <div class="col-sm-2">
-        </div>
-        </div>
-
-        <div id="collapseOne" class="panel-collapse collapse" style="height: auto;">
-
-          <div class="panel-body">
-           {{> noteReply}}
-          </div>
-
-        </div>
-        
-        {{else}}
-          {{> emptyFeed}}
-        {{/if}}
-        <br>
-        <br>
+      {{else}}
+        {{> emptyFeed}}
+      {{/if}}
+      <br>
+      <br>
     </div>
   </div>
 </template>
