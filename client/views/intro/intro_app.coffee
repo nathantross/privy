@@ -17,7 +17,7 @@ Template.intro.avatars = [
 ]
 
 Template.intro.rendered = ->
-  Notify.popup("#successAlert", "Welcome to Privy! Let's take a tour.", true)
+  Notify.popup("#successAlert", "Welcome to Strange! Let's take a tour.", true)
 
 Template.intro1.events
   'click .intro-finish': ->
