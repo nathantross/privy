@@ -3,17 +3,21 @@
     <div class="row text-center">
       {{> entryForgotPassword}}
     </div>
-    <div class="row text-center">
-      <label>Sound:</label>
-      <div class="myswitch">
-        <div class="onoffswitch">
-          <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" {{isChecked}}>
-          <label class="onoffswitch-label" for="myonoffswitch">
-            <div class="onoffswitch-inner"></div>
-            <div class="onoffswitch-switch"></div>
-          </label>
+
+    {{#each switches}}
+      <div class="row text-center">
+        <label>{{label}}</label>
+        <div class="myswitch">
+          <div class="onoffswitch">
+            <input type="checkbox" name="{{name}}-switch" class="onoffswitch-checkbox" id="{{name}}-switch" {{isChecked}}>
+            <label class="onoffswitch-label" for="{{name}}-switch">
+              <div class="onoffswitch-inner"></div>
+              <div class="onoffswitch-switch"></div>
+            </label>
+          </div>
         </div>
-      </div>
-    </div>  
+      </div>  
+    {{/each}}
+
   </div>
 </template>

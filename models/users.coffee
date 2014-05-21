@@ -242,13 +242,18 @@ Meteor.methods
       $set:
         'notifications.0.firstSkip': true
 
-  toggleSound: (toggle) ->
+  toggleNotifications: (toggle, attr) ->
+
+    unless attr == 'sound' || attr == 'email'
+      throw new Meteor.Error(400, "Attr must be sound or email.")
+
     unless Meteor.user()
       throw new Meteor.Error(401, "You have to log in to make this change.")
 
     unless typeof toggle == "boolean"
       throw new Meteor.Error(400, "Toggle must be a boolean.")
 
-    Meteor.users.update Meteor.userId(),
-      $set:
-        'notifications.0.sound': toggle
+    modifier = $set: {}
+    modifier.$set["notifications.0." + attr] = toggle
+
+    Meteor.users.update Meteor.userId(), modifier
