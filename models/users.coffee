@@ -104,47 +104,40 @@ Meteor.methods
         $set: userUpdate
     )
 
-  toggleTitleFlashing: (userAttr) ->
-    userId = userAttr._id
-
+  toggleTitleFlashing: (toggle) ->
     unless Meteor.userId()
       throw new Meteor.Error(401, "You have to log in to make this change.")
 
-    unless userId == Meteor.userId()
-      throw new Meteor.Error(401, "You can't make this change to other people's profiles")
+    unless typeof toggle == "boolean"
+      throw new Meteor.Error 401, "Toggle must be a boolean"
         
     now = new Date().getTime()
-    userUpdate = _.extend(_.pick(userAttr, 'notifications.0.isTitleFlashing'),
-      updatedAt: now
-    )
-    Meteor.users.update(
-        userId
-      ,
-        $set: userUpdate
-    )
+    Meteor.users.update Meteor.userId(),
+      $set: 
+        'notifications.0.isTitleFlashing': toggle
+        updatedAt: now
 
-  changeCount: (userAttr) ->
-    userId = userAttr._id
+    toggle
 
+  changeCount: (inc)->
     unless Meteor.userId()
-      throw new Meteor.Error(401, "You have to log in to make this change.")
+      throw new Meteor.Error 401, "You have to log in to make this change."
 
-    unless userId == Meteor.userId()
-      throw new Meteor.Error(401, "You can't make this change to other people's profiles")
+    unless typeof inc == "number" && inc % 1 == 0 
+      throw new Meteor.Error 401, "#{inc} is not an integer."
 
     now = new Date().getTime()
-    userUpdate = _.pick(userAttr, 'notifications.0.count')
-    
-    Meteor.users.update(userId,
+    Meteor.users.update Meteor.userId(),
       $set: 
         updatedAt: now
-      $inc: userUpdate
-    )
+      $inc: 
+        'notifications.0.count': inc
 
   getUserAttr: (userId) ->
     if Meteor.isServer
       user = Meteor.users.findOne(userId)
-      isIdle = user.status?.idle == true
+      isIdle = 
+        if user.status?.online? then user.status?.idle == true else !online?
       avatar = user.profile.avatar || false
         
       return (
@@ -202,3 +195,60 @@ Meteor.methods
 
     avatarAttr
 
+
+  toggleBlockUser: (toggle, blockedId) ->
+
+    # check for invalid inputs
+    unless Meteor.userId()
+      throw new Meteor.Error(401, "You have to log in to make this change.")
+
+    unless typeof toggle == "boolean"
+      throw new Meteor.Error(400, "Toggle must be a boolean.")
+
+    unless blockedId
+      throw new Meteor.Error(404, "You must included a blockedId.")      
+
+    if Meteor.isServer
+      unless Meteor.users.findOne(blockedId)
+        throw new Meteor.Error(404, "This user does not exist.")   
+
+    # Add/remove blockedId to/from blocker's block list
+    if toggle
+      Meteor.users.update Meteor.userId(),
+        $addToSet:
+          blockedIds: blockedId
+          
+    else
+      Meteor.users.update Meteor.userId(),
+        $pull:
+          blockedIds: blockedId
+
+    # Add/remove blockerId to/from blocker's blocker list
+    if Meteor.isServer
+      if toggle
+        Meteor.users.update blockedId,
+          $addToSet:
+            blockerIds: Meteor.userId()
+      else
+        Meteor.users.update blockedId,
+          $pull:
+            blockerIds: Meteor.userId()
+
+  toggleFirstSkip: ->
+    unless Meteor.user()
+      throw new Meteor.Error(401, "You have to log in to make this change.")
+
+    Meteor.users.update Meteor.userId(),
+      $set:
+        'notifications.0.firstSkip': true
+
+  toggleSound: (toggle) ->
+    unless Meteor.user()
+      throw new Meteor.Error(401, "You have to log in to make this change.")
+
+    unless typeof toggle == "boolean"
+      throw new Meteor.Error(400, "Toggle must be a boolean.")
+
+    Meteor.users.update Meteor.userId(),
+      $set:
+        'notifications.0.sound': toggle

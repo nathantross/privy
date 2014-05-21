@@ -1,5 +1,5 @@
 <template name="notification">
-
+  
   <li class="nav-note">
     <a href="{{pathFor 'showThread' _id=threadId}}" class="notification-link">
       <p class="{{#if isNotified}}pull-right fa fa-circle{{/if}}"></p>
@@ -13,7 +13,7 @@
       		<p class="messageIntro">{{messageIntro}}</p>
       	</li>
       </ul>
-
+      <a href="#" style="float: right;" class="archive">archive</a>
     </a>
   </li>
     

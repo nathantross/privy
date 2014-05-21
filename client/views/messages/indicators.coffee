@@ -6,7 +6,7 @@ Template.messageIndicators.helpers
         sort:
             createdAt: -1) 
 
-    unless lastMessage && lastMessage.senderId == Meteor.userId()
+    unless lastMessage && lastMessage.senderId == Meteor.userId() && !lastMessage.hasExited
       ""
     else if lastMessage && lastMessage.isRead
       "Read " + messageDate(lastMessage)

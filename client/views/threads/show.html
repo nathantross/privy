@@ -1,5 +1,23 @@
 <template name="showThread">
   <div class="container container-open">
+    {{#if hasTwoParticipants}}
+      <div class="row messageWidth">
+        <div style="float: right;">
+          {{#if isMuted}}
+            {{#unless isBlocked}}
+              <a href="#" style="text-align: right; color: grey; font-size: 20px;" id="enter-chat">Enter chat</a><br />
+            {{/unless}}
+          {{else}}
+            <a href="{{pathFor 'feed'}}" style="text-align: right; color: grey; font-size: 20px;" id="leave-chat">Leave chat</a><br />
+          {{/if}}
+          {{#if isBlocked}}
+            <a href="#" style="text-align: right; color: grey; font-size: 20px;" id="unblock-user">Unblock user</a>
+          {{else}}
+            <a href="{{pathFor 'feed'}}" style="text-align: right; color: grey; font-size: 20px;" id="block-user">Block user</a>
+          {{/if}}
+        </div>
+      </div>
+    {{/if}}
     <div class="row messageWidth">
       <div class="col-sm-12">
         <div id="msg-wrap">
@@ -17,7 +35,15 @@
         </div>
 
         <div>
-          {{> newMessage}}
+          {{#if isMuted}}
+            {{#if isBlocked}}
+              <button id="unblock-user">Unblock user</button>
+            {{else}}
+              <button id="enter-chat">Enter chat</button>
+            {{/if}}
+          {{else}}
+            {{> newMessage}}
+          {{/if}}
         </div>
       </div>
     </div>

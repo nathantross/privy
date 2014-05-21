@@ -6,6 +6,7 @@ Meteor.methods
     user = Meteor.user()
     threadId = messageAttr.threadId
     thread = Threads.findOne(threadId)
+    hasExited = messageAttr.hasExited
 
     unless user
       throw new Meteor.Error(401, "You have to login to create a message.")
@@ -19,13 +20,18 @@ Meteor.methods
     unless Notify.isParticipant(user._id, threadId)
       throw new Meteor.Error(401, "You can't create messages on this thread.")
 
+    if hasExited? && typeof hasExited != "boolean"
+      throw new Meteor.Error(400, "hasExited must be set to true or false.")
+
+
     # isRead should be true if any of the participants is in the room
-    isRead = false
-    if thread || Meteor.isServer
+    isRead = if hasExited? then true else false
+    
+    if !isRead && (thread || Meteor.isServer)
       for participant in thread.participants
         if participant.userId != user._id && participant.isInThread
           isRead = true
-
+    
     now = new Date().getTime()
     message = _.extend(_.pick(messageAttr, 'threadId', 'body'),
       senderId: user._id
@@ -33,6 +39,8 @@ Meteor.methods
       updatedAt: now
       isRead: isRead 
     )    
+    
+    message.hasExited = hasExited if hasExited?
 
     msgId = Messages.insert(message)
 

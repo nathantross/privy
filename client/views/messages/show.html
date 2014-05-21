@@ -14,29 +14,36 @@
   </div>
 
   <div class="text-center">
-    {{#if currentUserIsSender}}
+    {{#if hasExited}}
       <div class="row text-right">
-        <div class="col-xs-3">
-        </div>
-        <div id="yellow" class="col-xs-7 ">
-          <p class="comment text-right">{{body}}</p>
-        </div> 
-        <div id="green" class="col-xs-2 text-left">
-          <img class="text-left avatarright" src="{{senderAvatar}}" />
-        </div>
+        <img class="text-left avatarright" src="{{senderAvatar}}" />
+        <p class="comment text-right">{{body}}</p>
       </div>
-
     {{else}}
-      <div class="row text-left">
-        <div id="green" class="col-xs-2 text-right">
-          <img class="text-right avatarleft" src="{{senderAvatar}}" />
+      {{#if currentUserIsSender}}
+        <div class="row text-right">
+          <div class="col-xs-3">
+          </div>
+          <div id="yellow" class="col-xs-7 ">
+            <p class="comment text-right">{{body}}</p>
+          </div> 
+          <div id="green" class="col-xs-2 text-left">
+            <img class="text-left avatarright" src="{{senderAvatar}}" />
+          </div>
         </div>
-        <div id="yellow" class="col-xs-7">
-          <p class="response">{{body}}</p>
+
+      {{else}}
+        <div class="row text-left">
+          <div id="green" class="col-xs-2 text-right">
+            <img class="text-right avatarleft" src="{{senderAvatar}}" />
+          </div>
+          <div id="yellow" class="col-xs-7">
+            <p class="response">{{body}}</p>
+          </div>
+          <div class="col-xs-3">
+          </div>
         </div>
-        <div class="col-xs-3">
-        </div>
-      </div>
+      {{/if}}
     {{/if}}
   </div>
 </template>

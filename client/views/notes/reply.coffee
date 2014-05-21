@@ -19,15 +19,18 @@ Template.noteReply.events
     
     $(e.target).find('[name=reply-body]').val('')
 
-    Meteor.call 'addNoteReplier', noteAttr, (error, threadId) ->
-      return console.log(error.reason) if error   
+    Meteor.call 'addNoteReplier', noteAttr, (err, threadId) ->
+      return console.log(err.reason) if err   
 
       reply.threadId = threadId
-      Meteor.call 'createMessage', reply, (error, id) ->
-        return console.log(error.reason) if error
+      Meteor.call 'readMessage', threadId, (err, id) ->
+        return console.log(err.reason) if err
 
-        Meteor.call 'createNotification', reply, (error, id) ->
-          console.log(error.reason) if error
+        Meteor.call 'createMessage', reply, (err, id) ->
+          return console.log(err.reason) if err
+
+          Meteor.call 'createNotification', reply, (err, id) ->
+            console.log(err.reason) if err
     
     mixpanel.track("Reply: created", {
       noteId: @note._id, 
