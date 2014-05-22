@@ -6,6 +6,9 @@ Template.notification.helpers
     else
       @lastMessage
 
+  notifiedStyle: ->
+    if @isNotified then "pull-right fa fa-circle" else ""
+
   sender: ->
     user = Meteor.users.findOne @lastAvatarId
     isOnline =
@@ -16,6 +19,7 @@ Template.notification.helpers
       isOnline: isOnline
     )
     
+
 Template.notification.events
   'click .archive': (e)->
     e.preventDefault()
