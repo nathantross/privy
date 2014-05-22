@@ -6,6 +6,12 @@ Template.notification.helpers
       message = message.slice(0, previewLength) + "..."
     message
 
+  notifiedStyle: ->
+    if @isNotified
+      "pull-right fa fa-circle"
+    else
+      ""
+
 Template.notification.events
   'click .archive': (e)->
     e.preventDefault()
