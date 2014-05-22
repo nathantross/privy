@@ -1,6 +1,6 @@
 <template name="index">
   <div class="main container-fluid text-center">
-    <img src="https://s3-us-west-2.amazonaws.com/privy-application/main_logo.png" width="250px" />
+    <h1 class="main-logo-index">Strange</h1>
       <h1 class="mainheadline">A place to chat anonymously</h1>
       <br>
       <br>
@@ -12,9 +12,12 @@
 
       <div class="col-sm-4 text-center">
         <ul>
-          <li><a href="/sign-up" class="btn btn-primary btn-big btn-lg">Create Account</a></li>
+          {{#each loginServices}}
+              {{> entrySocial}}
+            {{/each}}
           <br>
-          <li><a href="/sign-in" class="login-instead">Login Instead</a></li>
+          <br>
+          <li><a href="/sign-in" class="login-instead">Or login with email</a></li>
         </ul>
       </div>
 
