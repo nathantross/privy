@@ -6,8 +6,30 @@ Meteor.publish "userStatus", ->
           userId: 1
           idle: 1
 
+Meteor.publish "notificationUserStatus", ->
+  userIds = 
+    Threads.find(
+      participants:
+        $elemMatch:
+          userId: @userId
+    ).map( (thread) -> 
+      if thread.participants.length == 2
+        [thread.participants[0].userId, thread.participants[1].userId]
+      else
+        thread.participants[0].userId
+    )
+
+  Meteor.users.find
+      _id: 
+        $in: _.uniq(_.flatten(userIds))
+    ,
+      fields: 
+        'profile.avatar': 1
+        'status.online': 1
+        'status.idle': 1
+
 Meteor.publish "notifications", ->
-  Notifications.find 
+    Notifications.find 
       userId: @userId
       $or: [
             isBlocked: false
@@ -15,8 +37,6 @@ Meteor.publish "notifications", ->
               $exists: false
           ]
       isArchived: false
-    , sort:
-        updatedAt: -1
 
 Meteor.publish "notes", (sort, limit) ->
   if @userId

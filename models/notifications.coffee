@@ -14,11 +14,14 @@ Meteor.methods
     unless Notify.isParticipant(user._id, threadId) 
       throw new Meteor.Error 401, "You can't create notifications in this thread."
 
+    unless Notify.isParticipant(messageAttr.senderId, threadId)
+      throw new Meteor.Error 401, "This senderId is invalid"
+
     if messageAttr.lastMessage == ""
       throw new Meteor.Error 404, "Whoops, looks like your message is blank!"
 
     unless threadId
-        throw new Meteor.Error 404, "ThreadId doesn't exist to make this notification."
+      throw new Meteor.Error 404, "ThreadId doesn't exist to make this notification."
   
     # Create a notification for the current user
     now = new Date().getTime()
@@ -32,12 +35,13 @@ Meteor.methods
     )
 
     # set avatar if replying to a note
-    if messageAttr.avatar 
-      notification['lastAvatar'] = messageAttr.avatar
+    if messageAttr.isReply
+      notification['lastAvatarId'] = messageAttr.senderId
     
     # set avatar if creating a note
     else if Notifications.findOne(_.pick(messageAttr, 'threadId')) == undefined
-       notification['lastAvatar'] = user.profile['avatar']
+       notification['lastAvatarId'] = user._id
+       notification['originalNote'] = messageAttr.lastMessage
 
     # create the notification
     Notifications.upsert
@@ -63,7 +67,7 @@ Meteor.methods
           notification = _.extend notification,
             userId: pUser._id
             isNotified: !isInThread
-            lastAvatar: user.profile.avatar
+            lastAvatarId: user._id
 
           # Insert the notifications for each participant
           Notifications.upsert
