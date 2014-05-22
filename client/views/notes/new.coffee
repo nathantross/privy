@@ -1,15 +1,28 @@
 Template.newNote.events
+  
+  "submit form": (e) ->    
+    submitNewNote()  
 
-  "submit form": (e) ->
-    e.preventDefault()
+
+  "keyup #notes-body": (e)->
+    if e.keyCode == 13
+      e.preventDefault()
+      submitNewNote()
+    else
+      val = $(e.target).find("[name=notes-body]").prevObject[0].value
+      len = val.length
+      $("#charNum").text(len + "/120")
+      
+      
+  submitNewNote = ->
     isChecked = $('input[name=onoffswitch]').prop('checked')
-
+    
     Meteor.call 'createThread', {}, (error, threadId) -> 
       return console.log(error.reason) if error
       
       noteAttr = 
-        body: $(e.target).find("[name=notes-body]").val()
-        maxReplies: parseInt($(e.target).find("#max-replies").val())
+        body: $("[name=notes-body]").val().replace(/(\r\n|\n|\r)/gm,"")
+        maxReplies: parseInt($("#max-replies").val())
         threadId: threadId
 
       Meteor.call 'createNote', noteAttr, isChecked, (error, response) -> 
@@ -30,9 +43,3 @@ Template.newNote.events
 
     Notify.popup('#successAlert', "Note created! Woot woooo!")
     Router.go "feed"
-
-
-  "keyup #notes-body": (e)->
-      val = $(e.target).find("[name=notes-body]").prevObject[0].value
-      len = val.length
-      $("#charNum").text(len + "/120")

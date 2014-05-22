@@ -1,22 +1,24 @@
 Template.notification.helpers
   lastMessagePreview: ->
-    textPreview @lastMessage, 20
+    textPreview @lastMessage, 20 if @lastMessage
 
   originalNotePreview: -> 
-    textPreview @originalNote, 20
+    textPreview @originalNote, 20 if @originalNote
 
   notifiedStyle: ->
     if @isNotified then "pull-right fa fa-circle" else ""
 
   sender: ->
-    user = Meteor.users.findOne @lastAvatarId
-    isOnline =
-      if user.status?.online && !user.status?.idle && user._id != Meteor.userId() then "•" else ""
+    user = Meteor.users.findOne @lastAvatarId if @lastAvatarId
 
-    return(
-      avatar: user.profile.avatar
-      isOnline: isOnline
-    )
+    if user
+      isOnline =
+        if user.status?.online && !user.status?.idle && user._id != Meteor.userId() then "•" else ""
+
+      return(
+        avatar: user.profile.avatar
+        isOnline: isOnline
+      )
 
   textPreview = (message, previewLength) ->
     if previewLength < message.length
