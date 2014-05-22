@@ -9,6 +9,7 @@ Router.configure
   waitOn: -> 
     Meteor.subscribe 'userData'
     Meteor.subscribe 'notifications'
+    Meteor.subscribe 'notificationUserStatus'
     Meteor.subscribe 'threads' #enables switching between threads
   onRun: ->
     mixpanel.disable() if window.location.host == "localhost:3000"

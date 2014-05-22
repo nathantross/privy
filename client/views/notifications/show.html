@@ -2,21 +2,21 @@
   
   <li class="nav-note">
     <a href="{{pathFor 'showThread' _id=threadId}}" class="notification-link">
-
+    <ul class="note-feed list-inline text-left">
+      <li><div class="avatar"><img class="avatar-feed" src="{{sender.avatar}}" /></div></li>
+      <li><div class="online is-user-active">{{sender.isOnline}}</div></li>
+    </ul>
     <ul class="list-inline">
       <li><img src="{{lastAvatar}}" class="avatar-nav" /></li>
-        <li><ul>
-        	<li>
-        		<p class="firstMessageIntro">{{messageIntro}}</p>
-        	</li>
-        	<li>
-        		<p class="messageIntro">{{messageIntro}}</p>
-        	</li>
-        </ul></li>
+      <li>
+        <ul>
+        	<li><p class="firstMessageIntro">{{messageIntro}}</p></li>
+        	<li><p class="messageIntro">{{originalNote}}</p></li>
+        </ul>
+      </li>
       <li><p><a href="#" class="fa fa-ban fa-lg archive"></a></p></li>
       <li><p class="{{notifiedStyle}}"></p></li>
     </ul>
-
     </a>
   </li>
     
