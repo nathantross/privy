@@ -1,9 +1,9 @@
 Template.showMessage.helpers
   senderAvatar: ->
-    Meteor.users.findOne(@senderId).profile.avatar
+    Meteor.users.findOne(@senderId).profile.avatar if @senderId
   
   currentUserIsSender: ->
-    @senderId == Meteor.userId()
+    @senderId == Meteor.userId() if @senderId
 
   hasExited: ->
     @hasExited == true
