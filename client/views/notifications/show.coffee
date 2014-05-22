@@ -5,6 +5,9 @@ Template.notification.helpers
   originalNotePreview: -> 
     textPreview @originalNote, 20
 
+  notifiedStyle: ->
+    if @isNotified then "pull-right fa fa-circle" else ""
+
   sender: ->
     user = Meteor.users.findOne @lastAvatarId
     isOnline =
@@ -21,6 +24,7 @@ Template.notification.helpers
     else
       message
     
+
 Template.notification.events
   'click .archive': (e)->
     e.preventDefault()
