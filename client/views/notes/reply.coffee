@@ -16,7 +16,7 @@ Template.noteReply.events
       body: $body.val()
       lastMessage: $body.val()
       isReply: true
-      senderId: @note.userId
+      noteCreatorId: @note.userId
     
     $(e.target).find('[name=reply-body]').val('')
 

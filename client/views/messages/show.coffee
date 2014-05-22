@@ -1,8 +1,6 @@
 Template.showMessage.helpers
   senderAvatar: ->
-    participants = Threads.findOne(@threadId).participants
-    for p in participants
-      return p['avatar'] if p['userId'] == @senderId
+    Meteor.users.findOne(@senderId).profile.avatar
   
   currentUserIsSender: ->
     @senderId == Meteor.userId()

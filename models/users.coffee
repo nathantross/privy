@@ -149,50 +149,27 @@ Meteor.methods
       user = Meteor.users.findOne(userId)      
       avatar = user.profile.avatar || false
         
-  setAvatar: (avatarAttr) ->
-    user = Meteor.user()
+  setAvatar: (avatarUrl) ->
+    avatars = 
+      [
+        "https://s3-us-west-2.amazonaws.com/privy-application/avatar_1.png",
+        "https://s3-us-west-2.amazonaws.com/privy-application/avatar_2.png",
+        "https://s3-us-west-2.amazonaws.com/privy-application/avatar_3.png",
+        "https://s3-us-west-2.amazonaws.com/privy-application/avatar_4.png", 
+        "https://s3-us-west-2.amazonaws.com/privy-application/avatar_5.png", 
+        "https://s3-us-west-2.amazonaws.com/privy-application/avatar_6.png"
+      ]
 
-    unless user
+    unless Meteor.userId()
       throw new Meteor.Error(401, "You have to log in to make this change.")
 
-    Meteor.users.update user._id,
+    if _.indexOf(avatars, avatarUrl) == -1
+      throw new Meteor.Error(401, "You cannot use this image as your avatar.")      
+    Meteor.users.update Meteor.userId(),
       $set:
-        'profile.avatar': avatarAttr
+        'profile.avatar': avatarUrl
 
-    # Update the avatar in each thread
-    threads = Threads.find
-      participants:
-        $elemMatch:
-          userId: user._id
-
-    if threads 
-      threads.forEach (thread) ->
-        index = Notify.userIndex(thread._id)
-        modifier = $set: {}
-        modifier.$set["participants." + index + ".avatar"] = avatarAttr
-        Threads.update(thread._id, modifier)
-        
-        # Update the notification when the user is the only one in thread
-        if thread.participants.length == 1 
-            Notifications.update
-              userId: user._id
-              threadId: thread._id
-            ,
-              $set: 
-                lastAvatar: avatarAttr
-            , 
-              multi: true
-
-        # Update the user's avatar in other people's notifications
-        if Meteor.isServer
-          Notifications.update
-              userId: 
-                $ne: user._id
-              threadId: thread._id
-            ,
-              lastAvatar: avatarAttr
-
-    avatarAttr
+    mixpanel.track "User: avatar", {avatar: avatarUrl} if Meteor.isClient
 
 
   toggleBlockUser: (toggle, blockedId) ->
