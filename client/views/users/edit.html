@@ -1,23 +1,28 @@
 <template name="editUser">
-  <div class="container container-open">
-    <div class="row text-center">
-      {{> entryForgotPassword}}
-    </div>
+  <div class="container container-open text-center">
+    <h2>Profile Settings</h2>
 
-    {{#each switches}}
-      <div class="row text-center">
-        <label>{{label}}</label>
-        <div class="myswitch">
-          <div class="onoffswitch">
-            <input type="checkbox" name="{{name}}-switch" class="onoffswitch-checkbox" id="{{name}}-switch" {{isChecked}}>
-            <label class="onoffswitch-label" for="{{name}}-switch">
-              <div class="onoffswitch-inner"></div>
-              <div class="onoffswitch-switch"></div>
-            </label>
-          </div>
-        </div>
-      </div>  
-    {{/each}}
+    <h3>Notification Settings</h3>
+
+    <ul class="list-inline">
+      {{#each switches}}
+      <li>
+          <label>{{label}}</label>
+          <div class="myswitch">
+            <div class="onoffswitch">
+              <input type="checkbox" name="{{name}}-switch" class="onoffswitch-checkbox" id="{{name}}-switch" {{isChecked}}>
+              <label class="onoffswitch-label" for="{{name}}-switch">
+                <div class="onoffswitch-inner"></div>
+                <div class="onoffswitch-switch"></div>
+              </label>
+            </div>
+          </div> 
+      </li>
+      {{/each}}
+    </ul>
+
+    <br>
+    <a href="/sign-out" class="btn-default btn">Sign Out</a>
 
   </div>
 </template>
