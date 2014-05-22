@@ -1,7 +1,12 @@
 <template name="noteReply">
 
-	<form class="reply-form navbar-fixed-bottom">
-	  <input name="reply-body" type="text" class="form-control reply-form" placeholder="Send a private reply" autofocus />
-  	</form>
+  <form class="reply-form navbar-fixed-bottom">
+    <div class="input-group">
+      <input  name="reply-body"  type="text" class="form-control reply-form" maxlength="300" placeholder="Send a private reply" autofocus  />
+      <span class="input-group-btn">
+        <button class="btn-message btn-default" type="button"><i class="fa fa-pencil fa-lg"></i></button>
+      </span>  
+    </div>   
+  </form>
 
 </template>
