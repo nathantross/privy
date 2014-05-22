@@ -1,11 +1,21 @@
 Template.notification.helpers
   messageIntro: ->
-    message = @lastMessage
     previewLength = 20 # change this to update number of characters
-    if previewLength < message.length
-      message = message.slice(0, previewLength) + "..."
-    message
+    if previewLength < @lastMessage.length
+      @lastMessage.slice(0, previewLength) + "..."
+    else
+      @lastMessage
 
+  sender: ->
+    user = Meteor.users.findOne @lastAvatarId
+    isOnline =
+      if user.status?.online && !user.status?.idle && user._id != Meteor.userId() then "•" else ""
+
+    return(
+      avatar: user.profile.avatar
+      isOnline: isOnline
+    )
+    
 Template.notification.events
   'click .archive': (e)->
     e.preventDefault()

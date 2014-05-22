@@ -136,8 +136,7 @@ Meteor.methods
   getUserAttr: (userId) ->
     if Meteor.isServer
       user = Meteor.users.findOne(userId)
-      isIdle = 
-        if user.status?.online? then user.status?.idle == true else !online?
+      isIdle = !user.status?.online || user.status?.idle == true
       avatar = user.profile.avatar || false
         
       return (

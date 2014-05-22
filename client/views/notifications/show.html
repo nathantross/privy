@@ -3,14 +3,17 @@
   <li class="nav-note">
     <a href="{{pathFor 'showThread' _id=threadId}}" class="notification-link">
       <p class="{{#if isNotified}}pull-right fa fa-circle{{/if}}"></p>
-      <img src="{{lastAvatar}}" class="avatar-nav" />
+      <ul class="note-feed list-inline text-left">
+        <li><div class="avatar"><img class="avatar-feed" src="{{sender.avatar}}" /></div></li>
+        <li><div class="online is-user-active">{{sender.isOnline}}</div></li>
+      </ul>
 
       <ul>
       	<li>
       		<p class="firstMessageIntro">{{messageIntro}}</p>
       	</li>
       	<li>
-      		<p class="messageIntro">{{messageIntro}}</p>
+      		<p class="messageIntro">{{originalNote}}</p>
       	</li>
       </ul>
       <a href="#" style="float: right;" class="archive">archive</a>
