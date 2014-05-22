@@ -29,13 +29,22 @@ Migrations.add
           thread.participants[1].userId
         else
           thread.participants[0].userId
-      
+
+      # Update the notification
       Notifications.update notification._id,
         $set:
           originalNote: originalNote.body
           lastAvatarId: lastAvatarId
         $unset:
           lastAvatar: ""
+
+      # Update thread
+      modifier = $unset: {}
+      modifier.$unset["participants.0.avatar"] = ""
+      if thread.participants.length == 2
+        modifier.$unset["participants.1.avatar"] = ""
+
+      Threads.update thread._id, modifier
       
   down: ->
     Notifications.update {},

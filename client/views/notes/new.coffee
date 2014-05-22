@@ -19,7 +19,8 @@ Template.newNote.events
         message = 
           body: noteAttr.body
           threadId: response.threadId
-          lastMessage: noteAttr.body       
+          lastMessage: noteAttr.body
+          isNewNote: true       
 
         Meteor.call 'createMessage', message, (error, id) ->
           return console.log(error.reason) if error 

@@ -154,12 +154,10 @@ Meteor.methods
         # We create the thread here
         thread = 
           participants: [
-              userId: user._id 
-              avatar: user.profile['avatar'] 
-            ,
-              userId: sender._id 
-              avatar: sender.profile['avatar'] 
-          ]
+              userId: user._id
+            , 
+              userId: sender._id
+          ] 
           createdAt: now
           updatedAt: now
 
@@ -181,7 +179,6 @@ Meteor.methods
           $addToSet:
             participants: 
               userId: user._id
-              avatar: user.profile['avatar'] 
         
         return thread._id
 

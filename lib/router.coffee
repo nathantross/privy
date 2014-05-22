@@ -20,7 +20,7 @@ Router.map ->
   @route "index",
     path: "/"
     onBeforeAction: ->
-      document.title = "Privy"
+      document.title = "Strange"
       Session.set("isTrackingChanges", false)
       Router.go "feed" if Meteor.user()
 

@@ -6,6 +6,7 @@ Meteor.methods
   createNotification: (messageAttr) -> 
     user = Meteor.user()
     threadId = messageAttr.threadId
+    noteCreatorId = messageAttr.noteCreatorId
 
     # Declare errors
     unless user
@@ -14,7 +15,7 @@ Meteor.methods
     unless Notify.isParticipant(user._id, threadId) 
       throw new Meteor.Error 401, "You can't create notifications in this thread."
 
-    unless Notify.isParticipant(messageAttr.senderId, threadId)
+    if noteCreatorId && !Notify.isParticipant(noteCreatorId, threadId)
       throw new Meteor.Error 401, "This senderId is invalid"
 
     if messageAttr.lastMessage == ""
@@ -36,10 +37,10 @@ Meteor.methods
 
     # set avatar if replying to a note
     if messageAttr.isReply
-      notification['lastAvatarId'] = messageAttr.senderId
+      notification['lastAvatarId'] = noteCreatorId
     
     # set avatar if creating a note
-    else if Notifications.findOne(_.pick(messageAttr, 'threadId')) == undefined
+    else if messageAttr.isNewNote
        notification['lastAvatarId'] = user._id
        notification['originalNote'] = messageAttr.lastMessage
 
