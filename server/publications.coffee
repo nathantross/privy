@@ -29,7 +29,7 @@ Meteor.publish "notificationUserStatus", ->
         'status.idle': 1
 
 Meteor.publish "notifications", ->
-    Notifications.find 
+  Notifications.find 
       userId: @userId
       $or: [
             isBlocked: false
@@ -37,6 +37,8 @@ Meteor.publish "notifications", ->
               $exists: false
           ]
       isArchived: false
+    , sort:
+        updatedAt: -1
 
 Meteor.publish "notes", (sort, limit) ->
   if @userId

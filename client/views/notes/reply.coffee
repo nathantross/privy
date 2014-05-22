@@ -14,7 +14,6 @@ Template.noteReply.events
 
     reply = 
       body: $body.val()
-      avatar: @userAttr.avatar
       lastMessage: $body.val()
       isReply: true
       senderId: @note.userId
