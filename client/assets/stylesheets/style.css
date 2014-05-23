@@ -18,10 +18,10 @@ body {
 }
 
 .login-instead {
-  margin-top: 40px !important;
+  margin-top: -33px !important;
   color: #fff;
   opacity: 0.7;
-  font-size: 20px;
+  font-size: 17px;
   text-decoration: underline;
 }
 
@@ -262,14 +262,43 @@ background-color: rgba( 233, 233, 233, 1) !important;
   background-color: #222222;
   margin-bottom: 0px;
   margin-top: -50px;
-  padding-top: 50px;
   padding-bottom: 80px;
   padding-left: 40px;
   padding-right: 40px;
 }
 
+.facebook-btn-index > .btn {
+  display: inline-block;
+  padding: 12px 25px;
+  margin-bottom: 0;
+  font-size: 20px;
+  /* font-weight: normal; */
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  background-color: rgba( 28, 136, 200, 1);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: rgba( 245, 245, 245, 0.7);
+  margin-bottom: -14px;
+}
+
+.facebook-btn-index > .btn:hover {
+  color: rgba( 245, 245, 245, 1);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, .9);
+  -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, .9);
+}
+
+
 .main-logo-index {
-  font-size: 72px;
+  font-size: 74px;
   font-family: "Roboto" !important;
   font-weight: 100 !important;
   color: rgba( 245, 245, 245, 1 );
@@ -324,17 +353,20 @@ background-color: rgba( 233, 233, 233, 1) !important;
 .action-item {
   padding-top: 50px;
   padding-bottom: 50px;
-  background-color: #285c76;
+  background-color: #65B356;
 }
 
 .sub-head {
-  color: #87d1f5;
-  font-size: 34px;
+  font-family: "Droid Serif";
+  color: rgba(245, 245, 245, 0.9);
+  font-size: 26px;
 }
 
 .home-body {
-  color: #b6e7ff;
-  font-size: 18px;
+  font-family: "Droid Serif";
+  color: rgba(245, 245, 245, 0.7);
+  font-size: 14px;
+  line-height: 2.5;
 }
 
 .fill {
@@ -346,8 +378,8 @@ background-color: rgba( 233, 233, 233, 1) !important;
 .mainheadline {
   color: rgba(245, 245, 245, 0.8);
   font-family: "Droid Serif";
-  font-size: 30px;
-  font-weight: 400;
+  font-size: 20px;
+  font-weight: 100;
   margin-top: -20px;
 }
 
