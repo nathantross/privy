@@ -1,9 +1,7 @@
 Template.signedInNav.events
-  'click #threads-link': (event)->
+  'click #dropdown-li': (event)->
     Notify.toggleNavHighlight(false)
     Notify.toggleTitleFlashing(false)
-    isDropdownOpen = Session.get('isDropdownOpen')
-    Session.set('isDropdownOpen', !isDropdownOpen)
 
   'click #sign-out': ->
     mixpanel.track("User: signed out")
@@ -25,5 +23,8 @@ Template.signedInNav.helpers
     user = Meteor.user().notifications
     if user && user[0].isNavNotified then "nav-notify" else ""
 
-  isDropdownOpen: ->
-    if Session.get('isDropdownOpen') then "open" else ""
+  isIntro: ->
+    disabledPaths = ['intro', 'intro_1', 'intro_2', 'intro_3']
+    currentPath = Router.current().path.split('/')[1]
+
+    _.indexOf(disabledPaths, currentPath) == 1

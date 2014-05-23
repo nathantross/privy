@@ -1176,6 +1176,7 @@ a#noteFeed {
   padding-right: 20px !important;
 }
 
+.intro-logo,
 .nav-logo {
   font-size: 32px;
   font-family: "Roboto" !important;
@@ -1188,11 +1189,21 @@ a#noteFeed {
   margin-top: -35px;
 }
 
+.intro-logo {
+  color: #fff;
+  margin: 0px;
+}
+
 @media (min-width: 800px) {
 
   .nav-logo {
    padding-left: 0px !important; 
    margin-left: -20px;
+  }
+
+  .intro-logo {
+    font-size: 36px;
+    line-height: 79px;
   }
 
 }
@@ -1324,6 +1335,7 @@ a#noteFeed {
   padding-top: 10px;
   padding-bottom: 0px;
   z-index: 100 !important;
+  height: 61px;
 }
 
 .navbar-fixed-bottom {
@@ -1366,6 +1378,10 @@ a#noteFeed {
 
   .navbar-inverse-loggedout a {
     margin-top: 5px !important;
+  }
+
+  .navbar-inverse {
+    height: 89px;
   }
 
 }

@@ -1,8 +1,9 @@
 <template name="signedInNav">
   <nav class="navbar-inverse navbar-fixed-top">
     <ul class="list-inline">
-      <li class="dropdown {{isDropdownOpen}}" id="threads-link">
-        <a href="#" class="large fa fa-comment fa-lg {{isNavNotified}}" data-toggle="dropdown"></a>
+      {{#unless isIntro}}
+        <li class="dropdown" id="dropdown-li">
+          <a href="#" class="large fa fa-comment fa-lg {{isNavNotified}}" data-toggle="dropdown"></a>
           <ul id="full-height" class="dropdown-menu">
             <ul class="dropdown-menu-top list-inline">
               <li class="pull-left">
@@ -24,7 +25,14 @@
             </ul>
           </ul>
         </li>
-      <li class="pull-right"><a class="large pull-right fa fa-plus fa-lg large-icon" href="{{ pathFor 'newNote' }}" id="addNote"></a></li>
+        <li class="pull-right">
+          <a class="large pull-right fa fa-plus fa-lg large-icon" href="{{ pathFor 'newNote' }}" id="addNote"></a>
+        </li>
+      {{else}}
+        <li>
+          <a href="{{pathFor 'feed'}}"><h1 class="intro-logo">Strange</h1></a>
+        </li>  
+      {{/unless}}
     </ul>
   </nav>
 </template>
