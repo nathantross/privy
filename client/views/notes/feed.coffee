@@ -1,12 +1,14 @@
 Template.feed.events
   "click #skip": (e, template) ->
-    if Meteor.user().notifications[0].firstSkip?   
+    if Meteor.user().notifications[0].firstSkip? && !Session.equals 'isSkipAlert', true
       Meteor.call 'skipNote', @note._id, @userAttr.isIdle, (error, id) -> 
         console.log(error.reason) if error
     else
+      $('#first-skip-alert').slideDown "slow" unless Session.equals 'isSkipAlert', true
+      Session.set 'isSkipAlert', true
       Meteor.call 'toggleFirstSkip', {}, (err) ->
         console.log err if err
-      $('#first-skip-alert').slideDown "slow"
+      
 
   "click #startChat": ->
     $("[name=reply-body]").focus()

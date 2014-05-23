@@ -49,6 +49,7 @@ Template.firstSkipAlert.events
   'click .skip-btn': (e) ->
     e.preventDefault()
     $('#first-skip-alert').slideUp "slow"
+    Session.set 'isSkipAlert', false
 
   'click #skip-confirm': (e)->
     Meteor.call 'skipNote', @note._id, @userAttr.isIdle, (error, id) -> 
