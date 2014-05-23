@@ -804,7 +804,7 @@ a.fa.fa-comment.fa-lg.pull-left {
   outline: none;
   font-size: 24px !important;
   padding-right: 20px;
-    color: rgba(245, 245 ,245, 0.8);
+  color: rgba(245, 245 ,245, 0.8);
 }
 
 button#enter-chat, button#enter-chat:visited {
