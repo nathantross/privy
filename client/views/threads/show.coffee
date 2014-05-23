@@ -24,11 +24,11 @@ Template.showThread.events
     Router.go(@nextPath)
 
   'click #leave-chat': (e) ->
-    Notify.toggleIsMuted(true, "left the chat", @threadId, @userIndex)
+    Notify.toggleIsMuted(true, "Left the chat", @threadId, @userIndex)
     Router.go('feed')
 
   'click #enter-chat': (e) ->
-    Notify.toggleIsMuted(false, "entered the chat", @threadId, @userIndex)
+    Notify.toggleIsMuted(false, "Entered the chat", @threadId, @userIndex)
 
   'click #block-user': (e)->
     e.preventDefault()
