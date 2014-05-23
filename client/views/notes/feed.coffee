@@ -7,8 +7,7 @@ Template.feed.events
       $('#first-skip-alert').slideDown "slow" unless Session.equals 'isSkipAlert', true
       Session.set 'isSkipAlert', true
       Meteor.call 'toggleFirstSkip', {}, (err) ->
-        console.log err if err
-      
+        console.log err if err      
 
   "click #startChat": ->
     $("[name=reply-body]").focus()

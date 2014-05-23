@@ -38,6 +38,7 @@ Meteor.methods
     # set avatar if replying to a note
     if messageAttr.isReply
       notification['lastAvatarId'] = noteCreatorId
+      notification['originalNote'] = messageAttr.lastMessage
     
     # set avatar if creating a note
     else if messageAttr.isNewNote
