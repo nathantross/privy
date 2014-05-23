@@ -25,6 +25,7 @@ Template.showThread.events
 
   'click #leave-chat': (e) ->
     Notify.toggleIsMuted(true, "left the chat", @threadId, @userIndex)
+    Router.go('feed')
 
   'click #enter-chat': (e) ->
     Notify.toggleIsMuted(false, "entered the chat", @threadId, @userIndex)
