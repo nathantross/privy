@@ -165,11 +165,9 @@ Meteor.methods
     unless typeof toggle == "boolean"
       throw new Meteor.Error 401, "Toggle must be a boolean."
 
-    now = new Date().getTime()
     Notifications.update notId,
       $set:
         isArchived: toggle
-        updatedAt: now
 
     mixpanel.track "Notification: archived" if Meteor.isClient
     notId

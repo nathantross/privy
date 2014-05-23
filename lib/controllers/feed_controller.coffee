@@ -57,7 +57,7 @@ exports.FeedController = RouteController.extend(
     return note
 
   userAttr: ->
-    Notify.getUserStatus(@note().userId) if @note().userId
+    Notify.getUserStatus(@note().userId) if @note()?.userId
 
   data: ->
     return(
