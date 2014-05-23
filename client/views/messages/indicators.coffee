@@ -16,14 +16,14 @@ Template.messageIndicators.helpers
         if readStatus    
           readStatus = if lastMessage.isRead then "Read #{readStatus}" else "Sent #{readStatus}"
         else
-          if lastMessage.isRead then "Just read" else "Just sent"
+          readStatus = if lastMessage.isRead then "Just read" else "Just sent"
 
       else
         if readStatus
           readStatus = "Read #{readStatus}"
         else
           readStatus = "Just received"
-      
+
       return(
         userIsSender: userIsSender
         readStatus: readStatus
