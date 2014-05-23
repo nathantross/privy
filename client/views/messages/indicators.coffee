@@ -10,17 +10,16 @@ Template.messageIndicators.helpers
     if lastMessage
       userIsSender = Meteor.userId() == lastMessage.senderId
       readStatus = timeSince(lastMessage.updatedAt)
+      readStatus = readStatus + " ago" if readStatus
 
       if userIsSender
-        if readStatus
-          readStatus = readStatus + " ago"
+        if readStatus    
           readStatus = if lastMessage.isRead then "Read #{readStatus}" else "Sent #{readStatus}"
         else
           if lastMessage.isRead then "Just read" else "Just sent"
 
       else
         if readStatus
-          readStatus = readStatus + " ago"
           readStatus = "Read #{readStatus}"
         else
           readStatus = "Just received"
@@ -37,7 +36,7 @@ Template.messageIndicators.helpers
     if participant then participant.isTyping else false
 
   avatar: ->
-    typist(@threadId).avatar
+    Notify.getUserStatus(typist(@threadId).userId, true, false)
 
 
   timeSince = (msgDate) ->

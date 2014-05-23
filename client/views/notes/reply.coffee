@@ -17,6 +17,7 @@ Template.noteReply.events
       lastMessage: $body.val()
       isReply: true
       noteCreatorId: @note.userId
+      originalNote: @note.body
     
     $(e.target).find('[name=reply-body]').val('')
 
@@ -42,8 +43,6 @@ Template.noteReply.events
     })
 
     Notify.toggleLock Session.get('currentNoteId'), false
-
-    # document.body.style.backgroundColor = '#' + ((Math.random()*10)+1).toString(16).slice(4, 6) + 'FF' + ((Math.random()*10)+1).toString(16).slice(4, 6)
 
     Notify.popup('#successAlert', "Reply sent!")
              

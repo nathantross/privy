@@ -226,7 +226,7 @@ exports.Notify =
 
   getUserStatus: (userId, avatar, isIdle) ->
     if userId
-      user = Meteor.users.find userId
+      user = Meteor.users.findOne userId
 
       if user
         if (avatar && isIdle) || (!avatar && !isIdle)
@@ -252,6 +252,7 @@ exports.Notify =
             isOnline: Session.get 'isOnline'
           )
         else if avatar
+          console.log Session.get 'avatar'
           Session.get 'avatar'
         else
           Session.get 'isOnline'

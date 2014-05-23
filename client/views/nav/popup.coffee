@@ -13,17 +13,10 @@ Template.newMessageAlert.helpers
       lastMessage = notification.lastMessage
 
       if userId
-        user = Meteor.users.findOne(userId)
-        if user
-          user.profile.avatar
-        else
-          Meteor.call 'getUserAttr', userId, (err, userAttr) ->
-            return console.log err if err
+        avatar = Notify.getUserStatus(userId, true, false)
 
-            Session.set 'avatar', userAttr.avatar
-
-        _.extend notification, 
-          avatar: Session.get 'avatar'
+        _.extend notification,
+          avatar: avatar
 
 
 Template.newMessageAlert.events

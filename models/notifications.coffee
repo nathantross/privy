@@ -21,6 +21,9 @@ Meteor.methods
     if messageAttr.lastMessage == ""
       throw new Meteor.Error 404, "Whoops, looks like your message is blank!"
 
+    if messageAttr.originalNote == ""
+      throw new Meteor.Error 404, "Whoops, looks like your original note is blank!"
+
     unless threadId
       throw new Meteor.Error 404, "ThreadId doesn't exist to make this notification."
   
@@ -38,12 +41,12 @@ Meteor.methods
     # set avatar if replying to a note
     if messageAttr.isReply
       notification['lastAvatarId'] = noteCreatorId
-      notification['originalNote'] = messageAttr.lastMessage
+      notification['originalNote'] = messageAttr.originalNote
     
     # set avatar if creating a note
     else if messageAttr.isNewNote
-       notification['lastAvatarId'] = user._id
-       notification['originalNote'] = messageAttr.lastMessage
+      notification['lastAvatarId'] = user._id
+      notification['originalNote'] = messageAttr.lastMessage
 
     # create the notification
     Notifications.upsert

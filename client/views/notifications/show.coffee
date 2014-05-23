@@ -10,25 +10,13 @@ Template.notification.helpers
 
   sender: ->
     if @lastAvatarId
-      user = Meteor.users.findOne @lastAvatarId 
+      userAttr = Notify.getUserStatus @lastAvatarId
 
-      if user
-        avatar = user.profile.avatar
-        isOnline =
-          if user.status?.online && !user.status?.idle && user._id != Meteor.userId() then "•" else ""
-      else
-        Meteor.call 'getUserAttr', @lastAvatarId, (err, userAttr) ->
-          console.log err if err 
-          if userAttr
-            Session.set 'isIdle', userAttr.isIdle
-            Session.set 'avatar', userAttr.avatar
-
-        isOnline = 
-          if Session.equals('isIdle', false) then "•" else ""
-        avatar = Session.get 'avatar'
+      isOnline = 
+        if userAttr.isOnline && @lastAvatarId != Meteor.userId() then "•" else ""
 
       return(
-        avatar: avatar
+        avatar: userAttr.avatar
         isOnline: isOnline
       )
 

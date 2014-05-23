@@ -1,7 +1,7 @@
 Template.feed.events
   "click #skip": (e, template) ->
     if Meteor.user().notifications[0].firstSkip? && !Session.equals 'isSkipAlert', true
-      Meteor.call 'skipNote', @note._id, @userAttr.isIdle, (error, id) -> 
+      Meteor.call 'skipNote', @note._id, @userAttr.isOnline, (error, id) -> 
         console.log(error.reason) if error
     else
       $('#first-skip-alert').slideDown "slow" unless Session.equals 'isSkipAlert', true
@@ -16,7 +16,7 @@ Template.feed.events
       body: @note.body, 
       creatorId: @note.userId, 
       threadId: @note.threadId, 
-      creatorIsOnline: if !@userAttr.isIdle then "Yes" else "No"
+      creatorIsOnline: if @userAttr.isOnline then "Yes" else "No"
     })
 
   "click #flag": (e)->
@@ -26,12 +26,12 @@ Template.feed.events
       noteId: @note._id, 
       body: @note.body, 
       creatorId: @note.userId, 
-      creatorIsOnline: if !@userAttr.isIdle then "Yes" else "No"
+      creatorIsOnline: if @userAttr.isOnline then "Yes" else "No"
     })
 
 Template.feed.helpers
   isUserActive: ->
-    "•" if @userAttr? && !@userAttr.isIdle 
+    "•" if @userAttr? && @userAttr.isOnline 
     
   location: ->
     if @note.place

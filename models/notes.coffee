@@ -182,7 +182,7 @@ Meteor.methods
         
         return thread._id
 
-  skipNote: (noteId, userIsIdle) ->
+  skipNote: (noteId, userIsOnline) ->
     note = Notes.findOne(noteId)
 
     unless Meteor.userId()
@@ -206,7 +206,7 @@ Meteor.methods
         noteId: note._id, 
         body: note.body, 
         creatorId: note.userId, 
-        creatorIsOnline: if !userIsIdle then "Yes" else "No"
+        creatorIsOnline: if userIsOnline then "Yes" else "No"
       }) 
       
       Notify.toggleLock Session.get('currentNoteId'), false
