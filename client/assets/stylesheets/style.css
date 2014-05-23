@@ -793,10 +793,59 @@ background-color: rgba( 233, 233, 233, 1) !important;
   padding-top: 0px;
 }
 
+a.fa.fa-comment.fa-lg.pull-left {
+  margin-top: 17px !important;
+  font-size: 30px !important;
+  padding-left: 0;
+  margin-left: 20px;
+}
+
+.thread-header > ul > li > a {
+  outline: none;
+  font-size: 24px !important;
+  padding-right: 20px;
+    color: rgba(245, 245 ,245, 0.8);
+}
+
+button#enter-chat, button#enter-chat:visited {
+  display: block;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.05);
+  text-align: center;
+  height: 60px;
+  line-height: 60px;
+  width: 80%;
+  margin: 0 auto;
+  font-size: 18px;
+  color: rgba( 245, 245, 245, 1);
+  border: 0;
+  background-color: rgba( 105, 206, 78, 1 );
+  margin-bottom: 30px !important;
+}
+
+.button#enter-chat:hover, .button#enter-chat:active, .button#enter-chat:focus {
+  background-color: rgba( 114, 223, 85, 1 ) !important;
+  color: #ffffff !important;
+}
+
 @media (min-width: 800px) {
+
   .nav-thread-title {
     margin-top: 30px;
   }
+
+  a.fa.fa-comment.fa-lg.pull-left {
+    font-size: 0px !important;
+  }
+
+  .thread-header > ul > li > a {
+    outline: none;
+    font-size: 24px !important;
+    padding-right: 20px;
+    color: rgba(245, 245 ,245, 0.8);
+    padding-top: 12px;
+  }
+
 }
 
 .dropdown-menu-message {
@@ -853,7 +902,7 @@ background-color: rgba( 233, 233, 233, 1) !important;
   padding-bottom: 10px;
   height: 59px;
   margin-bottom: -9px;
-  z-index: 9999999999;
+  z-index: 10000;
   
 }
 
@@ -879,16 +928,30 @@ background-color: rgba( 233, 233, 233, 1) !important;
   margin-left: -17px !important;
   padding-top: 40px;
   margin-bottom: 0px;
-  }  
+  } 
+
+  .thread-header > ul > li > a {
+    outline : none;
+    font-size: 24px !important;
+    margin-top: 22px;
+
+  }
+
+  a.fa.fa-chevron-left.fa-lg.pull-left {
+    margin-top: 33px !important;
+  }
 
 }
 
 .thread-header > ul > li > a {
   outline : none;
   font-size: 24px !important;
-  padding-left: 20px;
-  margin-top: 21px !important;
+  margin-top: 11px;
 
+}
+
+a.fa.fa-chevron-left.fa-lg.pull-left {
+  margin-top: 20px !important;
 }
 
 .thread-header > ul > li > a:hover {
