@@ -2,7 +2,10 @@
 
   <div class="navbar-fixed-top thread-header">
     <ul>
-      <li><a href="{{pathFor 'feed'}}" class="fa fa-comment fa-lg pull-left"></a></li>
+      <li>
+        <a href="#" class="fa fa-comment fa-lg pull-left {{isNavNotified}}" data-toggle="dropdown"></a>
+        {{> dropdown}}
+      </li>
       <li><a href="#" class="pull-right" data-toggle="dropdown">•••</a>
         <ul id="full-height" class="dropdown-menu dropdown-menu-message list-inline text-center">
           <li><a class="message-dropdown" id="block-user" href="#">Block user</a></li>
