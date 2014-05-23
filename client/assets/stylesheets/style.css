@@ -18,10 +18,10 @@ body {
 }
 
 .login-instead {
-  margin-top: 40px !important;
+  margin-top: -33px !important;
   color: #fff;
   opacity: 0.7;
-  font-size: 20px;
+  font-size: 17px;
   text-decoration: underline;
 }
 
@@ -67,12 +67,9 @@ h2 {
 }
 
 .notes {
-  background-color: rgba( 28, 136, 200, 1);
   padding-top: 50px;
   margin-top: -20px;
-  height: 2000px;
   width: 100%;
-  position: fixed;
 }
 
 
@@ -265,14 +262,42 @@ background-color: rgba( 233, 233, 233, 1) !important;
   background-color: #222222;
   margin-bottom: 0px;
   margin-top: -50px;
-  padding-top: 50px;
   padding-bottom: 80px;
   padding-left: 40px;
   padding-right: 40px;
 }
 
+.facebook-btn-index > .btn {
+  display: inline-block;
+  padding: 12px 25px;
+  margin-bottom: 0;
+  font-size: 20px;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  background-color: rgba( 28, 136, 200, 1);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: rgba( 245, 245, 245, 0.7);
+  margin-bottom: -14px;
+}
+
+.facebook-btn-index > .btn:hover {
+  color: rgba( 245, 245, 245, 1);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, .9);
+  -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, .9);
+}
+
+
 .main-logo-index {
-  font-size: 72px;
+  font-size: 74px;
   font-family: "Roboto" !important;
   font-weight: 100 !important;
   color: rgba( 245, 245, 245, 1 );
@@ -327,17 +352,20 @@ background-color: rgba( 233, 233, 233, 1) !important;
 .action-item {
   padding-top: 50px;
   padding-bottom: 50px;
-  background-color: #285c76;
+  background-color: #65B356;
 }
 
 .sub-head {
-  color: #87d1f5;
-  font-size: 34px;
+  font-family: "Droid Serif";
+  color: rgba(245, 245, 245, 0.9);
+  font-size: 26px;
 }
 
 .home-body {
-  color: #b6e7ff;
-  font-size: 18px;
+  font-family: "Droid Serif";
+  color: rgba(245, 245, 245, 0.7);
+  font-size: 14px;
+  line-height: 2.5;
 }
 
 .fill {
@@ -349,8 +377,8 @@ background-color: rgba( 233, 233, 233, 1) !important;
 .mainheadline {
   color: rgba(245, 245, 245, 0.8);
   font-family: "Droid Serif";
-  font-size: 30px;
-  font-weight: 400;
+  font-size: 20px;
+  font-weight: 100;
   margin-top: -20px;
 }
 
@@ -445,8 +473,9 @@ background-color: rgba( 233, 233, 233, 1) !important;
 }
 
 .note-feed {
-  padding-left: 40px;
+  padding-left: 10px;
   padding-right: 40px;
+  margin-top: 11px;
 }
 
 .feed {
@@ -655,13 +684,15 @@ background-color: rgba( 233, 233, 233, 1) !important;
   height: 70px;
   width: 100%;
   left: 0;
-  z-index: 1000;
+  z-index: 10;
   bottom: 0;
   border-radius: 0px !important;
   text-align: left;
   outline: none;
-  box-shadow:none;
+  box-shadow: none;
   border: 0px solid #ccc;
+  bottom: 0px;
+  position: fixed;
 }
 
 
@@ -827,10 +858,29 @@ background-color: rgba( 233, 233, 233, 1) !important;
 }
 
 @media (min-width: 800px) {
+
   .thread-header {
     margin-left: 320px !important;
     padding-bottom: 90px;
   }
+
+  a.fa.fa-ban.fa-lg.archive {
+  margin-left: -10px;
+  width: 1px;
+  height: 1px;
+  }
+
+  .fa-circle {
+  padding-right: 0px;
+  color: #ffed54;
+  border-color: #fff;
+  border-style: solid 1px;
+  font-size: 24px;
+  margin-left: -17px !important;
+  padding-top: 40px;
+  margin-bottom: 0px;
+  }  
+
 }
 
 .thread-header > ul > li > a {
@@ -861,7 +911,7 @@ background-color: rgba( 233, 233, 233, 1) !important;
   display: inline-block;
   max-width: 200px;
   word-wrap: break-word;
-  background-color: rgba( 230, 235, 240, 1 );
+  background-color: rgba(192, 192, 192, 1);
 }
 
 .avatarright {
@@ -948,7 +998,7 @@ background-color: rgba( 233, 233, 233, 1) !important;
   font-color: #f5f8fe !important;
 }
 
-.btn-message {
+.btn-message, .btn-message:visited {
   background-color: rgba( 105, 206, 78, 1 );
   width: 76px;
   height: 70px;
@@ -959,9 +1009,9 @@ background-color: rgba( 233, 233, 233, 1) !important;
   right: 0;
 }
 
-.btn-message:hover, .btn-message:active {
-  background-color: rgba( 114, 223, 85, 1 );
-  color: #ffffff;
+.btn-message:hover, .btn-message:active, .btn-message:focus {
+  background-color: rgba( 114, 223, 85, 1 ) !important;
+  color: #ffffff !important;
 }
 
 .empty-button {
@@ -979,6 +1029,18 @@ background-color: rgba( 233, 233, 233, 1) !important;
   padding-left: 12px;
   color: #fff;
   font-family: helvetica, arial, sans-serif;
+}
+
+a#noteFeed {
+  font-size: 31px !important;
+}
+
+@media (min-width: 800px) {
+
+  a#noteFeed {
+  font-size: 0px !important;
+  }
+
 }
 
 .nav-notify {
@@ -1016,6 +1078,7 @@ background-color: rgba( 233, 233, 233, 1) !important;
   outline : none;
   font-size: 24px !important;
   padding: 0 20px;
+  padding-right: 9px;
   margin-top: -10px !important;
 }
 
@@ -1054,6 +1117,15 @@ background-color: rgba( 233, 233, 233, 1) !important;
   padding-left: 35px;
   padding-top: 0px;
   margin-top: -35px;
+}
+
+@media (min-width: 800px) {
+
+  .nav-logo {
+   padding-left: 0px !important; 
+   margin-left: -20px;
+  }
+
 }
 
 .dropdown-menu > li > a {
@@ -1186,7 +1258,9 @@ background-color: rgba( 233, 233, 233, 1) !important;
 }
 
 .navbar-fixed-bottom {
-  z-index: 99 !important;  
+  z-index: -1 !important;
+  background-color: rgba( 28, 136, 200, 1);
+  padding-top: 200%;
 }
 
 .navbar-inverse a {
@@ -1249,24 +1323,49 @@ background-color: rgba( 233, 233, 233, 1) !important;
   font-weight: 700;
   padding-top: 10px;
   padding-left: 0px;
-  margin-top: -60px;
-  margin-left: -10px;
-  width: 150px;
+  margin-top: 0px;
+  margin-left: -25px;
+  width: 162px;
 }
 
 .messageIntro {
   font-family: "Droid Serif";
   font-size: 12px !important;
   padding-left: 0px;
-  margin-left: -10px;
-  margin-top: -10px;
+  margin-left: -26px;
+  margin-top: -12px;
   padding-bottom: 20px;
+}
+
+@media (min-width: 800px) {
+
+  .firstMessageIntro {
+    font-family: "Droid Serif";
+    font-size: 14px !important;
+    font-weight: 700;
+    padding-top: 10px;
+    padding-left: 0px;
+    margin-top: -60px;
+    margin-left: -40px;
+    width: 150px;
+  }
+
+  .messageIntro {
+    font-family: "Droid Serif";
+    font-size: 12px !important;
+    padding-left: 0px;
+    margin-left: -40px;
+    margin-top: -10px;
+    padding-bottom: 20px;
+  }
+
 }
 
 .archive {
   color: #666 !important;
-  font-size: 4px !important;
+  font-size: 30px !important;
   opacity: 0.2;
+  margin-right: -20px;
 }
 
 .archive:hover {
@@ -1284,8 +1383,27 @@ font-size: 16px !important;
 }
 
 
+.online-sidebar {
+  color: rgb( 105, 206, 78 );
+  font-family: Arial;
+  font-size: 50px;
+  margin-left: -37px;
+  margin-top: -18px;
+}
 
-/***********/
+@media (min-width: 800px) {
+
+  .online-sidebar {
+    color: rgb( 105, 206, 78 );
+    font-family: Arial;
+    font-size: 64px;
+    margin-left: -42px;
+    margin-top: -5px;
+  }
+
+}
+
+/**********
 
 /****** Notifications ******/
 
@@ -1387,7 +1505,8 @@ font-size: 16px !important;
   border-color: #fff;
   border-style: solid 1px;
   font-size: 24px;
-  margin-left: -10px !important;
+  margin-left: -17px !important;
+  margin-bottom: -5px;
 }
 
 .avatar-notify {
