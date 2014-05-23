@@ -999,7 +999,7 @@ background-color: rgba( 233, 233, 233, 1) !important;
   font-color: #f5f8fe !important;
 }
 
-.btn-message {
+.btn-message, .btn-message:visited {
   background-color: rgba( 105, 206, 78, 1 );
   width: 76px;
   height: 70px;
@@ -1010,9 +1010,9 @@ background-color: rgba( 233, 233, 233, 1) !important;
   right: 0;
 }
 
-.btn-message:hover, .btn-message:active {
-  background-color: rgba( 114, 223, 85, 1 );
-  color: #ffffff;
+.btn-message:hover, .btn-message:active, .btn-message:focus {
+  background-color: rgba( 114, 223, 85, 1 ) !important;
+  color: #ffffff !important;
 }
 
 .empty-button {
