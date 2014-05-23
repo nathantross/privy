@@ -1134,8 +1134,8 @@ a#noteFeed {
   }
 
   .intro-logo {
-    margin-top: 20px;
-    font-size: 36px
+    font-size: 36px;
+    line-height: 79px;
   }
 
 }
@@ -1267,6 +1267,7 @@ a#noteFeed {
   padding-top: 10px;
   padding-bottom: 0px;
   z-index: 100 !important;
+  height: 61px;
 }
 
 .navbar-fixed-bottom {
@@ -1309,6 +1310,10 @@ a#noteFeed {
 
   .navbar-inverse-loggedout a {
     margin-top: 5px !important;
+  }
+
+  .navbar-inverse {
+    height: 89px;
   }
 
 }

@@ -23,8 +23,8 @@ Template.signedInNav.helpers
     user = Meteor.user().notifications
     if user && user[0].isNavNotified then "nav-notify" else ""
 
-  isDropdownEnabled: ->
+  isIntro: ->
     disabledPaths = ['intro', 'intro_1', 'intro_2', 'intro_3']
     currentPath = Router.current().path.split('/')[1]
 
-    _.indexOf(disabledPaths, currentPath) == -1
+    _.indexOf(disabledPaths, currentPath) == 1
