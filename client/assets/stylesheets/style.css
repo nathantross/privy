@@ -67,12 +67,9 @@ h2 {
 }
 
 .notes {
-  background-color: rgba( 28, 136, 200, 1);
   padding-top: 50px;
   margin-top: -20px;
-  height: 2000px;
   width: 100%;
-  position: fixed;
 }
 
 
@@ -1228,7 +1225,9 @@ a#noteFeed {
 }
 
 .navbar-fixed-bottom {
-  z-index: 99 !important;  
+  z-index: -1 !important;
+  background-color: rgba( 28, 136, 200, 1);
+  padding-top: 100%;
 }
 
 .navbar-inverse a {
@@ -1371,7 +1370,7 @@ font-size: 16px !important;
 
 }
 
-/***********/
+/**********
 
 /****** Notifications ******/
 
