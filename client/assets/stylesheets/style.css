@@ -693,16 +693,19 @@ footer.navbar.navbar-inverse.text-center {
 }
 
 .message-feed-empty {
-  font-size: 30px !important;
+  font-size: 52px !important;
   padding-bottom: 0px !important;
   margin-bottom: 0px !important;
   padding-top: 0;
+  font-weight: 700 !important;
   border: 0 !important;
   font-family: "Droid Serif";
   color: rgba( 242, 242, 242, 1 );
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-.message-feed-empty > h3 {
+.message-feed-empty-subhead {
   font-size: 20px !important;
   padding-bottom: 0px !important;
   margin-bottom: 0px !important;
@@ -711,6 +714,8 @@ footer.navbar.navbar-inverse.text-center {
   border: 0 !important;
   font-family: "Droid Serif";
   color: rgba( 242, 242, 242, 1 );  
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .message-feed input {
