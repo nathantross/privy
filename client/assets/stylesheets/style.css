@@ -685,13 +685,15 @@ background-color: rgba( 233, 233, 233, 1) !important;
   height: 70px;
   width: 100%;
   left: 0;
-  z-index: 1000;
+  z-index: 10;
   bottom: 0;
   border-radius: 0px !important;
   text-align: left;
   outline: none;
-  box-shadow:none;
+  box-shadow: none;
   border: 0px solid #ccc;
+  bottom: 0px;
+  position: fixed;
 }
 
 
@@ -1259,7 +1261,7 @@ a#noteFeed {
 .navbar-fixed-bottom {
   z-index: -1 !important;
   background-color: rgba( 28, 136, 200, 1);
-  padding-top: 100%;
+  padding-top: 200%;
 }
 
 .navbar-inverse a {
