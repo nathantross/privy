@@ -1098,6 +1098,11 @@ a#noteFeed {
   font-size: 31px !important;
 }
 
+.scrollbar {
+  height:800px;
+  overflow:scroll;
+}
+
 @media (min-width: 800px) {
 
   a#noteFeed {
@@ -1163,6 +1168,7 @@ a#noteFeed {
   font-size: 18px;
   min-width: 327px;
   z-index: 999 !important;
+  padding-bottom: 30px;
 }
 
 .fa-cog {
@@ -1323,7 +1329,7 @@ a#noteFeed {
 .navbar-fixed-bottom {
   z-index: -1 !important;
   background-color: rgba( 28, 136, 200, 1);
-  padding-top: 200%;
+  padding-top: 300%;
 }
 
 .navbar-inverse a {
@@ -1374,10 +1380,10 @@ a#noteFeed {
   font-size: 24px;
 }
 
-.scrolllbar {
+.scrollbar-height {
   overflow-y: scroll;
   padding-bottom: 100px;
-  height: 2000px !important;
+  height: 1200px !important;
 }
 
 .firstMessageIntro {
