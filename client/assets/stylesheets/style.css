@@ -445,7 +445,7 @@ background-color: rgba( 233, 233, 233, 1) !important;
 }
 
 .note-feed {
-  padding-left: 40px;
+  padding-left: 10px;
   padding-right: 40px;
 }
 
@@ -827,10 +827,29 @@ background-color: rgba( 233, 233, 233, 1) !important;
 }
 
 @media (min-width: 800px) {
+
   .thread-header {
     margin-left: 320px !important;
     padding-bottom: 90px;
   }
+
+  a.fa.fa-ban.fa-lg.archive {
+  margin-left: -10px;
+  width: 1px;
+  height: 1px;
+  }
+
+  .fa-circle {
+  padding-right: 0px;
+  color: #ffed54;
+  border-color: #fff;
+  border-style: solid 1px;
+  font-size: 24px;
+  margin-left: -17px !important;
+  padding-top: 40px;
+  margin-bottom: 0px;
+  }  
+
 }
 
 .thread-header > ul > li > a {
@@ -861,7 +880,7 @@ background-color: rgba( 233, 233, 233, 1) !important;
   display: inline-block;
   max-width: 200px;
   word-wrap: break-word;
-  background-color: rgba( 230, 235, 240, 1 );
+  background-color: rgba(192, 192, 192, 1);
 }
 
 .avatarright {
@@ -1244,29 +1263,54 @@ background-color: rgba( 233, 233, 233, 1) !important;
 }
 
 .firstMessageIntro {
-  font-family: "Droid Serif";
-  font-size: 14px !important;
-  font-weight: 700;
-  padding-top: 10px;
-  padding-left: 0px;
-  margin-top: -60px;
-  margin-left: -10px;
-  width: 150px;
+font-family: "Droid Serif";
+font-size: 14px !important;
+font-weight: 700;
+padding-top: 10px;
+padding-left: 0px;
+margin-top: 0px;
+margin-left: -25px;
+width: 162px;
 }
 
 .messageIntro {
   font-family: "Droid Serif";
   font-size: 12px !important;
   padding-left: 0px;
-  margin-left: -10px;
-  margin-top: -10px;
+  margin-left: -26px;
+  margin-top: -12px;
   padding-bottom: 20px;
+}
+
+@media (min-width: 800px) {
+
+  .firstMessageIntro {
+    font-family: "Droid Serif";
+    font-size: 14px !important;
+    font-weight: 700;
+    padding-top: 10px;
+    padding-left: 0px;
+    margin-top: -60px;
+    margin-left: -40px;
+    width: 150px;
+  }
+
+  .messageIntro {
+    font-family: "Droid Serif";
+    font-size: 12px !important;
+    padding-left: 0px;
+    margin-left: -40px;
+    margin-top: -10px;
+    padding-bottom: 20px;
+  }
+
 }
 
 .archive {
   color: #666 !important;
-  font-size: 4px !important;
+  font-size: 30px !important;
   opacity: 0.2;
+  margin-right: -20px;
 }
 
 .archive:hover {
@@ -1284,6 +1328,25 @@ font-size: 16px !important;
 }
 
 
+.online-sidebar {
+  color: rgb( 105, 206, 78 );
+  font-family: Arial;
+  font-size: 50px;
+  margin-left: -37px;
+  margin-top: -18px;
+}
+
+@media (min-width: 800px) {
+
+  .online-sidebar {
+    color: rgb( 105, 206, 78 );
+    font-family: Arial;
+    font-size: 64px;
+    margin-left: -42px;
+    margin-top: -5px;
+  }
+
+}
 
 /***********/
 
@@ -1387,7 +1450,8 @@ font-size: 16px !important;
   border-color: #fff;
   border-style: solid 1px;
   font-size: 24px;
-  margin-left: -10px !important;
+  margin-left: -17px !important;
+  margin-bottom: -5px;
 }
 
 .avatar-notify {
