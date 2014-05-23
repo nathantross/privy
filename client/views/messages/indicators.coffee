@@ -27,40 +27,6 @@ Template.messageIndicators.helpers
   avatar: ->
     typist(@threadId).avatar
 
-  messageDate = (msgDate) ->
-    d = new Date(0)
-    d.setUTCMilliseconds(msgDate)
-    dayString = d.toDateString()
-
-    # if the date is today, return "today"
-    now = new Date()
-    return "today" if now.toDateString() == dayString
-    
-    # if the date is yesterday, return 'yesterday'
-    yesterday = new Date()
-    yesterday.setDate(now.getDate() - 1)
-    return "yesterday" if yesterday.toDateString() == dayString
-    
-    # if the date is before yesterday, return the date
-    dateArr = dayString.split(" ")
-    dateArr[2] = dateArr[2].slice(1) if dateArr[2].slice(0, 1) == "0"
-    return dateArr[1] + " " + dateArr[2]
-  
-  messageTime = (msgDate) ->
-    time = new Date(0)
-    time.setUTCMilliseconds(msgDate)
-    
-    hours = time.getHours()
-    min = time.getMinutes()
-    min = if min < 10 then "0" + min else min
-    ampm = 
-      if hours > 12
-        hours -= 12
-        "pm"
-      else
-        "am"
-
-    "#{hours}:#{min} #{ampm} "
 
   timeSince = (msgDate) ->
     date = new Date(0)
@@ -84,9 +50,6 @@ Template.messageIndicators.helpers
     return pluralize(interval, "minute") if interval > 1
     
     false
-    # if Math.floor(seconds) > 0
-    #   pluralize(Math.floor(seconds), "second") 
-    # else
     
 
   pluralize = (amount, str)->
