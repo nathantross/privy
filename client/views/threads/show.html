@@ -3,10 +3,18 @@
   <div class="navbar-fixed-top thread-header">
     <ul>
       <li><a href="{{pathFor 'feed'}}" class="fa fa-comment fa-lg pull-left"></a></li>
-      <li><a href="#" class="pull-right" data-toggle="dropdown">•••</a>
+      <li><a href="#" class="pull-right" data-toggle="dropdown"><div class="link text-center"><p>•••</p></div></a>
         <ul id="full-height" class="dropdown-menu dropdown-menu-message list-inline text-center">
+        {{#if isMuted}}
+          <li><a class="message-dropdown" id="enter-chat" href="#">Enter Chat</a></li>
+        {{else}}
+          <li><a class="message-dropdown" id="leave-chat" href="#">Leave Chat</a></li>
+        {{/if}}
+        {{#if isMuted}}
+          <li><a class="message-dropdown" id="unblock-user" href="#">Unblock User</a></li>
+        {{else}}
           <li><a class="message-dropdown" id="block-user" href="#">Block user</a></li>
-          <li><a class="message-dropdown" id="leave-chat" href="#">Leave Conversation</a></li>
+        {{/if}}
         </ul>
       </li>
     </ul>
@@ -20,15 +28,15 @@
         <div style="float: right;">
           {{#if isMuted}}
             {{#unless isBlocked}}
-              <a href="#" style="text-align: right; color: grey; font-size: 20px;" id="enter-chat">Enter chat</a><br />
+              <a href="#" class="message-drop-links" id="enter-chat">Enter chat</a><br />
             {{/unless}}
           {{else}}
-            <a href="{{pathFor 'feed'}}" style="text-align: right; color: grey; font-size: 20px;" id="leave-chat">Leave chat</a><br />
+            <a href="{{pathFor 'feed'}}" class="message-drop-links" id="leave-chat">Leave chat</a><br />
           {{/if}}
           {{#if isBlocked}}
-            <a href="#" style="text-align: right; color: grey; font-size: 20px;" id="unblock-user">Unblock user</a>
+            <a href="#" class="message-drop-links" id="unblock-user">Unblock user</a>
           {{else}}
-            <a href="{{pathFor 'feed'}}" style="text-align: right; color: grey; font-size: 20px;" id="block-user">Block user</a>
+            <a href="{{pathFor 'feed'}}" class="message-drop-links" id="block-user">Block user</a>
           {{/if}}
         </div>
       </div>

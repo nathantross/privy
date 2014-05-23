@@ -670,11 +670,13 @@ footer.navbar.navbar-inverse.text-center {
   text-align: left;
   padding-left: 40px;
   padding-right: 40px;
+  word-wrap: break-word;
 }
 
 @media (min-width: 800px) {
   .message-feed {
     font-size: 60px !important;
+    word-wrap: break-word;
   }
 }
 
@@ -993,6 +995,60 @@ a.fa.fa-chevron-left.fa-lg.pull-left {
 #messages{
   margin-bottom: 70px;
 }
+
+a {
+  text-decoration: none !important;
+}
+
+.link {
+  width: 40px;
+  height: 40px;
+  letter-spacing: 0.15em;
+  color: rgba( 245, 245, 245, 0.7 );
+  text-decoration: none;
+}
+
+.link:hover {
+  color: rgba( 245, 245, 245, 1 ); 
+  text-decoration: none !important;
+}
+
+.link a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.link a:hover {
+  color: rgba( 245, 245, 245, 1 ); 
+  text-decoration: none !important; 
+}
+
+a#leave-chat {
+  margin-top: 16px;
+  color: rgba(151, 151, 151, 1) !important;
+}
+
+a#enter-chat {
+  margin-top: 16px;
+  color: rgba(151, 151, 151, 1) !important;
+}
+
+a#block-user {
+  margin-top: 16px;
+  color: rgba(151, 151, 151, 1) !important;
+}
+
+a#unblock-user {
+  margin-top: 16px;
+  color: rgba(151, 151, 151, 1) !important;
+}
+
+.message-drop-links {
+  text-align: right; 
+  color: blue; 
+  font-size: 20px;
+}
+
 
 #load-more{
   padding-bottom: 20px;
@@ -1850,6 +1906,7 @@ footer {
 
   .message-feed {
     font-size: 34px;
+    word-wrap: break-word;
   }
 
   .message-feed-empty {
