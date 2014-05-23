@@ -1,23 +1,35 @@
 Template.messageIndicators.helpers
-  readStatus: ->
+  lastMsg: ->
     lastMessage = 
       Messages.findOne
           threadId: @threadId
         ,
           sort:
               createdAt: -1 
-          
-    unless lastMessage && lastMessage.senderId == Meteor.userId() && !lastMessage.hasExited
-      return ""
+    
+    if lastMessage
+      userIsSender = Meteor.userId() == lastMessage.senderId
+      readStatus = timeSince(lastMessage.updatedAt)
 
-    else
-      timeStr = timeSince(lastMessage.updatedAt)
+      if userIsSender
+        if readStatus
+          readStatus = readStatus + " ago"
+          readStatus = if lastMessage.isRead then "Read #{readStatus}" else "Sent #{readStatus}"
+        else
+          if lastMessage.isRead then "Just read" else "Just sent"
+
+      else
+        if readStatus
+          readStatus = readStatus + " ago"
+          readStatus = "Read #{readStatus}"
+        else
+          readStatus = "Just received"
       
-      if timeStr
-        timeStr = timeStr + " ago"
-        return if lastMessage.isRead then "Read #{timeStr}" else "Sent #{timeStr}"
-      
-      return if lastMessage.isRead then "Just read" else "Just sent"
+      return(
+        userIsSender: userIsSender
+        readStatus: readStatus
+      )
+
 
   isTyping: ->
     participant = typist(@threadId)
@@ -32,22 +44,22 @@ Template.messageIndicators.helpers
     date = new Date(0)
     date.setUTCMilliseconds(msgDate)
 
-    seconds = Math.floor((new Date() - date) / 1000)
+    seconds = (new Date() - date) / 1000
     
-    interval = Math.floor(seconds / 31536000)
-    return pluralize(interval, "year")  if interval > 1
+    interval = seconds / 31536000
+    return pluralize(Math.floor(interval), "year")  if interval > 1
 
-    interval = Math.floor(seconds / 2592000)
-    return pluralize(interval, "month")  if interval > 1
+    interval = seconds / 2592000
+    return pluralize(Math.floor(interval), "month")  if interval > 1
     
-    interval = Math.floor(seconds / 86400)
-    return pluralize(interval, "day") if interval > 1
+    interval = seconds / 86400
+    return pluralize(Math.floor(interval), "day") if interval > 1
     
-    interval = Math.floor(seconds / 3600)
-    return pluralize(interval, "hour") if interval > 1
+    interval = seconds / 3600
+    return pluralize(Math.floor(interval), "hour") if interval > 1
     
-    interval = Math.floor(seconds / 60)
-    return pluralize(interval, "minute") if interval > 1
+    interval = seconds / 60
+    return pluralize(Math.floor(interval), "minute") if interval > 1
     
     false
     
