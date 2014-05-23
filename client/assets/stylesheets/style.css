@@ -447,6 +447,7 @@ background-color: rgba( 233, 233, 233, 1) !important;
 .note-feed {
   padding-left: 10px;
   padding-right: 40px;
+  margin-top: 11px;
 }
 
 .feed {
@@ -1000,6 +1001,18 @@ background-color: rgba( 233, 233, 233, 1) !important;
   font-family: helvetica, arial, sans-serif;
 }
 
+a#noteFeed {
+  font-size: 31px !important;
+}
+
+@media (min-width: 800px) {
+
+  a#noteFeed {
+  font-size: 0px !important;
+  }
+
+}
+
 .nav-notify {
   color: #ffed54 !important;
 }
@@ -1035,6 +1048,7 @@ background-color: rgba( 233, 233, 233, 1) !important;
   outline : none;
   font-size: 24px !important;
   padding: 0 20px;
+  padding-right: 9px;
   margin-top: -10px !important;
 }
 
@@ -1073,6 +1087,15 @@ background-color: rgba( 233, 233, 233, 1) !important;
   padding-left: 35px;
   padding-top: 0px;
   margin-top: -35px;
+}
+
+@media (min-width: 800px) {
+
+  .nav-logo {
+   padding-left: 0px !important; 
+   margin-left: -20px;
+  }
+
 }
 
 .dropdown-menu > li > a {
