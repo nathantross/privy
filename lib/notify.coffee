@@ -223,3 +223,35 @@ exports.Notify =
       Notify.toggleIsMuted(toggle, msgBody, thread._id)
       Meteor.call 'toggleNotificationBlocked', toggle, thread._id, (err) ->
         console.log err if err
+
+  getUserStatus: (userId, avatar, isIdle) ->
+    if userId
+      user = Meteor.users.find userId
+
+      if user
+        if (avatar && isIdle) || (!avatar && !isIdle)
+          return( 
+            avatar: user.profile.avatar
+            isOnline: user.status?.online && !user.status?.idle 
+          )
+        else if avatar
+          user.profile.avatar
+        else 
+          user.status?.online && !user.status?.idle 
+
+      else
+        Meteor.call 'getUserAttr', userId, (err, userAttr) ->
+          console.log err if err
+
+          Session.set 'avatar', userAttr.avatar
+          Session.set 'isOnline', !userAttr.isIdle
+
+        if (avatar && isIdle) || (!avatar && !isIdle)
+          return(
+            avatar: Session.get 'avatar'
+            isOnline: Session.get 'isOnline'
+          )
+        else if avatar
+          Session.get 'avatar'
+        else
+          Session.get 'isOnline'

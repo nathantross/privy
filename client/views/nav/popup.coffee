@@ -1,11 +1,30 @@
 Template.newMessageAlert.helpers
   notification: ->
-    Notifications.findOne(
+    notification = Notifications.findOne(
         {}
       , 
         sort:
           updatedAt: -1
     )
+
+    if notification
+      userId = notification.lastAvatarId 
+      threadId = notification.threadId
+      lastMessage = notification.lastMessage
+
+      if userId
+        user = Meteor.users.findOne(userId)
+        if user
+          user.profile.avatar
+        else
+          Meteor.call 'getUserAttr', userId, (err, userAttr) ->
+            return console.log err if err
+
+            Session.set 'avatar', userAttr.avatar
+
+        _.extend notification, 
+          avatar: Session.get 'avatar'
+
 
 Template.newMessageAlert.events
   'click #newMessageAlert': (event)->

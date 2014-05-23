@@ -5,7 +5,7 @@ Template.showMessage.helpers
       if user
         user.profile.avatar
       else
-        Meteor.call 'getUserAttr', @lastAvatarId, (err, userAttr) ->
+        Meteor.call 'getUserAttr', @senderId, (err, userAttr) ->
           return console.log err if err
 
           Session.set 'avatar', userAttr.avatar
