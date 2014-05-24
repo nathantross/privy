@@ -74,40 +74,19 @@ h2 {
 
 
 .btn-primary {
-  border-color: rgb( 0, 0, 0 );
-  border-style: solid;
   border-style: solid;
   border-width: 5px;
-  border-color: rgb( 255, 255, 255 );
+  border-color: rgba( 255, 255, 255, 1 );
   border-radius: 50%;
-  background-color: rgb( 105, 206, 78 );
+  background-color: rgba( 105, 206, 78, 1 );
   width: 110px;
   height: 110px;
   margin: 5px;
 }
 
 .btn-primary:hover {
-  border-color: rgb( 0, 0, 0 );
-  border-style: solid;
-  border-style: solid;
-  border-width: 5px;
-  border-color: rgb( 255, 255, 255 );
-  border-radius: 50%;
-  background-color: rgb( 105, 206, 78 );
-  width: 124px;
-  height: 124px;
-}
-
-.btn-primary:active {
-  border-color: rgb( 0, 0, 0 );
-  border-style: solid;
-  border-style: solid;
-  border-width: 5px;
-  border-color: rgb( 255, 255, 255 );
-  border-radius: 50%;
-  background-color: rgb( 105, 206, 78 );
-  width: 124px;
-  height: 124px;
+  border-color: rgba( 255, 255, 255, 1 );
+  background-color: rgba( 89, 185, 63, 1 );
 }
 
 .fa-mail-forward {
@@ -122,53 +101,26 @@ h2 {
   color: #fff;
 }
 
-
-
 .btn-info {
-  border-color: rgb( 0, 0, 0 );
-  border-style: solid;
   border-style: solid;
   border-width: 5px;
-  border-color: rgb( 255, 255, 255 );
+  border-color: rgba( 255, 255, 255, 1 );
   border-radius: 50%;
-  background-color: #999;
+  background-color: rgba(111, 111, 111, 1 );
   width: 70px;
   height: 70px;
-  margin: 5px;
+  margin: 0px
 }
 
 .btn-info:hover {
-  border-color: rgb( 0, 0, 0 );
-  border-style: solid;
-  border-style: solid;
-  border-width: 5px;
-  border-color: rgb( 255, 255, 255 );
-  border-radius: 50%;
-  background-color: rgb( 999, 999, 999 );
-  width: 80px;
-  height: 80px;
-}
-
-.btn-info:active {
-  border-color: rgb( 0, 0, 0 );
-  border-style: solid;
-  border-style: solid;
-  border-width: 5px;
-  border-color: rgb( 255, 255, 255 );
-  border-radius: 50%;
-  background-color: rgb( 999, 999, 999 );
-  width: 80px;
-  height: 80px;
+  border-color: rgba( 255, 255, 255, 1 );
+  background-color: rgba( 95, 95, 95, 1 );
 }
 
 .fa-times {
   margin-top: 45px;
   font-size: 30px !important;
   line-height: 47px !important;
-}
-
-.btn-info:hover {
-  background-color: #777;
 }
 
 .btn-big {
@@ -259,7 +211,7 @@ background-color: rgba( 233, 233, 233, 1) !important;
 /****** Index ******/
 
 .main {
-  background-color: #222222;
+  background-color: rgba(58, 95, 136, 1);
   margin-bottom: 0px;
   margin-top: -50px;
   padding-bottom: 80px;
@@ -291,8 +243,8 @@ background-color: rgba( 233, 233, 233, 1) !important;
 
 .facebook-btn-index > .btn:hover {
   color: rgba( 245, 245, 245, 1);
-  box-shadow: 0 4px 4px rgba(0, 0, 0, .9);
-  -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, .9);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, .2);
+  -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, .2);
 }
 
 
@@ -352,20 +304,24 @@ background-color: rgba( 233, 233, 233, 1) !important;
 .action-item {
   padding-top: 50px;
   padding-bottom: 50px;
-  background-color: #65B356;
+  background-color: rgba(216, 216, 216, 1);
 }
 
 .sub-head {
   font-family: "Droid Serif";
-  color: rgba(245, 245, 245, 0.9);
-  font-size: 26px;
+  color: rgba(61, 61, 61, 0.9);
+  font-size: 30px;
+  line-height: 1.4;
+}
+
+footer.navbar.navbar-inverse.text-center {
+  height: 127px;
 }
 
 .home-body {
   font-family: "Droid Serif";
-  color: rgba(245, 245, 245, 0.7);
-  font-size: 14px;
-  line-height: 2.5;
+  color: rgba(49, 49, 49, 0.7);
+  font-size: 18px;
 }
 
 .fill {
@@ -512,11 +468,10 @@ background-color: rgba( 233, 233, 233, 1) !important;
 .create-form {
   padding-top: 0px;
   padding-left: 20px;
-  font-size: 30px;
+  font-size: 24px;
   border: 0;
   background-color: rgba(200, 54, 54, 0);
   outline: none;
-  height: 100%;
   height: 180px;
   resize: none;
   overflow-x: hidden;
@@ -526,6 +481,14 @@ background-color: rgba( 233, 233, 233, 1) !important;
   font-family: "Droid Serif";
   color: rgba( 242, 242, 242, 1 );
   text-align: left;
+}
+
+input.fa.fa-check.fa-lg.grow.btn.btn-primary-new-note {
+  color: rgba( 245, 245, 245, 1 );
+}
+
+input.fa.fa-check.fa-lg.grow.btn.btn-primary-new-note:hover {
+  color: rgba( 245, 245, 245, 1 );
 }
 
 .btn-primary-new-note {
@@ -710,11 +673,13 @@ background-color: rgba( 233, 233, 233, 1) !important;
   text-align: left;
   padding-left: 40px;
   padding-right: 40px;
+  word-wrap: break-word;
 }
 
 @media (min-width: 800px) {
   .message-feed {
     font-size: 60px !important;
+    word-wrap: break-word;
   }
 }
 
@@ -731,16 +696,19 @@ background-color: rgba( 233, 233, 233, 1) !important;
 }
 
 .message-feed-empty {
-  font-size: 30px !important;
+  font-size: 52px !important;
   padding-bottom: 0px !important;
   margin-bottom: 0px !important;
   padding-top: 0;
+  font-weight: 700 !important;
   border: 0 !important;
   font-family: "Droid Serif";
   color: rgba( 242, 242, 242, 1 );
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-.message-feed-empty > h3 {
+.message-feed-empty-subhead {
   font-size: 20px !important;
   padding-bottom: 0px !important;
   margin-bottom: 0px !important;
@@ -749,6 +717,8 @@ background-color: rgba( 233, 233, 233, 1) !important;
   border: 0 !important;
   font-family: "Droid Serif";
   color: rgba( 242, 242, 242, 1 );  
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .message-feed input {
@@ -1033,6 +1003,60 @@ a.fa.fa-chevron-left.fa-lg.pull-left {
 #messages{
   margin-bottom: 70px;
 }
+
+a {
+  text-decoration: none !important;
+}
+
+.link {
+  width: 40px;
+  height: 40px;
+  letter-spacing: 0.15em;
+  color: rgba( 245, 245, 245, 0.7 );
+  text-decoration: none;
+}
+
+.link:hover {
+  color: rgba( 245, 245, 245, 1 ); 
+  text-decoration: none !important;
+}
+
+.link a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.link a:hover {
+  color: rgba( 245, 245, 245, 1 ); 
+  text-decoration: none !important; 
+}
+
+a#leave-chat {
+  margin-top: 16px;
+  color: rgba(151, 151, 151, 1) !important;
+}
+
+a#enter-chat {
+  margin-top: 16px;
+  color: rgba(151, 151, 151, 1) !important;
+}
+
+a#block-user {
+  margin-top: 16px;
+  color: rgba(151, 151, 151, 1) !important;
+}
+
+a#unblock-user {
+  margin-top: 16px;
+  color: rgba(151, 151, 151, 1) !important;
+}
+
+.message-drop-links {
+  text-align: right; 
+  color: blue; 
+  font-size: 20px;
+}
+
 
 #load-more{
   padding-bottom: 20px;
@@ -1360,7 +1384,7 @@ a#noteFeed {
 .navbar-inverse-loggedout {
   border-radius: 0;
   color: #fff;
-  background-color: #222;
+  background-color: rgba(58, 95, 136, 1);
   border: 0;
   outline : none;
   padding-top: 10px;
@@ -1536,15 +1560,22 @@ font-size: 16px !important;
 }
 
 .alert-nav button {
-  color: rgba( 242, 242, 242, 1 );
-  border-color: rgb( 0, 0, 0 );
+  color: rgba( 242, 242, 242, 0.8 );
   border-style: solid;
-  border-style: solid;
-  border-width: 2px;
+  border-width: 3px;
   border-color: rgb( 255, 255, 255 );
-  margin: 0px; 
+  margin: 0px;
   background-color: #999;
-  font-size: 14px;
+  border-radius: 100px;
+  padding: 8px 31px;
+  font-size: 18;
+}
+
+.alert-nav button:hover {
+  color: rgba( 242, 242, 242, 1 );
+  background-color: #666;
+  border-style: solid;
+  border-width: 3px;
 }
 
 .alert-danger {
@@ -1890,6 +1921,7 @@ footer {
 
   .message-feed {
     font-size: 34px;
+    word-wrap: break-word;
   }
 
   .message-feed-empty {
