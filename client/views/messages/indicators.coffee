@@ -12,17 +12,15 @@ Template.messageIndicators.helpers
       readStatus = timeSince(lastMessage.updatedAt)
       readStatus = readStatus + " ago" if readStatus
 
-      if userIsSender
-        if readStatus    
-          readStatus = if lastMessage.isRead then "Read #{readStatus}" else "Sent #{readStatus}"
-        else
-          readStatus = if lastMessage.isRead then "Just read" else "Just sent"
+      readStatus = 
+        if userIsSender
+          if readStatus    
+            if lastMessage.isRead then "Read #{readStatus}" else "Sent #{readStatus}"
+          else
+            if lastMessage.isRead then "Just read" else "Just sent"
 
-      else
-        if readStatus
-          readStatus = "Read #{readStatus}"
         else
-          readStatus = "Just received"
+          if readStatus then "Read #{readStatus}" else "Just received"
 
       return(
         userIsSender: userIsSender
