@@ -1,6 +1,6 @@
 Template.showMessage.helpers
   senderAvatar: ->
-    Meteor.users.findOne(@senderId).profile.avatar if @senderId
+    Notify.getUserStatus(@senderId, true, false) if @senderId
   
   currentUserIsSender: ->
     @senderId == Meteor.userId() if @senderId

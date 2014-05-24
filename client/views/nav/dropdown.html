@@ -1,0 +1,24 @@
+<template name="dropdown">
+  
+  <ul id="full-height" class="dropdown-menu">
+    <ul class="dropdown-menu-top list-inline">
+      <li class="pull-left">
+        <a class="large fa fa-comment fa-lg" href="#" id="noteFeed"></a>
+      </li>
+      <li class="text-center">
+        <a href="{{pathFor 'feed'}}"><h1 class="nav-logo">Strange</h1></a>
+      </li>
+      <li class="pull-right">
+        <a class="pull-right fa fa-cog fa-lg text-right" href="{{pathFor 'editUser'}}" id="settings"></a>
+      </li>
+    </ul>
+    <ul class="scrollbar">
+      <li>
+        {{> allNotifications}}
+      </li>
+      <li class="dropdown-spacing">
+      </li>
+    </ul>
+  </ul>
+
+</template>

@@ -1,11 +1,20 @@
 Template.newMessageAlert.helpers
   notification: ->
-    Notifications.findOne(
+    notification = Notifications.findOne
         {}
       , 
         sort:
           updatedAt: -1
-    )
+
+    if notification
+      userId = notification.lastAvatarId 
+
+      if userId
+        avatar = Notify.getUserStatus(userId, true, false)
+
+        _.extend notification,
+          avatar: avatar
+
 
 Template.newMessageAlert.events
   'click #newMessageAlert': (event)->
@@ -49,6 +58,7 @@ Template.firstSkipAlert.events
   'click .skip-btn': (e) ->
     e.preventDefault()
     $('#first-skip-alert').slideUp "slow"
+    Session.set 'isSkipAlert', false
 
   'click #skip-confirm': (e)->
     Meteor.call 'skipNote', @note._id, @userAttr.isIdle, (error, id) -> 

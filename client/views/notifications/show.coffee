@@ -9,14 +9,14 @@ Template.notification.helpers
     if @isNotified then "pull-right fa fa-circle" else ""
 
   sender: ->
-    user = Meteor.users.findOne @lastAvatarId if @lastAvatarId
+    if @lastAvatarId
+      userAttr = Notify.getUserStatus @lastAvatarId
 
-    if user
-      isOnline =
-        if user.status?.online && !user.status?.idle && user._id != Meteor.userId() then "•" else ""
+      isOnline = 
+        if userAttr.isOnline && @lastAvatarId != Meteor.userId() then "•" else ""
 
       return(
-        avatar: user.profile.avatar
+        avatar: userAttr.avatar
         isOnline: isOnline
       )
 

@@ -57,12 +57,7 @@ exports.FeedController = RouteController.extend(
     return note
 
   userAttr: ->
-    if @note()
-      Meteor.call 'getUserAttr', @note().userId, (err, response) ->
-        return console.log err if err
-        Session.set 'userAttr', response
-
-      Session.get 'userAttr'
+    Notify.getUserStatus(@note().userId) if @note()?.userId
 
   data: ->
     return(

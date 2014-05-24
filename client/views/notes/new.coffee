@@ -15,6 +15,7 @@ Template.newNote.events
       
       
   submitNewNote = ->
+    Notify.popup('#successAlert', "Note created! Woot woooo!")
     isChecked = $('input[name=onoffswitch]').prop('checked')
     
     Meteor.call 'createThread', {}, (error, threadId) -> 
@@ -41,5 +42,4 @@ Template.newNote.events
           Meteor.call 'createNotification', message, (error, id)->
             console.log(error.reason) if error
 
-    Notify.popup('#successAlert', "Note created! Woot woooo!")
     Router.go "feed"
