@@ -1,16 +1,13 @@
 Template.newMessageAlert.helpers
   notification: ->
-    notification = Notifications.findOne(
+    notification = Notifications.findOne
         {}
       , 
         sort:
           updatedAt: -1
-    )
 
     if notification
       userId = notification.lastAvatarId 
-      threadId = notification.threadId
-      lastMessage = notification.lastMessage
 
       if userId
         avatar = Notify.getUserStatus(userId, true, false)
