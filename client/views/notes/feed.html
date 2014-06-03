@@ -9,9 +9,9 @@
           <div class="col-sm-8 feed">
             <p class="text-right"><a href="#" data-toggle="modal" data-target="#noteModal" class="message-feed-drop text-right">• • •</a></p>
 
-            <h1 class="message-feed">{{note.body}}</h1>
+            <h1 class="{{noteClass}}">{{note.body}}</h1>
             <ul class="note-feed list-inline text-left">
-              <li><div class="avatar"><img class="avatar-feed" src="{{userAttr.avatar}}" /></div></li>
+              <li><div class="avatar"><img class="note-avatar" src="{{userAttr.avatar}}" /></div></li>
               <li><div class="online is-user-active">{{isUserActive}}</div></li>
               {{#if location}}
                 <li><p class="location">{{location}}</p></li>

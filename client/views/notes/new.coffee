@@ -12,6 +12,10 @@ Template.newNote.events
       val = $(e.target).find("[name=notes-body]").prevObject[0].value
       len = val.length
       $("#charNum").text(len + "/120")
+
+      if window.innerWidth < 480
+        lineHeight = if len > 90 then '25px' else ''
+        $("#notes-body").css('line-height', lineHeight) 
       
       
   submitNewNote = (e) ->

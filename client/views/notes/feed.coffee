@@ -30,6 +30,10 @@ Template.feed.events
     })
 
 Template.feed.helpers
+  
+  noteClass: ->
+    if @note.body.length > 60 then "message-feed-sm" else "message-feed"
+    
   isUserActive: ->
     "•" if @userAttr? && @userAttr.isOnline 
     
