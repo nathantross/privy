@@ -5,6 +5,7 @@
   {{> flagAlert}}
   {{> blockUserAlert}}
   {{> firstSkipAlert}}
+  {{> errorAlert}}
 </template>
 
 <template name="newMessageAlert">
@@ -22,6 +23,11 @@
 
 <template name="successAlert">
   <div class="alert-nav alert-success-nav alert-dismissable popup" id="successAlert"></div>
+</template>
+
+<template name="errorAlert">
+  <div class="alert-nav alert-flag alert-dismissable popup" id="errorAlert">
+  </div>
 </template>
 
 <template name="flagAlert">

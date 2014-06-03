@@ -1,8 +1,6 @@
 Template.newMessageAlert.helpers
   notification: ->
-    notification = Notifications.findOne
-        {}
-      , 
+    notification = Notifications.findOne {}, 
         sort:
           updatedAt: -1
 
@@ -18,16 +16,15 @@ Template.newMessageAlert.helpers
 
 Template.newMessageAlert.events
   'click #newMessageAlert': (event)->
-    notification = Notifications.findOne(
-        {}
-      , 
+    notification = Notifications.findOne {}, 
         sort:
           updatedAt: -1
-    )
+
     Notify.toggleItemHighlight(notification, false)
     Notify.toggleNavHighlight(false) unless Notify.anyItemsNotified()
     Notify.toggleTitleFlashing(false)
     $('#newMessageAlert').slideUp('slow')
+
 
 Template.flagAlert.events
   'click .flag-btn': (e)->
@@ -45,6 +42,7 @@ Template.flagAlert.events
       creatorIsOnline: if !@userAttr.isIdle then "Yes" else "No"
     })
 
+
 Template.blockUserAlert.events
   'click .block-btn': (e)->
     e.preventDefault()
@@ -53,6 +51,7 @@ Template.blockUserAlert.events
   'click #block-confirm': (e)->
     Notify.toggleBlock(true, @threadId, @userIndex)
     Router.go('feed')
+
 
 Template.firstSkipAlert.events
   'click .skip-btn': (e) ->
