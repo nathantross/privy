@@ -6,6 +6,7 @@ Meteor.publish "userStatus", ->
           userId: 1
           idle: 1
 
+
 Meteor.publish "notificationUserStatus", ->
   userIds = 
     Threads.find(
@@ -28,6 +29,7 @@ Meteor.publish "notificationUserStatus", ->
         'status.online': 1
         'status.idle': 1
 
+
 Meteor.publish "notifications", ->
   Notifications.find 
       userId: @userId
@@ -40,6 +42,7 @@ Meteor.publish "notifications", ->
     , sort:
         updatedAt: -1
 
+
 Meteor.publish "notes", (sort, limit) ->
   if @userId
     user = Meteor.users.findOne @userId
@@ -50,8 +53,6 @@ Meteor.publish "notes", (sort, limit) ->
             $ne: @userId
         , userId:
             $nin: user.blockerIds || []
-        , userId:
-            $nin: user.blockedIds || []
         ]
         isInstream: true
         $or: [
@@ -79,6 +80,7 @@ Meteor.publish "notes", (sort, limit) ->
           replierIds: 0
           loc: 0
 
+
 Meteor.publish "threads", ->
   Threads.find
       participants:
@@ -89,15 +91,6 @@ Meteor.publish "threads", ->
         createdAt: 0
         noteId: 0
 
-# Meteor.publish "thread", (threadId) ->
-#   Threads.find
-#       _id: threadId
-#     ,
-#       fields:
-#         createdAt: 0
-#         updatedAt: 0
-#         noteId: 0
-#       limit: 1
 
 Meteor.publish "userData", ->
   Meteor.users.find

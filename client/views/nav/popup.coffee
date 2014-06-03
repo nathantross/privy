@@ -1,8 +1,6 @@
 Template.newMessageAlert.helpers
   notification: ->
-    notification = Notifications.findOne
-        {}
-      , 
+    notification = Notifications.findOne {}, 
         sort:
           updatedAt: -1
 
@@ -18,12 +16,10 @@ Template.newMessageAlert.helpers
 
 Template.newMessageAlert.events
   'click #newMessageAlert': (event)->
-    notification = Notifications.findOne(
-        {}
-      , 
+    notification = Notifications.findOne {}, 
         sort:
           updatedAt: -1
-    )
+
     Notify.toggleItemHighlight(notification, false)
     Notify.toggleNavHighlight(false) unless Notify.anyItemsNotified()
     Notify.toggleTitleFlashing(false)

@@ -4,6 +4,7 @@ body {
   color: #555;
   height: 100%;
   background-color: rgba( 233, 233, 233, 1);
+  overflow-x: hidden;
   /*background: -moz-linear-gradient(left,  rgba(198,198,198,0.65) 0%, rgba(249,249,249,0.83) 50%, rgba(198,198,198,1) 100%); /* FF3.6+ */
   /*background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(198,198,198,0.65)), color-stop(50%,rgba(249,249,249,0.83)), color-stop(100%,rgba(198,198,198,1))); /* Chrome,Safari4+ */
   /*background: -webkit-linear-gradient(left,  rgba(198,198,198,0.65) 0%,rgba(249,249,249,0.83) 50%,rgba(198,198,198,1) 100%); /* Chrome10+,Safari5.1+ */
@@ -1421,7 +1422,6 @@ a#noteFeed {
 }
 
 .scrollbar-height {
-  overflow-y: scroll;
   padding-bottom: 100px;
   height: 1200px !important;
 }

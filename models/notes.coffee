@@ -27,14 +27,14 @@ Meteor.methods
       false
 
     user = Meteor.user()
-    maxReplies = noteAttr.maxReplies
+    # maxReplies = noteAttr.maxReplies
 
 
     # Check for errors 
     unless user
       throw new Meteor.Error 401, "You have to login to create a note."
 
-    unless noteAttr.body || noteAttr.body.length <= 0
+    unless noteAttr.body && noteAttr.body.length > 0
       throw new Meteor.Error 422, 'Whoops, looks like your note is blank!'
 
     unless noteAttr.body.length < 121
@@ -43,8 +43,8 @@ Meteor.methods
     unless noteAttr.threadId
       throw new Meteor.Error 422, 'You need a threadId for your note.'
 
-    unless maxReplies == 1 || maxReplies == 3 || maxReplies == 5
-      throw new Meteor.Error 422, "You can only get 1, 3, or 5 replies."
+    # unless maxReplies == 1 || maxReplies == 3 || maxReplies == 5
+    #   throw new Meteor.Error 422, "You can only get 1, 3, or 5 replies."
 
     if Meteor.isServer
       duplicateNote = Notes.findOne(
@@ -62,7 +62,7 @@ Meteor.methods
 
     # Set note attributes
     now = new Date().getTime()
-    noteAttr = _.extend(_.pick(noteAttr, 'body', 'threadId', 'maxReplies'),
+    noteAttr = _.extend(_.pick(noteAttr, 'body', 'threadId'), #, 'maxReplies'),
       userId: user._id
       isInstream: true
       createdAt: now
@@ -94,7 +94,7 @@ Meteor.methods
     # Track note creation in mixpanel
     if Meteor.isClient
       mixpanel.track('Note/Thread: created') 
-      mixpanel.track('Note: #{maxReplies} replies') 
+      # mixpanel.track('Note: #{maxReplies} replies') 
       includeLocation = if isChecked then "on" else "off"
       mixpanel.track('Note: location #{includeLocation}')
 
@@ -114,18 +114,18 @@ Meteor.methods
     unless note
       throw new Meteor.Error(404, "Your note is missing.")
 
-    unless !note.replierIds? || _.indexOf(note.replierIds, user._id) == -1
+    if note.replierIds? && _.indexOf(note.replierIds, user._id) != -1
       throw new Meteor.Error 302, 'You already replied to this note.'
 
     unless note.isInstream
       throw new Meteor.Error(409, "Bummer! This note's been removed.")
 
-    isInstream = !(note.replierIds && note.replierIds.length >= note.maxReplies - 1)
+    # isInstream = !(note.replierIds && note.replierIds.length >= note.maxReplies - 1)
 
     now = new Date().getTime()
     Notes.update noteAttr.noteId, 
       $set:
-        isInstream: isInstream
+        # isInstream: isInstream
         updatedAt: now
       $addToSet:
         replierIds: user._id
