@@ -3,7 +3,7 @@
   <ul id="full-height" class="dropdown-menu">
     <ul class="dropdown-menu-top list-inline">
       <li class="pull-left">
-        <a class="large fa fa-comment fa-lg" href="#" id="noteFeed"></a>
+        <a class="large fa fa-chevron-left fa-lg" href="{{pathFor 'feed'}}" id="noteFeed"></a>
       </li>
       <li class="text-center">
         <a href="{{pathFor 'feed'}}"><h1 class="nav-logo">Strange</h1></a>
@@ -14,7 +14,15 @@
     </ul>
     <ul class="scrollbar">
       <li>
-        {{> allNotifications}}
+        {{#unless notifications}}
+          {{> allNotifications}} 
+        {{else}}
+          <div class="noMessages">
+            <p>You have no conversations.</p>
+            <a href="{{pathFor 'newNote'}}" class="noMessagesBtn">Create your first note</a>
+          </div>       
+        {{/unless}}
+
       </li>
       <li class="dropdown-spacing">
       </li>
