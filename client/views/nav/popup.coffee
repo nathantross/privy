@@ -25,6 +25,7 @@ Template.newMessageAlert.events
     Notify.toggleTitleFlashing(false)
     $('#newMessageAlert').slideUp('slow')
 
+
 Template.flagAlert.events
   'click .flag-btn': (e)->
     e.preventDefault()
@@ -41,6 +42,7 @@ Template.flagAlert.events
       creatorIsOnline: if !@userAttr.isIdle then "Yes" else "No"
     })
 
+
 Template.blockUserAlert.events
   'click .block-btn': (e)->
     e.preventDefault()
@@ -49,6 +51,7 @@ Template.blockUserAlert.events
   'click #block-confirm': (e)->
     Notify.toggleBlock(true, @threadId, @userIndex)
     Router.go('feed')
+
 
 Template.firstSkipAlert.events
   'click .skip-btn': (e) ->
