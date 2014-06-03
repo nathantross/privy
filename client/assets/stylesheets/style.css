@@ -441,6 +441,30 @@ footer.navbar.navbar-inverse.text-center {
   padding-right: 20px;
 }
 
+.feed-drop {
+}
+
+.dropdown-menu-feed {
+  background-color: rgba( 28, 136, 200, 1) !important;
+  color: #fff;
+  font-size: 18px;
+  margin-top: -510px !important;
+  padding-bottom: 0px !important;
+  padding-top: 0px !important;
+  box-shadow: none;
+  margin-right: -27px;
+  min-width: 0px !important;
+}
+
+.message-dropdown-feed {
+  color: #fff !important;
+  font-size: 30px;
+  margin-right: -115px;
+  min-width: 0px !important;
+  margin-right: 80px;
+}
+
+
 
 /***********/
 
