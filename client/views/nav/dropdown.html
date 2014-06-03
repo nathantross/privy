@@ -14,11 +14,15 @@
     </ul>
     <ul class="scrollbar">
       <li>
-        <div class="noMessages">
-          <p>You have no conversations.</p>
-          <a href="{{pathFor 'newNote'}}" class="noMessagesBtn">Create your first note</a>
-        </div>
-        {{> allNotifications}}
+        {{#unless notifications}}
+          {{> allNotifications}} 
+        {{else}}
+          <div class="noMessages">
+            <p>You have no conversations.</p>
+            <a href="{{pathFor 'newNote'}}" class="noMessagesBtn">Create your first note</a>
+          </div>       
+        {{/unless}}
+
       </li>
       <li class="dropdown-spacing">
       </li>
