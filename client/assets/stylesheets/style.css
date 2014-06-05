@@ -700,6 +700,11 @@ ul.dropdown-menu.dropdown-menu-feed {
   margin-top: -25px !important;
 }
 
+a#flag {
+  background-color: rgba( 28, 136, 200, 1);
+  cursor: pointer;
+}
+
 .reply-form form input {
   outline: none;
   box-shadow:none;
