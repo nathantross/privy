@@ -873,10 +873,7 @@ button#enter-chat, button#enter-chat:visited {
 }
 
 .exited-chat {
-  padding-top: 10px;
-  padding-bottom: 10px;
   border: 1px;
-  border-color: rgba( 0, 0, 0, 0.2 );
   padding-top: 5px;
   padding-bottom: 10px;
   padding-left: 5px;
