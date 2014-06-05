@@ -69,13 +69,16 @@ exports.Notify =
       Session.set('darken', true)
       $('#main-body').height($(window).height() - 91)
 
-    $(divId).removeClass "closed"
-    Meteor.setTimeout(()-> 
-        $(divId).addClass "closed"
-        Session.set('darken', false) if darken
-      , 2250
-    )
-    $(divId).text(alertCopy)
+    closeAlert = -> 
+      $(divId).addClass "closed"
+      Session.set('darken', false) if darken
+    
+    activateAlert = ->
+      $(divId).removeClass "closed"
+      $(divId).text(alertCopy)
+      Meteor.setTimeout(closeAlert, 2250)
+
+    Meteor.setTimeout(activateAlert, 250)
 
   # Toggles whether a user is checked into a thread
   toggleCheckIn: (threadId, toggle, userIndex, isMuted) ->
