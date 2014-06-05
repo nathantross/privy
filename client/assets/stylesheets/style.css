@@ -457,7 +457,7 @@ footer.navbar.navbar-inverse.text-center {
   background-color: rgba( 28, 136, 200, 1) !important;
   color: #fff;
   font-size: 18px;
-  margin-top: -510px !important;
+  margin-top: 0px !important;
   padding-bottom: 0px !important;
   padding-top: 0px !important;
   box-shadow: none;
@@ -691,6 +691,14 @@ input.fa.fa-check.fa-lg.grow.btn.btn-primary-new-note:hover {
   position: fixed;
 }
 
+ul.dropdown-menu.dropdown-menu-feed {
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  top: 0% !important;
+  margin-right: -45px;
+  margin-top: -25px !important;
+}
 
 .reply-form form input {
   outline: none;
@@ -862,6 +870,31 @@ button#enter-chat, button#enter-chat:visited {
 .button#enter-chat:hover, .button#enter-chat:active, .button#enter-chat:focus {
   background-color: rgba( 114, 223, 85, 1 ) !important;
   color: #ffffff !important;
+}
+
+.exited-chat {
+  border: 1px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 14px;
+  -webkit-border-radius: 12px 12px 12px 12px;
+  border-radius: 12px 12px 12px 12px;
+  color: #333;
+  font-weight: 100;
+  display: inline-block;
+  max-width: 200px;
+  word-wrap: break-word;
+  border-color: rgba( 0, 0, 0, 0.2 );
+}
+
+.avatar-right-exit {
+  width: 2em;
+  height: 2em;
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
+  margin-left: -15px;
 }
 
 @media (min-width: 800px) {
@@ -1080,6 +1113,7 @@ a {
   letter-spacing: 0.15em;
   color: rgba( 245, 245, 245, 0.7 );
   text-decoration: none;
+  margin-top: -40px;
 }
 
 .link:hover {
@@ -1651,9 +1685,14 @@ font-size: 16px !important;
   margin: 0px;
   background-color: #999;
   border-radius: 100px;
-  padding: 8px 31px;
-  font-size: 18;
+  padding: 3px 20px;
+  font-size: 18px;
 }
+
+p.fa.fa-flag {
+  margin-left: 0px;
+}
+
 
 .alert-nav button:hover {
   color: rgba( 242, 242, 242, 1 );
