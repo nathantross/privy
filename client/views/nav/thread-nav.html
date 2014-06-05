@@ -18,11 +18,9 @@
         {{else}}
           <li><a class="message-dropdown" id="leave-chat" href="#">Leave chat</a></li>
         {{/if}}
-        {{#if isMuted}}
-          <li><a class="message-dropdown" id="unblock-user" href="#">Unblock user</a></li>
-        {{else}}
+        {{#unless isBlocked}}
           <li><a class="message-dropdown" id="block-user" href="#">Block user</a></li>
-        {{/if}}
+        {{/unless}}
         </ul>
       </li>
     </ul>

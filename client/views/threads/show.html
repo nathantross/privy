@@ -23,11 +23,7 @@
 
         <div>
           {{#if isMuted}}
-            {{#if isBlocked}}
-              <button id="unblock-user">Unblock user</button>
-            {{else}}
-              <button id="enter-chat">Enter chat</button>
-            {{/if}}
+            <button id="enter-chat">Enter chat</button>
           {{else}}
             {{> newMessage}}
           {{/if}}
