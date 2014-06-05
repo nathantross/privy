@@ -14,3 +14,7 @@ Template.signedInNav.events
   'click #addNote': ->
     mixpanel.track("Nav: clicked add note")
 
+  'click #dropdown-li': (event)->
+    Notify.toggleNavHighlight(false)
+    Notify.toggleTitleFlashing(false)
+

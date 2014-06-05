@@ -14,26 +14,24 @@ Template.threadNav.helpers
   hasTwoParticipants: ->
     if @threadId?
       thread = Threads.findOne(@threadId) 
-      thread.participants.length == 2
+      console.log thread.participants.length
+      ans = thread.participants.length == 2
+      console.log ans
+      ans
 
   isNavNotified: ->
-    user = Meteor.user().notifications
-    if user && user[0].isNavNotified then "nav-notify" else ""
+    user = Meteor.user()
+    if user && user.notifications[0].isNavNotified then "nav-notify" else ""
 
 
 Template.threadNav.events
-  'click .load-more': (e)->
-    e.preventDefault()
-    Session.set('bodyScrollTop', $('body').scrollTop())
-    Session.set('msgWrapHeight', $('#msg-wrap').height())
-    Router.go(@nextPath)
+  'click #dropdown-li': (event)->
+    Notify.toggleNavHighlight(false)
+    Notify.toggleTitleFlashing(false)
 
   'click #leave-chat': (e) ->
     Notify.toggleIsMuted(true, "Left the chat", @threadId, @userIndex)
     Router.go('feed')
-
-  'click #enter-chat': (e) ->
-    Notify.toggleIsMuted(false, "Entered the chat", @threadId, @userIndex)
 
   'click #block-user': (e)->
     e.preventDefault()
@@ -48,6 +46,6 @@ Template.threadNav.events
       blockedId: blockedId
     })
 
-  'click #unblock-user': (e)->
-    e.preventDefault()
-    Notify.toggleBlock(false, @threadId, @userIndex)
+  # 'click #unblock-user': (e)->
+  #   e.preventDefault()
+  #   Notify.toggleBlock(false, @threadId, @userIndex)

@@ -14,7 +14,4 @@ Template.dropdown.events
 
   'click #logo': ->
     mixpanel.track("Nav: clicked logo")
-
-  'click #dropdown-li': (event)->
-    Notify.toggleNavHighlight(false)
-    Notify.toggleTitleFlashing(false)
+    
