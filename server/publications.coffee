@@ -39,7 +39,9 @@ Meteor.publish "notifications", ->
               $exists: false
           ]
       isArchived: false
-    , sort:
+    , 
+      limit: 25
+      sort:
         updatedAt: -1
 
 

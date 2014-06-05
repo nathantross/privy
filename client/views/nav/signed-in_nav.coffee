@@ -5,7 +5,11 @@ Template.signedInNav.helpers
     
     _.indexOf(disabledPaths, currentPath) != -1
 
+  isNavNotified: ->
+    user = Meteor.user().notifications
+    if user && user[0].isNavNotified then "nav-notify" else ""
 
+    
 Template.signedInNav.events
   'click #addNote': ->
     mixpanel.track("Nav: clicked add note")
