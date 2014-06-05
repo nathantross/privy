@@ -61,8 +61,10 @@ exports.Notify =
       document.title = title
 
   defaultTitle: ->
-    notCount = Meteor.user()?.notifications?[0].count
-    if notCount > 0 then "Strange (" + notCount + " unread)" else "Strange"
+    # Removed unread count until we can get it working
+    # notCount = Meteor.user()?.notifications?[0].count
+    # if notCount > 0 then "Strange (" + notCount + " unread)" else "Strange"
+    "Strange"
 
   popup: (divId, alertCopy, darken) ->
     if darken
