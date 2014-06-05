@@ -64,17 +64,17 @@ exports.Notify =
     notCount = Meteor.user()?.notifications?[0].count
     if notCount > 0 then "Strange (" + notCount + " unread)" else "Strange"
 
-  # Popup activates the popup notification 
   popup: (divId, alertCopy, darken) ->
     if darken
       Session.set('darken', true)
       $('#main-body').height($(window).height() - 91)
 
-    $(divId).slideDown "slow", ->
-      Meteor.setTimeout(()-> 
-          $(divId).slideUp("slow")
-          Session.set('darken', false) if darken
-        , 3000)
+    $(divId).removeClass "closed"
+    Meteor.setTimeout(()-> 
+        $(divId).addClass "closed"
+        Session.set('darken', false) if darken
+      , 2250
+    )
     $(divId).text(alertCopy)
 
   # Toggles whether a user is checked into a thread

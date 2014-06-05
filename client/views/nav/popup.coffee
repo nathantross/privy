@@ -23,13 +23,13 @@ Template.newMessageAlert.events
     Notify.toggleItemHighlight(notification, false)
     Notify.toggleNavHighlight(false) unless Notify.anyItemsNotified()
     Notify.toggleTitleFlashing(false)
-    $('#newMessageAlert').slideUp('slow')
+    $('#newMessageAlert').addClass 'closed'
 
 
 Template.flagAlert.events
   'click .flag-btn': (e)->
     e.preventDefault()
-    $('#flagAlert').slideUp('slow')
+    $('#flagAlert').addClass 'closed'
 
   'click #flag-confirm': (e)->
     Meteor.call 'flag', @note._id, (err, res) ->
@@ -46,7 +46,7 @@ Template.flagAlert.events
 Template.blockUserAlert.events
   'click .block-btn': (e)->
     e.preventDefault()
-    $('#block-user-alert').slideUp('slow')
+    $('#block-user-alert').addClass('closed')
 
   'click #block-confirm': (e)->
     Notify.toggleBlock(true, @threadId, @userIndex)
@@ -56,7 +56,7 @@ Template.blockUserAlert.events
 Template.firstSkipAlert.events
   'click .skip-btn': (e) ->
     e.preventDefault()
-    $('#first-skip-alert').slideUp "slow"
+    $('#first-skip-alert').addClass 'closed'
     Session.set 'isSkipAlert', false
 
   'click #skip-confirm': (e)->

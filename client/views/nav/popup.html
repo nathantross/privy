@@ -9,7 +9,7 @@
 </template>
 
 <template name="newMessageAlert">
-  <div class="alert-nav alert-danger alert-dismissable popup" id="newMessageAlert">
+  <div class="alert-nav alert-danger alert-dismissable popup slider closed" id="newMessageAlert">
     {{#with notification}}
       <a href="{{pathFor 'showThread' _id=threadId}}">
         <ul class="list-inline">
@@ -22,16 +22,16 @@
 </template>
 
 <template name="successAlert">
-  <div class="alert-nav alert-success-nav alert-dismissable popup" id="successAlert"></div>
+  <div class="alert-nav alert-success-nav alert-dismissable popup slider closed" id="successAlert"></div>
 </template>
 
 <template name="errorAlert">
-  <div class="alert-nav alert-flag alert-dismissable popup" id="errorAlert">
+  <div class="alert-nav alert-flag alert-dismissable popup slider closed" id="errorAlert">
   </div>
 </template>
 
 <template name="flagAlert">
-  <div class="alert-nav alert-flag alert-dismissable popup" id="flagAlert">
+  <div class="alert-nav alert-flag alert-dismissable popup slider closed" id="flagAlert">
     <ul class="list-inline">
       <li><p class="fa fa-flag fa-lg"> Flag this note?</p></li>
       <li><button id="flag-confirm" class="flag-btn">Yes</button></li>
@@ -41,7 +41,7 @@
 </template>
 
 <template name="blockUserAlert">
-  <div class="alert-nav alert-block-user alert-dismissable popup" id="block-user-alert">
+  <div class="alert-nav alert-block-user alert-dismissable popup slider closed" id="block-user-alert">
       <p>Are you sure you want to block this user?</p>
       <br>
       <ul class="list-inline">
@@ -52,7 +52,7 @@
 </template>
 
 <template name="firstSkipAlert">
-  <div class="alert-nav alert-first-skip alert-dismissable popup" id="first-skip-alert">
+  <div class="alert-nav alert-first-skip alert-dismissable popup slider closed" id="first-skip-alert">
       <p>When you skip a note, you won't see it again. Skip wisely!</p>
       <br>
       <ul class="list-inline">

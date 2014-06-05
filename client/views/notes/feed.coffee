@@ -4,7 +4,7 @@ Template.feed.events
       Meteor.call 'skipNote', @note._id, @userAttr.isOnline, (error, id) -> 
         console.log(error.reason) if error
     else
-      $('#first-skip-alert').slideDown "slow" unless Session.equals 'isSkipAlert', true
+      $('#first-skip-alert').removeClass "closed" unless Session.equals 'isSkipAlert', true
       Session.set 'isSkipAlert', true
       Meteor.call 'toggleFirstSkip', {}, (err) ->
         console.log err if err      
@@ -21,7 +21,7 @@ Template.feed.events
 
   "click #flag": (e)->
     e.preventDefault()
-    $('#flagAlert').slideDown "slow"
+    $('#flagAlert').removeClass "closed"
     mixpanel.track("Flag: clicked", {
       noteId: @note._id, 
       body: @note.body, 
@@ -30,6 +30,10 @@ Template.feed.events
     })
 
 Template.feed.helpers
+  
+  noteClass: ->
+    if @note.body.length > 60 then "message-feed-sm" else "message-feed"
+    
   isUserActive: ->
     "•" if @userAttr? && @userAttr.isOnline 
     

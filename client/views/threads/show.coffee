@@ -4,7 +4,7 @@ Template.showThread.helpers
 
   isBlocked: ->
     thread = Threads.findOne(@threadId) if @threadId?
-    if thread && @userIndex? && thread.participants.size == 2
+    if thread && @userIndex? && thread.participants.length == 2
       blockedIndex = if @userIndex == 1 then 0 else 1
       blockedId = thread.participants[blockedIndex].userId
       return _.indexOf(Meteor.user().blockedIds, blockedId) > -1
@@ -12,8 +12,9 @@ Template.showThread.helpers
       false
 
   hasTwoParticipants: ->
-    thread = Threads.findOne(@threadId) if @threadId?
-    thread.participants.size == 2 if thread
+    if @threadId?
+      thread = Threads.findOne(@threadId) 
+      thread.participants.length == 2
 
 
 Template.showThread.events
@@ -32,7 +33,7 @@ Template.showThread.events
 
   'click #block-user': (e)->
     e.preventDefault()
-    $('#block-user-alert').slideDown "slow"
+    $('#block-user-alert').removeClass "closed"
 
     blockedIndex = if @userIndex == 1 then 0 else 1
     blockedId = Threads.findOne(@threadId).participants[blockedIndex].userId
