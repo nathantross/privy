@@ -5,14 +5,6 @@ body {
   height: 100%;
   background-color: rgba( 233, 233, 233, 1);
   overflow-x: hidden;
-  overflow-y: hidden;
-  /*background: -moz-linear-gradient(left,  rgba(198,198,198,0.65) 0%, rgba(249,249,249,0.83) 50%, rgba(198,198,198,1) 100%); /* FF3.6+ */
-  /*background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(198,198,198,0.65)), color-stop(50%,rgba(249,249,249,0.83)), color-stop(100%,rgba(198,198,198,1))); /* Chrome,Safari4+ */
-  /*background: -webkit-linear-gradient(left,  rgba(198,198,198,0.65) 0%,rgba(249,249,249,0.83) 50%,rgba(198,198,198,1) 100%); /* Chrome10+,Safari5.1+ */
-  /*background: -o-linear-gradient(left,  rgba(198,198,198,0.65) 0%,rgba(249,249,249,0.83) 50%,rgba(198,198,198,1) 100%); /* Opera 11.10+ */
-  /*background: -ms-linear-gradient(left,  rgba(198,198,198,0.65) 0%,rgba(249,249,249,0.83) 50%,rgba(198,198,198,1) 100%); /* IE10+ */
-  /*background: linear-gradient(to right,  rgba(198,198,198,0.65) 0%,rgba(249,249,249,0.83) 50%,rgba(198,198,198,1) 100%); /* W3C */
-  /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6c6c6c6', endColorstr='#c6c6c6',GradientType=1 ); /* IE6-9 */
 }
 
 .container {
@@ -307,6 +299,15 @@ background-color: rgba( 233, 233, 233, 1) !important;
 .main-line {
   height: 10px;
   background-color: #54656e;
+}
+
+.secondary-headline {
+  margin-top: -15px;
+  margin-bottom: 40px;
+  font-size: 35px;
+  font-family: "roboto";
+  font-weight: 300;
+  color: rgba( 0, 0, 0, 0.7);
 }
 
 .action-item {
@@ -697,7 +698,12 @@ ul.dropdown-menu.dropdown-menu-feed {
   padding-bottom: 0 !important;
   top: 0% !important;
   margin-right: -45px;
-  margin-top: -25px !important;
+  margin-top: -40px !important;
+}
+
+a#flag {
+  background-color: rgba( 28, 136, 200, 1);
+  cursor: pointer;
 }
 
 .reply-form form input {
@@ -756,6 +762,7 @@ ul.dropdown-menu.dropdown-menu-feed {
   text-align: right;
   padding-left: 40px;
   padding-right: 40px;
+  margin-top: -45px;
 }
 
 .message-feed-drop:hover {
@@ -905,6 +912,7 @@ button#enter-chat, button#enter-chat:visited {
 
   a.fa.fa-comment.fa-lg.pull-left {
     font-size: 0px !important;
+    margin-top: -300px !important;
   }
 
   .thread-header > ul > li > a {
@@ -1113,7 +1121,7 @@ a {
   letter-spacing: 0.15em;
   color: rgba( 245, 245, 245, 0.7 );
   text-decoration: none;
-  margin-top: -40px;
+  margin-top: 0px;
 }
 
 .link:hover {
@@ -1527,7 +1535,7 @@ a#noteFeed {
 
 .firstMessageIntro {
   font-family: "Droid Serif";
-  font-size: 14px !important;
+  font-size: 13px !important;
   font-weight: 700;
   padding-top: 10px;
   padding-left: 0px;
@@ -1609,6 +1617,29 @@ font-size: 16px !important;
     margin-top: -5px;
   }
 
+  .noMessages {
+    color: #555;
+    font-size: 24px;
+    padding: 50px;
+    font-family: "Roboto" !important;
+    font-weight: 400;
+  }
+
+  a.noMessagesBtn {
+    font-size: 20px !important;
+  }
+
+  .noMessagesBtn {
+    color: rgba( 28, 136, 200, 0.8) !important;
+    font-size: 24px !important;
+    text-decoration: underline !important;
+    font-weight: 100;
+  }
+
+  .noMessagesBtn:hover {
+    color: rgba( 28, 136, 200, 1) !important;
+  }
+
 }
 
 .noMessages {
@@ -1616,13 +1647,14 @@ font-size: 16px !important;
   font-size: 22px;
   padding: 50px;
   font-family: "Roboto" !important;
-  font-weight: 100;
+  font-weight: 400;
 }
 
 .noMessagesBtn {
   color: rgba( 28, 136, 200, 0.8) !important;
   font-size: 24px !important;
   text-decoration: underline !important;
+  font-weight: 100;
 }
 
 .noMessagesBtn:hover {

@@ -1,0 +1,29 @@
+<template name="threadNav">
+
+  <div class="navbar-fixed-top thread-header">
+    <ul>
+      <li>
+        <a href="#" class="fa fa-comment fa-lg pull-left {{isNavNotified}}" data-toggle="dropdown"></a>
+        {{> dropdown}}
+      </li>
+      <li>
+        {{#if hasTwoParticipants}}
+          <a href="#" class="pull-right" data-toggle="dropdown">
+            <div class="link text-center"><p>•••</p></div>
+          </a>
+        {{/if}}
+        <ul id="full-height" class="dropdown-menu dropdown-menu-message list-inline text-center">
+        {{#if isMuted}}
+          <li><a class="message-dropdown" id="enter-chat" href="#">Enter chat</a></li>
+        {{else}}
+          <li><a class="message-dropdown" id="leave-chat" href="#">Leave chat</a></li>
+        {{/if}}
+        {{#unless isBlocked}}
+          <li><a class="message-dropdown" id="block-user" href="#">Block user</a></li>
+        {{/unless}}
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+</template>

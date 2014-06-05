@@ -1,32 +1,6 @@
 <template name="showThread">
 
-  <div class="navbar-fixed-top thread-header">
-    <ul>
-      <li>
-        <a href="#" class="fa fa-comment fa-lg pull-left {{isNavNotified}}" data-toggle="dropdown"></a>
-        {{> dropdown}}
-      </li>
-      <li>
-        {{#if hasTwoParticipants}}
-          <a href="#" class="pull-right" data-toggle="dropdown">
-            <div class="link text-center"><p>•••</p></div>
-          </a>
-        {{/if}}
-        <ul id="full-height" class="dropdown-menu dropdown-menu-message list-inline text-center">
-        {{#if isMuted}}
-          <li><a class="message-dropdown" id="enter-chat" href="#">Enter chat</a></li>
-        {{else}}
-          <li><a class="message-dropdown" id="leave-chat" href="#">Leave chat</a></li>
-        {{/if}}
-        {{#if isMuted}}
-          <li><a class="message-dropdown" id="unblock-user" href="#">Unblock user</a></li>
-        {{else}}
-          <li><a class="message-dropdown" id="block-user" href="#">Block user</a></li>
-        {{/if}}
-        </ul>
-      </li>
-    </ul>
-  </div>
+{{> threadNav}}
 
   <div class="container container-open">
     <br>
@@ -49,11 +23,7 @@
 
         <div>
           {{#if isMuted}}
-            {{#if isBlocked}}
-              <button id="unblock-user">Unblock user</button>
-            {{else}}
-              <button id="enter-chat">Enter chat</button>
-            {{/if}}
+            <button id="enter-chat">Enter chat</button>
           {{else}}
             {{> newMessage}}
           {{/if}}
