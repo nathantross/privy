@@ -1521,9 +1521,8 @@ a#noteFeed {
 }
 
 .scrollbar-height {
-  /*overflow-y: scroll;*/
   padding-bottom: 100px;
-  height: 1200px !important;
+  max-height: 1200px !important;
 }
 
 .firstMessageIntro {
