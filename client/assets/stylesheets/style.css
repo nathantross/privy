@@ -864,6 +864,34 @@ button#enter-chat, button#enter-chat:visited {
   color: #ffffff !important;
 }
 
+.exited-chat {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px;
+  border-color: rgba( 0, 0, 0, 0.2 );
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 14px;
+  -webkit-border-radius: 12px 12px 12px 12px;
+  border-radius: 12px 12px 12px 12px;
+  color: #333;
+  font-weight: 100;
+  display: inline-block;
+  max-width: 200px;
+  word-wrap: break-word;
+  border-color: rgba( 0, 0, 0, 0.2 );
+}
+
+.avatar-right-exit {
+  width: 2em;
+  height: 2em;
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
+  margin-left: -15px;
+}
+
 @media (min-width: 800px) {
 
   .nav-thread-title {
