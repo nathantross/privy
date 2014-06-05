@@ -61,21 +61,26 @@ exports.Notify =
       document.title = title
 
   defaultTitle: ->
-    notCount = Meteor.user()?.notifications?[0].count
-    if notCount > 0 then "Strange (" + notCount + " unread)" else "Strange"
+    # Removed unread count until we can get it working
+    # notCount = Meteor.user()?.notifications?[0].count
+    # if notCount > 0 then "Strange (" + notCount + " unread)" else "Strange"
+    "Strange"
 
   popup: (divId, alertCopy, darken) ->
     if darken
       Session.set('darken', true)
       $('#main-body').height($(window).height() - 91)
 
-    $(divId).removeClass "closed"
-    Meteor.setTimeout(()-> 
-        $(divId).addClass "closed"
-        Session.set('darken', false) if darken
-      , 2250
-    )
-    $(divId).text(alertCopy)
+    closeAlert = -> 
+      $(divId).addClass "closed"
+      Session.set('darken', false) if darken
+    
+    activateAlert = ->
+      $(divId).removeClass "closed"
+      $(divId).text(alertCopy)
+      Meteor.setTimeout(closeAlert, 2250)
+
+    Meteor.setTimeout(activateAlert, 250)
 
   # Toggles whether a user is checked into a thread
   toggleCheckIn: (threadId, toggle, userIndex, isMuted) ->

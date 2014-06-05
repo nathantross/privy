@@ -2,16 +2,29 @@
 
   <div class="text-center">
     {{#if hasExited}}
-      <div class="row text-right">
-        <div class="col-xs-3">
+      {{#if currentUserIsSender}}
+        <div class="row text-right">
+          <div class="col-xs-3">
+          </div>
+          <div class="col-xs-7 ">
+            <p class="exited-chat text-right">{{body}}</p>
+          </div> 
+          <div class="col-xs-2 text-left">
+            <img class="text-left avatar-right-exit" src="{{senderAvatar}}" />
+          </div>
         </div>
-        <div class="col-xs-7 ">
-          <p class="exited-chat text-right">{{body}}</p>
-        </div> 
-        <div class="col-xs-2 text-left">
-          <img class="text-left avatar-right-exit" src="{{senderAvatar}}" />
+      {{else}}
+        <div class="row text-left">
+          <div class="col-xs-2 text-right">
+            <img class="text-right avatarleft" src="{{senderAvatar}}" />
+          </div>
+          <div class="col-xs-7">
+            <p class="exited-chat text-right">{{body}}</p>
+          </div>
+          <div class="col-xs-3">
+          </div>
         </div>
-      </div>
+      {{/if}}
     {{else}}
       {{#if currentUserIsSender}}
         <div class="row text-right">

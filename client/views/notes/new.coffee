@@ -53,4 +53,4 @@ Template.newNote.events
 
     else
       e.preventDefault()
-      Notify.popup "#errorAlert", "Whoops! Looks like your note's blank."
+      # Notify.popup "#errorAlert", "Whoops! Looks like your note's blank."

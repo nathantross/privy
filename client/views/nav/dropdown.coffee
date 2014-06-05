@@ -1,17 +1,6 @@
 Template.dropdown.helpers
-  isNavNotified: ->
-    user = Meteor.user().notifications
-    if user && user[0].isNavNotified then "nav-notify" else ""
-
-  isIntro: ->
-    disabledPaths = ['intro', 'intro_1', 'intro_2', 'intro_3']
-    currentPath = Router.current().path.split('/')[1]
-    
-    _.indexOf(disabledPaths, currentPath) != -1
-
-  'click #dropdown-li': (event)->
-    Notify.toggleNavHighlight(false)
-    Notify.toggleTitleFlashing(false)
+  hasNotification: ->
+    Notifications.findOne({isArchived: false})?
 
 Template.dropdown.events
   'click #sign-out': ->
@@ -25,3 +14,4 @@ Template.dropdown.events
 
   'click #logo': ->
     mixpanel.track("Nav: clicked logo")
+    
