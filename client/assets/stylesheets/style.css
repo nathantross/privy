@@ -1610,6 +1610,29 @@ font-size: 16px !important;
     margin-top: -5px;
   }
 
+  .noMessages {
+    color: #555;
+    font-size: 24px;
+    padding: 50px;
+    font-family: "Roboto" !important;
+    font-weight: 400;
+  }
+
+  a.noMessagesBtn {
+    font-size: 20px !important;
+  }
+
+  .noMessagesBtn {
+    color: rgba( 28, 136, 200, 0.8) !important;
+    font-size: 24px !important;
+    text-decoration: underline !important;
+    font-weight: 100;
+  }
+
+  .noMessagesBtn:hover {
+    color: rgba( 28, 136, 200, 1) !important;
+  }
+
 }
 
 .noMessages {
@@ -1617,13 +1640,14 @@ font-size: 16px !important;
   font-size: 22px;
   padding: 50px;
   font-family: "Roboto" !important;
-  font-weight: 100;
+  font-weight: 400;
 }
 
 .noMessagesBtn {
   color: rgba( 28, 136, 200, 0.8) !important;
   font-size: 24px !important;
   text-decoration: underline !important;
+  font-weight: 100;
 }
 
 .noMessagesBtn:hover {
