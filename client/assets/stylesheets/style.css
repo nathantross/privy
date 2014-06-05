@@ -4,6 +4,7 @@ body {
   color: #555;
   height: 100%;
   background-color: rgba( 233, 233, 233, 1);
+  overflow-x: hidden;
 }
 
 .container {
@@ -697,7 +698,7 @@ ul.dropdown-menu.dropdown-menu-feed {
   padding-bottom: 0 !important;
   top: 0% !important;
   margin-right: -45px;
-  margin-top: -25px !important;
+  margin-top: -40px !important;
 }
 
 a#flag {
@@ -761,6 +762,7 @@ a#flag {
   text-align: right;
   padding-left: 40px;
   padding-right: 40px;
+  margin-top: -45px;
 }
 
 .message-feed-drop:hover {
@@ -1534,7 +1536,7 @@ a#noteFeed {
 
 .firstMessageIntro {
   font-family: "Droid Serif";
-  font-size: 14px !important;
+  font-size: 13px !important;
   font-weight: 700;
   padding-top: 10px;
   padding-left: 0px;
