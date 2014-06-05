@@ -1688,9 +1688,14 @@ font-size: 16px !important;
   margin: 0px;
   background-color: #999;
   border-radius: 100px;
-  padding: 8px 31px;
-  font-size: 18;
+  padding: 3px 20px;
+  font-size: 18px;
 }
+
+p.fa.fa-flag {
+  margin-left: 0px;
+}
+
 
 .alert-nav button:hover {
   color: rgba( 242, 242, 242, 1 );
