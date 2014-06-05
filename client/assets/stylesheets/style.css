@@ -305,7 +305,7 @@ background-color: rgba( 233, 233, 233, 1) !important;
   margin-top: -15px;
   margin-bottom: 40px;
   font-size: 35px;
-  font-family: "roboto";
+  font-family: "Roboto";
   font-weight: 300;
   color: rgba( 0, 0, 0, 0.7);
 }
@@ -1558,7 +1558,7 @@ a#noteFeed {
 
   .firstMessageIntro {
     font-family: "Droid Serif";
-    font-size: 14px !important;
+    font-size: 13px !important;
     font-weight: 700;
     padding-top: 10px;
     padding-left: 0px;
@@ -1776,7 +1776,7 @@ p.fa.fa-flag {
   border-color: #fff;
   border-style: solid 1px;
   font-size: 24px;
-  margin-left: -17px !important;
+  margin-left: -21px !important;
   margin-bottom: -5px;
 }
 
