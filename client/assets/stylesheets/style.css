@@ -457,7 +457,7 @@ footer.navbar.navbar-inverse.text-center {
   background-color: rgba( 28, 136, 200, 1) !important;
   color: #fff;
   font-size: 18px;
-  margin-top: -510px !important;
+  margin-top: 0px !important;
   padding-bottom: 0px !important;
   padding-top: 0px !important;
   box-shadow: none;
@@ -691,6 +691,14 @@ input.fa.fa-check.fa-lg.grow.btn.btn-primary-new-note:hover {
   position: fixed;
 }
 
+ul.dropdown-menu.dropdown-menu-feed {
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  top: 0% !important;
+  margin-right: -45px;
+  margin-top: -25px !important;
+}
 
 .reply-form form input {
   outline: none;
@@ -1108,6 +1116,7 @@ a {
   letter-spacing: 0.15em;
   color: rgba( 245, 245, 245, 0.7 );
   text-decoration: none;
+  margin-top: -40px;
 }
 
 .link:hover {
