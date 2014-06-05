@@ -910,6 +910,7 @@ button#enter-chat, button#enter-chat:visited {
 
   a.fa.fa-comment.fa-lg.pull-left {
     font-size: 0px !important;
+    margin-top: -300px !important;
   }
 
   .thread-header > ul > li > a {
@@ -1118,7 +1119,7 @@ a {
   letter-spacing: 0.15em;
   color: rgba( 245, 245, 245, 0.7 );
   text-decoration: none;
-  margin-top: -40px;
+  margin-top: 0px;
 }
 
 .link:hover {
