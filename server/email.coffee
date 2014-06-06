@@ -2,12 +2,12 @@
 Accounts.config
   sendVerificationEmail: true
   forbidClientAccountCreation: false
-  Accounts.emailTemplates.siteName = "Privy"
-  Accounts.emailTemplates.from = "Privy <hello@privy.cc>"
+  Accounts.emailTemplates.siteName = "Get Strange"
+  Accounts.emailTemplates.from = "Get Strange <hello@getstrange.co>"
 
   Accounts.emailTemplates.verifyEmail.subject = (user) ->
-    "Verify your Privy Account"
+    "Verify your account on Get Strange"
   
   Accounts.emailTemplates.verifyEmail.text = (user, url) ->
-    "Thanks for joining Privy!\n\nTo finish verifying your anonymous Privy account, please click the link below:\n\n" + url
+    "Thanks for joining Strange!\n\nTo finish verifying your anonymous account on Get Strange, please click the link below:\n\n" + url
 
