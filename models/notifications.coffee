@@ -100,11 +100,11 @@ Meteor.methods
               lastMessage: messageAttr.lastMessage
 
             Email.send
-              from: "Privy <hello@privy.cc>"
+              from: "Get Strange <hello@getstrange.co>"
               to: emailAttr.receiverEmail
               subject: "You have a new message"
-              text: "You have a new message at http://privy.cc/threads/" + emailAttr.threadId
-              html: "<center><img src='" + emailAttr.senderAvatar + "' /><br><br>You have a new message:<br><br><h1>" + emailAttr.lastMessage + "</h1><br><a href='http://privy.cc/threads/" + emailAttr.threadId + "' >Click here to respond</a></center>"
+              text: "You have a new message at http://getstrange.co/threads/" + emailAttr.threadId
+              html: "<center><img src='" + emailAttr.senderAvatar + "' /><br><br>You have a new message:<br><br><h1>" + emailAttr.lastMessage + "</h1><br><a href='http://getstrange.co/threads/" + emailAttr.threadId + "' >Click here to respond</a></center>"
 
 
   toggleItemHighlight: (notAttr) ->
