@@ -24,12 +24,14 @@ Template.newMessageAlert.events
     Notify.toggleNavHighlight(false) unless Notify.anyItemsNotified()
     Notify.toggleTitleFlashing(false)
     $('#newMessageAlert').addClass 'closed'
+    mixpanel.track "Message: alert clicked"
 
 
 Template.flagAlert.events
   'click .flag-btn': (e)->
     e.preventDefault()
     $('#flagAlert').addClass 'closed'
+    mixpanel.track "Flag: canceled"
 
   'click #flag-confirm': (e)->
     Meteor.call 'flag', @note._id, (err, res) ->
@@ -47,10 +49,12 @@ Template.blockUserAlert.events
   'click .block-btn': (e)->
     e.preventDefault()
     $('#block-user-alert').addClass('closed')
+    mixpanel.track "Block user: canceled"
 
   'click #block-confirm': (e)->
     Notify.toggleBlock(true, @threadId, @userIndex)
     Router.go('feed')
+    mixpanel.track "Block user: confirmed"
 
 
 Template.firstSkipAlert.events
@@ -58,8 +62,10 @@ Template.firstSkipAlert.events
     e.preventDefault()
     $('#first-skip-alert').addClass 'closed'
     Session.set 'isSkipAlert', false
+    mixpanel.track "Skip first note: canceled"
 
   'click #skip-confirm': (e)->
     Meteor.call 'skipNote', @note._id, @userAttr.isIdle, (error, id) -> 
       console.log(error.reason) if error
+    mixpanel.track "Skip first note: confirmed"
     

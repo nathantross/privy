@@ -6,12 +6,13 @@ Template.dropdown.events
   'click #sign-out': ->
     mixpanel.track("User: signed out")
 
-  'click #noteFeed': ->
-    mixpanel.track("Nav: clicked note feed")
+  'click .navlogo': ->
+    mixpanel.track("Nav: clicked logo")
 
   'click #settings': ->
     mixpanel.track("Nav: clicked settings")
 
-  'click #logo': ->
-    mixpanel.track("Nav: clicked logo")
+  'click #noteFeedChevron': ->
+    mixpanel.track("Nav: clicked noteFeedChevron")
+
     

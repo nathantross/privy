@@ -31,4 +31,8 @@ Template.notification.events
   'click .archive': (e)->
     e.preventDefault()
     Meteor.call "toggleArchived", @_id, true, (err, notId)->
-      console.log err if err       
+      console.log err if err  
+    mixpanel.track "Notification: archived"
+
+  'click .notification-link': ->
+    mixpanel.track "Notification: clicked"    

@@ -25,8 +25,10 @@ Template.threadNav.events
   'click #dropdown-li': (event)->
     Notify.toggleNavHighlight(false)
     Notify.toggleTitleFlashing(false)
+    mixpanel.track("Nav: clicked comment bubble")
 
   'click #leave-chat': (e) ->
+    mixpanel.track "Thread: left chat"
     Notify.toggleIsMuted(true, "Left the chat", @threadId, @userIndex)
     Router.go('feed')
 
@@ -42,6 +44,9 @@ Template.threadNav.events
       blockerId: Meteor.userId()
       blockedId: blockedId
     })
+
+  'click #more-actions': ->
+    mixpanel.track "Thread: 'more actions' clicked"
 
   # 'click #unblock-user': (e)->
   #   e.preventDefault()
