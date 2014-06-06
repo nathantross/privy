@@ -235,10 +235,14 @@ exports.Notify =
 
       if user
         if (avatar && isIdle) || (!avatar && !isIdle)
-          return( 
+          userStatus =
             avatar: user.profile.avatar
             isOnline: user.status?.online && !user.status?.idle 
-          )
+
+          Session.set 'avatar', userStatus.avatar
+          Session.set 'isOnline', userStatus.isOnline
+          
+          userStatus
         else if avatar
           user.profile.avatar
         else 
