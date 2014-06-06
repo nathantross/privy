@@ -1,5 +1,5 @@
 Meteor.startup ->
-  if Meteor.users.find().count() == 0
+  if Meteor.users.find().count() == 0 && window.location.host == "localhost:3000"
     userIds = []
 
     # Create three users
