@@ -20,6 +20,9 @@ Template.editUser.events
   'click #email-switch': (e) ->
     toggleSwitch("email")
 
+  'click #sign-out': ->
+    mixpanel.track "User: signed out"
+
   toggleSwitch = (name) ->
 
     toTitleCase = (str) ->
@@ -34,4 +37,4 @@ Template.editUser.events
 
     onOff = if isChecked then "on" else "off"
     Notify.popup('#successAlert', "Your #{name} is #{onOff}!")
-    mixpanel.track '#{toTitleCase(name)}: #{onOff}'
+    mixpanel.track "#{toTitleCase(name)}: #{onOff}"
