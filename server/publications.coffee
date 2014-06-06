@@ -5,6 +5,7 @@ Meteor.publish "userStatus", ->
         fields: 
           userId: 1
           idle: 1
+          ipAddr: 1
 
 
 Meteor.publish "notificationUserStatus", ->

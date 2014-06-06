@@ -70,22 +70,12 @@ Meteor.methods
       expiresAt: (now + 7*24*60*60*1000) # 7 days from now (in ms)
     )
     
-    console.log "isChecked"
-    console.log isChecked
-    
     # Add location to note
     if isChecked && Meteor.isServer
       ipAddr = @connection.clientAddress
-      console.log "ipAddr"
-      console.log ipAddr
       
       location = Locations.findOne ipAddress: ipAddr  
-      console.log "location 1"
-      console.log location
-
       location = getLocation(ipAddr) unless location  
-      console.log "location 2"
-      console.log location
 
       if location 
         noteAttr = _.extend noteAttr,
@@ -96,9 +86,6 @@ Meteor.methods
             city: location.cityName
             region: location.regionName
             country: location.countryName
-      
-      console.log "noteAttr"
-      console.log noteAttr
 
     # Create the note
     noteId = Notes.insert(noteAttr)
