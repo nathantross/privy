@@ -2094,3 +2094,19 @@ footer {
   }
 
 }
+
+@media (max-width: 699px) and (min-width: 300px) {
+  form.new-note.text-center {
+    margin-top: -35px !important;
+  }
+
+  .newnote-selectors {
+    padding-bottom: 10px !important;
+    text-align: center !important;
+  }
+
+  .create-form {
+    height: 140px !important;
+  }
+
+}
