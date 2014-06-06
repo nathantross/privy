@@ -24,7 +24,9 @@ Template.newNote.events
     if body.length > 0
       Notify.popup('#successAlert', "Note created! Woot woooo!")
       isChecked = $('input[name=onoffswitch]').prop('checked')
-      
+      console.log "isChecked" 
+      console.log isChecked
+
       Meteor.call 'createThread', {}, (error, threadId) -> 
         return console.log(error.reason) if error
         
@@ -32,6 +34,10 @@ Template.newNote.events
           body: body
           # maxReplies: parseInt($("#max-replies").val())
           threadId: threadId
+
+        console.log "isChecked for createNote" 
+        console.log isChecked
+
 
         Meteor.call 'createNote', noteAttr, isChecked, (error, response) -> 
           return console.log(error.reason) if error
