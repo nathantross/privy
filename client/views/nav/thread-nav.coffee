@@ -28,7 +28,7 @@ Template.threadNav.events
     mixpanel.track("Nav: clicked comment bubble")
 
   'click #leave-chat': (e) ->
-    mixpanel.track "Thread: left chat"
+    mixpanel.track "ThreadNav: left chat"
     Notify.toggleIsMuted(true, "Left the chat", @threadId, @userIndex)
     Router.go('feed')
 
@@ -39,14 +39,14 @@ Template.threadNav.events
     blockedIndex = if @userIndex == 1 then 0 else 1
     blockedId = Threads.findOne(@threadId).participants[blockedIndex].userId
 
-    mixpanel.track("Block user: clicked", {
+    mixpanel.track("ThreadNav: clicked block user", {
       threadId: @threadId 
       blockerId: Meteor.userId()
       blockedId: blockedId
     })
 
   'click #more-actions': ->
-    mixpanel.track "Thread: 'more actions' clicked"
+    mixpanel.track "ThreadNav: clicked 'more actions'"
 
   # 'click #unblock-user': (e)->
   #   e.preventDefault()

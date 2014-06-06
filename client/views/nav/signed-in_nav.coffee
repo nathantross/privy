@@ -17,5 +17,5 @@ Template.signedInNav.events
   'click #dropdown-li': (event)->
     Notify.toggleNavHighlight(false)
     Notify.toggleTitleFlashing(false)
-    mixpanel.track("Nav: comment bubble")
+    mixpanel.track("Nav: clicked comment bubble")
 
