@@ -5,6 +5,7 @@ body {
   height: 100%;
   background-color: rgba( 233, 233, 233, 1);
   overflow-x: hidden;
+  min-height: 400px;
 }
 
 .container {
@@ -203,8 +204,42 @@ background-color: rgba( 233, 233, 233, 1) !important;
   padding: 0px;
   margin-bottom: -20px;
   margin: 0;
+  margin-top: -35px;
 }
 
+.entry .entry-signin-cta {
+  margin-bottom: -20px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 25px;
+  margin-top: -50px;
+}
+
+.entry-form button.submit {
+  font-size: 16px;
+  padding: 10px 12px;
+  margin-top: -35px;
+}
+
+.entry-form label {
+margin-bottom: 5px;
+  font-weight: 500;
+  font-size: 14px;
+  margin-left: -35px;
+}
+
+.entry .entry-agreement {
+  margin-top: 0px;
+  font-size: 13px;
+  }
+
+.entry-social button#entry-facebook {
+  background: #3B5998;
+  color: #fff;
+  margin-top: 60px;
+}
 
 /***********/
 
@@ -814,9 +849,20 @@ a#flag {
   border: 0 !important;
 }
 
-.form-control {
-  border: 0px solid #fff;
-  border-top: 1px solid #999;
+.sign-up {
+  margin-top: 81px !important;
+}
+
+input.form-control.sign-in {
+  margin-top: 70px;
+}
+
+.entry-social button#entry-facebook {
+  margin-top: 0px;
+}
+
+div.entry-social.sign-in {
+  margin-top: 60px;
 }
 
 .btn-default {
@@ -1317,7 +1363,7 @@ a#noteFeed {
   color: rgba( 83, 83, 83, 1 );
   line-height: 1;
   text-align: center !important;
-  padding-left: 35px;
+  padding-left: 45px;
   padding-top: 0px;
   margin-top: -35px;
 }
@@ -2000,7 +2046,7 @@ footer {
   color: #666;
   font-weight: 400;
   font-size: 2em;
-  padding-bottom: 30px;
+  padding-bottom: 0px;
 }
 
 /***********/
@@ -2117,6 +2163,14 @@ footer {
   .btn-message, .btn-message:visited {
     height: 50px;
     font-size: 20px;
+  }
+
+  .list-inline > li {
+    padding-right: 6px;
+  }
+
+  .entry {
+    margin-top: -60px;
   }
 
 }
