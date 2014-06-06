@@ -24,7 +24,7 @@ Template.newNote.events
     if body.length > 0
       Notify.popup('#successAlert', "Note created! Woot woooo!")
       isChecked = $('input[name=onoffswitch]').prop('checked')
-      
+
       Meteor.call 'createThread', {}, (error, threadId) -> 
         return console.log(error.reason) if error
         
