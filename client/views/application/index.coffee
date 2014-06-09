@@ -6,6 +6,10 @@ Template.index.helpers
     Meteor.logout()
     "logout"
 
+Template.index.events
+  'mouseover .tooltip': (e) -> 
+    $('.tooltip').tooltip('show')
+
 
 Template.navbar.helpers
   getStarted: ->

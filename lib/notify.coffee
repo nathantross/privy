@@ -229,24 +229,14 @@ exports.Notify =
       Meteor.call 'toggleNotificationBlocked', toggle, thread._id, (err) ->
         console.log err if err
 
-  getUserStatus: (userId, avatar, isIdle) ->
+  getUserStatus: (userId, wantsAvatar, isIdle) ->
     if userId
       user = Meteor.users.findOne userId
 
+      # Get avatar and isOnline
       if user
-        if (avatar && isIdle) || (!avatar && !isIdle)
-          userStatus =
-            avatar: user.profile.avatar
-            isOnline: user.status?.online && !user.status?.idle 
-
-          Session.set 'avatar', userStatus.avatar
-          Session.set 'isOnline', userStatus.isOnline
-          
-          userStatus
-        else if avatar
-          user.profile.avatar
-        else 
-          user.status?.online && !user.status?.idle 
+        avatar = user.profile.avatar
+        isOnline = user.status?.online && !user.status?.idle 
 
       else
         Meteor.call 'getUserAttr', userId, (err, userAttr) ->
@@ -255,13 +245,15 @@ exports.Notify =
           Session.set 'avatar', userAttr.avatar
           Session.set 'isOnline', !userAttr.isIdle
 
-        if (avatar && isIdle) || (!avatar && !isIdle)
-          return(
-            avatar: Session.get 'avatar'
-            isOnline: Session.get 'isOnline'
-          )
-        else if avatar
-          console.log Session.get 'avatar'
-          Session.get 'avatar'
-        else
-          Session.get 'isOnline'
+        avatar = Session.get 'avatar'
+        isOnline = Session.get 'isOnline'
+
+      
+      # Return avatar and/or isOnline
+      if (wantsAvatar && isIdle) || (!wantsAvatar && !isIdle)
+        return(
+          avatar: avatar
+          isOnline: isOnline
+        )
+      else
+        if wantsAvatar then avatar else isOnline
