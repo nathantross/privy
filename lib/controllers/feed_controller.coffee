@@ -13,9 +13,9 @@ exports.FeedController = RouteController.extend(
   waitOn: ->
     Meteor.subscribe "notes", @sort(), @limit()
 
-  onStop: -> 
-    Notify.toggleLock(Session.get('currentNoteId'), false)
-    Session.set('currentNoteId', false)
+  # onStop: -> 
+    # Notify.toggleLock(Session.get('currentNoteId'), false)
+    # Session.set('currentNoteId', false)
 
   note: ->
     user = Meteor.user()
@@ -31,12 +31,12 @@ exports.FeedController = RouteController.extend(
               $nin: user.blockedIds || []
           ]
           isInstream: true
-          $or: [
-            currentViewer: Meteor.userId()
-          ,
-            currentViewer:
-              $exists: false
-          ]
+          # $or: [
+          #   currentViewer: Meteor.userId()
+          # ,
+          #   currentViewer:
+          #     $exists: false
+          # ]
           skipperIds:
             $ne: Meteor.userId()
           flaggerIds:
@@ -50,9 +50,9 @@ exports.FeedController = RouteController.extend(
                 $exists: false
           ]
     
-    if note && !Meteor.user().status.idle
-      Session.set('currentNoteId', note._id)
-      Notify.toggleLock note._id, true
+    # if note && !Meteor.user().status.idle
+    #   Session.set('currentNoteId', note._id)
+      # Notify.toggleLock note._id, true
 
     return note
 
