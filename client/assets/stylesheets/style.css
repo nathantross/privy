@@ -2214,24 +2214,22 @@ footer {
 
 }
 
-.question-ball {
+.question-ball, .question-ball:hover, .question-ball:active {
   background-color: #fff;
   color: #333;
   opacity: 0.3;
   border-radius: 800px;
-  padding: 6px;
+  padding-top: 4px;
   font-size: 14px !important;
   margin-top: 13px;
+  height: 20px;
+  width: 20px;
   margin-left: 10px;
 }
 
-.question-ball:hover, .question-ball:active {
-  background-color: #fff;
-  color: #333;
-  opacity: 0.3;
-  border-radius: 800px;
-  padding: 6px;
-  font-size: 14px !important;
-  margin-top: 13px;
-  margin-left: 10px;
+@media (max-width: 320px) {
+  .question-ball, .question-ball:hover, .question-ball:active {
+    margin-top: -25px;
+    margin-left: 125px;
+  }
 }
