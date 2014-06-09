@@ -204,6 +204,7 @@ background-color: rgba( 233, 233, 233, 1) !important;
   margin-bottom: -20px;
   margin: 0;
   margin-top: -35px;
+  padding-top: 40px;
 }
 
 .entry .entry-signin-cta {
@@ -240,9 +241,36 @@ background-color: rgba( 233, 233, 233, 1) !important;
   margin-top: 60px;
 }
 
+.sign-up-facebook {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.sign-up-label {
+  padding-left: 40px;
+  padding-top: 40px;
+}
+
+.sign-up-block-btn {
+margin-top: 0px !important;
+margin-bottom: 10px !important;
+}
+
 /***********/
 
 /****** Index ******/
+
+.a.fa.fa-question.fa-lg.tooltip {
+  background-color: #fff;
+  color: #333;
+  opacity: 0.3;
+  border-radius: 800px;
+  padding: 6px;
+  font-size: 14px;
+  margin-top: 13px;
+  margin-left: 10px;
+}
+
 
 .main {
   background-color: rgba(58, 95, 136, 1);
