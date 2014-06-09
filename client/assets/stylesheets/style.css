@@ -13,7 +13,6 @@ body {
 }
 
 .login-instead {
-  margin-top: -33px !important;
   color: #fff;
   opacity: 0.7;
   font-size: 17px;
@@ -282,6 +281,31 @@ background-color: rgba( 233, 233, 233, 1) !important;
   -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, .2);
 }
 
+.tooltip:hover,
+.tooltip {
+  opacity: 0.2;
+  color: #fff;
+  margin-left: 5px;
+  z-index: 1029;
+}
+
+.tooltip-inner {
+    max-width: 250px;
+    /* If max-width does not work, try using width instead */
+    width: 250px; 
+    background-color: white;
+    color: black;
+    padding: 10px;
+}
+
+.tooltip-arrow {
+  border-right-color: white !important;
+}
+
+.why-facebook {
+  display: inline-flex;
+  list-style-type: none;
+}
 
 .main-logo-index {
   font-size: 74px;
