@@ -214,7 +214,7 @@ background-color: rgba( 233, 233, 233, 1) !important;
 
 .form-group {
   margin-bottom: 25px;
-  margin-top: -50px;
+  margin-top: -30px;
 }
 
 .entry-form button.submit {
@@ -259,18 +259,6 @@ margin-bottom: 10px !important;
 /***********/
 
 /****** Index ******/
-
-.a.fa.fa-question.fa-lg.tooltip {
-  background-color: #fff;
-  color: #333;
-  opacity: 0.3;
-  border-radius: 800px;
-  padding: 6px;
-  font-size: 14px;
-  margin-top: 13px;
-  margin-left: 10px;
-}
-
 
 .main {
   background-color: rgba(58, 95, 136, 1);
@@ -490,7 +478,6 @@ footer.navbar.navbar-inverse.text-center {
 .whiteshadow {
   text-shadow: 2px 2px 2px #FFFFFF;
 }
-
 
 /****** Feed ******/
 
@@ -2225,4 +2212,26 @@ footer {
     margin-top: -60px;
   }
 
+}
+
+.question-ball {
+  background-color: #fff;
+  color: #333;
+  opacity: 0.3;
+  border-radius: 800px;
+  padding: 6px;
+  font-size: 14px !important;
+  margin-top: 13px;
+  margin-left: 10px;
+}
+
+.question-ball:hover, .question-ball:active {
+  background-color: #fff;
+  color: #333;
+  opacity: 0.3;
+  border-radius: 800px;
+  padding: 6px;
+  font-size: 14px !important;
+  margin-top: 13px;
+  margin-left: 10px;
 }
