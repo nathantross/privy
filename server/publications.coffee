@@ -1,3 +1,37 @@
+noteQuery = 
+  Notes.find
+    $and: [
+      userId:
+        $ne: @userId
+    , userId:
+        $nin: user.blockerIds || []
+    ]
+    isInstream: true
+    # $or: [
+    #       currentViewer: @userId
+    #     , currentViewer:
+    #         $exists: false
+    #     ]
+    replierIds:
+      $ne: @userId
+    skipperIds: 
+      $ne: @userId
+    flaggerIds:
+      $ne: @userId
+    $or: [
+      flagCount:
+        $exists: false
+    , flagCount:
+        $lt: 2
+    ]
+  , 
+    sort: sort
+    limit: limit
+    fields: 
+      skipperIds: 0
+      replierIds: 0
+      loc: 0
+
 Meteor.publish "userStatus", ->
   UserStatus.connections.find
         userId: @userId
@@ -19,6 +53,8 @@ Meteor.publish "notificationUserStatus", ->
       else
         thread.participants[0].userId
     )
+
+  userIds.concat(noteQuery.map( (note) -> note.userId ))
 
   Meteor.users.find
       _id: 
@@ -48,39 +84,7 @@ Meteor.publish "notifications", ->
 Meteor.publish "notes", (sort, limit) ->
   if @userId
     user = Meteor.users.findOne @userId
-    
-    Notes.find
-        $and: [
-          userId:
-            $ne: @userId
-        , userId:
-            $nin: user.blockerIds || []
-        ]
-        isInstream: true
-        # $or: [
-        #       currentViewer: @userId
-        #     , currentViewer:
-        #         $exists: false
-        #     ]
-        replierIds:
-          $ne: @userId
-        skipperIds: 
-          $ne: @userId
-        flaggerIds:
-          $ne: @userId
-        $or: [
-          flagCount:
-            $exists: false
-        , flagCount:
-            $lt: 2
-        ]
-      , 
-        sort: sort
-        limit: limit
-        fields: 
-          skipperIds: 0
-          replierIds: 0
-          loc: 0
+    noteQuery    
 
 
 Meteor.publish "threads", ->

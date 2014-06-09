@@ -133,16 +133,16 @@ Meteor.methods
       $inc: 
         'notifications.0.count': inc
 
-  getUserAttr: (userId) ->
-    if Meteor.isServer
-      user = Meteor.users.findOne(userId)
-      isIdle = !user.status?.online || user.status?.idle == true
-      avatar = user.profile.avatar || false
+  # getUserAttr: (userId) ->
+  #   if Meteor.isServer
+  #     user = Meteor.users.findOne(userId)
+  #     isIdle = !user.status?.online || user.status?.idle == true
+  #     avatar = user.profile.avatar || false
         
-      return (
-        isIdle: isIdle
-        avatar: avatar
-      )
+  #     return (
+  #       isIdle: isIdle
+  #       avatar: avatar
+  #     )
 
   getAvatar: (userId) ->
     if Meteor.isServer
