@@ -209,49 +209,49 @@ Meteor.methods
         creatorIsOnline: if userIsOnline then "Yes" else "No"
       }) 
       
-      Notify.toggleLock Session.get('currentNoteId'), false
+      # Notify.toggleLock Session.get('currentNoteId'), false
       
 
-  toggleLock: (noteAttr) ->
-    noteId = noteAttr.noteId
-    isLocked = noteAttr.isLocked
+  # toggleLock: (noteAttr) ->
+  #   noteId = noteAttr.noteId
+  #   isLocked = noteAttr.isLocked
 
-    unless Meteor.userId()
-      throw new Meteor.Error(401, "You have to login to lock a note.") 
+  #   unless Meteor.userId()
+  #     throw new Meteor.Error(401, "You have to login to lock a note.") 
 
-    unless noteId
-      throw new Meteor.Error(404, "Your noteId is missing.")
+  #   unless noteId
+  #     throw new Meteor.Error(404, "Your noteId is missing.")
 
-    unless Notes.findOne(noteId)
-      throw new Meteor.Error(404, "This note doesn't exist.")        
+  #   unless Notes.findOne(noteId)
+  #     throw new Meteor.Error(404, "This note doesn't exist.")        
 
-    now = new Date().getTime()
-    if isLocked 
-      Notes.update noteId, 
-        $set:
-          currentViewer: Meteor.userId()
-          updatedAt: now
-    else
-      Notes.update noteId, 
-        $unset:
-          currentViewer: ""
-        $set:
-          updatedAt: now   
+  #   now = new Date().getTime()
+  #   if isLocked 
+  #     Notes.update noteId, 
+  #       $set:
+  #         currentViewer: Meteor.userId()
+  #         updatedAt: now
+  #   else
+  #     Notes.update noteId, 
+  #       $unset:
+  #         currentViewer: ""
+  #       $set:
+  #         updatedAt: now   
 
-  unlockAll: ->
-    unless Meteor.userId()
-      throw new Meteor.Error(401, "You have to login to lock a note.") 
+  # unlockAll: ->
+  #   unless Meteor.userId()
+  #     throw new Meteor.Error(401, "You have to login to lock a note.") 
 
-    now = new Date().getTime()
-    Notes.update 
-        currentViewer: Meteor.userId()
-      ,
-        $unset:
-          currentViewer: ""
-        $set:
-          updatedAt: now
-      ,
-        multi: true
+  #   now = new Date().getTime()
+  #   Notes.update 
+  #       currentViewer: Meteor.userId()
+  #     ,
+  #       $unset:
+  #         currentViewer: ""
+  #       $set:
+  #         updatedAt: now
+  #     ,
+  #       multi: true
 
 
   flag: (noteId)->

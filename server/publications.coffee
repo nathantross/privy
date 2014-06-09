@@ -57,11 +57,11 @@ Meteor.publish "notes", (sort, limit) ->
             $nin: user.blockerIds || []
         ]
         isInstream: true
-        $or: [
-              currentViewer: @userId
-            , currentViewer:
-                $exists: false
-            ]
+        # $or: [
+        #       currentViewer: @userId
+        #     , currentViewer:
+        #         $exists: false
+        #     ]
         replierIds:
           $ne: @userId
         skipperIds: 

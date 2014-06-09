@@ -42,7 +42,7 @@ Template.noteReply.events
       creatorIsOnline: if !@userAttr.isIdle then "Yes" else "No"
     })
 
-    Notify.toggleLock Session.get('currentNoteId'), false
+    # Notify.toggleLock Session.get('currentNoteId'), false
 
     Notify.popup('#successAlert', "Reply sent!")
              

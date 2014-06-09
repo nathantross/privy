@@ -17,11 +17,11 @@ if Meteor.isClient
       if user
         if user.status?.idle && !Session.get('isIdle')
           # mixpanel.track("User: is idle")  
-          note = Notes.findOne(currentViewer: Meteor.userId())
-          if note
-            Meteor.call 'unlockAll', {}, (err) ->
-              return console.log(err) if err
-              Session.set("currentNoteId", false)
+          # note = Notes.findOne(currentViewer: Meteor.userId())
+          # if note
+            # Meteor.call 'unlockAll', {}, (err) ->
+            #   return console.log(err) if err
+            #   Session.set("currentNoteId", false)
 
           # If idle, check out of all threads
           if user.inThreads.length > 0
@@ -47,8 +47,8 @@ if Meteor.isClient
             Notify.toggleTitleFlashing(false)
 
           # Check into their current note if they're in a note
-          if url[1] == "notes"
-            Notify.toggleLock(Session.get("currentNoteId"), true)
+          # if url[1] == "notes"
+          #   Notify.toggleLock(Session.get("currentNoteId"), true)
 
           Session.set('isIdle', false)
 
