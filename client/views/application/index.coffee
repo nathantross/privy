@@ -7,9 +7,7 @@ Template.index.helpers
     "logout"
 
 Template.index.events
-
   'mouseover .tooltip': (e) -> 
-    console.log e
     $('.tooltip').tooltip('show')
 
 
