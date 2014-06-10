@@ -60,8 +60,6 @@ Meteor.publish "userStatus", ->
           idle: 1
 
 
-
-
 Meteor.publish "notificationUserStatus", ->
   if @userId
     Meteor.publishWithRelations
