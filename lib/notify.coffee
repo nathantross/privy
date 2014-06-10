@@ -238,15 +238,15 @@ exports.Notify =
         avatar = user.profile.avatar
         isOnline = user.status?.online && !user.status?.idle 
 
-      else
-        Meteor.call 'getUserAttr', userId, (err, userAttr) ->
-          console.log err if err
+      # else
+      #   Meteor.call 'getUserAttr', userId, (err, userAttr) ->
+      #     console.log err if err
 
-          Session.set 'avatar', userAttr.avatar
-          Session.set 'isOnline', !userAttr.isIdle
+      #     Session.set 'avatar', userAttr.avatar
+      #     Session.set 'isOnline', !userAttr.isIdle
 
-        avatar = Session.get 'avatar'
-        isOnline = Session.get 'isOnline'
+      #   avatar = Session.get 'avatar'
+      #   isOnline = Session.get 'isOnline'
 
       
       # Return avatar and/or isOnline
