@@ -12,12 +12,6 @@ Meteor.methods
     unless user
       throw new Meteor.Error 401, "Please login to create a notification."
 
-    unless Notify.isParticipant(user._id, threadId) 
-      throw new Meteor.Error 401, "You can't create notifications in this thread."
-
-    if noteCreatorId && !Notify.isParticipant(noteCreatorId, threadId)
-      throw new Meteor.Error 401, "This senderId is invalid"
-
     if messageAttr.lastMessage == ""
       throw new Meteor.Error 404, "Whoops, looks like your message is blank!"
 
@@ -26,6 +20,15 @@ Meteor.methods
 
     unless threadId
       throw new Meteor.Error 404, "ThreadId doesn't exist to make this notification."
+
+    # Server validations
+    if Meteor.isServer
+      unless Notify.isParticipant(user._id, threadId) 
+        throw new Meteor.Error 401, "You can't create notifications in this thread."
+
+      if noteCreatorId && !Notify.isParticipant(noteCreatorId, threadId)
+        throw new Meteor.Error 401, "This senderId is invalid"
+
   
     # Create a notification for the current user
     now = new Date().getTime()

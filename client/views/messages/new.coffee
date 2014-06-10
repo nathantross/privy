@@ -15,7 +15,7 @@ Template.newMessage.events
         Meteor.call 'createNotification', message, (error, id) ->
           console.log(error.reason) if error 
     
-    toggleTyping @threadId, @userIndex, false
+    toggleTyping @threadId, @thread.participants, @userIndex, false
     $('body').scrollTop($("#messages")[0].scrollHeight)
     $body.val("") 
     
@@ -23,21 +23,23 @@ Template.newMessage.events
   "keydown input": (e) ->
     $body = $(e.target).find('[name=message-body]')
     body = $body.context.value
-    toggleTyping(@threadId, @userIndex, true) if body.length == 1
+    if body.length == 1
+      toggleTyping(@threadId, @thread.participants, @userIndex, true) 
 
 
   "keyup input": (e) ->
     $body = $(e.target).find('[name=message-body]')
     body = $body.context.value
-    toggleTyping(@threadId, @userIndex, false) if body.length == 0
+    if body.length == 0
+      toggleTyping(@threadId, @thread.participants, @userIndex, false) 
 
 
   "click input": (e) ->
     Notify.toggleTitleFlashing(false)
 
 
-  toggleTyping = (threadId, userIndex, toggle) ->
-    unless Threads.findOne(threadId).participants[userIndex].isTyping == toggle
+  toggleTyping = (threadId, participants, userIndex, toggle) ->
+    unless participants[userIndex].isTyping == toggle
       threadAttr = 
         threadId: threadId
         toggle: toggle

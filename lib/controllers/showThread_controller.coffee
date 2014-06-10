@@ -53,6 +53,9 @@ exports.showThreadController = RouteController.extend(
         createdAt: 1
       limit: @limit()
 
+  thread: ->
+    Threads.findOne @threadId() if @threadId()
+
   data: ->
     hasMore = @messages().count() == @limit()
     nextPath = @route.path
@@ -63,6 +66,7 @@ exports.showThreadController = RouteController.extend(
       messages: @messages()
       nextPath: (if hasMore then nextPath else null)
       threadId: @threadId()
+      thread: @thread()
       userIndex: Notify.userIndex(@threadId())
       # lastMessage: @lastMessage()
     )
