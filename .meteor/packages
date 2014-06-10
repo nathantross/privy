@@ -21,3 +21,4 @@ iron-router-progress
 blaze-layout
 handlebars-server
 http
+publish-with-relations
