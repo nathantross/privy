@@ -14,7 +14,7 @@ Template.threadNav.helpers
   hasTwoParticipants: ->
     if @threadId?
       thread = Threads.findOne(@threadId) 
-      ans = thread.participants.length == 2
+      ans = thread?.participants.length == 2
 
   isNavNotified: ->
     user = Meteor.user()

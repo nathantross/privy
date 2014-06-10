@@ -50,6 +50,9 @@ notificationsOptions =
   limit: 25
   sort:
     updatedAt: -1
+  fields: 
+    createdAt: 0
+    isArchived: 0
 
 Meteor.publish "userStatus", ->
   UserStatus.connections.find
@@ -88,29 +91,6 @@ Meteor.publish "notificationUserStatus", ->
       ]
 
 
-
-  # userIds = 
-  #   Threads.find(
-  #     participants:
-  #       $elemMatch:
-  #         userId: @userId
-  #   ).map( (thread) -> 
-  #     if thread.participants.length == 2
-  #       [thread.participants[0].userId, thread.participants[1].userId]
-  #     else
-  #       thread.participants[0].userId
-  #   )
-
-  # Meteor.users.find
-  #     _id: 
-  #       $in: _.uniq(_.flatten(userIds))
-  #   ,
-  #     fields: 
-  #       'profile.avatar': 1
-  #       'status.online': 1
-  #       'status.idle': 1
-
-
 Meteor.publish "notifications", ->
   Notifications.find notificationsQuery(@userId), notificationsOptions
 
@@ -121,21 +101,21 @@ Meteor.publish "notes", (sort, limit) ->
     Notes.find noteQuery(@userId), noteOptions
 
 
-Meteor.publish "threads", ->
-  Threads.find
-      participants:
-        $elemMatch:
-          userId: @userId
-    , 
-      fields:
-        createdAt: 0
-        noteId: 0
-
+Meteor.publish "oneThread", (threadId) ->
+  if Notify.isParticipant(@userId(), threadId) 
+    Threads.find
+        _id: threadId
+      , 
+        fields:
+          createdAt: 0
+          noteId: 0
+        limit: 1  
 
 Meteor.publish "userData", ->
   Meteor.users.find
       _id: @userId
     ,
+      limit: 1
       fields:
         notifications: 1
         status: 1

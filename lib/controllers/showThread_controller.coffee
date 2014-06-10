@@ -42,8 +42,8 @@ exports.showThreadController = RouteController.extend(
     @params._id
 
   waitOn: ->
-    if Notify.isParticipant(Meteor.userId(), @threadId()) 
-      Meteor.subscribe "messages", @threadId(), @limit()
+    Meteor.subscribe "oneThread", @threadId()
+    Meteor.subscribe "messages", @threadId(), @limit()
 
   messages: ->
     Messages.find

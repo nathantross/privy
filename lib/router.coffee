@@ -6,11 +6,7 @@ Router.configure
       to: 'navRegion'
   loadingTemplate: "loading"
   notFoundTemplate: 'notFound'
-  waitOn: -> 
-    Meteor.subscribe 'userData'
-    Meteor.subscribe 'notifications'
-    Meteor.subscribe 'notificationUserStatus'
-    Meteor.subscribe 'threads' #enables switching between threads
+
   onRun: ->
     mixpanel.disable() if window.location.host == "localhost:3000"
 
@@ -84,6 +80,13 @@ loginChecks = (pause)->
     pause()
 
 loggedOutPages = ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "entryResetPassword", "contact", "entryForgotPassword", "404"]
+
+Router.waitOn ->
+    Meteor.subscribe 'userData'
+    Meteor.subscribe 'notifications'
+    Meteor.subscribe 'notificationUserStatus'
+  ,
+    except: loggedOutPages
 
 Router.onBeforeAction loginChecks,
   except: loggedOutPages
