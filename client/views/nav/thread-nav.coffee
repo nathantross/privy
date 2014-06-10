@@ -1,20 +1,17 @@
 Template.threadNav.helpers
   isMuted: ->
-    Threads.findOne(@threadId)?.participants[@userIndex].isMuted
+    @thread.participants[@userIndex].isMuted if @thread
 
   isBlocked: ->
-    thread = Threads.findOne(@threadId) if @threadId?
-    if thread && @userIndex? && thread.participants.length == 2
+    if @thread && @userIndex? && @thread.participants.length == 2
       blockedIndex = if @userIndex == 1 then 0 else 1
-      blockedId = thread.participants[blockedIndex].userId
+      blockedId = @thread.participants[blockedIndex].userId
       return _.indexOf(Meteor.user().blockedIds, blockedId) > -1
     else
       false
 
   hasTwoParticipants: ->
-    if @threadId?
-      thread = Threads.findOne(@threadId) 
-      ans = thread?.participants.length == 2
+    @thread.participants.length == 2 if @thread
 
   isNavNotified: ->
     user = Meteor.user()

@@ -50,9 +50,6 @@ notificationsOptions =
   limit: 25
   sort:
     updatedAt: -1
-  fields: 
-    createdAt: 0
-    isArchived: 0
 
 Meteor.publish "userStatus", ->
   UserStatus.connections.find
@@ -101,16 +98,6 @@ Meteor.publish "notes", (sort, limit) ->
     Notes.find noteQuery(@userId), noteOptions
 
 
-Meteor.publish "oneThread", (threadId) ->
-  if Notify.isParticipant(@userId(), threadId) 
-    Threads.find
-        _id: threadId
-      , 
-        fields:
-          createdAt: 0
-          noteId: 0
-        limit: 1  
-
 Meteor.publish "userData", ->
   Meteor.users.find
       _id: @userId
@@ -124,14 +111,25 @@ Meteor.publish "userData", ->
         blockedIds: 1
 
 
+Meteor.publish "oneThread", (threadId) ->
+  if Notify.isParticipant(@userId, threadId) 
+    Threads.find
+        _id: threadId
+      , 
+        limit: 1
+        fields:
+          createdAt: 0
+          noteId: 0
+        
+
 Meteor.publish "messages", (threadId, limit) ->
   if Notify.isParticipant(@userId, threadId) 
     Messages.find
-          threadId: threadId
-        ,
-          sort: 
-            createdAt: -1
-          limit: limit
+        threadId: threadId
+      ,
+        sort: 
+          createdAt: -1
+        limit: limit
 
   else
     null

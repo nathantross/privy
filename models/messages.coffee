@@ -17,15 +17,17 @@ Meteor.methods
     unless threadId
       throw new Meteor.Error(404, "Thread does not exist to create a message.")
 
-    unless Notify.isParticipant(user._id, threadId)
-      throw new Meteor.Error(401, "You can't create messages on this thread.")
-
     if hasExited? && typeof hasExited != "boolean"
       throw new Meteor.Error(400, "hasExited must be set to true or false.")
 
+    # Server validations
+    if Meteor.isServer
+
+      unless Notify.isParticipant(user._id, threadId)
+        throw new Meteor.Error 401, "You can't create messages on this thread."
 
     # isRead should be true if any of the participants is in the room
-    isRead = if hasExited? then true else false
+    isRead = hasExited?
     
     if !isRead && (thread || Meteor.isServer)
       for participant in thread.participants
@@ -54,20 +56,24 @@ Meteor.methods
 
   readMessage: (threadId) ->  
     user = Meteor.user()
-    thread = Threads.findOne(threadId)
+    
     index = Notify.userIndex(threadId)
       
     unless user
       throw new Meteor.Error(401, "You have to login to update a message.")
-
-    unless threadId
-      throw new Meteor.Error(404, "The threadId does not exist.")
     
-    unless thread
-      throw new Meteor.Error(404, "This thread does not exist.")
+    unless threadId
+        throw new Meteor.Error(404, "The threadId does not exist.")
+    
+    # Server validations
+    if Meteor.isServer
+      thread = Threads.findOne(threadId)
+      
+      unless thread
+        throw new Meteor.Error(404, "This thread does not exist.")
 
-    unless thread.participants[index].userId == user._id
-      throw new Meteor.Error(401, "You can't read messages on this thread.")
+      unless thread.participants[index].userId == user._id
+        throw new Meteor.Error(401, "You can't read messages on this thread.")
 
     # whitelisted keys
     now = new Date().getTime()
