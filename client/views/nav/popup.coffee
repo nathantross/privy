@@ -8,10 +8,10 @@ Template.newMessageAlert.helpers
       userId = notification.lastAvatarId 
 
       if userId
-        avatar = Notify.getUserStatus(userId, true, false)
+        sender = Notify.getUserStatus(userId, true, false)
 
         _.extend notification,
-          avatar: avatar
+          avatar: sender.avatar
 
 
 Template.newMessageAlert.events

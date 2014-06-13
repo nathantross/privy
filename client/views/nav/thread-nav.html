@@ -7,6 +7,12 @@
         {{> dropdown}}
       </li>
       <li>
+        {{#if partner.avatar}}
+          <img class="text-right avatarleft" src="{{partner.avatar}}" />
+            <a href="#" id="give-point"><i class="fa fa-plus-square"></i></a>
+          <!-- <span>{{partner.points}}</span>
+          <a id="hasPoint" href="#">{{hasPoint}}</a> -->
+        {{/if}}
         {{#if hasTwoParticipants}}
           <a href="#" class="pull-right" data-toggle="dropdown">
             <div class="link text-center" id="more-actions"><p>•••</p></div>

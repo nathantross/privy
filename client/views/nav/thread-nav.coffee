@@ -17,6 +17,17 @@ Template.threadNav.helpers
     user = Meteor.user()
     if user && user.notifications[0].isNavNotified then "nav-notify" else ""
 
+  partner: ->
+    if @thread
+      partnerIndex = if @userIndex == 0 then 1 else 0
+      partnerId = @thread.participants[partnerIndex]?.userId
+      Notify.getUserStatus(partnerId) if partnerId
+
+  # hasPoint: ->
+  #   if @thread
+  #     partnerIndex = if @userIndex == 0 then 1 else 0
+  #     @thread.participants[partnerIndex]?.hasPoint
+
 
 Template.threadNav.events
   'click #dropdown-li': (event)->
@@ -41,6 +52,36 @@ Template.threadNav.events
       blockerId: Meteor.userId()
       blockedId: blockedId
     })
+
+  # 'click #hasPoint': (e)->
+  #   e.preventDefault()
+  #   partnerIndex = if @userIndex == 0 then 1 else 0
+
+  #   Meteor.call "toggleHasPoint", @threadId, partnerIndex, (err) ->
+  #     console.log err if err 
+
+  'click #give-point': (e)->
+    e.preventDefault()
+    partnerIndex = if @userIndex == 0 then 1 else 0
+
+    unless @thread.participants[partnerIndex]?.hasPoint || !@threadId
+      Meteor.call 'givePoint', @threadId, partnerIndex, @userIndex, (err, threadId) ->
+        return console.log err if err
+        
+        messageAttr = 
+          body: "+1 for a great chat!"
+          threadId: threadId
+          isPoint: true
+      
+        Meteor.call "createMessage", messageAttr, (err) ->
+          return console.log err if err
+
+        mixpanel.track("ThreadNav: gave point", {
+          threadId: @threadId 
+          giver: @thread.participants[partnerIndex].userId
+          receiver: @thread.participants[@userIndex].userId
+        })
+
 
   'click #more-actions': ->
     mixpanel.track "ThreadNav: clicked 'more actions'"

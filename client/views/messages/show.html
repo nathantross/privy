@@ -10,13 +10,13 @@
             <p class="exited-chat text-right">{{body}}</p>
           </div> 
           <div class="col-xs-2 text-left">
-            <img class="text-left avatar-right-exit" src="{{senderAvatar}}" />
+            <img class="text-left avatar-right-exit" src="{{senderAvatar.avatar}}" />
           </div>
         </div>
       {{else}}
         <div class="row text-left">
           <div class="col-xs-2 text-right">
-            <img class="text-right avatarleft" src="{{senderAvatar}}" />
+            <img class="text-right avatarleft" src="{{senderAvatar.avatar}}" />
           </div>
           <div class="col-xs-7">
             <p class="exited-chat text-right">{{body}}</p>
@@ -34,14 +34,14 @@
             <p class="comment text-right">{{body}}</p>
           </div> 
           <div class="col-xs-2 text-left">
-            <img class="text-left avatarright" src="{{senderAvatar}}" />
+            <img class="text-left avatarright" src="{{senderAvatar.avatar}}" />
           </div>
         </div>
 
       {{else}}
         <div class="row text-left">
           <div class="col-xs-2 text-right">
-            <img class="text-right avatarleft" src="{{senderAvatar}}" />
+            <img class="text-right avatarleft" src="{{senderAvatar.avatar}}" />
           </div>
           <div class="col-xs-7">
             <p class="response">{{body}}</p>

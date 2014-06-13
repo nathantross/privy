@@ -33,7 +33,7 @@ Template.messageIndicators.helpers
     $('body').scrollTop($("#messages")[0].scrollHeight) if participant && participant.isTyping
     if participant then participant.isTyping else false
 
-  avatar: ->
+  typer: ->
     Notify.getUserStatus(typist(@threadId).userId, true, false)
 
 
