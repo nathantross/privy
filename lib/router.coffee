@@ -19,6 +19,7 @@ Router.map ->
       document.title = "Strange"
       Session.set("isTrackingChanges", false)
       Router.go "feed" if Meteor.user()
+        
 
 
   # User Routes    
