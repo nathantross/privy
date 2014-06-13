@@ -7,6 +7,7 @@ Meteor.methods
     threadId = messageAttr.threadId
     thread = Threads.findOne(threadId)
     hasExited = messageAttr.hasExited
+    isPoint = messageAttr.isPoint
 
     unless user
       throw new Meteor.Error(401, "You have to login to create a message.")
@@ -19,6 +20,9 @@ Meteor.methods
 
     if hasExited? && typeof hasExited != "boolean"
       throw new Meteor.Error(400, "hasExited must be set to true or false.")
+
+    if isPoint? && typeof isPoint != "boolean"
+      throw new Meteor.Error(400, "isPoint must be set to true or false.")
 
     # Server validations
     if Meteor.isServer
@@ -43,6 +47,7 @@ Meteor.methods
     )    
     
     message.hasExited = hasExited if hasExited?
+    message.isPoint = isPoint if isPoint?
 
     msgId = Messages.insert(message)
 
