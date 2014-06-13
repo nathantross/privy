@@ -17,7 +17,10 @@
 
             <h1 class="{{noteClass}}">{{note.body}}</h1>
             <ul class="note-feed list-inline text-left">
-              <li><div class="avatar"><img class="note-avatar" src="{{userAttr.avatar}}" /></div></li>
+              <li>
+                <div class="avatar"><img class="note-avatar" src="{{userAttr.avatar}}" /></div>
+                <span>{{userAttr.points}}</span>
+              </li>
               <li><div class="online is-user-active">{{isUserActive}}</div></li>
               {{#if location}}
                 <li><p class="location">{{location}}</p></li>

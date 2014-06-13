@@ -68,6 +68,7 @@ Meteor.publish "notificationUserStatus", ->
       options: 
         fields: 
           'profile.avatar': 1
+          'profile.points': 1
           'status.online': 1
           'status.idle': 1
       filter: {}

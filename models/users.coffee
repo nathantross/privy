@@ -233,3 +233,44 @@ Meteor.methods
     modifier.$set["notifications.0." + attr] = toggle
 
     Meteor.users.update Meteor.userId(), modifier
+
+  givePoint: (threadId, partnerIndex, userIndex) ->
+    thread = Threads.findOne threadId
+    partner = thread.participants[partnerIndex]
+
+    unless thread 
+      throw new Meteor.Error(404, "This thread does not exist.")
+    
+    unless partner
+      throw new Meteor.Error(404, "There is no partner in this thread.")
+
+    unless Meteor.users.findOne partner.userId
+      throw new Meteor.Error(404, "This partner does not exist.")      
+
+    unless Meteor.userId() == thread.participants[userIndex].userId
+      throw new Meteor.Error(401, "You do not have access to this thread.")
+
+    if partner.hasPoint 
+      throw new Meteor.Error(401, "This person has already received a point.")
+
+    modifier = $set: {}
+    modifier.$set["participants." + partnerIndex + ".hasPoint"] = true
+
+    Threads.update threadId, modifier
+
+    Meteor.users.update partner.userId, 
+      $inc: 
+        'profile.points': 1
+
+    threadId
+
+  # FOR TESTING PURPOSES
+  # toggleHasPoint: (threadId, partnerIndex) ->
+  #   thread = Threads.findOne threadId
+  #   partner = thread.participants[partnerIndex]
+
+  #   modifier = $set: {}
+  #   modifier.$set["participants." + partnerIndex + ".hasPoint"] = !partner.hasPoint
+
+  #   Threads.update threadId, modifier 
+  #       
