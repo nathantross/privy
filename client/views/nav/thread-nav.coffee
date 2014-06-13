@@ -63,6 +63,7 @@ Template.threadNav.events
   'click #give-point': (e)->
     e.preventDefault()
     partnerIndex = if @userIndex == 0 then 1 else 0
+    userIndex = @userIndex
 
     unless @thread.participants[partnerIndex]?.hasPoint || !@threadId
       Meteor.call 'givePoint', @threadId, partnerIndex, @userIndex, (err, threadId) ->
@@ -76,10 +77,11 @@ Template.threadNav.events
         Meteor.call "createMessage", messageAttr, (err) ->
           return console.log err if err
 
+        thread = Threads.findOne threadId
         mixpanel.track("ThreadNav: gave point", {
-          threadId: @threadId 
-          giver: @thread.participants[partnerIndex].userId
-          receiver: @thread.participants[@userIndex].userId
+          threadId: threadId
+          giver: thread.participants[partnerIndex].userId
+          receiver: thread.participants[userIndex].userId
         })
 
 
