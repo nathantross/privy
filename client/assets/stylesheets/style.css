@@ -2175,6 +2175,7 @@ footer {
   color: rgba( 242, 242, 242, 0.6 );
   text-align: left;
   margin-left: -20px;
+  margin-right: 8px;
 }
 
 .points {
@@ -2183,7 +2184,7 @@ footer {
   font-family: "Droid Serif";
   color: rgba( 242, 242, 242, 0.6 );
   text-align: left;
-  margin-left: 0px;
+  margin-left: -20px;
 }
 
 @media (min-width: 800px) {
