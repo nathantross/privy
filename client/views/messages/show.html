@@ -25,30 +25,59 @@
           </div>
         </div>
       {{/if}}
+
     {{else}}
-      {{#if currentUserIsSender}}
-        <div class="row text-right">
-          <div class="col-xs-3">
+      {{#if isPoint}}
+        {{#if currentUserIsSender}}
+          <div class="row text-right">
+            <div class="col-xs-3">
+            </div>
+            <div class="col-xs-7 ">
+              <p class="exited-chat text-right point-copy">+<i class="fa fa-heart"></i> Great chat!</p>
+            </div> 
+            <div class="col-xs-2 text-left">
+              <img class="text-left avatar-right-exit" src="{{senderAvatar.avatar}}" />
+            </div>
           </div>
-          <div class="col-xs-7 ">
-            <p class="comment text-right">{{body}}</p>
-          </div> 
-          <div class="col-xs-2 text-left">
-            <img class="text-left avatarright" src="{{senderAvatar.avatar}}" />
+        {{else}}
+          <div class="row text-left">
+            <div class="col-xs-2 text-right">
+              <img class="text-right avatarleft" src="{{senderAvatar.avatar}}" />
+            </div>
+            <div class="col-xs-7">
+              <p class="exited-chat text-right point-copy"><i class="fa fa-heart"></i>{{body}}</p>
+            </div>
+            <div class="col-xs-3">
+            </div>
           </div>
-        </div>
+        {{/if}}
+      
 
       {{else}}
-        <div class="row text-left">
-          <div class="col-xs-2 text-right">
-            <img class="text-right avatarleft" src="{{senderAvatar.avatar}}" />
+        {{#if currentUserIsSender}}
+          <div class="row text-right">
+            <div class="col-xs-3">
+            </div>
+            <div class="col-xs-7 ">
+              <p class="comment text-right">{{body}}</p>
+            </div> 
+            <div class="col-xs-2 text-left">
+              <img class="text-left avatarright" src="{{senderAvatar.avatar}}" />
+            </div>
           </div>
-          <div class="col-xs-7">
-            <p class="response">{{body}}</p>
+
+        {{else}}
+          <div class="row text-left">
+            <div class="col-xs-2 text-right">
+              <img class="text-right avatarleft" src="{{senderAvatar.avatar}}" />
+            </div>
+            <div class="col-xs-7">
+              <p class="response">{{body}}</p>
+            </div>
+            <div class="col-xs-3">
+            </div>
           </div>
-          <div class="col-xs-3">
-          </div>
-        </div>
+        {{/if}}
       {{/if}}
     {{/if}}
   </div>

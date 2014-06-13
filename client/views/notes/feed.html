@@ -22,9 +22,9 @@
               </li>
               <li><div class="online is-user-active">{{isUserActive}}</div></li>
               {{#if location}}
-                <li><p class="location">San Francisco, CA</p></li>
+                <li><p class="location">{{location}} |</p></li>
               {{/if}}
-              <li><p class="points">{{userAttr.points}} points</p></li>
+              <li><p class="points fa fa-heart"> {{userAttr.points}}</p></li>
             </ul>
             <div class="row small-centered">
               <div class="small-12 columns text-center">

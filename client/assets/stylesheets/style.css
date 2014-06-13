@@ -1155,17 +1155,22 @@ a.fa.fa-chevron-left.fa-lg.pull-left {
   margin-right: -15px;
 }
 
+.point-copy {
+  font-size: 17px !important;
+  color: #444 !important;
+}
+
 .avatar-thread-nav {
-  width: 1.5em;
-  height: 1.5em;
+  width: 1em;
+  height: 1em;
   -webkit-border-radius: 100px;
   border-radius: 100px;
   margin-left: 20px;
-  margin-top: 25px;
+  margin-top: -5px;
 }
 
 .plus-button {
-  padding-top: 35px;
+  padding-top: 20px;
   margin-left: -15px;
   opacity: 0.8 !important;
   color: #ffffff !important;
@@ -1175,6 +1180,32 @@ a.fa.fa-chevron-left.fa-lg.pull-left {
   color: #fff !important;
   opacity: 1.0 !important;
 }
+
+@media (min-width: 800px) {
+
+  .avatar-thread-nav {
+    width: 1.5em;
+    height: 1.5em;
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+    margin-left: 20px;
+    margin-top: 5px;
+  }
+
+  .plus-button {
+    padding-top: 35px;
+    margin-left: -15px;
+    opacity: 0.8 !important;
+    color: #ffffff !important;
+  }
+
+  .plus-button:hover .plus-button:active .plus-button:focus {
+    color: #fff !important;
+    opacity: 1.0 !important;
+  }
+
+}
+
 
 .comment {
   border: 1px;
@@ -2139,7 +2170,7 @@ footer {
 
 .location {
   color: #fff;
-  font-size: 14px;
+  font-size: 16px;
   font-family: "Droid Serif";
   color: rgba( 242, 242, 242, 0.6 );
   text-align: left;
@@ -2148,7 +2179,7 @@ footer {
 
 .points {
   color: #fff;
-  font-size: 16px;
+  font-size: 14px;
   font-family: "Droid Serif";
   color: rgba( 242, 242, 242, 0.6 );
   text-align: left;
