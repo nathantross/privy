@@ -1155,6 +1155,27 @@ a.fa.fa-chevron-left.fa-lg.pull-left {
   margin-right: -15px;
 }
 
+.avatar-thread-nav {
+  width: 1.5em;
+  height: 1.5em;
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
+  margin-left: 20px;
+  margin-top: 25px;
+}
+
+.plus-button {
+  padding-top: 35px;
+  margin-left: -15px;
+  opacity: 0.8 !important;
+  color: #ffffff !important;
+}
+
+.plus-button:hover .plus-button:active .plus-button:focus {
+  color: #fff !important;
+  opacity: 1.0 !important;
+}
+
 .comment {
   border: 1px;
   border-color: rgba( 84, 165, 246, 1 );
@@ -2118,12 +2139,20 @@ footer {
 
 .location {
   color: #fff;
-  font-size: 18px;
   font-size: 14px;
   font-family: "Droid Serif";
   color: rgba( 242, 242, 242, 0.6 );
   text-align: left;
   margin-left: -20px;
+}
+
+.points {
+  color: #fff;
+  font-size: 16px;
+  font-family: "Droid Serif";
+  color: rgba( 242, 242, 242, 0.6 );
+  text-align: left;
+  margin-left: 0px;
 }
 
 @media (min-width: 800px) {

@@ -19,12 +19,12 @@
             <ul class="note-feed list-inline text-left">
               <li>
                 <div class="avatar"><img class="note-avatar" src="{{userAttr.avatar}}" /></div>
-                <span>{{userAttr.points}}</span>
               </li>
               <li><div class="online is-user-active">{{isUserActive}}</div></li>
               {{#if location}}
-                <li><p class="location">{{location}}</p></li>
+                <li><p class="location">San Francisco, CA</p></li>
               {{/if}}
+              <li><p class="points">{{userAttr.points}} points</p></li>
             </ul>
             <div class="row small-centered">
               <div class="small-12 columns text-center">
