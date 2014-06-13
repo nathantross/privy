@@ -70,12 +70,15 @@ Template.threadNav.events
         return console.log err if err
         
         messageAttr = 
-          body: "++PlusPoint"
+          body: "+♥ Great chat!"
           threadId: threadId
           isPoint: true
       
         Meteor.call "createMessage", messageAttr, (err) ->
           return console.log err if err
+
+          Meteor.call 'createNotification', messageAttr, (error, id) ->
+            console.log(error.reason) if error 
 
         thread = Threads.findOne threadId
         mixpanel.track("ThreadNav: gave point", {
