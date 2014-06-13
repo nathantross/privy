@@ -70,7 +70,7 @@ Template.threadNav.events
         return console.log err if err
         
         messageAttr = 
-          body: "+1 for a great chat!"
+          body: "++PlusPoint"
           threadId: threadId
           isPoint: true
       
