@@ -53,12 +53,12 @@ Template.threadNav.events
       blockedId: blockedId
     })
 
-  'click #hasPoint': (e)->
-    e.preventDefault()
-    partnerIndex = if @userIndex == 0 then 1 else 0
+  # 'click #hasPoint': (e)->
+  #   e.preventDefault()
+  #   partnerIndex = if @userIndex == 0 then 1 else 0
 
-    Meteor.call "toggleHasPoint", @threadId, partnerIndex, (err) ->
-      console.log err if err 
+  #   Meteor.call "toggleHasPoint", @threadId, partnerIndex, (err) ->
+  #     console.log err if err 
 
   'click #give-point': (e)->
     e.preventDefault()
@@ -75,6 +75,12 @@ Template.threadNav.events
       
         Meteor.call "createMessage", messageAttr, (err) ->
           return console.log err if err
+
+        mixpanel.track("ThreadNav: gave point", {
+          threadId: @threadId 
+          giver: @thread.participants[partnerIndex].userId
+          receiver: @thread.participants[@userIndex].userId
+        })
 
 
   'click #more-actions': ->
