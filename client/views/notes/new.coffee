@@ -6,8 +6,7 @@ Template.newNote.events
 
   "keyup #notes-body": (e)->
     if e.keyCode == 13
-      e.preventDefault()
-      submitNewNote()
+      submitNewNote(e)
     else
       val = $(e.target).find("[name=notes-body]").prevObject[0].value
       len = val.length
@@ -19,6 +18,7 @@ Template.newNote.events
       
       
   submitNewNote = (e) ->
+    e.preventDefault()
     body = $("[name=notes-body]").val().replace(/(\r\n|\n|\r)/gm,"")
 
     if body.length > 0
