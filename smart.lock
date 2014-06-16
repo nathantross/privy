@@ -10,7 +10,8 @@
       "user-status": {},
       "iron-router-progress": {},
       "handlebars-server": {},
-      "publish-with-relations": {}
+      "publish-with-relations": {},
+      "kadira": {}
     },
     "packages": {
       "font-awesome": {
@@ -57,6 +58,11 @@
         "git": "https://github.com/erundook/meteor-publish-with-relations.git",
         "tag": "v0.1.5",
         "commit": "98213e9f056b139597c99fb9ec2884ae6be76d91"
+      },
+      "kadira": {
+        "git": "https://github.com/meteorhacks/kadira.git",
+        "tag": "v2.4.0",
+        "commit": "18ac6e2b054f891560063427bfa36c817e585567"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
