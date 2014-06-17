@@ -4,7 +4,7 @@ exports.Notifications = new Meteor.Collection('notifications')
 # These methods modify the database
 Meteor.methods
   createNotification: (messageAttr) -> 
-    console.log "hi!"
+    console.log "testing123"
     # threadId = messageAttr.threadId
     # noteCreatorId = messageAttr.noteCreatorId
 
