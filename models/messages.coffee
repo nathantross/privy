@@ -60,26 +60,25 @@ Meteor.methods
     msgId
 
   readMessage: (threadId) -> 
-    console.log "testing123"
-    # @unblock()
-    # index = Notify.userIndex(threadId)
+    @unblock()
+    index = Notify.userIndex(threadId)
     
-    # unless Threads.findOne(threadId)?.participants[index].userId == @userId || !Meteor.isServer
-    #   throw new Meteor.Error(401, "You can't read messages on this thread.")
+    unless Threads.findOne(threadId)?.participants[index].userId == @userId || !Meteor.isServer
+      throw new Meteor.Error(401, "You can't read messages on this thread.")
 
-    # # whitelisted keys
-    # now = new Date().getTime()
-    # Messages.update
-    #     threadId: threadId
-    #     senderId: 
-    #       $ne: @userId
-    #     isRead: false
-    #   , 
-    #     $set:
-    #       isRead: true
-    #       updatedAt: now
-    #   ,
-    #     multi: true
+    # whitelisted keys
+    now = new Date().getTime()
+    Messages.update
+        threadId: threadId
+        senderId: 
+          $ne: @userId
+        isRead: false
+      , 
+        $set:
+          isRead: true
+          updatedAt: now
+      ,
+        multi: true
         
     # Decrement the notification count by the messages read
     # Notify.changeCount(-1*messages) unless messages == 0

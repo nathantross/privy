@@ -4,112 +4,111 @@ exports.Notifications = new Meteor.Collection('notifications')
 # These methods modify the database
 Meteor.methods
   createNotification: (messageAttr) -> 
-    console.log "testing123"
-    # threadId = messageAttr.threadId
-    # noteCreatorId = messageAttr.noteCreatorId
+    threadId = messageAttr.threadId
+    noteCreatorId = messageAttr.noteCreatorId
 
-    # # Declare errors
-    # unless @userId
-    #   throw new Meteor.Error 401, "Please login to create a notification."
+    # Declare errors
+    unless @userId
+      throw new Meteor.Error 401, "Please login to create a notification."
 
-    # if messageAttr.lastMessage == ""
-    #   throw new Meteor.Error 404, "Whoops, looks like your message is blank!"
+    if messageAttr.lastMessage == ""
+      throw new Meteor.Error 404, "Whoops, looks like your message is blank!"
 
-    # if messageAttr.originalNote == ""
-    #   throw new Meteor.Error 404, "Whoops, looks like your original note is blank!"
+    if messageAttr.originalNote == ""
+      throw new Meteor.Error 404, "Whoops, looks like your original note is blank!"
 
-    # unless threadId
-    #   throw new Meteor.Error 404, "ThreadId doesn't exist to make this notification."
+    unless threadId
+      throw new Meteor.Error 404, "ThreadId doesn't exist to make this notification."
 
-    # # Server validations
-    # if Meteor.isServer
-    #   unless Notify.isParticipant(@userId, threadId) 
-    #     throw new Meteor.Error 401, "You can't create notifications in this thread."
+    # Server validations
+    if Meteor.isServer
+      unless Notify.isParticipant(@userId, threadId) 
+        throw new Meteor.Error 401, "You can't create notifications in this thread."
 
-    #   if noteCreatorId && !Notify.isParticipant(noteCreatorId, threadId)
-    #     throw new Meteor.Error 401, "This senderId is invalid"
+      if noteCreatorId && !Notify.isParticipant(noteCreatorId, threadId)
+        throw new Meteor.Error 401, "This senderId is invalid"
 
   
-    # # Create a notification for the current user
-    # now = new Date().getTime()
-    # notification = _.extend(_.pick(messageAttr, 'threadId', 'lastMessage'),
-    #   userId: @userId
-    #   lastSenderId: @userId
-    #   isNotified: false
-    #   isArchived: false
-    #   createdAt: now
-    #   updatedAt: now
-    # )
+    # Create a notification for the current user
+    now = new Date().getTime()
+    notification = _.extend(_.pick(messageAttr, 'threadId', 'lastMessage'),
+      userId: @userId
+      lastSenderId: @userId
+      isNotified: false
+      isArchived: false
+      createdAt: now
+      updatedAt: now
+    )
 
-    # # set avatar if replying to a note
-    # if messageAttr.isReply
-    #   notification['lastAvatarId'] = noteCreatorId
-    #   notification['originalNote'] = messageAttr.originalNote
+    # set avatar if replying to a note
+    if messageAttr.isReply
+      notification['lastAvatarId'] = noteCreatorId
+      notification['originalNote'] = messageAttr.originalNote
     
-    # # set avatar if creating a note
-    # else if messageAttr.isNewNote
-    #   notification['lastAvatarId'] = @userId
-    #   notification['originalNote'] = messageAttr.lastMessage
+    # set avatar if creating a note
+    else if messageAttr.isNewNote
+      notification['lastAvatarId'] = @userId
+      notification['originalNote'] = messageAttr.lastMessage
 
-    # # create the notification
-    # Notifications.upsert
-    #     threadId: threadId
-    #     userId: @userId
-    #   , 
-    #     $set: notification         
+    # create the notification
+    Notifications.upsert
+        threadId: threadId
+        userId: @userId
+      , 
+        $set: notification         
 
-    # # Create a notification for each of the other users
-    # @unblock()
-    # if Meteor.isServer
-    #   thread = Threads.findOne(threadId)
+    # Create a notification for each of the other users
+    @unblock()
+    if Meteor.isServer
+      thread = Threads.findOne(threadId)
 
-    #   unless thread
-    #     throw new Meteor.Error 404, "Thread doesn't exist to make this notification."
+      unless thread
+        throw new Meteor.Error 404, "Thread doesn't exist to make this notification."
       
-    #   # create a notification for each participant (pUser) in the thread
-    #   pUser
-    #   for participant in thread.participants
-    #     unless participant.userId == @userId || participant.isMuted
-    #       pUser = Meteor.users.findOne participant.userId
-    #       isInThread = Notify.isInThread(pUser._id, threadId)
+      # create a notification for each participant (pUser) in the thread
+      pUser
+      for participant in thread.participants
+        unless participant.userId == @userId || participant.isMuted
+          pUser = Meteor.users.findOne participant.userId
+          isInThread = Notify.isInThread(pUser._id, threadId)
 
-    #       notification = _.extend notification,
-    #         userId: pUser._id
-    #         isNotified: !isInThread
-    #         lastAvatarId: @userId
+          notification = _.extend notification,
+            userId: pUser._id
+            isNotified: !isInThread
+            lastAvatarId: @userId
 
-    #       # Insert the notifications for each participant
-    #       Notifications.upsert
-    #           threadId: threadId
-    #           userId: pUser._id
-    #         , 
-    #           $set: notification
+          # Insert the notifications for each participant
+          Notifications.upsert
+              threadId: threadId
+              userId: pUser._id
+            , 
+              $set: notification
           
-    #       # Highlight nav and increment unread count if user's not in thread
-    #       unless isInThread
-    #         Meteor.users.update pUser._id,
-    #           $set: 
-    #             'notifications.0.isNavNotified': true
-    #             updatedAt: now
-    #           $inc: 
-    #             'notifications.0.count': 1
+          # Highlight nav and increment unread count if user's not in thread
+          unless isInThread
+            Meteor.users.update pUser._id,
+              $set: 
+                'notifications.0.isNavNotified': true
+                updatedAt: now
+              $inc: 
+                'notifications.0.count': 1
           
-    #       # Send notification email to idle/offline user          
-    #       if pUser.notifications[0].email && (!pUser.status?.online || pUser.status?.idle)
+          # Send notification email to idle/offline user          
+          if pUser.notifications[0].email && (!pUser.status?.online || pUser.status?.idle)
 
-    #         emailAttr = 
-    #           receiverEmail: pUser.emails[0].address
-    #           senderAvatar: Meteor.user().profile.avatar
-    #           threadId: threadId
-    #           lastMessage: messageAttr.lastMessage
+            emailAttr = 
+              receiverEmail: pUser.emails[0].address
+              senderAvatar: Meteor.user().profile.avatar
+              threadId: threadId
+              lastMessage: messageAttr.lastMessage
 
             
-    #         Email.send
-    #           from: "Get Strange <hello@getstrange.co>"
-    #           to: emailAttr.receiverEmail
-    #           subject: "You have a new message"
-    #           text: "You have a new message at http://getstrange.co/threads/" + emailAttr.threadId
-    #           html: "<center><img src='" + emailAttr.senderAvatar + "' /><br><br>You have a new message:<br><br><h1>" + emailAttr.lastMessage + "</h1><br><a href='http://getstrange.co/threads/" + emailAttr.threadId + "' >Click here to respond</a></center>"
+            Email.send
+              from: "Get Strange <hello@getstrange.co>"
+              to: emailAttr.receiverEmail
+              subject: "You have a new message"
+              text: "You have a new message at http://getstrange.co/threads/" + emailAttr.threadId
+              html: "<center><img src='" + emailAttr.senderAvatar + "' /><br><br>You have a new message:<br><br><h1>" + emailAttr.lastMessage + "</h1><br><a href='http://getstrange.co/threads/" + emailAttr.threadId + "' >Click here to respond</a></center>"
 
 
   toggleItemHighlight: (notAttr) ->
