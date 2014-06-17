@@ -60,7 +60,7 @@ Meteor.methods
     # Add the user to the thread
     now = new Date().getTime()
     if threadAttr.toggle
-      Meteor.users.update @userid,
+      Meteor.users.update @userId,
         $addToSet:
           inThreads: threadAttr.threadId
     else

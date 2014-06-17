@@ -10,6 +10,9 @@ exports.FeedController = RouteController.extend(
   onBeforeAction: ->
     document.title = Notify.defaultTitle()
 
+  onStop: ->
+    @render('showThread')
+    
   waitOn: ->
     Meteor.subscribe "notes", @sort(), @limit()
 
