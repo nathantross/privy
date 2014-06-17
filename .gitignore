@@ -2,3 +2,4 @@ packages/accounts-t9n
 .DS_Store
 server/secret_keys.coffee
 settings.json
+server/kadira.js
