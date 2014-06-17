@@ -59,6 +59,7 @@ Meteor.methods
         $set: notification         
 
     # Create a notification for each of the other users
+    @unblock()
     if Meteor.isServer
       thread = Threads.findOne(threadId)
 
