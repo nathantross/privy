@@ -60,6 +60,7 @@ Meteor.methods
     msgId
 
   readMessage: (threadId) -> 
+    @unblock()
     index = Notify.userIndex(threadId)
     
     unless Threads.findOne(threadId)?.participants[index].userId == @userId || !Meteor.isServer

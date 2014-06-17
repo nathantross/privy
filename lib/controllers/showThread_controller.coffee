@@ -17,16 +17,17 @@ exports.showThreadController = RouteController.extend(
           userId: Meteor.userId()
           isNotified: true
 
-        Notify.toggleItemHighlight(notification, false) if notification
+        if notification
+          Notify.toggleItemHighlight(notification, false) 
 
-        $({})
-          .queue((next)->
-            Meteor.call 'readMessage', threadId, (error, id) ->
-              console.log(error.reason) if error
-            next()
-          ).queue((next)->
-            document.title = Notify.defaultTitle(user)
-          )
+          $({})
+            .queue((next)->
+              Meteor.call 'readMessage', threadId, (error, id) ->
+                console.log(error.reason) if error
+              next()
+            ).queue((next)->
+              document.title = Notify.defaultTitle(user)
+            )
 
   onStop: ->
     Notify.toggleCheckIn(@threadId(), false)
