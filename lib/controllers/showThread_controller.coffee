@@ -3,25 +3,26 @@ exports.showThreadController = RouteController.extend(
   template: "showThread"
 
   onBeforeAction: ->
-    threadId = @params._id
+    console.log "testing123"
+    # threadId = @params._id
 
-    if Meteor.user() && Threads.findOne(threadId)
-      unless Meteor.user().status.idle
-        Notify.toggleCheckIn(threadId, true) 
+    # if Meteor.user() && Threads.findOne(threadId)
+    #   unless Meteor.user().status.idle
+    #     Notify.toggleCheckIn(threadId, true) 
 
-        # Turn off the notification, if there is one
-        notification = Notifications.findOne
-          threadId: threadId
-          userId: Meteor.userId()
-          isNotified: true
+    #     # Turn off the notification, if there is one
+    #     notification = Notifications.findOne
+    #       threadId: threadId
+    #       userId: Meteor.userId()
+    #       isNotified: true
 
-        if notification
-          Notify.toggleItemHighlight(notification, false) 
-          Meteor.call 'readMessage', threadId, (error, id) ->
-            console.log(error.reason) if error
+    #     if notification
+    #       Notify.toggleItemHighlight(notification, false) 
+    #       Meteor.call 'readMessage', threadId, (error, id) ->
+    #         console.log(error.reason) if error
 
-          if Meteor.user().notifications[0].isTitleFlashing
-            document.title = Notify.defaultTitle()
+    #       if Meteor.user().notifications[0].isTitleFlashing
+    #         document.title = Notify.defaultTitle()
 
   onStop: ->
     Notify.toggleCheckIn(@threadId(), false)
