@@ -59,33 +59,18 @@ Meteor.methods
 
     msgId
 
-  readMessage: (threadId) ->  
-    user = Meteor.user()
-    
+  readMessage: (threadId) -> 
     index = Notify.userIndex(threadId)
-      
-    unless user
-      throw new Meteor.Error(401, "You have to login to update a message.")
     
-    unless threadId
-        throw new Meteor.Error(404, "The threadId does not exist.")
-    
-    # Server validations
-    if Meteor.isServer
-      thread = Threads.findOne(threadId)
-      
-      unless thread
-        throw new Meteor.Error(404, "This thread does not exist.")
-
-      unless thread.participants[index].userId == user._id
-        throw new Meteor.Error(401, "You can't read messages on this thread.")
+    unless Threads.findOne(threadId)?.participants[index].userId == @userId || !Meteor.isServer
+      throw new Meteor.Error(401, "You can't read messages on this thread.")
 
     # whitelisted keys
     now = new Date().getTime()
-    messages = Messages.update
+    Messages.update
         threadId: threadId
         senderId: 
-          $ne: user._id
+          $ne: @userId
         isRead: false
       , 
         $set:
@@ -95,4 +80,4 @@ Meteor.methods
         multi: true
         
     # Decrement the notification count by the messages read
-    Notify.changeCount(-1*messages) unless messages == 0
+    # Notify.changeCount(-1*messages) unless messages == 0
