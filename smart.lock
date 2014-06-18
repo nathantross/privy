@@ -11,7 +11,8 @@
       "iron-router-progress": {},
       "handlebars-server": {},
       "publish-with-relations": {},
-      "kadira": {}
+      "kadira": {},
+      "subs-manager": {}
     },
     "packages": {
       "font-awesome": {
@@ -61,8 +62,13 @@
       },
       "kadira": {
         "git": "https://github.com/meteorhacks/kadira.git",
-        "tag": "v2.4.0",
-        "commit": "18ac6e2b054f891560063427bfa36c817e585567"
+        "tag": "v2.4.1",
+        "commit": "b0de26c879f1e7a32d82cab53770ccbb00a1c5ab"
+      },
+      "subs-manager": {
+        "git": "https://github.com/meteorhacks/subs-manager.git",
+        "tag": "v1.0.0",
+        "commit": "e01b87ac004ef114f882a73549ba38f64709649e"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",

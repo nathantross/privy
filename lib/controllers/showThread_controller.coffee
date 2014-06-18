@@ -37,8 +37,8 @@ exports.showThreadController = RouteController.extend(
     @params._id
 
   waitOn: ->
-    Meteor.subscribe "oneThread", @threadId()
-    Meteor.subscribe "messages", @threadId(), @limit()
+    Subs.subscribe "oneThread", @threadId()
+    Subs.subscribe "messages", @threadId(), @limit()
 
   messages: ->
     Messages.find

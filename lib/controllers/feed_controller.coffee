@@ -1,37 +1,30 @@
 exports = this
 exports.FeedController = RouteController.extend(
   template: "feed"
-  
-  sort: -> 
-    createdAt: -1
-
-  limit: -> 5
 
   onBeforeAction: ->
     document.title = Notify.defaultTitle()
 
   onStop: ->
     @render('showThread')
-    
+
   waitOn: ->
-    Meteor.subscribe "notes", @sort(), @limit()
+    Subs.subscribe "notes", { createdAt: -1 }, 5
 
   # onStop: -> 
     # Notify.toggleLock(Session.get('currentNoteId'), false)
     # Session.set('currentNoteId', false)
 
   note: ->
-    user = Meteor.user()
-
     note = 
       Notes.findOne
           $and: [
             userId:
               $ne: Meteor.userId()
           , userId:
-              $nin: user.blockerIds || []
+              $nin: Meteor.user().blockerIds || []
           , userId:
-              $nin: user.blockedIds || []
+              $nin: Meteor.user().blockedIds || []
           ]
           isInstream: true
           # $or: [

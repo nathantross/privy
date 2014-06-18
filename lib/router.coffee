@@ -10,6 +10,9 @@ Router.configure
   onRun: ->
     mixpanel.disable() if window.location.host == "localhost:3000"
 
+exports = this
+exports.Subs = new SubsManager()
+
 
 Router.map ->
   # Sets route for Index to '/' for the application
@@ -82,9 +85,9 @@ loginChecks = (pause)->
 loggedOutPages = ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "entryResetPassword", "contact", "entryForgotPassword", "404"]
 
 Router.waitOn ->
-    Meteor.subscribe 'userData'
-    Meteor.subscribe 'notifications'
-    Meteor.subscribe 'notificationUserStatus'
+    Subs.subscribe 'userData'
+    Subs.subscribe 'notifications'
+    Subs.subscribe 'notificationUserStatus'
   ,
     except: loggedOutPages
 
