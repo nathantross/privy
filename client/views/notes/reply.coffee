@@ -25,14 +25,15 @@ Template.noteReply.events
       return console.log(err.reason) if err   
 
       reply.threadId = threadId
-      Meteor.call 'readMessage', threadId, (err, id) ->
+      
+      Meteor.call 'createMessage', reply, (err, id) ->
         return console.log(err.reason) if err
 
-        Meteor.call 'createMessage', reply, (err, id) ->
-          return console.log(err.reason) if err
+        Meteor.call 'createNotification', reply, (err, id) ->
+          console.log(err.reason) if err
 
-          Meteor.call 'createNotification', reply, (err, id) ->
-            console.log(err.reason) if err
+        Meteor.call 'readMessage', reply.threadId, (err, id) ->
+          return console.log(err.reason) if err
     
     mixpanel.track("Reply: created", {
       noteId: @note._id, 

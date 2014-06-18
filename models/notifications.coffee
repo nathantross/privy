@@ -4,12 +4,11 @@ exports.Notifications = new Meteor.Collection('notifications')
 # These methods modify the database
 Meteor.methods
   createNotification: (messageAttr) -> 
-    user = Meteor.user()
     threadId = messageAttr.threadId
     noteCreatorId = messageAttr.noteCreatorId
 
     # Declare errors
-    unless user
+    unless @userId
       throw new Meteor.Error 401, "Please login to create a notification."
 
     if messageAttr.lastMessage == ""
@@ -23,7 +22,7 @@ Meteor.methods
 
     # Server validations
     if Meteor.isServer
-      unless Notify.isParticipant(user._id, threadId) 
+      unless Notify.isParticipant(@userId, threadId) 
         throw new Meteor.Error 401, "You can't create notifications in this thread."
 
       if noteCreatorId && !Notify.isParticipant(noteCreatorId, threadId)
@@ -33,8 +32,8 @@ Meteor.methods
     # Create a notification for the current user
     now = new Date().getTime()
     notification = _.extend(_.pick(messageAttr, 'threadId', 'lastMessage'),
-      userId: user._id
-      lastSenderId: user._id
+      userId: @userId
+      lastSenderId: @userId
       isNotified: false
       isArchived: false
       createdAt: now
@@ -48,17 +47,18 @@ Meteor.methods
     
     # set avatar if creating a note
     else if messageAttr.isNewNote
-      notification['lastAvatarId'] = user._id
+      notification['lastAvatarId'] = @userId
       notification['originalNote'] = messageAttr.lastMessage
 
     # create the notification
     Notifications.upsert
         threadId: threadId
-        userId: user._id
+        userId: @userId
       , 
         $set: notification         
 
     # Create a notification for each of the other users
+    @unblock()
     if Meteor.isServer
       thread = Threads.findOne(threadId)
 
@@ -68,14 +68,14 @@ Meteor.methods
       # create a notification for each participant (pUser) in the thread
       pUser
       for participant in thread.participants
-        unless participant.userId == user._id || participant.isMuted
+        unless participant.userId == @userId || participant.isMuted
           pUser = Meteor.users.findOne participant.userId
           isInThread = Notify.isInThread(pUser._id, threadId)
 
           notification = _.extend notification,
             userId: pUser._id
             isNotified: !isInThread
-            lastAvatarId: user._id
+            lastAvatarId: @userId
 
           # Insert the notifications for each participant
           Notifications.upsert
@@ -98,17 +98,17 @@ Meteor.methods
 
             emailAttr = 
               receiverEmail: pUser.emails[0].address
-              senderAvatar: user.profile.avatar
+              senderAvatar: Meteor.user().profile.avatar
               threadId: threadId
               lastMessage: messageAttr.lastMessage
 
-            Meteor.defer ->
-              Email.send
-                from: "Get Strange <hello@getstrange.co>"
-                to: emailAttr.receiverEmail
-                subject: "You have a new message"
-                text: "You have a new message at http://getstrange.co/threads/" + emailAttr.threadId
-                html: "<center><img src='" + emailAttr.senderAvatar + "' /><br><br>You have a new message:<br><br><h1>" + emailAttr.lastMessage + "</h1><br><a href='http://getstrange.co/threads/" + emailAttr.threadId + "' >Click here to respond</a></center>"
+            
+            Email.send
+              from: "Get Strange <hello@getstrange.co>"
+              to: emailAttr.receiverEmail
+              subject: "You have a new message"
+              text: "You have a new message at http://getstrange.co/threads/" + emailAttr.threadId
+              html: "<center><img src='" + emailAttr.senderAvatar + "' /><br><br>You have a new message:<br><br><h1>" + emailAttr.lastMessage + "</h1><br><a href='http://getstrange.co/threads/" + emailAttr.threadId + "' >Click here to respond</a></center>"
 
 
   toggleItemHighlight: (notAttr) ->
@@ -122,7 +122,7 @@ Meteor.methods
     unless user
       throw new Meteor.Error 401, "You have to login to create a notification."
 
-    unless notification.userId == user._id
+    unless notification.userId == @userId
       throw new Meteor.Error 401, "You cannot access this notification."
 
     notUpdate = _.extend(_.pick(notAttr, 'isNotified'))
