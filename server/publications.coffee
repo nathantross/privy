@@ -131,6 +131,7 @@ Meteor.publish "manyThreads", ->
         fields: 
           'createdAt': 0
           'noteId': 0
+        limit: 15
       filter: {}
       mappings: [
         {

@@ -5,8 +5,8 @@ exports.showThreadController = RouteController.extend(
   onBeforeAction: ->
     threadId = @params._id
 
-    if Meteor.user() && Threads.findOne(threadId)
-      unless Meteor.user().status.idle
+    if Meteor.user()
+      unless Meteor.user().status?.idle
         Notify.toggleCheckIn(threadId, true) 
 
         # Turn off the notification, if there is one
