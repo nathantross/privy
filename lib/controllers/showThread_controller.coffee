@@ -37,7 +37,7 @@ exports.showThreadController = RouteController.extend(
     @params._id
 
   waitOn: ->
-    Subs.subscribe "oneThread", @threadId()
+    # Subs.subscribe "oneThread", @threadId()
     Subs.subscribe "messages", @threadId(), @limit()
 
   messages: ->

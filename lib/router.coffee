@@ -88,6 +88,7 @@ Router.waitOn ->
     Subs.subscribe 'userData'
     Subs.subscribe 'notifications'
     Subs.subscribe 'notificationUserStatus'
+    Subs.subscribe 'manyThreads'
   ,
     except: loggedOutPages
 
