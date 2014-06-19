@@ -22,6 +22,7 @@ Meteor.methods
 
 
   toggleIsTyping: (threadAttr) ->
+    @unblock()
     unless typeof threadAttr.toggle == "boolean"
       throw new Meteor.Error(400, "Toggle must be set to true or false.")
 

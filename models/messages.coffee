@@ -2,21 +2,17 @@ exports = this
 exports.Messages = new Meteor.Collection('messages')
 
 Meteor.methods
-  createMessage: (messageAttr) ->
-    user = Meteor.user()
-    threadId = messageAttr.threadId
+  createMessage: (msgAttr) ->
+    threadId = msgAttr.threadId
     thread = Threads.findOne(threadId)
-    hasExited = messageAttr.hasExited
-    isPoint = messageAttr.isPoint
+    hasExited = msgAttr.hasExited
+    isPoint = msgAttr.isPoint
 
-    unless user
+    unless Meteor.user()
       throw new Meteor.Error(401, "You have to login to create a message.")
 
-    unless messageAttr.body
+    unless msgAttr.body
       throw new Meteor.Error(422, 'Woops, looks like your message is blank!')
-    
-    unless threadId
-      throw new Meteor.Error(404, "Thread does not exist to create a message.")
 
     if hasExited? && typeof hasExited != "boolean"
       throw new Meteor.Error(400, "hasExited must be set to true or false.")
@@ -25,22 +21,20 @@ Meteor.methods
       throw new Meteor.Error(400, "isPoint must be set to true or false.")
 
     # Server validations
-    if Meteor.isServer
-
-      unless Notify.isParticipant(user._id, threadId)
-        throw new Meteor.Error 401, "You can't create messages on this thread."
+    if Meteor.isServer && !_.findWhere(thread.participants, {userId: @userId})
+      throw new Meteor.Error 401, "You can't create messages on this thread."
 
     # isRead should be true if any of the participants is in the room
     isRead = hasExited?
     
     if !isRead && (thread || Meteor.isServer)
       for participant in thread.participants
-        if participant.userId != user._id && participant.isInThread
+        if participant.userId != @userId && participant.isInThread
           isRead = true
     
     now = new Date().getTime()
-    message = _.extend(_.pick(messageAttr, 'threadId', 'body'),
-      senderId: user._id
+    message = _.extend(_.pick(msgAttr, 'threadId', 'body'),
+      senderId: @userId
       createdAt: now
       updatedAt: now
       isRead: isRead 
@@ -54,7 +48,7 @@ Meteor.methods
     if Meteor.isClient
       mixpanel.track("Message: created", {
         threadId: threadId
-        userId: user._id
+        userId: @userId
       })
 
     msgId
