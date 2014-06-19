@@ -54,11 +54,6 @@ Meteor.methods
 
     msgId
 
-  createPointMsg: (msgAttr) ->
-    #Validations
-    unless @userId
-      throw new Meteor.Error(401, "You have to login to create a message.")
-
   readMessage: (threadId) -> 
     @unblock()
     index = Notify.userIndex(threadId)
