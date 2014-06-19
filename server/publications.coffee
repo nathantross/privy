@@ -142,15 +142,15 @@ Meteor.publish "manyThreads", ->
       ]
 
 Meteor.publish "messages", (threadId, limit) ->
-  
-  participants = Threads.findOne(threadId)?.participants
-  if participants[0].userId == @userId || participants[1].userId == @userId
-    Messages.find
-        threadId: threadId
-      ,
-        sort: 
-          createdAt: -1
-        limit: limit
+  if @userId
+    participants = Threads.findOne(threadId)?.participants
+    if participants[0].userId == @userId || participants[1].userId == @userId
+      Messages.find
+          threadId: threadId
+        ,
+          sort: 
+            createdAt: -1
+          limit: limit
 
-  else
-    null
+    else
+      null
