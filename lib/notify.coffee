@@ -131,9 +131,9 @@ exports.Notify =
     false
 
   isParticipant: (userId, threadId)->
-    thread = Threads.findOne(threadId)
-    if thread
-      for participant in thread.participants
+    participants = @getParticipants(threadId)
+    if participants
+      for participant in participants
         if participant.userId == userId
           return true
     false

@@ -1,4 +1,5 @@
 Template.newMessage.events
+
   "submit form": (e) ->
     e.preventDefault()
 
@@ -15,7 +16,7 @@ Template.newMessage.events
         Meteor.call 'createNotification', message, (error, id) ->
           console.log(error.reason) if error 
     
-    toggleTyping @threadId, @thread.participants, @userIndex, false
+    toggleTyping(@threadId, @userIndex, false)
     $('body').scrollTop($("#messages")[0].scrollHeight)
     $body.val("") 
     
@@ -24,21 +25,22 @@ Template.newMessage.events
     $body = $(e.target).find('[name=message-body]')
     body = $body.context.value
     if body.length == 1
-      toggleTyping(@threadId, @thread.participants, @userIndex, true) 
+      toggleTyping(@threadId, @userIndex, true) 
 
 
   "keyup input": (e) ->
     $body = $(e.target).find('[name=message-body]')
     body = $body.context.value
     if body.length == 0
-      toggleTyping(@threadId, @thread.participants, @userIndex, false) 
+      toggleTyping(@threadId, @userIndex, false) 
 
 
   "click input": (e) ->
     Notify.toggleTitleFlashing(false)
 
 
-  toggleTyping = (threadId, participants, userIndex, toggle) ->
+  toggleTyping = (threadId, userIndex, toggle) ->
+    participants = Notify.getParticipants(threadId)
     unless participants[userIndex].isTyping == toggle
       threadAttr = 
         threadId: threadId
@@ -47,3 +49,4 @@ Template.newMessage.events
 
       Meteor.call 'toggleIsTyping', threadAttr, (error, id) -> 
           console.log(error.reason) if error 
+  

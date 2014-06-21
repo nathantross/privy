@@ -5,27 +5,22 @@ exports.Notifications = new Meteor.Collection('notifications')
 Meteor.methods
   createNotification: (messageAttr) -> 
     threadId = messageAttr.threadId
-    noteCreatorId = messageAttr.noteCreatorId
 
     # Declare errors
-    unless @userId
-      throw new Meteor.Error 401, "Please login to create a notification."
-
     if messageAttr.lastMessage == ""
       throw new Meteor.Error 404, "Whoops, looks like your message is blank!"
 
     if messageAttr.originalNote == ""
       throw new Meteor.Error 404, "Whoops, looks like your original note is blank!"
 
-    unless threadId
-      throw new Meteor.Error 404, "ThreadId doesn't exist to make this notification."
-
     # Server validations
     if Meteor.isServer
-      unless Notify.isParticipant(@userId, threadId) 
+      participants = Notify.getParticipants(threadId)
+
+      unless _.findWhere(participants, {userId: @userId})
         throw new Meteor.Error 401, "You can't create notifications in this thread."
 
-      if noteCreatorId && !Notify.isParticipant(noteCreatorId, threadId)
+      if messageAttr.noteCreatorId && !Notify.participantIndex(participants)
         throw new Meteor.Error 401, "This senderId is invalid"
 
   
@@ -42,7 +37,7 @@ Meteor.methods
 
     # set avatar if replying to a note
     if messageAttr.isReply
-      notification['lastAvatarId'] = noteCreatorId
+      notification['lastAvatarId'] = messageAttr.noteCreatorId
       notification['originalNote'] = messageAttr.originalNote
     
     # set avatar if creating a note
@@ -60,39 +55,38 @@ Meteor.methods
     # Create a notification for each of the other users
     @unblock()
     if Meteor.isServer
-      thread = Threads.findOne(threadId)
-
-      unless thread
-        throw new Meteor.Error 404, "Thread doesn't exist to make this notification."
-      
       # create a notification for each participant (pUser) in the thread
       pUser
-      for participant in thread.participants
+      for participant in participants
         unless participant.userId == @userId || participant.isMuted
-          pUser = Meteor.users.findOne participant.userId
-          isInThread = Notify.isInThread(pUser._id, threadId)
-
+  
           notification = _.extend notification,
-            userId: pUser._id
-            isNotified: !isInThread
+            userId: participant.userId
+            isNotified: !participant.isInThread
             lastAvatarId: @userId
 
           # Insert the notifications for each participant
           Notifications.upsert
               threadId: threadId
-              userId: pUser._id
+              userId: participant.userId
             , 
               $set: notification
           
           # Highlight nav and increment unread count if user's not in thread
-          unless isInThread
-            Meteor.users.update pUser._id,
+          unless participant.isInThread
+            Meteor.users.update participant.userId,
               $set: 
                 'notifications.0.isNavNotified': true
                 updatedAt: now
               $inc: 
                 'notifications.0.count': 1
           
+          pUser = Meteor.users.findOne participant.userId, 
+            fields: 
+              status: 1
+              'notifications.0.email': 1
+              'emails.0.address': 1
+
           # Send notification email to idle/offline user          
           if pUser.notifications[0].email && (!pUser.status?.online || pUser.status?.idle)
 

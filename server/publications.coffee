@@ -122,26 +122,6 @@ Meteor.publish "oneThread", (threadId) ->
           createdAt: 0
           noteId: 0
 
-Meteor.publish "manyThreads", ->
-  if @userId
-    Meteor.publishWithRelations
-      handle: @
-      collection: Threads
-      options: 
-        fields: 
-          'createdAt': 0
-          'noteId': 0
-        limit: 15
-      filter: {}
-      mappings: [
-        {
-          key:        "threadId"
-          collection: Notifications
-          filter:     notificationsQuery(@userId)
-          options:    notificationsOptions
-        }
-      ]
-
 Meteor.publish "messages", (threadId, limit) ->
   if @userId
     participants = Threads.findOne(threadId)?.participants
