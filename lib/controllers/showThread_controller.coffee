@@ -4,15 +4,15 @@ exports.showThreadController = RouteController.extend(
 
   onBeforeAction: ->
     threadId = @params._id
-
-    if Meteor.user() && Threads.findOne(threadId)
-      unless Meteor.user().status.idle
+    user = Meteor.user()
+    if user
+      unless user.status?.idle
         Notify.toggleCheckIn(threadId, true) 
 
         # Turn off the notification, if there is one
         notification = Notifications.findOne
           threadId: threadId
-          userId: Meteor.userId()
+          userId: user._id
           isNotified: true
 
         if notification
@@ -20,7 +20,7 @@ exports.showThreadController = RouteController.extend(
           Meteor.call 'readMessage', threadId, (error, id) ->
             console.log(error.reason) if error
 
-          if Meteor.user().notifications[0].isTitleFlashing
+          if user.notifications[0].isTitleFlashing
             document.title = Notify.defaultTitle()
 
   onStop: ->
@@ -48,9 +48,6 @@ exports.showThreadController = RouteController.extend(
         createdAt: 1
       limit: @limit()
 
-  thread: ->
-    Threads.findOne @threadId() if @threadId()
-
   data: ->
     hasMore = @messages().count() == @limit()
     nextPath = @route.path
@@ -61,7 +58,6 @@ exports.showThreadController = RouteController.extend(
       messages: @messages()
       nextPath: (if hasMore then nextPath else null)
       threadId: @threadId()
-      thread: @thread()
       userIndex: Notify.userIndex(@threadId())
       # lastMessage: @lastMessage()
     )

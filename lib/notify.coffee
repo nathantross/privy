@@ -82,24 +82,36 @@ exports.Notify =
 
     Meteor.setTimeout(activateAlert, 250)
 
+  getParticipants: (threadId) ->
+    Threads.findOne(threadId, {fields: {participants: 1}})?.participants
+
+  participantIndex: (participants) ->
+    if participants?
+      for participant, i in participants
+        return i if participant.userId == Meteor.userId()
+
+    false
+
   # Toggles whether a user is checked into a thread
   toggleCheckIn: (threadId, toggle, userIndex, isMuted) ->
-    thread = Threads.findOne(threadId)
-    index = userIndex || @userIndex(threadId)
-    updateMute = isMuted? && thread?.participants[index].isMuted != isMuted
-    updateCheckIn = thread?.participants[index].isInThread != toggle
+    participants = @getParticipants(threadId)
+    
+    if participants?
+      index = userIndex || @participantIndex(participants)
+      updateMute = isMuted? && participants[index]?.isMuted != isMuted
+      updateCheckIn = participants[index]?.isInThread != toggle
 
-    if thread? && (updateMute || updateCheckIn)
+      if (updateMute || updateCheckIn)
 
-      threadAttr =
-        threadId: threadId
-        toggle: toggle
-        userIndex: index
+        threadAttr =
+          threadId: threadId
+          toggle: toggle
+          userIndex: index
 
-      threadAttr['isMuted'] = isMuted if isMuted?
+        threadAttr['isMuted'] = isMuted if isMuted?
 
-      Meteor.call 'toggleIsInThread', threadAttr, (error, id) ->
-        console.log(error.reason) if error
+        Meteor.call 'toggleIsInThread', threadAttr, (error, id) ->
+          console.log(error.reason) if error
 
   # Helper function that determines whether a user is in a thread
   isInThread: (userId, threadId)->
@@ -119,9 +131,9 @@ exports.Notify =
     false
 
   isParticipant: (userId, threadId)->
-    thread = Threads.findOne(threadId)
-    if thread
-      for participant in thread.participants
+    participants = @getParticipants(threadId)
+    if participants
+      for participant in participants
         if participant.userId == userId
           return true
     false

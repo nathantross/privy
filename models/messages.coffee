@@ -3,51 +3,51 @@ exports.Messages = new Meteor.Collection('messages')
 
 Meteor.methods
   createMessage: (msgAttr) ->
-    threadId = msgAttr.threadId
-    thread = Threads.findOne(threadId)
-    hasExited = msgAttr.hasExited
-    isPoint = msgAttr.isPoint
+    participants = Notify.getParticipants(msgAttr.threadId)
 
-    unless Meteor.user()
-      throw new Meteor.Error(401, "You have to login to create a message.")
-
+    #Validations
     unless msgAttr.body
       throw new Meteor.Error(422, 'Woops, looks like your message is blank!')
 
-    if hasExited? && typeof hasExited != "boolean"
-      throw new Meteor.Error(400, "hasExited must be set to true or false.")
-
-    if isPoint? && typeof isPoint != "boolean"
-      throw new Meteor.Error(400, "isPoint must be set to true or false.")
-
-    # Server validations
-    if Meteor.isServer && !_.findWhere(thread.participants, {userId: @userId})
+    if Meteor.isServer && !_.findWhere(participants, {userId: @userId})
       throw new Meteor.Error 401, "You can't create messages on this thread."
 
-    # isRead should be true if any of the participants is in the room
-    isRead = hasExited?
+    # Set isRead
+    isRead = msgAttr.hasExited?
     
-    if !isRead && (thread || Meteor.isServer)
-      for participant in thread.participants
+    if !isRead && (participants || Meteor.isServer)
+      for participant in participants
         if participant.userId != @userId && participant.isInThread
           isRead = true
     
+    # Set message attributes
     now = new Date().getTime()
     message = _.extend(_.pick(msgAttr, 'threadId', 'body'),
       senderId: @userId
       createdAt: now
-      updatedAt: now
       isRead: isRead 
     )    
     
-    message.hasExited = hasExited if hasExited?
-    message.isPoint = isPoint if isPoint?
+    # Check to see if this is a special type of message
+    if msgAttr.hasExited? 
+      unless typeof msgAttr.hasExited == "boolean"
+        throw new Meteor.Error(400, "hasExited must be set to true or false.")
+      
+      message.hasExited = msgAttr.hasExited 
 
+    if msgAttr.isPoint?
+      unless typeof msgAttr.isPoint == "boolean"
+        throw new Meteor.Error(400, "isPoint must be set to true or false.")
+      
+      message.isPoint = msgAttr.isPoint 
+
+    # Insert the messages
     msgId = Messages.insert(message)
 
+    # Send Mixpanel event
     if Meteor.isClient
       mixpanel.track("Message: created", {
-        threadId: threadId
+        threadId: msgAttr.threadId
         userId: @userId
       })
 

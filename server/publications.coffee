@@ -47,7 +47,7 @@ notificationsQuery = (userId) ->
   isArchived: false
 
 notificationsOptions =   
-  limit: 25
+  limit: 15
   sort:
     updatedAt: -1
 
@@ -113,24 +113,27 @@ Meteor.publish "userData", ->
 
 
 Meteor.publish "oneThread", (threadId) ->
-  if Notify.isParticipant(@userId, threadId) 
-    Threads.find
-        _id: threadId
-      , 
-        limit: 1
-        fields:
-          createdAt: 0
-          noteId: 0
-        
+  if @userId
+    participants = Notify.getParticipants(threadId)
+    if participants[0].userId == @userId || participants[1].userId == @userId
+      Threads.find
+          _id: threadId
+        , 
+          limit: 1
+          fields:
+            createdAt: 0
+            noteId: 0
 
 Meteor.publish "messages", (threadId, limit) ->
-  if Notify.isParticipant(@userId, threadId) 
-    Messages.find
-        threadId: threadId
-      ,
-        sort: 
-          createdAt: -1
-        limit: limit
+  if @userId
+    participants = Notify.getParticipants(threadId)
+    if participants[0].userId == @userId || participants[1].userId == @userId
+      Messages.find
+          threadId: threadId
+        ,
+          sort: 
+            createdAt: -1
+          limit: limit
 
-  else
-    null
+    else
+      null
