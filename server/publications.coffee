@@ -113,18 +113,20 @@ Meteor.publish "userData", ->
 
 
 Meteor.publish "oneThread", (threadId) ->
-  if Notify.isParticipant(@userId, threadId) 
-    Threads.find
-        _id: threadId
-      , 
-        limit: 1
-        fields:
-          createdAt: 0
-          noteId: 0
+  if @userId
+    participants = Notify.getParticipants(threadId)
+    if participants[0].userId == @userId || participants[1].userId == @userId
+      Threads.find
+          _id: threadId
+        , 
+          limit: 1
+          fields:
+            createdAt: 0
+            noteId: 0
 
 Meteor.publish "messages", (threadId, limit) ->
   if @userId
-    participants = Threads.findOne(threadId)?.participants
+    participants = Notify.getParticipants(threadId)
     if participants[0].userId == @userId || participants[1].userId == @userId
       Messages.find
           threadId: threadId

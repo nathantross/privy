@@ -16,11 +16,11 @@ Meteor.methods
     # Server validations
     if Meteor.isServer
       participants = Notify.getParticipants(threadId)
-
-      unless _.findWhere(participants, {userId: @userId})
+      userIsInThread = _.findWhere(participants, {userId: @userId})
+      unless userIsInThread
         throw new Meteor.Error 401, "You can't create notifications in this thread."
 
-      if messageAttr.noteCreatorId && !Notify.participantIndex(participants)
+      if messageAttr.noteCreatorId && !userIsInThread
         throw new Meteor.Error 401, "This senderId is invalid"
 
   

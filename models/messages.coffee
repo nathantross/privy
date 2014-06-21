@@ -3,10 +3,9 @@ exports.Messages = new Meteor.Collection('messages')
 
 Meteor.methods
   createMessage: (msgAttr) ->
-    participants = Threads.findOne(msgAttr.threadId, {fields: {participants: 1}})?.participants
+    participants = Notify.getParticipants(msgAttr.threadId)
 
     #Validations
-    
     unless msgAttr.body
       throw new Meteor.Error(422, 'Woops, looks like your message is blank!')
 
