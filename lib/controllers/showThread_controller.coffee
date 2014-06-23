@@ -31,14 +31,14 @@ exports.showThreadController = RouteController.extend(
   increment: 15
 
   limit: ->
-    parseInt(@params.msgLimit) || @increment
+    parseInt(@params.msgLimit)
 
   threadId: ->
     @params._id
 
   waitOn: ->
-    Subs.subscribe "oneThread", @threadId()
-    Subs.subscribe "messages", @threadId(), @limit()
+    # Subs.subscribe "oneThread", @threadId()
+    Subs.subscribe "moreMessages", @threadId(), @limit() if @limit()
 
   messages: ->
     Messages.find
