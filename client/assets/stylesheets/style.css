@@ -2318,7 +2318,7 @@ footer {
   }
 }
 
-.fa-heart {
+.fa-heart-message {
   color: #333;
   font-size: 30px;
 }
@@ -2329,7 +2329,7 @@ footer {
 }
 
 @media (max-width: 699px) {
-   .fa-heart {
+   .fa-heart-message {
     color: #333;
     font-size: 24px;
   }
