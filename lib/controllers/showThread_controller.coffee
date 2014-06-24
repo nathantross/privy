@@ -48,6 +48,12 @@ exports.showThreadController = RouteController.extend(
         createdAt: 1
       limit: @limit()
 
+  participants: ->
+    Notify.getParticipants(@threadId())
+
+  userIndex: ->
+    Notify.participantIndex(@participants())
+
   data: ->
     hasMore = @messages().count() == @limit()
     nextPath = @route.path
@@ -58,7 +64,8 @@ exports.showThreadController = RouteController.extend(
       messages: @messages()
       nextPath: (if hasMore then nextPath else null)
       threadId: @threadId()
-      userIndex: Notify.userIndex(@threadId())
+      participants: @participants()
+      userIndex: @userIndex()
       # lastMessage: @lastMessage()
     )
 )

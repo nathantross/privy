@@ -92,6 +92,9 @@ exports.Notify =
 
     false
 
+  getParticipantIndex: (threadId) ->
+    @participantIndex(@getParticipants(threadId))
+
   # Toggles whether a user is checked into a thread
   toggleCheckIn: (threadId, toggle, userIndex, isMuted) ->
     participants = @getParticipants(threadId)

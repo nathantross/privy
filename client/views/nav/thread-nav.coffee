@@ -1,26 +1,26 @@
 Template.threadNav.helpers
   isMuted: ->
-    @thread.participants[@userIndex].isMuted if @thread
+    @participants[@userIndex].isMuted if @participants
 
   isBlocked: ->
-    if @thread && @userIndex? && @thread.participants.length == 2
+    if @participants && @userIndex? && @participants.length == 2
       blockedIndex = if @userIndex == 1 then 0 else 1
-      blockedId = @thread.participants[blockedIndex].userId
+      blockedId = @participants[blockedIndex].userId
       return _.indexOf(Meteor.user().blockedIds, blockedId) > -1
     else
       false
 
   hasTwoParticipants: ->
-    @thread.participants.length == 2 if @thread
+    @participants.length == 2 if @participants
 
   isNavNotified: ->
     user = Meteor.user()
     if user && user.notifications[0].isNavNotified then "nav-notify" else ""
 
   partner: ->
-    if @thread
+    if @participants
       partnerIndex = if @userIndex == 0 then 1 else 0
-      partnerId = @thread.participants[partnerIndex]?.userId
+      partnerId = @participants[partnerIndex]?.userId
       Notify.getUserStatus(partnerId) if partnerId
 
   # hasPoint: ->
