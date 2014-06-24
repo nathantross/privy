@@ -81,11 +81,7 @@ Meteor.methods
               $inc: 
                 'notifications.0.count': 1
           
-          pUser = Meteor.users.findOne participant.userId, 
-            fields: 
-              status: 1
-              'notifications.0.email': 1
-              'emails.0.address': 1
+          pUser = Meteor.users.findOne participant.userId
 
           # Send notification email to idle/offline user          
           if pUser.notifications[0].email && (!pUser.status?.online || pUser.status?.idle)

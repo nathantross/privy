@@ -31,14 +31,14 @@ exports.showThreadController = RouteController.extend(
   increment: 15
 
   limit: ->
-    parseInt(@params.msgLimit) || @increment
+    parseInt(@params.msgLimit)
 
   threadId: ->
     @params._id
 
   waitOn: ->
-    Subs.subscribe "oneThread", @threadId()
-    Subs.subscribe "messages", @threadId(), @limit()
+    # Subs.subscribe "oneThread", @threadId()
+    Subs.subscribe "moreMessages", @threadId(), @limit() if @limit()
 
   messages: ->
     Messages.find
@@ -47,6 +47,12 @@ exports.showThreadController = RouteController.extend(
       sort: 
         createdAt: 1
       limit: @limit()
+
+  participants: ->
+    Notify.getParticipants(@threadId())
+
+  userIndex: ->
+    Notify.participantIndex(@participants())
 
   data: ->
     hasMore = @messages().count() == @limit()
@@ -58,7 +64,8 @@ exports.showThreadController = RouteController.extend(
       messages: @messages()
       nextPath: (if hasMore then nextPath else null)
       threadId: @threadId()
-      userIndex: Notify.userIndex(@threadId())
+      participants: @participants()
+      userIndex: @userIndex()
       # lastMessage: @lastMessage()
     )
 )

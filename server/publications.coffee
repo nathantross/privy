@@ -1,3 +1,5 @@
+# QUERIES AND OPTIONS -------------------------------------
+
 noteQuery = (userId) ->
   user = Meteor.users.findOne userId
 
@@ -51,89 +53,90 @@ notificationsOptions =
   sort:
     updatedAt: -1
 
-Meteor.publish "userStatus", ->
-  UserStatus.connections.find
-        userId: @userId
-      ,
-        fields: 
-          userId: 1
-          idle: 1
+threadsOptions =
+  fields:
+    createdAt: 0
+    noteId: 0
 
+userStatusOptions = 
+  fields: 
+    'profile.avatar': 1
+    'profile.points': 1
+    'status.online': 1
+    'status.idle': 1
 
-Meteor.publish "notificationUserStatus", ->
+messageOptions = (limit) ->
+  limit: limit
+  sort:
+    createdAt: -1 
+
+userDataOptions = 
+  limit: 1
+  fields:
+    notifications: 1
+    status: 1
+    inThreads: 1
+    'flags.isSuspended': 1
+    blockedIds: 1
+
+# PUBLICATIONS -------------------------------------
+
+Meteor.publish "userData", ->
+  Meteor.users.find { _id: @userId }, userDataOptions
+
+Meteor.publish "chatsData", ->
   if @userId
     Meteor.publishWithRelations
       handle: @
-      collection: Meteor.users
-      options: 
-        fields: 
-          'profile.avatar': 1
-          'profile.points': 1
-          'status.online': 1
-          'status.idle': 1
-      filter: {}
+      collection: Notifications
+      filter: notificationsQuery(@userId)
+      options: notificationsOptions
       mappings: [
         {
-          key:        "userId"
-          collection: Notes
-          filter:     noteQuery(@userId)
-          options:    noteOptions
-
+          key: "lastAvatarId"
+          collection: Meteor.users
+          options: userStatusOptions
+        }, {
+          key: "threadId"
+          collection: Threads
+          filter: {}
+          options: threadsOptions
+          mappings: [
+            {
+              reverse: true
+              key: "threadId"
+              collection: Messages
+              filter: {}
+              options: messageOptions(10)
+            }
+          ]
         }
+
         {
-          key:        "lastAvatarId"
+          key:        "threadId"
           collection: Notifications
           filter:     notificationsQuery(@userId)
           options:    notificationsOptions
         }
       ]
 
-
-Meteor.publish "notifications", ->
-  Notifications.find notificationsQuery(@userId), notificationsOptions
-
-
-Meteor.publish "notes", (sort, limit) ->
+Meteor.publish "notesData", ->
   if @userId
-    user = Meteor.users.findOne @userId
-    Notes.find noteQuery(@userId), noteOptions
+    Meteor.publishWithRelations
+        handle: @
+        collection: Notes
+        filter: noteQuery(@userId)
+        options: noteOptions
+        mappings: [
+          {
+            key: "userId"
+            collection: Meteor.users
+            filter: {}
+            options: userStatusOptions
+        }]
 
-
-Meteor.publish "userData", ->
-  Meteor.users.find
-      _id: @userId
-    ,
-      limit: 1
-      fields:
-        notifications: 1
-        status: 1
-        inThreads: 1
-        'flags.isSuspended': 1
-        blockedIds: 1
-
-
-Meteor.publish "oneThread", (threadId) ->
+Meteor.publish "moreMessages", (threadId, limit) ->
   if @userId
     participants = Notify.getParticipants(threadId)
     if participants[0].userId == @userId || participants[1].userId == @userId
-      Threads.find
-          _id: threadId
-        , 
-          limit: 1
-          fields:
-            createdAt: 0
-            noteId: 0
-
-Meteor.publish "messages", (threadId, limit) ->
-  if @userId
-    participants = Notify.getParticipants(threadId)
-    if participants[0].userId == @userId || participants[1].userId == @userId
-      Messages.find
-          threadId: threadId
-        ,
-          sort: 
-            createdAt: -1
-          limit: limit
-
-    else
-      null
+      Messages.find { threadId: threadId }, messageOptions(limit) 

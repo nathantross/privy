@@ -9,7 +9,7 @@ exports.FeedController = RouteController.extend(
     @render('showThread')
 
   waitOn: ->
-    Subs.subscribe "notes", { createdAt: -1 }, 5
+    Subs.subscribe "notesData"
 
   # onStop: -> 
     # Notify.toggleLock(Session.get('currentNoteId'), false)

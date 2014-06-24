@@ -86,8 +86,7 @@ loggedOutPages = ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", 
 
 Router.waitOn ->
     Subs.subscribe 'userData'
-    Subs.subscribe 'notifications'
-    Subs.subscribe 'notificationUserStatus'
+    Subs.subscribe 'chatsData'
   ,
     except: loggedOutPages
 

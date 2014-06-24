@@ -12,7 +12,8 @@
       "handlebars-server": {},
       "publish-with-relations": {},
       "kadira": {},
-      "subs-manager": {}
+      "subs-manager": {},
+      "nodetime": {}
     },
     "packages": {
       "font-awesome": {
@@ -62,13 +63,18 @@
       },
       "kadira": {
         "git": "https://github.com/meteorhacks/kadira.git",
-        "tag": "v2.4.1",
-        "commit": "b0de26c879f1e7a32d82cab53770ccbb00a1c5ab"
+        "tag": "v2.4.4",
+        "commit": "6073fa5bdfb36478165977804f922796b6fc82de"
       },
       "subs-manager": {
         "git": "https://github.com/meteorhacks/subs-manager.git",
         "tag": "v1.0.0",
         "commit": "e01b87ac004ef114f882a73549ba38f64709649e"
+      },
+      "nodetime": {
+        "git": "https://github.com/subhog/meteor-nodetime.git",
+        "tag": "v0.2.0",
+        "commit": "3611684e29563e58ccbd6275c5885a31a60196d7"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
