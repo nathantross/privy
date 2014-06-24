@@ -3,18 +3,17 @@ Template.newNote.events
   "submit form": (e) ->    
     submitNewNote(e)  
 
-
+  "keydown #notes-body": (e)->
+    submitNewNote(e) if e.keyCode == 13
+      
   "keyup #notes-body": (e)->
-    if e.keyCode == 13
-      submitNewNote(e)
-    else
-      val = $(e.target).find("[name=notes-body]").prevObject[0].value
-      len = val.length
-      $("#charNum").text(len + "/120")
+    val = $(e.target).find("[name=notes-body]").prevObject[0].value
+    len = val.length
+    $("#charNum").text(len + "/120")
 
-      if window.innerWidth < 480
-        lineHeight = if len > 90 then '25px' else ''
-        $("#notes-body").css('line-height', lineHeight) 
+    if window.innerWidth < 480
+      lineHeight = if len > 90 then '25px' else ''
+      $("#notes-body").css('line-height', lineHeight) 
       
       
   submitNewNote = (e) ->
