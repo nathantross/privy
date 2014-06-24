@@ -47,7 +47,7 @@ exports.showThreadController = RouteController.extend(
       sort: 
         createdAt: 1
       limit: @limit()
-
+      
   participants: ->
     Notify.getParticipants(@threadId())
 
