@@ -1,6 +1,6 @@
 Template.threadNav.helpers
   isMuted: ->
-    @participants[@userIndex]?.isMuted if @participants
+    @participants[@userIndex].isMuted if @participants
 
   isBlocked: ->
     if @participants && @userIndex? && @participants.length == 2
