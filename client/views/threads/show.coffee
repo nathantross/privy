@@ -1,6 +1,6 @@
 Template.showThread.helpers
   isMuted: ->
-    @participants[@userIndex].isMuted
+    @participants[@userIndex].isMuted if @participants
 
 Template.showThread.events
   'click .load-more': (e)->
