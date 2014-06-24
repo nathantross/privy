@@ -2323,6 +2323,18 @@ footer {
   font-size: 30px;
 }
 
+.fa-heart-message:hover {
+  color: #E61D1D;
+}
+
+.disabled {
+  color: #CFCDCD; 
+}
+
+.disabled:hover {
+  color: #CFCDCD; 
+}
+
 .heart-note {
   padding: 20px 20px;
   background-color: #fff;

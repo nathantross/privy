@@ -1,3 +1,8 @@
+Template.newMessage.helpers
+  hasPoint: ->
+    partnerIndex = if @userIndex == 0 then 1 else 0
+    if @participants[partnerIndex]?.hasPoint then "disabled" else ""
+
 Template.newMessage.events
 
   "submit form": (e) ->
@@ -38,6 +43,39 @@ Template.newMessage.events
   "click input": (e) ->
     Notify.toggleTitleFlashing(false)
 
+  'click #give-point': (e)->
+    e.preventDefault()
+    partnerIndex = if @userIndex == 0 then 1 else 0
+    userIndex = @userIndex
+    participants = @participants
+
+    unless participants[partnerIndex]?.hasPoint || !@threadId
+      Meteor.call 'givePoint', @threadId, partnerIndex, @userIndex, (err, threadId) ->
+        return console.log err if err
+        
+        messageAttr = 
+          body: "+♥ Great chat!"
+          threadId: threadId
+          isPoint: true
+      
+        Meteor.call "createMessage", messageAttr, (err) ->
+          return console.log err if err
+
+          Meteor.call 'createNotification', messageAttr, (error, id) ->
+            console.log(error.reason) if error 
+
+          mixpanel.track("ThreadNav: gave point", {
+            threadId: threadId
+            giver: participants[partnerIndex].userId
+            receiver: participants[userIndex].userId
+          })
+          
+  # 'click #hasPoint': (e)->
+  #   e.preventDefault()
+  #   partnerIndex = if @userIndex == 0 then 1 else 0
+
+  #   Meteor.call "toggleHasPoint", @threadId, partnerIndex, (err) ->
+  #     console.log err if err 
 
   toggleTyping = (threadId, userIndex, toggle) ->
     participants = Notify.getParticipants(threadId)
