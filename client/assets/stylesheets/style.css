@@ -1476,11 +1476,11 @@ a#noteFeed {
 }
 
 a.fa.fa-times.sidebar-message-close.fa-lg.archive {
-font-size: 30px !important;
-margin-top: -20px;
-padding-top: 0px;
-padding-bottom: 20px;
-margin-bottom: -2px;
+  font-size: 30px !important;
+  padding-top: 0px;
+  padding-bottom: 20px;
+  margin-top: -20px;
+  margin-bottom: -2px;
 }
 
 @media (min-width: 800px) {
