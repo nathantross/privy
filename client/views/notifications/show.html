@@ -7,14 +7,35 @@
         <li><div class="online-sidebar is-user-active">{{sender.isOnline}}</div></li>
         <li>
           <ul>
+            <li><p class="sidebar-time">9:34am</p></li>
           	<li><p class="firstMessageIntro">{{lastMessagePreview}}</p></li>
           	<li><p class="messageIntro">{{originalNotePreview}}</p></li>
           </ul>
         </li>
         <li><p class="{{notifiedStyle}}"></p></li>
-        <li><p><a href="#" class="fa fa-times sidebar-message-close fa-lg archive"></a></p></li>
+        <ul>
+          <li><p><a href="#" class="fa fa-times sidebar-message-close fa-lg archive"></a></p></li>
+        </ul>
       </ul>
     </a>
   </li>
     
+<!-- 
+
+
+<ul>
+  <li><div class="avatar"><img class="avatar-feed" src="{{sender.avatar}}" /></div></li>
+  <li><div class="online-sidebar is-user-active">{{sender.isOnline}}</div></li>
+</ul>
+
+<ul>
+  <li><p class="sidbar-time">9:34am</p></li>
+  <li><p class="firstMessageIntro">{{lastMessagePreview}}</p></li>
+  <li><p class="messageIntro">{{originalNotePreview}}</p></li>
+</ul>
+
+<ul class="">
+  <li><p><a href="#" class="fa fa-times sidebar-message-close fa-lg archive"></a></p></li>
+</ul>
+ -->
 </template>
