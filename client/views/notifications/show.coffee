@@ -1,9 +1,9 @@
 Template.notification.helpers
   lastMessagePreview: ->
-    textPreview @lastMessage, 20 if @lastMessage
+    textPreview @lastMessage, 22 if @lastMessage
 
   originalNotePreview: -> 
-    textPreview @originalNote, 20 if @originalNote
+    textPreview @originalNote, 70 if @originalNote
 
   notifiedStyle: ->
     if @isNotified then "pull-right fa fa-circle" else ""

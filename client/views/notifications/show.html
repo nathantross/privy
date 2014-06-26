@@ -7,12 +7,15 @@
         <li><div class="online-sidebar is-user-active">{{sender.isOnline}}</div></li>
         <li>
           <ul>
+            <li><p class="sidebar-time">{{lastMessageTime}}</p></li>
           	<li><p class="firstMessageIntro">{{lastMessagePreview}}</p></li>
           	<li><p class="messageIntro">{{originalNotePreview}}</p></li>
           </ul>
         </li>
         <li><p class="{{notifiedStyle}}"></p></li>
-        <li><p><a href="#" class="fa fa-times sidebar-message-close fa-lg archive"></a></p></li>
+        <ul>
+          <li><p><a href="#" class="fa fa-times sidebar-message-close fa-lg archive"></a></p></li>
+        </ul>
       </ul>
     </a>
   </li>
