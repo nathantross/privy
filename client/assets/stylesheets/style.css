@@ -790,6 +790,11 @@ a#flag {
   margin-right: -100px;
 }
 
+#message-body:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 .message-feed, .message-feed-sm {
   font-size: 60px;
   font-family: "Droid Serif";
