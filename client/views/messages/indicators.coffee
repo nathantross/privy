@@ -9,7 +9,7 @@ Template.messageIndicators.helpers
     
     if lastMessage
       userIsSender = Meteor.userId() == lastMessage.senderId
-      readStatus = timeSince(lastMessage.updatedAt)
+      readStatus = timeSince(lastMessage.updatedAt || lastMessage.createdAt)
       readStatus = readStatus + " ago" if readStatus
 
       readStatus = 
