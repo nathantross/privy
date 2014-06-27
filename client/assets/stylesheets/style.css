@@ -2266,12 +2266,14 @@ footer {
   color: rgba( 242, 242, 242, 0.6 );
   text-align: left;
   margin-left: 74px;
+  padding-top: 18px !important;
 }
 
 @media (min-width: 800px) {
 
   .points {
     margin-left: 32px;
+    padding-top: 18px !important;
   }
 
   .navbar-inverse ul {
