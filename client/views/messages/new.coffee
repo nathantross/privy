@@ -1,7 +1,8 @@
 Template.newMessage.helpers
   hasPoint: ->
-    partnerIndex = if @userIndex == 0 then 1 else 0
-    if @participants[partnerIndex]?.hasPoint then "disabled" else ""
+    if @participants
+      partnerIndex = if @userIndex == 0 then 1 else 0
+      if @participants[partnerIndex]?.hasPoint then "disabled" else ""
 
 Template.newMessage.events
 
