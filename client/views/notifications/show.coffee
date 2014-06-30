@@ -1,6 +1,6 @@
 Template.notification.helpers
   lastMessagePreview: ->
-    textPreview @lastMessage, 22 if @lastMessage
+    textPreview @lastMessage, 20 if @lastMessage
 
   originalNotePreview: -> 
     textPreview @originalNote, 70 if @originalNote
