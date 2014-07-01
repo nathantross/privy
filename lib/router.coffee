@@ -57,9 +57,13 @@ Router.map ->
       mixpanel.track('Note: visited newNote')
 
   @route "feed",
-    path: "/notes/:notesLimit?" 
+    path: "/notes" 
     controller: FeedController
 
+  @route "showNote",
+    path: "/notes/:_id"
+    controller: showNoteController
+    
 
   # Thread Route
   @route "showThread",
@@ -82,7 +86,7 @@ loginChecks = (pause)->
     @render( if Meteor.loggingIn() then @loadingTemplate else "entrySignIn" )
     pause()
 
-loggedOutPages = ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "entryResetPassword", "contact", "entryForgotPassword", "404"]
+loggedOutPages = ["index", "register", "termsUrl", "privacyUrl", "entrySignUp", "entrySignIn", "entryResetPassword", "contact", "entryForgotPassword", "404", "showNote"]
 
 Router.waitOn ->
     Subs.subscribe 'userData'

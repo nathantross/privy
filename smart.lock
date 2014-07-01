@@ -5,7 +5,6 @@
       "font-awesome": {},
       "iron-router": {},
       "accounts-entry": {},
-      "percolatestudio-migrations": {},
       "mandrill": {},
       "user-status": {},
       "iron-router-progress": {},
@@ -13,7 +12,8 @@
       "publish-with-relations": {},
       "kadira": {},
       "subs-manager": {},
-      "nodetime": {}
+      "nodetime": {},
+      "percolatestudio-migrations": {}
     },
     "packages": {
       "font-awesome": {
@@ -31,11 +31,6 @@
         "tag": "v0.7.3",
         "commit": "7facaa045d3720eeeba3420c28e48d5709188fe3"
       },
-      "percolatestudio-migrations": {
-        "git": "https://github.com/percolatestudio/meteor-migrations.git",
-        "tag": "v0.6.0",
-        "commit": "baa77d4c121f6f06b6aa142ee11f71ace8795f7f"
-      },
       "mandrill": {
         "git": "https://github.com/timmyg/meteor-mandrill.git",
         "tag": "v0.0.6",
@@ -43,13 +38,13 @@
       },
       "user-status": {
         "git": "https://github.com/mizzao/meteor-user-status.git",
-        "tag": "v0.4.1",
-        "commit": "ccca026086e3aa6e44df066c9d5fe4bd412219fc"
+        "tag": "v0.5.0",
+        "commit": "6a096fd9f3a916887c92cb778040ce2f8a9cc554"
       },
       "iron-router-progress": {
         "git": "https://github.com/Multiply/iron-router-progress.git",
-        "tag": "v0.4.0",
-        "commit": "02f78bdaca4c13d59f548d5a0ce83408c34b56d1"
+        "tag": "v0.4.1",
+        "commit": "496fcda9a6ec352b4733725f60c6f280250c3541"
       },
       "handlebars-server": {
         "git": "https://github.com/EventedMind/meteor-handlebars-server.git",
@@ -63,18 +58,23 @@
       },
       "kadira": {
         "git": "https://github.com/meteorhacks/kadira.git",
-        "tag": "v2.4.4",
-        "commit": "6073fa5bdfb36478165977804f922796b6fc82de"
+        "tag": "v2.4.5",
+        "commit": "fa9a6446f6efb576953f99c01c03474f56f3852e"
       },
       "subs-manager": {
         "git": "https://github.com/meteorhacks/subs-manager.git",
-        "tag": "v1.0.0",
-        "commit": "e01b87ac004ef114f882a73549ba38f64709649e"
+        "tag": "v1.0.1",
+        "commit": "38317052d1601002d4dff537e4e0f61d1aa36e6d"
       },
       "nodetime": {
         "git": "https://github.com/subhog/meteor-nodetime.git",
         "tag": "v0.2.0",
         "commit": "3611684e29563e58ccbd6275c5885a31a60196d7"
+      },
+      "percolatestudio-migrations": {
+        "git": "https://github.com/percolatestudio/meteor-migrations.git",
+        "tag": "v0.6.0",
+        "commit": "baa77d4c121f6f06b6aa142ee11f71ace8795f7f"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
@@ -88,8 +88,8 @@
       },
       "timesync": {
         "git": "https://github.com/mizzao/meteor-timesync.git",
-        "tag": "v0.1.6",
-        "commit": "83067433f511bc13a11ae8c87e9a4d331256915e"
+        "tag": "v0.2.0",
+        "commit": "55f1daf261996dfbd726253688cfe7a2cc169d9b"
       }
     }
   }

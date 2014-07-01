@@ -3,7 +3,6 @@
     "font-awesome": {},
     "iron-router": {},
     "accounts-entry": {},
-    "percolatestudio-migrations": {},
     "mandrill": {},
     "user-status": {},
     "iron-router-progress": {},
@@ -11,6 +10,7 @@
     "publish-with-relations": {},
     "kadira": {},
     "subs-manager": {},
-    "nodetime": {}
+    "nodetime": {},
+    "percolatestudio-migrations": {}
   }
 }
