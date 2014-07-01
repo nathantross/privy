@@ -3,6 +3,9 @@ Template.signedInNav.helpers
     disabledPaths = ['intro', 'intro_1', 'intro_2', 'intro_3']
     currentPath = Router.current().path.split('/')[1]
     
+    if currentPath[1] == 'notes' && !currentPath[2] && currentPath[2] != "new"
+      return true 
+    
     _.indexOf(disabledPaths, currentPath) != -1
 
   isNavNotified: ->

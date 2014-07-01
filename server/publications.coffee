@@ -39,6 +39,16 @@ noteOptions =
     replierIds: 0
     loc: 0
 
+oneNoteOptions = 
+  limit: 1
+  sort: 
+    userId: 1
+  fields: 
+    body: 1
+    threadId: 1
+    userId: 1
+    place: 1
+
 notificationsQuery = (userId) ->
   userId: userId
   $or: [
@@ -140,3 +150,17 @@ Meteor.publish "moreMessages", (threadId, limit) ->
     participants = Notify.getParticipants(threadId)
     if participants[0].userId == @userId || participants[1].userId == @userId
       Messages.find { threadId: threadId }, messageOptions(limit) 
+
+Meteor.publish "oneNote", (noteId) ->
+  Meteor.publishWithRelations
+    handle: @
+    collection: Notes
+    filter: noteId
+    options: oneNoteOptions
+    mappings: [
+      {
+        key: "userId"
+        collection: Meteor.users
+        filter: {}
+        options: userStatusOptions
+    }]

@@ -13,7 +13,6 @@ accounts-oauth
 accounts-entry
 accounts-ui
 accounts-facebook
-percolatestudio-migrations
 email
 mandrill
 user-status
@@ -25,3 +24,4 @@ publish-with-relations
 kadira
 subs-manager
 nodetime
+percolatestudio-migrations
