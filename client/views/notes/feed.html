@@ -38,7 +38,11 @@
           <div class="col-sm-2"></div>
           <div id="collapseOne" class="panel-collapse collapse" style="height: auto;">
             <div class="panel-body">
-             {{> noteReply}}
+              {{#if user}}
+                {{> noteReply}}
+              {{ else }}
+                {{>noteReplyLoggedOut}}
+              {{/if}}
             </div>
           </div>
         </div>

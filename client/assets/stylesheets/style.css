@@ -550,8 +550,6 @@ footer.navbar.navbar-inverse.text-center {
   margin-right: 80px;
 }
 
-
-
 /***********/
 
 /****** New Note ******/
@@ -769,6 +767,22 @@ input.fa.fa-check.fa-lg.grow.btn.btn-primary-new-note:hover {
   position: fixed;
 }
 
+.reply-form-logged-out {
+  font-size: 20px;
+  height: 50px;
+  width: 100%;
+  left: 0;
+  z-index: 10;
+  bottom: 0;
+  border-radius: 0px !important;
+  text-align: left;
+  outline: none;
+  box-shadow: none;
+  border: 0px solid #ccc;
+  bottom: 0px;
+  position: fixed;
+}
+
 ul.dropdown-menu.dropdown-menu-feed {
   margin-bottom: 0 !important;
   padding-top: 0 !important;
@@ -784,6 +798,13 @@ a#flag {
 }
 
 .reply-form form input {
+  outline: none;
+  box-shadow:none;
+  padding-left: 100px !important;
+  margin-right: -100px;
+}
+
+.reply-form-logged-out form input {
   outline: none;
   box-shadow:none;
   padding-left: 100px !important;
@@ -2306,6 +2327,10 @@ footer {
   .reply-form {
     padding-left: 190px;
     text-align: left;
+  }
+
+  .reply-form-logged-out {
+    text-align: center;
   }
 
   .alert-nav {
