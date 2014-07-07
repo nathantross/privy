@@ -2331,6 +2331,7 @@ footer {
 
   .reply-form-logged-out {
     text-align: center;
+    height: 70px;
   }
 
   .alert-nav {
