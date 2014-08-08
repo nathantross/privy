@@ -1,6 +1,5 @@
 <template name="noteReply">
 
-  {{#if currentUser}}
     <form class="reply-form">
       <div class="input-group">
         <input  name="reply-body"  type="text" class="form-control reply-form" maxlength="300" placeholder="Send a private reply" autofocus  />
@@ -9,16 +8,5 @@
         </span>  
       </div>   
     </form>
-
-    {{else}}
-      <form class="reply-form-logged-out">
-        <div class="input-group">
-          <input  name="reply-body"  type="text" class="form-control reply-form-logged-out" maxlength="300" placeholder="Send a private reply" autofocus  />
-          <span class="input-group-btn">
-            <button class="btn-message btn-default" type="submit"><i class="fa fa-pencil fa-lg"></i></button>
-          </span>  
-        </div>   
-      </form>
-  {{/if}}
 
 </template>
