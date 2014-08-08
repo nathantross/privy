@@ -30,11 +30,17 @@
             <br>
               <li><p class="points fa fa-heart"> {{userAttr.points}}</p></li>
             <div class="row small-centered">
-              <div class="small-12 columns text-center">
-                <a  type="button" value="Change background" href="#" id="skip" class="btn btn-info fa fa-times fa-lg"></a>
+              {{#if currentUser}}
+                <div class="small-12 columns text-center">
+                  <a  type="button" value="Change background" href="#" id="skip" class="btn btn-info fa fa-times fa-lg"></a>
 
-                <a data-toggle="collapse" href="#collapseOne" class="grow btn btn-big btn-primary fa fa-pencil fa-lg empty-button" id="startChat"></a>
-              </div>
+                  <a data-toggle="collapse" href="#collapseOne" class="grow btn btn-big btn-primary fa fa-pencil fa-lg empty-button" id="startChat"></a>
+                </div>
+                {{else}}
+                  {{#each loginServices}}
+                    <li class="facebook-btn-note text-center">{{> entrySocial}}</li>
+                  {{/each}}
+              {{/if}}
             </div>
           </div>
           <div class="col-sm-2"></div>
